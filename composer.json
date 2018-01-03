@@ -1,18 +1,26 @@
 {
     "name": "romanzipp/twitch",
-    "description": "Twitch PHP Wrapper for the Twitch 2018 API",
+    "description": "Twitch PHP Wrapper for Laravel",
     "license": "MIT",
     "type": "library",
+    "version": "0.0.1",
     "authors": [
         {
             "name": "romanzipp",
-            "email": "ich@ich.wtf"
+            "email": "ich@ich.wtf",
+            "homepage": "https://ich.wtf"
         }
     ],
     "minimum-stability": "dev",
     "require": {
         "php": ">=7.1",
+        "laravel/framework": "^5.3",
         "guzzlehttp/guzzle": "^6.2@dev"
+    },
+    "autoload": {
+        "psr-4": {
+            "romanzipp\\Twitch\\": "src"
+        }
     },
     "extra": {
         "laravel": {

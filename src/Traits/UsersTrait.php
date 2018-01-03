@@ -19,8 +19,7 @@ trait UsersTrait
      */
     public function getUsers(array $parameters): Result
     {
-        if (!array_key_exists('name', $parameters) && !array_key_exists('id', $parameters))
-        {
+        if (!array_key_exists('name', $parameters) && !array_key_exists('id', $parameters)) {
             throw new BadMethodCallException('Parameter required missing: name or id');
         }
 
@@ -92,7 +91,7 @@ trait UsersTrait
     public function updateUser(string $description): Result
     {
         $this->put('users', [
-            'description' => $description
+            'description' => $description,
         ]);
     }
 }

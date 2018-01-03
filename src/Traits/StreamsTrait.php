@@ -13,7 +13,7 @@ trait StreamsTrait
      * @param  Paginator|null $paginator  Paginator object
      * @return Result                     Result object
      * @see    https://dev.twitch.tv/docs/api/reference#get-streams
-     * 
+     *
      * Parameters:
      * string   community_id    Returns streams in a specified community ID. You can specify up to 100 IDs.
      * string   game_id         Returns streams broadcasting a specified game ID. You can specify up to 100 IDs.

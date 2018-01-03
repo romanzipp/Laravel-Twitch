@@ -15,7 +15,7 @@ trait ClipsTrait
     public function createClip(int $broadcaster): Result
     {
         return $this->post('clips', [
-            'broadcaster_id' => $broadcaster
+            'broadcaster_id' => $broadcaster,
         ]);
     }
 
@@ -28,7 +28,7 @@ trait ClipsTrait
     public function getClip(string $id): Result
     {
         return $this->get('clips', [
-            'id' => $id
+            'id' => $id,
         ]);
     }
 
@@ -43,7 +43,7 @@ trait ClipsTrait
     {
         return $this->post('entitlements/upload', [
             'manifest_id' => $manifest,
-            'type' => $type
+            'type' => $type,
         ]);
     }
 }

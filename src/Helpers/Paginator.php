@@ -15,7 +15,8 @@ class Paginator
         $this->first = $first;
     }
 
-    public static function from(string $after, string $before = null, string $first = null){
+    public static function from(string $after, string $before = null, string $first = null)
+    {
         return new self($after, $before, $first);
     }
 }

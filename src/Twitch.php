@@ -5,14 +5,14 @@ namespace romanzipp\Twitch;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Psr7\Request;
+use romanzipp\Twitch\Exceptions\RequestRequiresAuthenticationException;
+use romanzipp\Twitch\Exceptions\RequestRequiresClientIdException;
 use romanzipp\Twitch\Traits\ClipsTrait;
 use romanzipp\Twitch\Traits\FollowsTrait;
 use romanzipp\Twitch\Traits\GamesTrait;
 use romanzipp\Twitch\Traits\StreamsTrait;
 use romanzipp\Twitch\Traits\UsersTrait;
 use romanzipp\Twitch\Traits\VideosTrait;
-use romanzipp\Twitch\Exceptions\RequestRequiresAuthenticationException;
-use romanzipp\Twitch\Exceptions\RequestRequiresClientIdException;
 
 class Twitch
 {
@@ -34,7 +34,7 @@ class Twitch
             if ($paginator->before) {
                 $options['before'] = $paginator->before;
             }
-            
+
             if ($paginator->first) {
                 $options['first'] = $paginator->first;
             }
@@ -210,12 +210,11 @@ class Twitch
         ];
 
         if ($token) {
-            $headers['Authorization'] = 'Bearer '.$this->getToken($token);
+            $headers['Authorization'] = 'Bearer ' . $this->getToken($token);
         }
 
         try {
             $request = new Request($method, $uri, $headers);
-            #dd($request);
 
             $response = $this->client->send($request);
 
@@ -230,7 +229,7 @@ class Twitch
     public function generateUrl($url, $token, $parameters)
     {
         if ($token) {
-            $url .= (parse_url($url, PHP_URL_QUERY) ? '&' : '?').'oauth_token='.$this->getToken($token);
+            $url .= (parse_url($url, PHP_URL_QUERY) ? '&' : '?') . 'oauth_token=' . $this->getToken($token);
         }
 
         foreach ($parameters as $optionKey => $option) {
@@ -238,7 +237,7 @@ class Twitch
             $data = !is_array($option) ? [$option] : $option;
 
             foreach ($data as $key => $value) {
-                $url .= (parse_url($url, PHP_URL_QUERY) ? '&' : '?').$optionKey.'='.$value;
+                $url .= (parse_url($url, PHP_URL_QUERY) ? '&' : '?') . $optionKey . '=' . $value;
             }
         }
 

@@ -18,8 +18,7 @@ trait GamesTrait
      */
     public function getGames(array $parameters): Result
     {
-        if (!array_key_exists('name', $parameters) && !array_key_exists('id', $parameters))
-        {
+        if (!array_key_exists('name', $parameters) && !array_key_exists('id', $parameters)) {
             throw new BadMethodCallException('Parameter required missing: name or id');
         }
 
@@ -35,7 +34,7 @@ trait GamesTrait
     public function getGameById(int $id): Result
     {
         return $this->getGames([
-            'id' => $id
+            'id' => $id,
         ]);
     }
 
@@ -48,7 +47,7 @@ trait GamesTrait
     public function getGameByName(string $name): Result
     {
         return $this->getGames([
-            'name' => $name
+            'name' => $name,
         ]);
     }
 
@@ -61,7 +60,7 @@ trait GamesTrait
     public function getGamesByIds(array $ids): Result
     {
         return $this->getGames([
-            'id' => $ids
+            'id' => $ids,
         ]);
     }
 
@@ -74,7 +73,7 @@ trait GamesTrait
     public function getGamesByNames(array $names): Result
     {
         return $this->getGames([
-            'name' => $names
+            'name' => $names,
         ]);
     }
 

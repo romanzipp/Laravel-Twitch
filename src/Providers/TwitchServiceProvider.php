@@ -3,7 +3,6 @@
 namespace romanzipp\Twitch\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use romanzipp\Twitch\Facades\TwitchApiServiceFacade;
 use romanzipp\Twitch\Twitch;
 
 class TwitchServiceProvider extends ServiceProvider
@@ -16,7 +15,7 @@ class TwitchServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->publishes([
-            dirname(__DIR__).'/../twitch-api.php' => config_path('twitch-api.php'),
+            dirname(__DIR__) . '/../twitch-api.php' => config_path('twitch-api.php'),
         ], 'config');
     }
 
@@ -28,7 +27,7 @@ class TwitchServiceProvider extends ServiceProvider
     public function register()
     {
         $this->mergeConfigFrom(
-            dirname(__DIR__).'/../twitch-api.php', 'twitch-api'
+            dirname(__DIR__) . '/../twitch-api.php', 'twitch-api'
         );
 
         $this->app->singleton(Twitch::class, function ($app) {

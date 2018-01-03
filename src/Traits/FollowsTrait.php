@@ -32,6 +32,8 @@ trait FollowsTrait
             $parameters['to_id'] = $to;
         }
 
+        $this->mergePaginator($parameters, $paginator);
+
         return $this->get('users/follows', $parameters);
     }
 

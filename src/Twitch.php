@@ -13,68 +13,18 @@ use romanzipp\Twitch\Traits\GamesTrait;
 use romanzipp\Twitch\Traits\StreamsTrait;
 use romanzipp\Twitch\Traits\UsersTrait;
 use romanzipp\Twitch\Traits\VideosTrait;
+use romanzipp\Twitch\Traits\Helpers\PaginatorTrait;
 
 class Twitch
 {
+    use PaginatorTrait;
+
     use ClipsTrait;
     use FollowsTrait;
     use GamesTrait;
     use StreamsTrait;
     use UsersTrait;
-    use VideosTrait;
-
-    public function mergePaginator(&$options, Paginator $paginator = null)
-    {
-        if ($paginator) {
-
-            if ($paginator->after) {
-                $options['after'] = $paginator->after;
-            }
-
-            if ($paginator->before) {
-                $options['before'] = $paginator->before;
-            }
-
-            if ($paginator->first) {
-                $options['first'] = $paginator->first;
-            }
-        }
-    }
-    public function parseAttribute($attribute, $integerIdentifier = 'id', $stringIdentifier = 'name')
-    {
-        if (is_integer($attribute)) {
-            return [$integerIdentifier => $attribute];
-        }
-
-        return [$stringIdentifier => $attribute];
-    }
-
-    public function parseAttributes(array $attributes, $integerIdentifier = 'id', $stringIdentifier = 'name')
-    {
-        $return = [];
-
-        foreach ($attributes as $key => $attribute) {
-
-            if (is_integer($attribute)) {
-
-                if (!array_key_exists($stringIdentifier, $return)) {
-                    $return[$stringIdentifier] = [];
-                }
-
-                $return[$stringIdentifier][] = $attribute;
-
-            } else {
-
-                if (!array_key_exists($integerIdentifier, $return)) {
-                    $return[$integerIdentifier] = [];
-                }
-
-                $return[$integerIdentifier][] = $attribute;
-            }
-        }
-
-        return $return;
-    }
+    use VideosTrait;    
 
     const BASE_URI = 'https://api.twitch.tv/helix/';
 
@@ -186,22 +136,22 @@ class Twitch
         return $this->token;
     }
 
-    public function get($path = '', $parameters = [], $token = false)
+    public function get($path = '', $parameters = [], $token = null)
     {
         return $this->query('GET', $path, $parameters, $token);
     }
 
-    public function post($path = '', $parameters = [], $token = false)
+    public function post($path = '', $parameters = [], $token = null)
     {
         return $this->query('POST', $path, $parameters, $token);
     }
 
-    public function put($path = '', $parameters = [], $token = false)
+    public function put($path = '', $parameters = [], $token = null)
     {
         return $this->query('PUT', $path, $parameters, $token);
     }
 
-    public function query($method = 'GET', $path = '', $parameters = [], $token = false)
+    public function query($method = 'GET', $path = '', $parameters = [], $token = null)
     {
         $uri = $this->generateUrl($path, $token, $parameters);
 

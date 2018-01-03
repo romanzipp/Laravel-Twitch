@@ -1,4 +1,4 @@
-# Twitch Laravel
+# Laravel Twitch
 
 PHP Twitch API Wrapper for Laravel 5+
 

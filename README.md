@@ -6,9 +6,9 @@
 
 PHP Twitch API Wrapper for Laravel 5+
 
-## Installation
+**NOTICE: This library uses the latest Twitch API which ist not fully featured yet**
 
-Run
+## Installation
 
 ```
 composer require romanzipp/twitch
@@ -17,7 +17,38 @@ composer require romanzipp/twitch
 Or add `romanzipp/twitch` to your `composer.json`
 
 ```
-"romanzipp/twitch": "~1.0"
+"romanzipp/twitch": "*"
 ```
 
 Run composer update to pull down the latest version.
+
+## Example
+
+### With Laravel dependency injection
+
+```php
+Route::get('/', function (\romanzipp\Twitch\Twitch $twitch) {
+
+    // Get User by Username
+    $userResult = $twitch->getUserByName('staiy');
+
+    // Check, if the query was successfull
+    if ($userResult->success) {
+        $user = $userResult->shift();
+    }
+
+    // Use Paginator
+
+    // Fetch first set of followers
+    $followsResult = $twitch->getFollowsTo(48865821);
+
+    // Fetch next set of followers
+    $nextFollowsResult = $twitch->getFollowsTo(48865821, $followsResult->next());
+});
+```
+
+## Documentation
+
+Coming Soon (tm)
+
+**Twitch API Documentation: https://dev.twitch.tv/docs/api/reference**

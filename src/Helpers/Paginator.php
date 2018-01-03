@@ -2,33 +2,48 @@
 
 namespace romanzipp\Twitch\Helpers;
 
+use romanzipp\Twitch\Result;
+use stdClass;
+
 class Paginator
 {
-    private $after;
-    private $before;
-    private $first;
+    private $pagination;
 
-    /**
-     * Paginator constructor
-     * @param mixed $after  Cursor for forward pagination: tells the server where to start fetching the next set of results, in a multi-page response
-     * @param mixed $before Cursor for backward pagination: tells the server where to start fetching the next set of results, in a multi-page response
-     * @param mixed $first  Number of values to be returned when getting results
-     */
-    public function __construct($after, $before, $first)
+    public $action = null;
+
+    public function __construct(stdClass $pagination)
     {
-        $this->after = $after;
-        $this->before = $before;
-        $this->first = $first;
+        $this->pagination = $pagination;
     }
 
-    /**
-     * Static Paginator constructor
-     * @param string $after  Cursor for forward pagination: tells the server where to start fetching the next set of results, in a multi-page response
-     * @param string $before Cursor for backward pagination: tells the server where to start fetching the next set of results, in a multi-page response
-     * @param string $first  Number of values to be returned when getting results
-     */
-    public static function from(string $after, string $before = null, string $first = null)
+    public static function from(Result $result)
     {
-        return new self($after, $before, $first);
+        return new self($result->pagination);
+    }
+
+    public function cursor()
+    {
+        return $this->pagination->cursor;
+    }
+
+    public function first()
+    {
+        $this->action = 'first';
+
+        return $this;
+    }
+
+    public function next()
+    {
+        $this->action = 'after';
+
+        return $this;
+    }
+
+    public function back()
+    {
+        $this->action = 'before';
+
+        return $this;
     }
 }

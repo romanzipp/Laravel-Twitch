@@ -3,6 +3,7 @@
 namespace romanzipp\Twitch;
 
 use GuzzleHttp\Psr7\Response;
+use romanzipp\Twitch\Helpers\Paginator;
 
 class Result
 {
@@ -16,7 +17,9 @@ class Result
 
     public $pagination;
 
-    public function __construct($response, $exception = false)
+    public $paginator;
+
+    public function __construct($response, $exception = false, $paginator = null)
     {
         $this->success = $response instanceof Response;
 
@@ -39,6 +42,8 @@ class Result
         if ($this->success && property_exists($jsonResponse, 'pagination')) {
             $this->pagination = $jsonResponse->pagination;
         }
+
+        $this->paginator = $paginator ?? Paginator::from($this);
     }
 
     public function success(): bool
@@ -62,7 +67,7 @@ class Result
         return strval($exception);
     }
 
-    public function first()
+    public function shift()
     {
         if ($this->data) {
 
@@ -72,5 +77,20 @@ class Result
         }
 
         return null;
+    }
+
+    public function first()
+    {
+        return $this->paginator->first();
+    }
+
+    public function next()
+    {
+        return $this->paginator->next();
+    }
+
+    public function back()
+    {
+        return $this->paginator->back();
     }
 }

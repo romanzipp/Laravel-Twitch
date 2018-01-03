@@ -7,18 +7,16 @@ use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Psr7\Request;
 use romanzipp\Twitch\Exceptions\RequestRequiresAuthenticationException;
 use romanzipp\Twitch\Exceptions\RequestRequiresClientIdException;
+use romanzipp\Twitch\Helpers\Paginator;
 use romanzipp\Twitch\Traits\ClipsTrait;
 use romanzipp\Twitch\Traits\FollowsTrait;
 use romanzipp\Twitch\Traits\GamesTrait;
 use romanzipp\Twitch\Traits\StreamsTrait;
 use romanzipp\Twitch\Traits\UsersTrait;
 use romanzipp\Twitch\Traits\VideosTrait;
-use romanzipp\Twitch\Traits\Helpers\PaginatorTrait;
 
 class Twitch
 {
-    use PaginatorTrait;
-
     use ClipsTrait;
     use FollowsTrait;
     use GamesTrait;
@@ -49,6 +47,13 @@ class Twitch
      * @var GuzzleClient
      */
     protected $client;
+
+    /**
+     * Paginator object
+     * 
+     * @var Paginator
+     */
+    protected $paginator;
 
     /**
      * Construction.
@@ -136,23 +141,35 @@ class Twitch
         return $this->token;
     }
 
-    public function get($path = '', $parameters = [], $token = null)
+    public function get($path = '', $parameters = [], $token = null, Paginator $paginator = null)
     {
-        return $this->query('GET', $path, $parameters, $token);
+        return $this->query('GET', $path, $parameters, $token, $paginator);
     }
 
-    public function post($path = '', $parameters = [], $token = null)
+    public function post($path = '', $parameters = [], $token = null, Paginator $paginator = null)
     {
-        return $this->query('POST', $path, $parameters, $token);
+        return $this->query('POST', $path, $parameters, $token, $paginator);
     }
 
-    public function put($path = '', $parameters = [], $token = null)
+    public function put($path = '', $parameters = [], $token = null, Paginator $paginator = null)
     {
-        return $this->query('PUT', $path, $parameters, $token);
+        return $this->query('PUT', $path, $parameters, $token, $paginator);
     }
 
-    public function query($method = 'GET', $path = '', $parameters = [], $token = null)
+    /**
+     * Execute query
+     * @param  string $method     HTTP method
+     * @param  string $path       Query path
+     * @param  array  $parameters Query parameters
+     * @param  [type] $token      [description]
+     * @return Result             Result object
+     */
+    public function query(string $method = 'GET', string $path = '', array $parameters = [], $token = null, Paginator $paginator = null): Result
     {
+        if ($paginator) {
+            $parameters[$paginator->action] = $paginator->cursor();
+        }
+
         $uri = $this->generateUrl($path, $token, $parameters);
 
         $headers = [
@@ -168,11 +185,11 @@ class Twitch
 
             $response = $this->client->send($request);
 
-            return new Result($response);
+            return new Result($response, null, $paginator);
 
         } catch (RequestException $e) {
 
-            return new Result(null, $e);
+            return new Result(null, $e, $paginator);
         }
     }
 

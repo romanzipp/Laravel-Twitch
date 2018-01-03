@@ -16,7 +16,7 @@ trait FollowsTrait
      * @return Result                    Result object
      * @see    https://dev.twitch.tv/docs/api/reference#get-users-follows
      */
-    public function getFollows(int $from, int $to = null, Paginator $paginator = null): Result
+    public function getFollows(int $from = null, int $to = null, Paginator $paginator = null): Result
     {
         if (!$from && !$to) {
             throw new BadMethodCallException('At minimum, from or to must be provided for a query to be valid');
@@ -32,9 +32,7 @@ trait FollowsTrait
             $parameters['to_id'] = $to;
         }
 
-        $this->mergePaginator($parameters, $paginator);
-
-        return $this->get('users/follows', $parameters);
+        return $this->get('users/follows', $parameters, null, $paginator);
     }
 
     /**

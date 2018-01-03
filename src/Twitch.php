@@ -193,7 +193,14 @@ class Twitch
         }
     }
 
-    public function generateUrl($url, $token, $parameters)
+    /**
+     * Generate URL for API
+     * @param  string      $url        Query uri
+     * @param  null|string $token      Auth token, if required
+     * @param  array       $parameters Query parameters
+     * @return string                  Full query url
+     */
+    public function generateUrl($url, $token, array $parameters): string
     {
         if ($token) {
             $url .= (parse_url($url, PHP_URL_QUERY) ? '&' : '?') . 'oauth_token=' . $this->getToken($token);

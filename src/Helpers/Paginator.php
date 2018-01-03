@@ -7,10 +7,22 @@ use stdClass;
 
 class Paginator
 {
+    /**
+     * Twitch response pagination cursor
+     * @var null|array
+     */
     private $pagination;
 
+    /**
+     * Next desired action (first, after, before)
+     * @var null|string
+     */
     public $action = null;
 
+    /**
+     * Constructor
+     * @param stdClass $pagination Twitch response pagination cursor
+     */
     public function __construct(stdClass $pagination)
     {
         $this->pagination = $pagination;

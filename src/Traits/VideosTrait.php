@@ -37,6 +37,7 @@ trait VideosTrait
      * @param  array          $parameters Additional parameters
      * @param  Paginator|null $paginator  Paginator object
      * @return Result                     Result object
+     * @see    https://dev.twitch.tv/docs/api/reference#get-videos
      */
     public function getVideosById(int $id, array $parameters = [], Paginator $paginator = null): Result
     {
@@ -51,6 +52,7 @@ trait VideosTrait
      * @param  array          $parameters Additional parameters
      * @param  Paginator|null $paginator  Paginator object
      * @return Result                     Result object
+     * @see    https://dev.twitch.tv/docs/api/reference#get-videos
      */
     public function getVideosByUser(int $user, array $parameters = [], Paginator $paginator = null): Result
     {
@@ -65,6 +67,7 @@ trait VideosTrait
      * @param  array          $parameters Additional parameters
      * @param  Paginator|null $paginator  Paginator object
      * @return Result                     Result object
+     * @see    https://dev.twitch.tv/docs/api/reference#get-videos
      */
     public function getVideosByGame(int $game, array $parameters = [], Paginator $paginator = null): Result
     {

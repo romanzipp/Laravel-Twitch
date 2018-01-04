@@ -3,6 +3,8 @@
 [![Latest Stable Version](https://poser.pugx.org/romanzipp/laravel-twitch/version)](https://packagist.org/packages/romanzipp/laravel-twitch)
 [![Total Downloads](https://poser.pugx.org/romanzipp/laravel-twitch/downloads)](https://packagist.org/packages/romanzipp/laravel-twitch)
 [![License](https://poser.pugx.org/romanzipp/laravel-twitch/license)](https://packagist.org/packages/romanzipp/laravel-twitch)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/romanzipp/Laravel-Twitch/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/romanzipp/Laravel-Twitch/?branch=master)
+[![Build Status](https://scrutinizer-ci.com/g/romanzipp/Laravel-Twitch/badges/build.png?b=master)](https://scrutinizer-ci.com/g/romanzipp/Laravel-Twitch/build-status/master)
 
 PHP Twitch API Wrapper for Laravel 5+
 
@@ -49,6 +51,6 @@ Route::get('/', function (\romanzipp\Twitch\Twitch $twitch) {
 
 ## Documentation
 
-Coming Soon (tm)
+Available in [Wiki](https://github.com/romanzipp/Laravel-Twitch/wiki/Full-reference) section
 
 **Twitch API Documentation: https://dev.twitch.tv/docs/api/reference**

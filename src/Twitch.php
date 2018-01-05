@@ -11,6 +11,7 @@ use romanzipp\Twitch\Helpers\Paginator;
 use romanzipp\Twitch\Traits\ClipsTrait;
 use romanzipp\Twitch\Traits\FollowsTrait;
 use romanzipp\Twitch\Traits\GamesTrait;
+use romanzipp\Twitch\Traits\Legacy\RootTrait as LegacyRootTrait;
 use romanzipp\Twitch\Traits\StreamsTrait;
 use romanzipp\Twitch\Traits\UsersTrait;
 use romanzipp\Twitch\Traits\VideosTrait;
@@ -22,7 +23,9 @@ class Twitch
     use GamesTrait;
     use StreamsTrait;
     use UsersTrait;
-    use VideosTrait;    
+    use VideosTrait;
+
+    use LegacyRootTrait;
 
     const BASE_URI = 'https://api.twitch.tv/helix/';
 

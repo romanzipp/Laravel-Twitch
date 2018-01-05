@@ -42,12 +42,12 @@ trait UsersTrait
 
     /**
      * Gets information about one specified Twitch user by name
-     * @param  int    $id         User name
+     * @param  string $name       User name
      * @param  array  $parameters Additional parameters
      * @return Result             Result object
      * @see    https://dev.twitch.tv/docs/api/reference#get-users
      */
-    public function getUserByName(int $name, array $parameters = []): Result
+    public function getUserByName(string $name, array $parameters = []): Result
     {
         $parameters['login'] = $name;
 

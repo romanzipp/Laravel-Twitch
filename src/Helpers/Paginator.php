@@ -21,9 +21,9 @@ class Paginator
 
     /**
      * Constructor
-     * @param stdClass $pagination Twitch response pagination cursor
+     * @param null|stdClass $pagination Twitch response pagination cursor
      */
-    public function __construct(stdClass $pagination)
+    public function __construct(stdClass $pagination = null)
     {
         $this->pagination = $pagination;
     }

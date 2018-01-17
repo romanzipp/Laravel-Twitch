@@ -30,14 +30,14 @@ class Twitch
     const BASE_URI = 'https://api.twitch.tv/helix/';
 
     /**
-     * Twitch token.
+     * Twitch token
      *
      * @var token
      */
     protected $token;
 
     /**
-     * Twitch client id.
+     * Twitch client id
      *
      * @var clientId
      */
@@ -59,12 +59,12 @@ class Twitch
     protected $paginator;
 
     /**
-     * Construction.
+     * Construction
      *
      * @param string $token    Twitch OAuth Token
      * @param string $clientId Twitch client id
      */
-    public function __construct($token = null, $clientId = null)
+    public function __construct(string $token = null, $clientId = null)
     {
         if ($token) {
             $this->setToken($token);
@@ -85,8 +85,7 @@ class Twitch
     }
 
     /**
-     * Set clientId.
-     *
+     * Set clientId
      * @param string $clientId Twitch client id
      */
     public function setClientId($clientId)
@@ -95,10 +94,8 @@ class Twitch
     }
 
     /**
-     * Get clientId.
-     *
-     * @param string clientId optional
-     *
+     * Get clientId
+     * @param  string clientId optional
      * @return string clientId
      */
     public function getClientId($clientId = null)
@@ -115,25 +112,22 @@ class Twitch
     }
 
     /**
-     * Set Twitch OAuth Token.
-     *
+     * Set Twitch OAuth Token
      * @param string $token OAuth token
      */
-    public function setToken($token)
+    public function setToken(string $token)
     {
         $this->token = $token;
     }
 
     /**
-     * Get Twitch token.
-     *
-     * @param string $token Twitch token
-     *
+     * Get Twitch token
+     * @param mixed $token Twitch OAuth Token
      * @return string Twitch token
      */
     public function getToken($token = null)
     {
-        if ($token) {
+        if (is_string($token)) {
             return $token;
         }
 
@@ -164,7 +158,7 @@ class Twitch
      * @param  string $method     HTTP method
      * @param  string $path       Query path
      * @param  array  $parameters Query parameters
-     * @param  [type] $token      [description]
+     * @param  mixed  $token      Token String or true/false to obtain by setToken method
      * @return Result             Result object
      */
     public function query(string $method = 'GET', string $path = '', array $parameters = [], $token = null, Paginator $paginator = null): Result
@@ -179,7 +173,7 @@ class Twitch
             'Client-ID' => $this->getClientId(),
         ];
 
-        if ($token) {
+        if ($this->token || $token) {
             $headers['Authorization'] = 'Bearer ' . $this->getToken($token);
         }
 

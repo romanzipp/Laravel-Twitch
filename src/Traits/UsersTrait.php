@@ -8,6 +8,17 @@ use romanzipp\Twitch\Result;
 trait UsersTrait
 {
     /**
+     * Get currently authed user with Bearer Token
+     * Note: Bearer OAuth Token is required
+     * @param  string $token Twitch OAuth Token
+     * @return Result Result object
+     */
+    public function getAuthedUser(string $token = null): Result
+    {
+        return $this->get('users', [], $token);
+    }
+
+    /**
      * Gets information about one or more specified Twitch users
      * @param  array  $parameters Array of parameters
      * @return Result             Result object

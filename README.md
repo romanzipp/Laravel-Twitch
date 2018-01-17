@@ -35,8 +35,11 @@ Route::get('/', function (\romanzipp\Twitch\Twitch $twitch) {
     $userResult = $twitch->getUserByName('staiy');
 
     // Check, if the query was successfull
-    if ($userResult->success) {
+    if ($userResult->success()) {
+        // Shift result to get single user data
         $user = $userResult->shift();
+
+        echo $user['id'];
     }
 
     // Use Paginator
@@ -47,6 +50,28 @@ Route::get('/', function (\romanzipp\Twitch\Twitch $twitch) {
     // Fetch next set of followers
     $nextFollowsResult = $twitch->getFollowsTo(48865821, $followsResult->next());
 });
+```
+
+### OAuth Tokens
+
+```php
+use \romanzipp\Twitch\Twitch;
+
+// Create instance with OAuth Token
+$twitch = new Twitch('843tvnbq35676unzrtvs78');
+
+$userResult = $twitch->getAuthedUser();
+
+if ($userResult->success()) {
+    $user = $userResult->shift();
+}
+
+// Change OAuth Token on the fly
+$twitch->setToken('j8uz457tzv5476v0qp');
+
+// Pass Token to methods that accept OAuth Token as parameters
+$userResult = $twitch->getAuthedUser('843tvnbq35676unzrtvs78');
+
 ```
 
 ## Documentation

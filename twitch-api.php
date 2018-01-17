@@ -1,9 +1,9 @@
 <?php
 
 return [
-    'client_id' => env('TWITCH_NEW_KEY', ''),
-    'client_secret' => env('TWITCH_NEW_SECRET', ''),
-    'redirect_url' => env('TWITCH_NEW_REDIRECT_URI', ''),
+    'client_id' => env('TWITCH_HELIX_KEY', ''),
+    'client_secret' => env('TWITCH_HELIX_SECRET', ''),
+    'redirect_url' => env('TWITCH_HELIX_REDIRECT_URI', ''),
     'scopes' => [
         'channel_check_subscription',
         'channel_commercial',
@@ -23,6 +23,9 @@ return [
         'user_follows_edit',
         'user_read',
         'user_subscriptions',
-        'viewing_activity_read'
+        'viewing_activity_read',
+        'clips:edit',
+        'user:edit',
+        'user:read:email',
     ],
 ];

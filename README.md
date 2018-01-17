@@ -8,7 +8,7 @@
 
 PHP Twitch API Wrapper for Laravel 5+
 
-**NOTICE: This library uses the latest Twitch API which ist not fully featured yet**
+**NOTICE: This library uses the latest Twitch HELIX API which ist not fully featured yet**
 
 ## Installation
 
@@ -23,6 +23,24 @@ Or add `romanzipp/laravel-twitch` to your `composer.json`
 ```
 
 Run composer update to pull down the latest version.
+
+**If you use Laravel 5.5+ you are already done, otherwise continue:**
+
+1. Add Service Provider to your `app.php` configuration file:
+
+```php
+romanzipp\Twitch\Providers\TwitchServiceProvider::class,
+```
+
+## Configuration
+
+Copy configuration to config folder:
+
+```
+$ php artisan vendor:publish --provider=romanzipp\Twitch\Providers\TwitchServiceProvider
+```
+
+Add environmental variables to your `.env`
 
 ## Example
 

@@ -42,6 +42,13 @@ $ php artisan vendor:publish --provider=romanzipp\Twitch\Providers\TwitchService
 
 Add environmental variables to your `.env`
 
+```
+TWITCH_HELIX_KEY=
+TWITCH_HELIX_SECRET=
+TWITCH_HELIX_REDIRECT_URI=http://localhost
+
+```
+
 ## Example
 
 ### With Laravel dependency injection

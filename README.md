@@ -22,7 +22,7 @@ Or add `romanzipp/laravel-twitch` to your `composer.json`
 "romanzipp/laravel-twitch": "dev-master"
 ```
 
-Run composer update to pull down the latest version.
+Run composer update to pull the latest version.
 
 **If you use Laravel 5.5+ you are already done, otherwise continue:**
 
@@ -46,7 +46,6 @@ Add environmental variables to your `.env`
 TWITCH_HELIX_KEY=
 TWITCH_HELIX_SECRET=
 TWITCH_HELIX_REDIRECT_URI=http://localhost
-
 ```
 
 ## Example

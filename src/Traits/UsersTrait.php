@@ -105,4 +105,10 @@ trait UsersTrait
             'description' => $description,
         ]);
     }
+
+    abstract public function get($path = '', $parameters = [], $token = null, Paginator $paginator = null);
+
+    abstract public function post($path = '', $parameters = [], $token = null, Paginator $paginator = null);
+
+    abstract public function put($path = '', $parameters = [], $token = null, Paginator $paginator = null);
 }

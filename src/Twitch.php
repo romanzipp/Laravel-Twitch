@@ -31,20 +31,20 @@ class Twitch
 
     /**
      * Twitch token
-     * @var token
+     * @var string
      */
     protected $token;
 
     /**
      * Twitch client id
-     * @var clientId
+     * @var string
      */
 
     protected $clientId;
 
     /**
      * Guzzle is used to make http requests
-     * @var GuzzleClient
+     * @var \GuzzleHttp\Client
      */
     protected $client;
 

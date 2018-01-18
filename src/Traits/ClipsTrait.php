@@ -2,6 +2,7 @@
 
 namespace romanzipp\Twitch\Traits;
 
+use romanzipp\Twitch\Helpers\Paginator;
 use romanzipp\Twitch\Result;
 
 trait ClipsTrait
@@ -46,4 +47,10 @@ trait ClipsTrait
             'type' => $type,
         ]);
     }
+
+    abstract public function get($path = '', $parameters = [], $token = null, Paginator $paginator = null);
+
+    abstract public function post($path = '', $parameters = [], $token = null, Paginator $paginator = null);
+
+    abstract public function put($path = '', $parameters = [], $token = null, Paginator $paginator = null);
 }

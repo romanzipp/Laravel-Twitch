@@ -146,4 +146,10 @@ trait StreamsTrait
 
         return $this->getStreams($parameters);
     }
+
+    abstract public function get($path = '', $parameters = [], $token = null, Paginator $paginator = null);
+
+    abstract public function post($path = '', $parameters = [], $token = null, Paginator $paginator = null);
+
+    abstract public function put($path = '', $parameters = [], $token = null, Paginator $paginator = null);
 }

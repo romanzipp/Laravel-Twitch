@@ -30,9 +30,8 @@ class TwitchServiceProvider extends ServiceProvider
             dirname(__DIR__) . '/../twitch-api.php', 'twitch-api'
         );
 
-        $this->app->singleton(Twitch::class, function ($app) {
-            $twitch = new Twitch;
-            return $twitch;
+        $this->app->singleton(Twitch::class, function () {
+            return new Twitch;
         });
     }
 

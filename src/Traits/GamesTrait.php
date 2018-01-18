@@ -87,7 +87,7 @@ trait GamesTrait
      */
     public function getTopGames(Paginator $paginator = null): Result
     {
-        return $this->get('games/top', $parameters);
+        return $this->get('games/top', [], $paginator);
     }
 
     abstract public function get($path = '', $parameters = [], $token = null, Paginator $paginator = null);

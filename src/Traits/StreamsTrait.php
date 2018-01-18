@@ -24,7 +24,7 @@ trait StreamsTrait
      */
     public function getStreams(array $parameters = [], Paginator $paginator = null): Result
     {
-        return $this->get('streams', $parameters);
+        return $this->get('streams', $parameters, $paginator);
     }
 
     /**
@@ -39,7 +39,7 @@ trait StreamsTrait
     {
         $parameters['user_id'] = $id;
 
-        return $this->getStreams($parameters);
+        return $this->getStreams($parameters, $paginator);
     }
 
     /**
@@ -54,7 +54,7 @@ trait StreamsTrait
     {
         $parameters['user_login'] = $name;
 
-        return $this->getStreams($parameters);
+        return $this->getStreams($parameters, $paginator);
     }
 
     /**
@@ -69,7 +69,7 @@ trait StreamsTrait
     {
         $parameters['user_id'] = $ids;
 
-        return $this->getStreams($parameters);
+        return $this->getStreams($parameters, $paginator);
     }
 
     /**
@@ -84,7 +84,7 @@ trait StreamsTrait
     {
         $parameters['user_login'] = $names;
 
-        return $this->getStreams($parameters);
+        return $this->getStreams($parameters, $paginator);
     }
 
     /**
@@ -99,7 +99,7 @@ trait StreamsTrait
     {
         $parameters['community_id'] = $id;
 
-        return $this->getStreams($parameters);
+        return $this->getStreams($parameters, $paginator);
     }
 
     /**
@@ -114,7 +114,7 @@ trait StreamsTrait
     {
         $parameters['community_id'] = $ids;
 
-        return $this->getStreams($parameters);
+        return $this->getStreams($parameters, $paginator);
     }
 
     /**
@@ -129,7 +129,7 @@ trait StreamsTrait
     {
         $parameters['game_id'] = $id;
 
-        return $this->getStreams($parameters);
+        return $this->getStreams($parameters, $paginator);
     }
 
     /**
@@ -144,7 +144,7 @@ trait StreamsTrait
     {
         $parameters['game_id'] = $ids;
 
-        return $this->getStreams($parameters);
+        return $this->getStreams($parameters, $paginator);
     }
 
     abstract public function get($path = '', $parameters = [], $token = null, Paginator $paginator = null);

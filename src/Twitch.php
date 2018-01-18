@@ -61,7 +61,7 @@ class Twitch
      */
     public function __construct(string $token = null, $clientId = null)
     {
-        if ($token) {
+        if ($token !== null) {
             $this->setToken($token);
         }
 
@@ -90,12 +90,12 @@ class Twitch
 
     /**
      * Get clientId
-     * @param  string clientId optional
-     * @return string clientId
+     * @param  string $clientId clientId optional
+     * @return string           clientId
      */
-    public function getClientId($clientId = null)
+    public function getClientId(string $clientId = null)
     {
-        if ($clientId) {
+        if ($clientId !== null) {
             return $clientId;
         }
 
@@ -192,9 +192,9 @@ class Twitch
      * @param  array       $parameters Query parameters
      * @return string                  Full query url
      */
-    public function generateUrl($url, $token, array $parameters): string
+    public function generateUrl(string $url, string $token = null, array $parameters): string
     {
-        if ($token) {
+        if ($token !== null) {
             $url .= (parse_url($url, PHP_URL_QUERY) ? '&' : '?') . 'oauth_token=' . $this->getToken($token);
         }
 

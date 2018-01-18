@@ -33,7 +33,7 @@ class Result
 
     /**
      * Twitch response pagination cursor
-     * @var null|array
+     * @var null|stdClass
      */
     public $pagination;
 
@@ -111,7 +111,7 @@ class Result
      */
     public function shift()
     {
-        if ($this->data) {
+        if (!empty($this->data)) {
 
             $data = $this->data;
 
@@ -123,28 +123,28 @@ class Result
 
     /**
      * Set the Paginator to fetch the first set of results
-     * @return Paginator
+     * @return null|Paginator
      */
     public function first()
     {
-        return $this->paginator->first();
+        return $this->paginator !== null ? $this->paginator->first() : null;
     }
 
     /**
      * Set the Paginator to fetch the next set of results
-     * @return Paginator
+     * @return null|Paginator
      */
     public function next()
     {
-        return $this->paginator->next();
+        return $this->paginator !== null ? $this->paginator->next() : null;
     }
 
     /**
      * Set the Paginator to fetch the last set of results
-     * @return Paginator
+     * @return null|Paginator
      */
     public function back()
     {
-        return $this->paginator->back();
+        return $this->paginator !== null ? $this->paginator->back() : null;
     }
 }

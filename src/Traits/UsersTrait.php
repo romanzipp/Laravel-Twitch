@@ -3,6 +3,7 @@
 namespace romanzipp\Twitch\Traits;
 
 use BadMethodCallException;
+use romanzipp\Twitch\Helpers\Paginator;
 use romanzipp\Twitch\Result;
 
 trait UsersTrait

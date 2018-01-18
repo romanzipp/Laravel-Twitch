@@ -2,6 +2,8 @@
 
 namespace romanzipp\Twitch\Traits;
 
+use BadMethodCallException;
+use romanzipp\Twitch\Helpers\Paginator;
 use romanzipp\Twitch\Result;
 
 trait VideosTrait
@@ -27,7 +29,7 @@ trait VideosTrait
             throw new BadMethodCallException('Parameter required missing: id, user_id or game_id');
         }
 
-        return $this->get('videos', $parameters);
+        return $this->get('videos', $parameters, $paginator);
     }
 
     /**

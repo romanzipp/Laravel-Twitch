@@ -18,17 +18,17 @@ trait FollowsTrait
      */
     public function getFollows(int $from = null, int $to = null, Paginator $paginator = null): Result
     {
-        if (!$from && !$to) {
+        if ($from === null && $to === null) {
             throw new BadMethodCallException('At minimum, from or to must be provided for a query to be valid');
         }
 
         $parameters = [];
 
-        if ($from) {
+        if ($from !== null) {
             $parameters['from_id'] = $from;
         }
 
-        if ($to) {
+        if ($to !== null) {
             $parameters['to_id'] = $to;
         }
 

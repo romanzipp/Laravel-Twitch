@@ -31,36 +31,31 @@ class Twitch
 
     /**
      * Twitch token
-     *
      * @var token
      */
     protected $token;
 
     /**
      * Twitch client id
-     *
      * @var clientId
      */
 
     protected $clientId;
 
     /**
-     * Guzzle is used to make http requests.
-     *
+     * Guzzle is used to make http requests
      * @var GuzzleClient
      */
     protected $client;
 
     /**
      * Paginator object
-     * 
      * @var Paginator
      */
     protected $paginator;
 
     /**
      * Construction
-     *
      * @param string $token    Twitch OAuth Token
      * @param string $clientId Twitch client id
      */
@@ -122,7 +117,7 @@ class Twitch
 
     /**
      * Get Twitch token
-     * @param mixed $token Twitch OAuth Token
+     * @param  mixed  $token Twitch OAuth Token
      * @return string Twitch token
      */
     public function getToken($token = null)

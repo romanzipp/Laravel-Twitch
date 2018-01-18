@@ -24,6 +24,6 @@ trait StreamsMetadataTrait
      */
     public function getStreams(array $parameters = [], Paginator $paginator = null): Result
     {
-        return $this->get('streams/metadata', $parameters);
+        return $this->get('streams/metadata', $parameters, $paginator);
     }
 }

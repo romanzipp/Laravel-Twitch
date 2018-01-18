@@ -9,7 +9,7 @@ class Paginator
 {
     /**
      * Twitch response pagination cursor
-     * @var null|array
+     * @var null|stdClass
      */
     private $pagination;
 

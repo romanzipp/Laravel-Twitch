@@ -15,7 +15,7 @@ class Result
 
     /**
      * Guzzle exception, if present
-     * @var null|Exception
+     * @var null|mixed
      */
     private $exception = null;
 
@@ -46,10 +46,10 @@ class Result
     /**
      * Constructor
      * @param null|Response  $response  HTTP response
-     * @param boolean        $exception Exception, if present
+     * @param null|mixed     $exception Exception, if present
      * @param null|Paginator $paginator Paginator, if present
      */
-    public function __construct($response, $exception = false, $paginator = null)
+    public function __construct($response, $exception = null, $paginator = null)
     {
         $this->success = $response instanceof Response;
 
@@ -57,7 +57,7 @@ class Result
             $this->exception = $exception;
         }
 
-        $jsonResponse = $this->success ? @json_decode($response->getBody()) : null;
+        $jsonResponse = $response === null ? [] : ($this->success ? @json_decode($response->getBody()) : null);
 
         if ($this->success && property_exists($jsonResponse, 'data')) {
             $this->data = $jsonResponse->data;
@@ -95,7 +95,7 @@ class Result
             return 'Twitch API Unavailable';
         }
 
-        $exception = (string) $e->getResponse()->getBody();
+        $exception = (string) $this->exception->getResponse()->getBody();
         $exception = @json_decode($exception);
 
         if (property_exists($exception, 'message')) {

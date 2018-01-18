@@ -101,7 +101,7 @@ trait UsersTrait
      */
     public function updateUser(string $description): Result
     {
-        $this->put('users', [
+        return $this->put('users', [
             'description' => $description,
         ]);
     }

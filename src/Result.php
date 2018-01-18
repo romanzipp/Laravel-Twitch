@@ -33,7 +33,7 @@ class Result
 
     /**
      * Twitch response pagination cursor
-     * @var null|stdClass
+     * @var null|\stdClass
      */
     public $pagination;
 

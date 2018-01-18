@@ -65,7 +65,7 @@ class Twitch
             $this->setToken($token);
         }
 
-        if ($clientId) {
+        if ($clientId !== null) {
 
             $this->setClientId($clientId);
 

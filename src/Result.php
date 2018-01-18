@@ -59,21 +59,22 @@ class Result
 
         $jsonResponse = $response === null ? [] : ($this->success ? @json_decode($response->getBody()) : null);
 
-        if ($this->success && property_exists($jsonResponse, 'data')) {
-            $this->data = $jsonResponse->data;
-        }
-
-        if ($this->success && property_exists($jsonResponse, 'total')) {
-            $this->total = $jsonResponse->total;
-        } else {
-            $this->total = count((array) $this->data);
-        }
-
-        if ($this->success && property_exists($jsonResponse, 'pagination')) {
-            $this->pagination = $jsonResponse->pagination;
-        }
+        $this->setPropertiesByResponse($jsonResponse, [
+            'data',
+            'total',
+            'pagination',
+        ]);
 
         $this->paginator = $paginator ?? Paginator::from($this);
+    }
+
+    private function setPropertiesByResponse($jsonResponse, array $properties)
+    {
+        foreach ($properties as $property) {
+            if ($this->success && property_exists($jsonResponse, $property)) {
+                $this->{$property} = $jsonResponse->{$property};
+            }
+        }
     }
 
     /**

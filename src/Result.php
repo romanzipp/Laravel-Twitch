@@ -11,7 +11,7 @@ class Result
      * Query successfull
      * @var boolean
      */
-    private $success = false;
+    public $success = false;
 
     /**
      * Guzzle exception, if present

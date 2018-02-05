@@ -98,6 +98,32 @@ $userResult = $twitch->getAuthedUser('843tvnbq35676unzrtvs78');
 
 ```
 
+### Pagination Loop Example
+
+This example fetches all Twitch Games and stores them into a database.
+
+```php
+use \romanzipp\Twitch\Twitch;
+
+$twitch = new Twitch;
+
+do {
+    $result = $twitch->getTopGames(['first' => 100], isset($result) ? $result->next() : null);
+
+    foreach ($result->data as $item) {
+
+        Game::updateOrCreate(
+            ['id' => $item->id],
+            [
+                'name' => $item->name,
+                'box_art_url' => $item->box_art_url,
+            ]
+        );
+    }
+
+} while($result->count() > 0);
+```
+
 ## Documentation
 
 Available in [Wiki](https://github.com/romanzipp/Laravel-Twitch/wiki/Full-reference) section

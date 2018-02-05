@@ -81,13 +81,14 @@ trait GamesTrait
 
     /**
      * Gets games sorted by number of current viewers on Twitch, most popular first
+     * @param  array  $parameters Array of parameters
      * @param  Paginator|null $paginator Paginator object
      * @return Result                    Result object
      * @see    https://dev.twitch.tv/docs/api/reference#get-top-games
      */
-    public function getTopGames(Paginator $paginator = null): Result
+    public function getTopGames(array $parameters = [], Paginator $paginator = null): Result
     {
-        return $this->get('games/top', [], $paginator);
+        return $this->get('games/top', $parameters, $paginator);
     }
 
     abstract public function get($path = '', $parameters = [], $token = null, Paginator $paginator = null);

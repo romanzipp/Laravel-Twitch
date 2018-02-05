@@ -121,7 +121,7 @@ do {
         );
     }
 
-} while($result->count() > 0);
+} while ($result->count() > 0);
 ```
 
 ## Documentation

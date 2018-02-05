@@ -144,7 +144,7 @@ class Twitch
         return $this->token;
     }
 
-    public function get($path = '', $parameters = [], Paginator $paginator = null, string $token = null)
+    public function get(string $path = '', array $parameters = [], Paginator $paginator = null, string $token = null)
     {
         if ($token) {
             $this->setToken($token);
@@ -153,7 +153,7 @@ class Twitch
         return $this->query('GET', $path, $parameters, $paginator);
     }
 
-    public function post($path = '', $parameters = [], Paginator $paginator = null, string $token = null)
+    public function post(string $path = '', array $parameters = [], Paginator $paginator = null, string $token = null)
     {
         if ($token) {
             $this->setToken($token);
@@ -162,7 +162,7 @@ class Twitch
         return $this->query('POST', $path, $parameters, $paginator);
     }
 
-    public function put($path = '', $parameters = [], Paginator $paginator = null, string $token = null)
+    public function put(string $path = '', array $parameters = [], Paginator $paginator = null, string $token = null)
     {
         if ($token) {
             $this->setToken($token);

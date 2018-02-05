@@ -91,9 +91,9 @@ trait GamesTrait
         return $this->get('games/top', $parameters, $paginator);
     }
 
-    abstract public function get($path = '', $parameters = [], $token = null, Paginator $paginator = null);
+    abstract public function get(string $path = '', array $parameters = [], Paginator $paginator = null, string $token = null);
 
-    abstract public function post($path = '', $parameters = [], $token = null, Paginator $paginator = null);
+    abstract public function post(string $path = '', array $parameters = [], Paginator $paginator = null, string $token = null);
 
-    abstract public function put($path = '', $parameters = [], $token = null, Paginator $paginator = null);
+    abstract public function put(string $path = '', array $parameters = [], Paginator $paginator = null, string $token = null);
 }

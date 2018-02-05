@@ -17,7 +17,7 @@ class Result
      * Guzzle exception, if present
      * @var null|mixed
      */
-    private $exception = null;
+    public $exception = null;
 
     /**
      * Query result data
@@ -100,7 +100,7 @@ class Result
         $exception = @json_decode($exception);
 
         if (property_exists($exception, 'message')) {
-            $exception->message;
+            return $exception->message;
         }
 
         return strval($exception);

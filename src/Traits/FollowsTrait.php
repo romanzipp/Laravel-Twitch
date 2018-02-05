@@ -32,7 +32,7 @@ trait FollowsTrait
             $parameters['to_id'] = $to;
         }
 
-        return $this->get('users/follows', $parameters, null, $paginator);
+        return $this->get('users/follows', $parameters, $paginator);
     }
 
     /**

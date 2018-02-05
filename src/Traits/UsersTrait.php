@@ -16,7 +16,7 @@ trait UsersTrait
      */
     public function getAuthedUser(string $token = null): Result
     {
-        return $this->get('users', [], $token);
+        return $this->get('users', [], null, $token);
     }
 
     /**

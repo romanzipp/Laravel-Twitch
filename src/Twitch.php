@@ -116,6 +116,17 @@ class Twitch
     }
 
     /**
+     * Set Twitch OAuth Token and return self instance
+     * @param  string $token OAuth token
+     * @return self
+     */
+    public function withToken(string $token)
+    {
+        $this->setToken();
+        return $this;
+    }
+
+    /**
      * Get Twitch token
      * @param  mixed  $token Twitch OAuth Token
      * @return string Twitch token
@@ -133,19 +144,31 @@ class Twitch
         return $this->token;
     }
 
-    public function get($path = '', $parameters = [], $token = null, Paginator $paginator = null)
+    public function get($path = '', $parameters = [], Paginator $paginator = null, string $token = null)
     {
-        return $this->query('GET', $path, $parameters, $token, $paginator);
+        if ($token) {
+            $this->setToken($token);
+        }
+
+        return $this->query('GET', $path, $parameters, $paginator);
     }
 
-    public function post($path = '', $parameters = [], $token = null, Paginator $paginator = null)
+    public function post($path = '', $parameters = [], Paginator $paginator = null, string $token = null)
     {
-        return $this->query('POST', $path, $parameters, $token, $paginator);
+        if ($token) {
+            $this->setToken($token);
+        }
+
+        return $this->query('POST', $path, $parameters, $paginator);
     }
 
-    public function put($path = '', $parameters = [], $token = null, Paginator $paginator = null)
+    public function put($path = '', $parameters = [], Paginator $paginator = null, string $token = null)
     {
-        return $this->query('PUT', $path, $parameters, $token, $paginator);
+        if ($token) {
+            $this->setToken($token);
+        }
+
+        return $this->query('PUT', $path, $parameters, $paginator);
     }
 
     /**
@@ -156,20 +179,20 @@ class Twitch
      * @param  mixed  $token      Token String or true/false to obtain by setToken method
      * @return Result             Result object
      */
-    public function query(string $method = 'GET', string $path = '', array $parameters = [], $token = null, Paginator $paginator = null): Result
+    public function query(string $method = 'GET', string $path = '', array $parameters = [], Paginator $paginator = null): Result
     {
         if ($paginator) {
             $parameters[$paginator->action] = $paginator->cursor();
         }
 
-        $uri = $this->generateUrl($path, $token, $parameters);
+        $uri = $this->generateUrl($path, $parameters);
 
         $headers = [
             'Client-ID' => $this->getClientId(),
         ];
 
-        if ($this->token || $token) {
-            $headers['Authorization'] = 'Bearer ' . $this->getToken($token);
+        if ($this->token) {
+            $headers['Authorization'] = 'Bearer ' . $this->getToken();
         }
 
         try {
@@ -192,12 +215,8 @@ class Twitch
      * @param  array       $parameters Query parameters
      * @return string                  Full query url
      */
-    public function generateUrl(string $url, string $token = null, array $parameters): string
+    public function generateUrl(string $url, array $parameters): string
     {
-        if ($token !== null) {
-            $url .= (parse_url($url, PHP_URL_QUERY) ? '&' : '?') . 'oauth_token=' . $this->getToken($token);
-        }
-
         foreach ($parameters as $optionKey => $option) {
 
             $data = !is_array($option) ? [$option] : $option;

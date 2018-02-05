@@ -123,6 +123,15 @@ class Result
     }
 
     /**
+     * Return the current count of items in dataset
+     * @return int Count
+     */
+    public function count(): int
+    {
+        return count((array) $this->data);
+    }
+
+    /**
      * Set the Paginator to fetch the first set of results
      * @return null|Paginator
      */

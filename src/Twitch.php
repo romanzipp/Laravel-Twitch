@@ -122,7 +122,7 @@ class Twitch
      */
     public function withToken(string $token)
     {
-        $this->setToken();
+        $this->setToken($token);
         return $this;
     }
 

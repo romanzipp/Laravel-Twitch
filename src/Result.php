@@ -48,8 +48,9 @@ class Result
      * @param null|Response  $response  HTTP response
      * @param null|mixed     $exception Exception, if present
      * @param null|Paginator $paginator Paginator, if present
+     * @param bool           $legacy    Is legacy v5 Request
      */
-    public function __construct($response, $exception = null, $paginator = null)
+    public function __construct($response, $exception = null, $paginator = null, bool $legacy = false)
     {
         $this->success = $response instanceof Response;
 
@@ -59,13 +60,25 @@ class Result
 
         $jsonResponse = $response === null ? [] : ($this->success ? @json_decode($response->getBody()) : null);
 
-        $this->setPropertiesByResponse($jsonResponse, [
-            'data',
-            'total',
-            'pagination',
-        ]);
+        if (!$legacy) {
 
-        $this->paginator = $paginator ?? Paginator::from($this);
+            $this->setPropertiesByResponse($jsonResponse, [
+                'data',
+                'total',
+                'pagination',
+            ]);
+
+            $this->paginator = $paginator ?? Paginator::from($this);
+
+        } else {
+
+            $this->data = $jsonResponse;
+
+            if (property_exists($jsonResponse, '_total')) {
+
+                $this->total = $jsonResponse->_total;
+            }
+        }
     }
 
     private function setPropertiesByResponse($jsonResponse, array $properties)

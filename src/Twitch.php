@@ -57,7 +57,7 @@ class Twitch
 
     /**
      * Is legacy Request
-     * @var null
+     * @var null|bool
      */
     protected $legacy = null;
 
@@ -156,7 +156,10 @@ class Twitch
      */
     public function withLegacy()
     {
+        $this->legacy = true;
         $this->once[] = 'legacy';
+
+        return $this;
     }
 
     /**
@@ -212,11 +215,11 @@ class Twitch
         }
 
         try {
-            $request = new Request($method, $uri, $headers);
+            $request = new Request($method, $uri, $headers, $this->legacy ? true : false);
 
             $response = $this->client->send($request);
 
-            $result = new Result($response, null, $paginator);
+            $result = new Result($response, null, $paginator, $this->legacy ? true : false);
 
         } catch (RequestException $e) {
 

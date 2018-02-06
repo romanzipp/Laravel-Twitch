@@ -16,7 +16,7 @@ trait UsersTrait
      */
     public function getAuthedUser(string $token = null): Result
     {
-        if ($token != null) {
+        if ($token !== null) {
             $this->withToken($token);
         }
 
@@ -116,4 +116,6 @@ trait UsersTrait
     abstract public function post(string $path = '', array $parameters = [], Paginator $paginator = null);
 
     abstract public function put(string $path = '', array $parameters = [], Paginator $paginator = null);
+
+    abstract public function withToken();
 }

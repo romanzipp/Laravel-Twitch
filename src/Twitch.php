@@ -152,7 +152,7 @@ class Twitch
 
     /**
      * Set legacy mode for one Request
-     * @return void
+     * @return self
      */
     public function withLegacy()
     {

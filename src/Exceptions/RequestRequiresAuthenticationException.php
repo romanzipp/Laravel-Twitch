@@ -6,8 +6,8 @@ use Exception;
 
 class RequestRequiresAuthenticationException extends Exception
 {
-    public function __construct()
+    public function __construct(string $message = null)
     {
-        $this->message = 'Request requires authentication';
+        $this->message = $message ?? 'Request requires authentication';
     }
 }

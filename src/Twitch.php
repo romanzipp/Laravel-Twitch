@@ -11,8 +11,8 @@ use romanzipp\Twitch\Helpers\Paginator;
 use romanzipp\Twitch\Traits\ClipsTrait;
 use romanzipp\Twitch\Traits\FollowsTrait;
 use romanzipp\Twitch\Traits\GamesTrait;
+use romanzipp\Twitch\Traits\Legacy\OAuthTrait as LegacyOAuthTrait;
 use romanzipp\Twitch\Traits\Legacy\RootTrait as LegacyRootTrait;
-use romanzipp\Twitch\Traits\OAuth2Trait;
 use romanzipp\Twitch\Traits\StreamsTrait;
 use romanzipp\Twitch\Traits\UsersTrait;
 use romanzipp\Twitch\Traits\VideosTrait;
@@ -25,24 +25,11 @@ class Twitch
     use StreamsTrait;
     use UsersTrait;
     use VideosTrait;
-    use OAuth2Trait;
 
+    use LegacyOAuthTrait;
     use LegacyRootTrait;
 
     const BASE_URI = 'https://api.twitch.tv/helix/';
-
-    /**
-     * Twitch token
-     * @var string
-     */
-    protected $token = null;
-
-    /**
-     * Twitch client id
-     * @var string
-     */
-
-    protected $clientId = null;
 
     /**
      * Guzzle is used to make http requests
@@ -57,11 +44,35 @@ class Twitch
     protected $paginator;
 
     /**
+     * Twitch token
+     * @var string
+     */
+    protected $token = null;
+
+    /**
+     * Twitch client id
+     * @var string
+     */
+    protected $clientId = null;
+
+    /**
+     * Is legacy Request
+     * @var null
+     */
+    protected $legacy = null;
+
+    /**
+     * Attributes saved for one request
+     * @var array
+     */
+    protected $once = [];
+
+    /**
      * Construction
      * @param string $token    Twitch OAuth Token
      * @param string $clientId Twitch client id
      */
-    public function __construct(string $token = null, $clientId = null)
+    public function __construct(string $token = null, string $clientId = null)
     {
         if ($token !== null) {
             $this->setToken($token);
@@ -95,12 +106,8 @@ class Twitch
      * @param  string $clientId clientId optional
      * @return string           clientId
      */
-    public function getClientId(string $clientId = null)
+    public function getClientId()
     {
-        if ($clientId !== null) {
-            return $clientId;
-        }
-
         if (!$this->clientId) {
             throw new RequestRequiresClientIdException();
         }
@@ -118,27 +125,24 @@ class Twitch
     }
 
     /**
-     * Set Twitch OAuth Token and return self instance
+     * Set Twitch OAuth Token for one request
      * @param  string $token OAuth token
      * @return self
      */
     public function withToken(string $token)
     {
         $this->setToken($token);
+        $this->once[] = 'token';
+
         return $this;
     }
 
     /**
      * Get Twitch token
-     * @param  mixed  $token Twitch OAuth Token
      * @return string Twitch token
      */
-    public function getToken($token = null)
+    public function getToken()
     {
-        if (is_string($token)) {
-            return $token;
-        }
-
         if (!$this->token) {
             throw new RequestRequiresAuthenticationException();
         }
@@ -146,30 +150,36 @@ class Twitch
         return $this->token;
     }
 
-    public function get(string $path = '', array $parameters = [], Paginator $paginator = null, string $token = null)
+    /**
+     * Set legacy mode for one Request
+     * @return void
+     */
+    public function withLegacy()
     {
-        if ($token) {
-            $this->setToken($token);
+        $this->once[] = 'legacy';
+    }
+
+    public function clearOnce()
+    {
+        foreach ($this->once as $value) {
+            $this->$value = null;
         }
 
+        $this->once = [];
+    }
+
+    public function get(string $path = '', array $parameters = [], Paginator $paginator = null)
+    {
         return $this->query('GET', $path, $parameters, $paginator);
     }
 
-    public function post(string $path = '', array $parameters = [], Paginator $paginator = null, string $token = null)
+    public function post(string $path = '', array $parameters = [], Paginator $paginator = null)
     {
-        if ($token) {
-            $this->setToken($token);
-        }
-
         return $this->query('POST', $path, $parameters, $paginator);
     }
 
-    public function put(string $path = '', array $parameters = [], Paginator $paginator = null, string $token = null)
+    public function put(string $path = '', array $parameters = [], Paginator $paginator = null)
     {
-        if ($token) {
-            $this->setToken($token);
-        }
-
         return $this->query('PUT', $path, $parameters, $paginator);
     }
 
@@ -194,7 +204,7 @@ class Twitch
         ];
 
         if ($this->token) {
-            $headers['Authorization'] = 'Bearer ' . $this->getToken();
+            $headers['Authorization'] = 'Bearer ' . $this->token;
         }
 
         try {
@@ -208,6 +218,8 @@ class Twitch
 
             $result = new Result(null, $e, $paginator);
         }
+
+        $this->clearOnce();
 
         return $result;
     }

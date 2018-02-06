@@ -77,9 +77,9 @@ trait VideosTrait
         return $this->getVideos($parameters, $paginator);
     }
 
-    abstract public function get(string $path = '', array $parameters = [], Paginator $paginator = null, string $token = null);
+    abstract public function get(string $path = '', array $parameters = [], Paginator $paginator = null);
 
-    abstract public function post(string $path = '', array $parameters = [], Paginator $paginator = null, string $token = null);
+    abstract public function post(string $path = '', array $parameters = [], Paginator $paginator = null);
 
-    abstract public function put(string $path = '', array $parameters = [], Paginator $paginator = null, string $token = null);
+    abstract public function put(string $path = '', array $parameters = [], Paginator $paginator = null);
 }

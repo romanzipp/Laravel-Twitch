@@ -16,7 +16,11 @@ trait UsersTrait
      */
     public function getAuthedUser(string $token = null): Result
     {
-        return $this->get('users', [], null, $token);
+        if ($token != null) {
+            $this->withToken($token);
+        }
+
+        return $this->get('users', [], null);
     }
 
     /**
@@ -107,9 +111,9 @@ trait UsersTrait
         ]);
     }
 
-    abstract public function get(string $path = '', array $parameters = [], Paginator $paginator = null, string $token = null);
+    abstract public function get(string $path = '', array $parameters = [], Paginator $paginator = null);
 
-    abstract public function post(string $path = '', array $parameters = [], Paginator $paginator = null, string $token = null);
+    abstract public function post(string $path = '', array $parameters = [], Paginator $paginator = null);
 
-    abstract public function put(string $path = '', array $parameters = [], Paginator $paginator = null, string $token = null);
+    abstract public function put(string $path = '', array $parameters = [], Paginator $paginator = null);
 }

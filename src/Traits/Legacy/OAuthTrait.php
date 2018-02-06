@@ -8,6 +8,14 @@ use romanzipp\Twitch\Result;
 
 trait OAuthTrait
 {
+    /**
+     * [LEGACY v5] Refresh OAuth Token by given Refresh Token
+     * @param  string      $refreshToken Refresh Token
+     * @param  string      $clientSecret Client Secret
+     * @param  string|null $scope        Scopes
+     * @return Result
+     * @see    https://dev.twitch.tv/docs/authentication#refreshing-access-tokens
+     */
     public function legacyRefreshToken(string $refreshToken, string $clientSecret, string $scope = null): Result
     {
         if ($this->clientId === null) {

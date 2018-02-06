@@ -7,7 +7,11 @@ use romanzipp\Twitch\Result;
 
 trait RootTrait
 {
-    public function legacyRoot()
+    /**
+     * [LEGACY v5] Root
+     * @return Result
+     */
+    public function legacyRoot(): Result
     {
         return $this->withLegacy()->get('/kraken');
     }

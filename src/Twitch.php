@@ -12,6 +12,7 @@ use romanzipp\Twitch\Traits\ClipsTrait;
 use romanzipp\Twitch\Traits\FollowsTrait;
 use romanzipp\Twitch\Traits\GamesTrait;
 use romanzipp\Twitch\Traits\Legacy\RootTrait as LegacyRootTrait;
+use romanzipp\Twitch\Traits\OAuth2Trait;
 use romanzipp\Twitch\Traits\StreamsTrait;
 use romanzipp\Twitch\Traits\UsersTrait;
 use romanzipp\Twitch\Traits\VideosTrait;
@@ -24,6 +25,7 @@ class Twitch
     use StreamsTrait;
     use UsersTrait;
     use VideosTrait;
+    use OAuth2Trait;
 
     use LegacyRootTrait;
 
@@ -33,14 +35,14 @@ class Twitch
      * Twitch token
      * @var string
      */
-    protected $token;
+    protected $token = null;
 
     /**
      * Twitch client id
      * @var string
      */
 
-    protected $clientId;
+    protected $clientId = null;
 
     /**
      * Guzzle is used to make http requests
@@ -200,12 +202,14 @@ class Twitch
 
             $response = $this->client->send($request);
 
-            return new Result($response, null, $paginator);
+            $result = new Result($response, null, $paginator);
 
         } catch (RequestException $e) {
 
-            return new Result(null, $e, $paginator);
+            $result = new Result(null, $e, $paginator);
         }
+
+        return $result;
     }
 
     /**

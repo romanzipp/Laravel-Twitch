@@ -2,6 +2,7 @@
 
 namespace romanzipp\Twitch\Traits\Legacy;
 
+use romanzipp\Twitch\Helpers\Paginator;
 use romanzipp\Twitch\Result;
 
 trait OAuthTrait

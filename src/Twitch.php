@@ -159,6 +159,10 @@ class Twitch
         $this->once[] = 'legacy';
     }
 
+    /**
+     * Clear parameters for last request
+     * @return void
+     */
     public function clearOnce()
     {
         foreach ($this->once as $value) {

@@ -10,6 +10,10 @@ PHP Twitch API Wrapper for Laravel 5+
 
 **NOTICE: This library uses the latest Twitch HELIX API which ist not fully featured yet**
 
+Join the Twitch Dev Discord!
+
+[![Discord](https://i.imgur.com/ot4soE4.png)](https://discord.gg/3DgbMB)
+
 ## Installation
 
 ```

@@ -2,6 +2,7 @@
 
 namespace romanzipp\Twitch\Traits\Legacy;
 
+use romanzipp\Twitch\Exceptions\RequestRequiresAuthenticationException;
 use romanzipp\Twitch\Helpers\Paginator;
 use romanzipp\Twitch\Result;
 
@@ -9,8 +10,8 @@ trait OAuthTrait
 {
     public function refreshToken(string $refreshToken, string $clientSecret, string $scope = null): Result
     {
-        if ($this->clientId == null) {
-            throw new Exception('Request requires Client ID');
+        if ($this->clientId === null) {
+            throw new RequestRequiresAuthenticationException('Request requires Client ID');
         }
 
         $attributes = [
@@ -20,7 +21,7 @@ trait OAuthTrait
             'refresh_token' => $refreshToken,
         ];
 
-        if ($scope != null) {
+        if ($scope !== null) {
             $attributes['scope'] = $scope;
         }
 
@@ -32,4 +33,6 @@ trait OAuthTrait
     abstract public function post(string $path = '', array $parameters = [], Paginator $paginator = null);
 
     abstract public function put(string $path = '', array $parameters = [], Paginator $paginator = null);
+
+    abstract public function withLegacy();
 }

@@ -27,7 +27,7 @@
                 "romanzipp\\Twitch\\Providers\\TwitchServiceProvider"
             ],
             "aliases": {
-                "TwitchApi": "romanzipp\\Twitch\\Facades\\TwitchServiceFacade"
+                "Twitch": "romanzipp\\Twitch\\Facades\\Twitch"
             }
         }
     }

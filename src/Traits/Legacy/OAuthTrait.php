@@ -11,12 +11,12 @@ trait OAuthTrait
     /**
      * [LEGACY v5] Refresh OAuth Token by given Refresh Token
      * @param  string      $refreshToken Refresh Token
-     * @param  string      $clientSecret Client Secret
+     * @param  string|null $clientSecret Client Secret
      * @param  string|null $scope        Scopes
      * @return Result
      * @see    https://dev.twitch.tv/docs/authentication#refreshing-access-tokens
      */
-    public function legacyRefreshToken(string $refreshToken, string $clientSecret, string $scope = null): Result
+    public function legacyRefreshToken(string $refreshToken, string $clientSecret = null, string $scope = null): Result
     {
         if ($this->clientId === null) {
             throw new RequestRequiresAuthenticationException('Request requires Client ID');
@@ -24,7 +24,7 @@ trait OAuthTrait
 
         $attributes = [
             'client_id' => $this->clientId,
-            'client_secret' => $clientSecret,
+            'client_secret' => $clientSecret ?? $this->getClientSecret(),
             'grant_type' => 'refresh_token',
             'refresh_token' => $refreshToken,
         ];
@@ -43,4 +43,6 @@ trait OAuthTrait
     abstract public function put(string $path = '', array $parameters = [], Paginator $paginator = null);
 
     abstract public function withLegacy();
+
+    abstract public function getClientSecret();
 }

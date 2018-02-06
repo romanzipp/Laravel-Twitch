@@ -4,7 +4,7 @@ namespace romanzipp\Twitch\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
-class TwitchServiceFacade extends Facade
+class Twitch extends Facade
 {
     protected static function getFacadeAccessor()
     {

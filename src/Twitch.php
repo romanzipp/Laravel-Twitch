@@ -56,6 +56,12 @@ class Twitch
     protected $clientId = null;
 
     /**
+     * Twitch client secret
+     * @var string
+     */
+    protected $clientSecret = null;
+
+    /**
      * Is legacy Request
      * @var null|bool
      */
@@ -85,6 +91,7 @@ class Twitch
         } elseif (config('twitch-api.client_id')) {
 
             $this->setClientId(config('twitch-api.client_id'));
+            $this->setClientSecret(config('twitch-api.client_secret'));
         }
 
         $this->client = new Client([
@@ -113,6 +120,29 @@ class Twitch
         }
 
         return $this->clientId;
+    }
+
+    /**
+     * Set clientSecret
+     * @param string $clientSecret Twitch client id
+     */
+    public function setClientSecret($clientSecret)
+    {
+        $this->clientSecret = $clientSecret;
+    }
+
+    /**
+     * Get clientSecret
+     * @param  string $clientSecret clientSecret optional
+     * @return string               clientSecret
+     */
+    public function getClientSecret()
+    {
+        if (!$this->clientSecret) {
+            throw new RequestRequiresClientIdException();
+        }
+
+        return $this->clientSecret;
     }
 
     /**

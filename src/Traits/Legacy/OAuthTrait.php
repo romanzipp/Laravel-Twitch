@@ -8,7 +8,7 @@ use romanzipp\Twitch\Result;
 
 trait OAuthTrait
 {
-    public function refreshToken(string $refreshToken, string $clientSecret, string $scope = null): Result
+    public function legacyRefreshToken(string $refreshToken, string $clientSecret, string $scope = null): Result
     {
         if ($this->clientId === null) {
             throw new RequestRequiresAuthenticationException('Request requires Client ID');

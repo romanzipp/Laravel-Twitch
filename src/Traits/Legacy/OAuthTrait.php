@@ -1,10 +1,10 @@
 <?php
 
-namespace romanzipp\Twitch\Traits;
+namespace romanzipp\Twitch\Traits\Legacy;
 
 use romanzipp\Twitch\Result;
 
-trait OAuth2Trait
+trait OAuthTrait
 {
     public function refreshToken(string $refreshToken, string $clientSecret, string $scope = null): Result
     {
@@ -23,6 +23,12 @@ trait OAuth2Trait
             $attributes['scope'] = $scope;
         }
 
-        return $this->post('/kraken/oauth2/token', $attributes);
+        return $this->withLegacy()->post('/kraken/oauth2/token', $attributes);
     }
+
+    abstract public function get(string $path = '', array $parameters = [], Paginator $paginator = null);
+
+    abstract public function post(string $path = '', array $parameters = [], Paginator $paginator = null);
+
+    abstract public function put(string $path = '', array $parameters = [], Paginator $paginator = null);
 }

@@ -211,7 +211,7 @@ class Twitch
         ];
 
         if ($this->token) {
-            $headers['Authorization'] = 'Bearer ' . $this->token;
+            $headers['Authorization'] = ($this->legacy ? 'OAuth ' : 'Bearer ' ) . $this->token;
         }
 
         try {

@@ -16,6 +16,7 @@ use romanzipp\Twitch\Traits\Legacy\RootTrait as LegacyRootTrait;
 use romanzipp\Twitch\Traits\StreamsTrait;
 use romanzipp\Twitch\Traits\UsersTrait;
 use romanzipp\Twitch\Traits\VideosTrait;
+use romanzipp\Twitch\Traits\WebhooksTrait;
 
 class Twitch
 {
@@ -25,6 +26,8 @@ class Twitch
     use StreamsTrait;
     use UsersTrait;
     use VideosTrait;
+
+    use WebhooksTrait;
 
     use LegacyOAuthTrait;
     use LegacyRootTrait;

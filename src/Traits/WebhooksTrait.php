@@ -29,17 +29,15 @@ trait WebhooksTrait
     public function unsubscribeWebhook(string $callback, string $topic): Result
     {
         $attributes = [
-            'hub' => [
-                'callback' => $callback,
-                'mode' => 'unsubscribe',
-                'topic' => $topic,
-            ],
+            'hub.callback' => $callback,
+            'hub.mode' => 'unsubscribe',
+            'hub.topic' => $topic,
         ];
 
         return $this->post('webhooks/hub', $attributes);
     }
 
-    public function webhookStreamMonitor(int $user): string
+    public function webhookTopicStreamMonitor(int $user): string
     {
         return static::BASE_URI . 'streams?user_id=' . $user;
     }

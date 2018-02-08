@@ -22,7 +22,7 @@ trait StreamsMetadataTrait
      * string   user_id         Returns streams broadcast by one or more of the specified user IDs. You can specify up to 100 IDs.
      * string   user_login      Returns streams broadcast by one or more of the specified user login names. You can specify up to 100 names.
      */
-    public function getStreams(array $parameters = [], Paginator $paginator = null): Result
+    public function getStreamsMetadata(array $parameters = [], Paginator $paginator = null): Result
     {
         return $this->get('streams/metadata', $parameters, $paginator);
     }

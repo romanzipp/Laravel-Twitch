@@ -2,6 +2,7 @@
 
 namespace romanzipp\Twitch\Traits;
 
+use romanzipp\Twitch\Helpers\Paginator;
 use romanzipp\Twitch\Result;
 
 trait WebhooksTrait
@@ -9,19 +10,17 @@ trait WebhooksTrait
     public function subscribeWebhook(string $callback, string $topic, int $lease = null, string $secret = null): Result
     {
         $attributes = [
-            'hub' => [
-                'callback' => $callback,
-                'mode' => 'subscribe',
-                'topic' => $topic,
-            ],
+            'hub.callback' => $callback,
+            'hub.mode' => 'subscribe',
+            'hub.topic' => $topic,
         ];
 
         if ($lease !== null) {
-            $attributes['hub']['lease_seconds'] = $lease;
+            $attributes['hub.lease_seconds'] = $lease;
         }
 
         if ($secret !== null) {
-            $attributes['hub']['secret'] = $secret;
+            $attributes['hub.secret'] = $secret;
         }
 
         return $this->post('webhooks/hub', $attributes);
@@ -38,6 +37,26 @@ trait WebhooksTrait
         ];
 
         return $this->post('webhooks/hub', $attributes);
+    }
+
+    public function webhookStreamMonitor(int $user): string
+    {
+        return static::BASE_URI . 'streams?user_id=' . $user;
+    }
+
+    public function webhookTopicUserFollows(int $from): string
+    {
+        return static::BASE_URI . 'users/follows?first=1&from_id=' . $from;
+    }
+
+    public function webhookTopicUserGainsFollower(int $to): string
+    {
+        return static::BASE_URI . 'users/follows?first=1&to_id=' . $from;
+    }
+
+    public function webhookTopicUserFollowsUser(int $from, int $to): string
+    {
+        return static::BASE_URI . 'users/follows?first=1&from_id=' . $from . '&to_id' . $from;
     }
 
     abstract public function post(string $path = '', array $parameters = [], Paginator $paginator = null);

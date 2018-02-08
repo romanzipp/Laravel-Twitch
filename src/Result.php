@@ -4,6 +4,7 @@ namespace romanzipp\Twitch;
 
 use GuzzleHttp\Psr7\Response;
 use romanzipp\Twitch\Helpers\Paginator;
+use stdClass;
 
 class Result
 {
@@ -32,6 +33,12 @@ class Result
     public $total = 0;
 
     /**
+     * Status Code
+     * @var integer
+     */
+    public $status = 0;
+
+    /**
      * Twitch response pagination cursor
      * @var null|\stdClass
      */
@@ -58,17 +65,22 @@ class Result
             $this->exception = $exception;
         }
 
+        $this->status = $response->getStatusCode();
+
         $jsonResponse = $response === null ? [] : ($this->success ? @json_decode($response->getBody()) : null);
 
         if (!$legacy) {
 
-            $this->setPropertiesByResponse($jsonResponse, [
-                'data',
-                'total',
-                'pagination',
-            ]);
+            if ($jsonResponse !== null) {
 
-            $this->paginator = $paginator ?? Paginator::from($this);
+                $this->setPropertiesByResponse($jsonResponse, [
+                    'data',
+                    'total',
+                    'pagination',
+                ]);
+
+                $this->paginator = $paginator ?? Paginator::from($this);
+            }
 
         } else {
 
@@ -81,7 +93,7 @@ class Result
         }
     }
 
-    private function setPropertiesByResponse($jsonResponse, array $properties)
+    private function setPropertiesByResponse(stdClass $jsonResponse, array $properties)
     {
         foreach ($properties as $property) {
             if ($this->success && property_exists($jsonResponse, $property)) {

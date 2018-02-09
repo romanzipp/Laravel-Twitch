@@ -51,6 +51,12 @@ class Result
     public $paginator;
 
     /**
+     * Original Guzzle HTTP Response
+     * @var Response
+     */
+    public $response;
+
+    /**
      * Constructor
      * @param null|Response  $response  HTTP response
      * @param null|mixed     $exception Exception, if present
@@ -59,6 +65,8 @@ class Result
      */
     public function __construct($response, $exception = null, $paginator = null, bool $legacy = false)
     {
+        $this->response = $response;
+
         $this->success = $response instanceof Response;
 
         if ($exception) {

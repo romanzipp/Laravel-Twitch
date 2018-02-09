@@ -120,6 +120,15 @@ class Result
     }
 
     /**
+     * Get the response data, also available as public attribute
+     * @return mixed
+     */
+    public function data()
+    {
+        return $this->data;
+    }
+
+    /**
      * Returns the last HTTP or API error
      * @return string Error message
      */

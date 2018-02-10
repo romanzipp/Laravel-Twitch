@@ -12,7 +12,7 @@ PHP Twitch API Wrapper for Laravel 5+
 
 Join the Twitch Dev Discord!
 
-[![Discord](https://i.imgur.com/ot4soE4.png)](https://discord.me/twitch-api)
+[![Discord](https://discordapp.com/api/guilds/325552783787032576/embed.png?style=banner2)](https://discord.gg/8NXaEyV)
 
 ## Installation
 

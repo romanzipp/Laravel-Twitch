@@ -235,7 +235,7 @@ class Twitch
      */
     public function query(string $method = 'GET', string $path = '', array $parameters = [], Paginator $paginator = null): Result
     {
-        if ($paginator) {
+        if ($paginator !== null) {
             $parameters[$paginator->action] = $paginator->cursor();
         }
 
@@ -260,6 +260,8 @@ class Twitch
 
             $result = new Result(null, $e, $paginator);
         }
+
+        $result->request = $request;
 
         $this->clearOnce();
 

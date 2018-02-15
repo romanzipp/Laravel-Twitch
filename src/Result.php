@@ -80,7 +80,9 @@ class Result
             $this->exception = $exception;
         }
 
-        $this->status = $response->getStatusCode();
+        if ($response !== null) {
+            $this->status = $response->getStatusCode();
+        }
 
         $jsonResponse = $response === null ? [] : ($this->success ? @json_decode($response->getBody()) : null);
 

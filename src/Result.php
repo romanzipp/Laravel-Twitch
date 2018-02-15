@@ -94,7 +94,7 @@ class Result
                     'pagination',
                 ]);
 
-                $this->paginator = $paginator ?? Paginator::from($this);
+                $this->paginator = Paginator::from($this);
             }
 
         } else {

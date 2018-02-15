@@ -33,7 +33,7 @@ class Paginator
      * @param  Result $result Result object
      * @return self           Paginator object
      */
-    public static function from(Result $result)
+    public static function from(Result $result): self
     {
         return new self($result->pagination);
     }
@@ -51,7 +51,7 @@ class Paginator
      * Set the Paginator to fetch the next set of results
      * @return self
      */
-    public function first()
+    public function first(): self
     {
         $this->action = 'first';
 
@@ -62,7 +62,7 @@ class Paginator
      * Set the Paginator to fetch the first set of results
      * @return self
      */
-    public function next()
+    public function next(): self
     {
         $this->action = 'after';
 
@@ -73,7 +73,7 @@ class Paginator
      * Set the Paginator to fetch the last set of results
      * @return self
      */
-    public function back()
+    public function back(): self
     {
         $this->action = 'before';
 

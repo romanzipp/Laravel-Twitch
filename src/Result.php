@@ -2,8 +2,8 @@
 
 namespace romanzipp\Twitch;
 
-use GuzzleHttp\Psr7\Response;
 use GuzzleHttp\Psr7\Request;
+use GuzzleHttp\Psr7\Response;
 use romanzipp\Twitch\Helpers\Paginator;
 use stdClass;
 
@@ -65,36 +65,30 @@ class Result
 
     /**
      * Constructor
-     * @param null|Response  $response  HTTP response
-     * @param null|mixed     $exception Exception, if present
-     * @param null|Paginator $paginator Paginator, if present
-     * @param bool           $legacy    Is legacy v5 Request
+     * @param Response        $response  HTTP response
+     * @param Exception|mixed $exception Exception, if present
+     * @param null|Paginator  $paginator Paginator, if present
+     * @param bool            $legacy    Is legacy v5 Request
      */
-    public function __construct($response, $exception = null, $paginator = null, bool $legacy = false)
+    public function __construct(Response $response, \Exception $exception = null, Paginator $paginator = null, bool $legacy = false)
     {
         $this->response = $response;
 
-        $this->success = $response instanceof Response;
+        $this->success = $exception === null;
 
-        if ($exception) {
-            $this->exception = $exception;
-        }
+        $this->exception = $exception;
 
-        if ($response !== null) {
-            $this->status = $response->getStatusCode();
-        }
+        $this->status = $response->getStatusCode();
 
-        $jsonResponse = $response === null ? [] : ($this->success ? @json_decode($response->getBody()) : null);
+        $jsonResponse = @json_decode($response->getBody());
 
         if (!$legacy) {
 
             if ($jsonResponse !== null) {
 
-                $this->setPropertiesByResponse($jsonResponse, [
-                    'data',
-                    'total',
-                    'pagination',
-                ]);
+                $this->setProperty($jsonResponse, 'data');
+                $this->setProperty($jsonResponse, 'total');
+                $this->setProperty($jsonResponse, 'pagination');
 
                 $this->paginator = Paginator::from($this);
             }
@@ -103,19 +97,22 @@ class Result
 
             $this->data = $jsonResponse;
 
-            if (property_exists($jsonResponse, '_total')) {
-
-                $this->total = $jsonResponse->_total;
-            }
+            $this->setProperty($jsonResponse, '_total', 'total');
         }
     }
 
-    private function setPropertiesByResponse(stdClass $jsonResponse, array $properties)
+    /**
+     * Sets a class attribute by given JSON Response Body
+     * @param stdClass    $jsonResponse     Response Body
+     * @param string      $responseProperty Response property name
+     * @param string|null $attribute        Class property name
+     */
+    private function setProperty(stdClass $jsonResponse, string $responseProperty, string $attribute = null)
     {
-        foreach ($properties as $property) {
-            if ($this->success && property_exists($jsonResponse, $property)) {
-                $this->{$property} = $jsonResponse->{$property};
-            }
+        $classAttribute = $attribute ?? $responseProperty;
+
+        if (!empty($jsonResponse) && property_exists($jsonResponse, $responseProperty)) {
+            $this->{$classAttribute} = $jsonResponse->{$responseProperty};
         }
     }
 
@@ -143,18 +140,20 @@ class Result
      */
     public function error(): string
     {
-        if (!$this->exception || !$this->exception->hasResponse()) {
+        // TODO Switch Exception response parsing to this->data
+
+        if ($this->exception === null || !$this->exception->hasResponse()) {
             return 'Twitch API Unavailable';
         }
 
         $exception = (string) $this->exception->getResponse()->getBody();
         $exception = @json_decode($exception);
 
-        if (property_exists($exception, 'message')) {
+        if (property_exists($exception, 'message') && !empty($exception->message)) {
             return $exception->message;
         }
 
-        return strval($exception);
+        return $this->exception->getMessage();
     }
 
     /**

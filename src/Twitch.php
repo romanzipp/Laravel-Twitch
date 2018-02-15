@@ -3,6 +3,7 @@
 namespace romanzipp\Twitch;
 
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Psr7\Request;
 use romanzipp\Twitch\Exceptions\RequestRequiresAuthenticationException;
@@ -246,7 +247,7 @@ class Twitch
         ];
 
         if ($this->token) {
-            $headers['Authorization'] = ($this->legacy ? 'OAuth ' : 'Bearer ' ) . $this->token;
+            $headers['Authorization'] = ($this->legacy ? 'OAuth ' : 'Bearer ') . $this->token;
         }
 
         try {
@@ -256,9 +257,13 @@ class Twitch
 
             $result = new Result($response, null, $paginator, $this->legacy ? true : false);
 
-        } catch (RequestException $e) {
+        } catch (RequestException $exception) {
 
-            $result = new Result(null, $e, $paginator);
+            $result = new Result($exception->getResponse(), $exception, $paginator);
+
+        } catch (ClientException $exception) {
+
+            $result = new Result($exception->getResponse(), $exception, $paginator);
         }
 
         $result->request = $request;

@@ -236,7 +236,7 @@ class Result
             return $item;
         });
 
-        $this->data = $dataWithUsers;
+        $this->data = $dataWithUsers->toArray();
 
         return $this;
     }

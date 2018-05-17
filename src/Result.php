@@ -218,9 +218,7 @@ class Result
         $data = $this->data;
 
         $userIds = collect($data)->map(function ($item) use ($identifierAttribute) {
-
             return $item->{$identifierAttribute};
-
         })->toArray();
 
         if (count($userIds) == 0) {
@@ -230,7 +228,6 @@ class Result
         $users = collect($this->twitch->getUsersByIds($userIds)->data);
 
         $dataWithUsers = collect($data)->map(function ($item) use ($users, $identifierAttribute) {
-
             $item->user = $users->where('id', $item->{$identifierAttribute})->first();
 
             return $item;

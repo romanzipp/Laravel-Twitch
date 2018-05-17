@@ -9,6 +9,7 @@ use GuzzleHttp\Psr7\Request;
 use romanzipp\Twitch\Exceptions\RequestRequiresAuthenticationException;
 use romanzipp\Twitch\Exceptions\RequestRequiresClientIdException;
 use romanzipp\Twitch\Helpers\Paginator;
+use romanzipp\Twitch\Traits\BitsTrait;
 use romanzipp\Twitch\Traits\ClipsTrait;
 use romanzipp\Twitch\Traits\FollowsTrait;
 use romanzipp\Twitch\Traits\GamesTrait;
@@ -22,6 +23,7 @@ use romanzipp\Twitch\Traits\WebhooksTrait;
 
 class Twitch
 {
+    use BitsTrait;
     use ClipsTrait;
     use FollowsTrait;
     use GamesTrait;

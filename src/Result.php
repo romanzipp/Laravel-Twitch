@@ -64,6 +64,11 @@ class Result
     public $request;
 
     /**
+     * Original Twitch instance
+     */
+    public $twitch;
+
+    /**
      * Constructor
      * @param Response        $response  HTTP response
      * @param Exception|mixed $exception Exception, if present
@@ -201,5 +206,38 @@ class Result
     public function back()
     {
         return $this->paginator !== null ? $this->paginator->back() : null;
+    }
+
+    /**
+     * Insert users in data response
+     * @param  string $identifierAttribute Attribute to identify the users
+     * @return array
+     */
+    public function insertUsers(string $identifierAttribute = 'user_id'): self
+    {
+        $data = $this->data;
+
+        $userIds = collect($data)->map(function ($item) use ($identifierAttribute) {
+
+            return $item->{$identifierAttribute};
+
+        })->toArray();
+
+        if (count($userIds) == 0) {
+            return $this->data;
+        }
+
+        $users = collect($this->twitch->getUsersByIds($userIds)->data);
+
+        $dataWithUsers = collect($data)->map(function ($item) use ($users, $identifierAttribute) {
+
+            $item->user = $users->where('id', $item->{$identifierAttribute})->first();
+
+            return $item;
+        });
+
+        $this->data = $dataWithUsers;
+
+        return $this;
     }
 }

@@ -262,6 +262,7 @@ class Twitch
         }
 
         $result->request = $request;
+        $result->twitch = $this;
 
         $this->clearOnce();
 

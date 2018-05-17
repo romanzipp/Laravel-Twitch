@@ -12,7 +12,7 @@ trait BitsTrait
      * Get Bits leaderboard.
      * @return Result
      * @see    https://dev.twitch.tv/docs/api/reference/#get-bits-leaderboard
-     * 
+     *
      * Parameters:
      * integer      count           Number of results to be returned. Maximum: 100. Default: 10.
      * string       period          Time period over which data is aggregated (PST time zone). This parameter interacts with started_at.

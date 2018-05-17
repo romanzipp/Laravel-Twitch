@@ -5,6 +5,7 @@
 [![License](https://poser.pugx.org/romanzipp/laravel-twitch/license)](https://packagist.org/packages/romanzipp/laravel-twitch)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/romanzipp/Laravel-Twitch/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/romanzipp/Laravel-Twitch/?branch=master)
 [![Build Status](https://scrutinizer-ci.com/g/romanzipp/Laravel-Twitch/badges/build.png?b=master)](https://scrutinizer-ci.com/g/romanzipp/Laravel-Twitch/build-status/master)
+[![StyleCI](https://styleci.io/repos/116135617/shield?branch=master&style=flat)](https://styleci.io/repos/116135617)
 
 PHP Twitch API Wrapper for Laravel 5+
 

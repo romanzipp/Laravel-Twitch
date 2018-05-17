@@ -53,7 +53,7 @@ TWITCH_HELIX_SECRET=
 TWITCH_HELIX_REDIRECT_URI=http://localhost
 ```
 
-## Example
+## Examples
 
 ### With Laravel dependency injection
 
@@ -129,8 +129,46 @@ do {
 } while ($result->count() > 0);
 ```
 
+### Insert user objects
+
+The new API does not include the user objects in endpoints like followers or bits.
+
+```json
+[
+  {
+    "from_id": "123456",
+    "to_id": "654321",
+    "followed_at": "2018-01-01 12:00:00"
+  }
+]
+```
+
+You can just call the [insertUsers](https://github.com/romanzipp/Laravel-Twitch/blob/master/src/Result.php#L216) method to insert all users.
+
+```php
+$result = $twitch->getFollowsTo($userId);
+$result->insertUsers('from_id'); // Insert users identified by "from_id"
+```
+
+**New Result data:**
+
+```json
+[
+  {
+    "from_id": "123456",
+    "to_id": "654321",
+    "followed_at": "2018-01-01 12:00:00",
+    "user": {
+      "id": "123456",
+      "display_name": "HerrAusragend",
+      "login": "herrausragend"
+    }
+  }
+]
+```
+
 ## Documentation
 
-Available in [Wiki](https://github.com/romanzipp/Laravel-Twitch/wiki/Full-reference) section
+Packages Docs Available in [Wiki Section](https://github.com/romanzipp/Laravel-Twitch/wiki/Full-reference)
 
 **Twitch API Documentation: https://dev.twitch.tv/docs/api/reference**

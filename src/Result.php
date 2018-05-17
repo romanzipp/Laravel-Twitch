@@ -83,18 +83,14 @@ class Result
         $jsonResponse = @json_decode($response->getBody());
 
         if (!$legacy) {
-
             if ($jsonResponse !== null) {
-
                 $this->setProperty($jsonResponse, 'data');
                 $this->setProperty($jsonResponse, 'total');
                 $this->setProperty($jsonResponse, 'pagination');
 
                 $this->paginator = Paginator::from($this);
             }
-
         } else {
-
             $this->data = $jsonResponse;
 
             $this->setProperty($jsonResponse, '_total', 'total');
@@ -163,7 +159,6 @@ class Result
     public function shift()
     {
         if (!empty($this->data)) {
-
             $data = $this->data;
 
             return array_shift($data);

@@ -91,11 +91,8 @@ class Twitch
         }
 
         if ($clientId !== null) {
-
             $this->setClientId($clientId);
-
         } elseif (config('twitch-api.client_id')) {
-
             $this->setClientId(config('twitch-api.client_id'));
             $this->setClientSecret(config('twitch-api.client_secret'));
         }
@@ -256,13 +253,9 @@ class Twitch
             $response = $this->client->send($request);
 
             $result = new Result($response, null, $paginator, $this->legacy ? true : false);
-
         } catch (RequestException $exception) {
-
             $result = new Result($exception->getResponse(), $exception, $paginator);
-
         } catch (ClientException $exception) {
-
             $result = new Result($exception->getResponse(), $exception, $paginator);
         }
 
@@ -283,7 +276,6 @@ class Twitch
     public function generateUrl(string $url, array $parameters): string
     {
         foreach ($parameters as $optionKey => $option) {
-
             $data = !is_array($option) ? [$option] : $option;
 
             foreach ($data as $key => $value) {

@@ -211,7 +211,7 @@ class Result
     /**
      * Insert users in data response
      * @param  string $identifierAttribute Attribute to identify the users
-     * @return array
+     * @return self
      */
     public function insertUsers(string $identifierAttribute = 'user_id'): self
     {

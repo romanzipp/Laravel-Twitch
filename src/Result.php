@@ -222,7 +222,7 @@ class Result
         })->toArray();
 
         if (count($userIds) == 0) {
-            return $this->data;
+            return $this;
         }
 
         $users = collect($this->twitch->getUsersByIds($userIds)->data);

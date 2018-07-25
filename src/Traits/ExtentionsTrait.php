@@ -40,6 +40,5 @@ trait ExtentionsTrait
 
     abstract public function get(string $path = '', array $parameters = [], Paginator $paginator = null);
 
-    abstract public function withToken();
-
+    abstract public function withToken(string $token);
 }

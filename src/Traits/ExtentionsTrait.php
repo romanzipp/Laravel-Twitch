@@ -2,17 +2,14 @@
 
 namespace romanzipp\Twitch\Traits;
 
-use BadMethodCallException;
 use romanzipp\Twitch\Helpers\Paginator;
 use romanzipp\Twitch\Result;
 
 trait ExtentionsTrait
 {
-
-
     /**
      * Get currently authed user's extenions with Bearer Token
-     * Note: Bearer OAuth Token and the state "user:edit:broadcast" are both required 
+     * Note: Bearer OAuth Token and the state "user:edit:broadcast" are both required
      * @param  string $token Twitch OAuth Token
      * @return Result Result object
      * @see    "https://dev.twitch.tv/docs/api/reference#get-user-extensions"
@@ -27,7 +24,7 @@ trait ExtentionsTrait
 
     /**
      * Get currently authed user's active extenions with Bearer Token
-     * Note: Bearer OAuth Token and the state "user:edit:broadcast" are both required 
+     * Note: Bearer OAuth Token and the state "user:edit:broadcast" are both required
      * @param  string $token Twitch OAuth Token
      * @return Result Result object
      * @see    "https://dev.twitch.tv/docs/api/reference#get-user-active-extensions"

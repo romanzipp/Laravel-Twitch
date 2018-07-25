@@ -27,5 +27,7 @@ return [
         'clips:edit',
         'user:edit',
         'user:read:email',
+        'user:read:broadcast',
+        'user:edit:broadcast',
     ],
 ];

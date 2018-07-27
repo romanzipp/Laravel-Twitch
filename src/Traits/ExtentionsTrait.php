@@ -96,7 +96,7 @@ trait ExtentionsTrait
 
         $extensions  = (object) $extensionsResult->data;
 
-        foreach($extensions  as $index => $component) {
+        foreach ($extensions  as $index => $component) {
             foreach ($component as $key => $value) {
                 if ($disabled === true) {
                     $extensions ->$index->$key->active = false;

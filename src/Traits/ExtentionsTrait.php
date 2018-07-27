@@ -94,48 +94,29 @@ trait ExtentionsTrait
     {
         $extensionsResult = $this->getAuthedUserActiveExtensions();
 
-        $extensions = (array) $extensionsResult->data;
+        $extensions  = (object) $extensionsResult->data;
 
-        $data = (object) [
-            'panel' => $extensions['panel'],
-            'overlay' => $extensions['overlay'],
-            'component' => $extensions['component'],
-        ];
+        foreach($extensions  as $index => $component) {
 
-        $processType = function (string $type) use (&$data, $method, $parameter, $disabled) {
-
-            $i = 1;
-
-            foreach ($data->$type as $key => $value) {
+            foreach ($component as $key => $value) {
 
                 if ($disabled === true) {
-
-                    $data->$type->$i->active = false;
-
+                    $extensions ->$index->$key->active = false;
                 } else {
-
                     if (isset($value->$method)) {
-
-                        if ($value->$method <=> $parameter) {
-                            $data->$type->$i->active = false;
+                        if ($value->$method === $parameter) {
+                            $extensions->$index->$key->active = false;
                         } else {
-                            $data->$type->$i->active = $value->active;
+                            $extensions->$index->$key->active = $value->active;
                         }
-
                     } else {
-                        $data->$type->$i = $value;
+                        $extensions->$index->$key = $value;
                     }
                 }
-
-                $i++;
             }
-        };
+        }
 
-        $processType('panel');
-        $processType('overlay');
-        $processType('component');
-
-        return $this->json('PUT', 'users/extensions', (array) $data);
+        return $this->json('PUT', 'users/extensions', (array) $extensions);
     }
 
     abstract public function get(string $path = '', array $parameters = [], Paginator $paginator = null);

@@ -101,7 +101,7 @@ trait ExtentionsTrait
             'component' => $extensions['component'],
         ];
 
-        $processType = function (string $type) use (&$data) {
+        $processType = function (string $type) use (&$data, $method, $parameter, $disabled) {
 
             $i = 1;
 

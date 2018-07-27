@@ -38,7 +38,7 @@ class Twitch
 
     use LegacyOAuthTrait;
     use LegacyRootTrait;
-
+    
     const BASE_URI = 'https://api.twitch.tv/helix/';
 
     /**
@@ -46,7 +46,7 @@ class Twitch
      * @var \GuzzleHttp\Client
      */
     protected $client;
-
+    
     /**
      * Paginator object
      * @var Paginator
@@ -100,7 +100,7 @@ class Twitch
             $this->setClientId(config('twitch-api.client_id'));
             $this->setClientSecret(config('twitch-api.client_secret'));
         }
-
+        
         $this->client = new Client([
             'base_uri' => self::BASE_URI,
         ]);
@@ -125,7 +125,7 @@ class Twitch
         if (!$this->clientId) {
             throw new RequestRequiresClientIdException();
         }
-
+        
         return $this->clientId;
     }
 
@@ -173,7 +173,7 @@ class Twitch
 
         return $this;
     }
-
+    
     /**
      * Get Twitch token
      * @return string Twitch token
@@ -227,6 +227,11 @@ class Twitch
         return $this->query('PUT', $path, $parameters, $paginator);
     }
 
+    public function json(string $path = '', array $parameters = [])
+    {
+        return $this->jsonquery('PUT', $path, $parameters, null);
+    }
+
     /**
      * Execute query
      * @param  string $method     HTTP method
@@ -253,9 +258,9 @@ class Twitch
 
         try {
             $request = new Request($method, $uri, $headers, $this->legacy ? true : false);
-
+            
             $response = $this->client->send($request);
-
+            
             $result = new Result($response, null, $paginator, $this->legacy ? true : false);
         } catch (RequestException $exception) {
             $result = new Result($exception->getResponse(), $exception, $paginator);
@@ -270,7 +275,7 @@ class Twitch
 
         return $result;
     }
-
+    
     /**
      * Generate URL for API
      * @param  string      $url        Query uri
@@ -282,12 +287,68 @@ class Twitch
     {
         foreach ($parameters as $optionKey => $option) {
             $data = !is_array($option) ? [$option] : $option;
-
+            
             foreach ($data as $key => $value) {
                 $url .= (parse_url($url, PHP_URL_QUERY) ? '&' : '?') . $optionKey . '=' . $value;
             }
         }
-
+        
         return $url;
+    }
+
+    /**
+     * Execute Json query
+     * @param  string $method     HTTP method
+     * @param  string $path       Query path
+     * @param  array  $parameters Query parameters
+     * @return Result             Result object
+     */
+    public function jsonquery(string $method = '', string $path = '', array $parameters = []) : Result
+    {
+        $uri = self::BASE_URI . $path;
+        
+        $headers = [
+            'Client-ID' => $this->getClientId(),
+            'Content-Type' => 'application/json'
+        ];
+        
+        if ($this->token) {
+            $headers['Authorization'] = ($this->legacy ? 'OAuth ' : 'Bearer ') . $this->token;
+        }
+        
+        $body = $this->generateBody($parameters);
+        
+        try {
+            $request = new Request($method, $uri, $headers, $body);
+            
+            $response = $this->client->send($request);
+            
+            $result = new Result($response, null, null, $this->legacy ? true : false);
+        } catch (RequestException $exception) {
+            $result = new Result($exception->getResponse(), $exception, null);
+        } catch (ClientException $exception) {
+            $result = new Result($exception->getResponse(), $exception, null);
+        }
+        
+        $result->request = $request;     
+        $result->twitch = $this;
+        
+        $this->clearOnce();
+        
+        return $result;
+    }
+    
+    /**
+     * Generate JsonBody for Request
+     * @param  array       $parameters Body parameters
+     * @return string                  Encoded json string
+     */
+    public function generateBody(array $parameters = null) : string
+    {
+        $data = [
+            "data" => $parameters
+        ];
+        
+        return json_encode($data);
     }
 }

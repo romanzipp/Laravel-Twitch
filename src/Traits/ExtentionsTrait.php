@@ -95,69 +95,44 @@ trait ExtentionsTrait
 
         $extensions = (array) $extensionsResult->data;
 
-        $panels = $extensions['panel'];
-        $overlays = $extensions['overlay'];
-        $components = $extensions['component'];
-
         $data = (object) [
-            'panel' => $panels,
-            'overlay' => $overlays,
-            'component' => $components,
+            'panel' => $extensions['panel'],
+            'overlay' => $extensions['overlay'],
+            'component' => $extensions['component'],
         ];
 
-        $i = 1;
-        foreach ($data->panel as $key => $value) {
-            if ($disabled === true) {
-                $data->panel->$i->active = false;
-            } else {
-                if (isset($value->$method)) {
-                    if ($value->$method <=> $parameter) {
-                        $data->panel->$i->active = false;
-                    } else {
-                        $data->panel->$i->active = $value->active;
-                    }
-                } else {
-                    $data->panel->$i = $value;
-                }
-            }
-            $i++;
-        }
+        $processType = function (string $type) use (&$data) {
 
-        $i = 1;
-        foreach ($data->overlay as $key => $value) {
-            if ($disabled === true) {
-                $data->overlay->$i->active = false;
-            } else {
-                if (isset($value->$method)) {
-                    if ($value->$method <=> $parameter) {
-                        $data->overlay->$i->active = false;
-                    } else {
-                        $data->overlay->$i->active = $value->active;
-                    }
-                } else {
-                    $data->overlay->$i = $value;
-                }
-            }
-            $i++;
-        }
+            $i = 1;
 
-        $i = 1;
-        foreach ($data->component as $key => $value) {
-            if ($disabled === true) {
-                $data->component->$i->active = false;
-            } else {
-                if (isset($value->$method)) {
-                    if ($value->$method <=> $parameter) {
-                        $data->component->$i->active = false;
-                    } else {
-                        $data->component->$i->active = $value->active;
-                    }
+            foreach ($data->$type as $key => $value) {
+
+                if ($disabled === true) {
+
+                    $data->$type->$i->active = false;
+
                 } else {
-                    $data->component->$i = $value;
+
+                    if (isset($value->$method)) {
+
+                        if ($value->$method <=> $parameter) {
+                            $data->$type->$i->active = false;
+                        } else {
+                            $data->$type->$i->active = $value->active;
+                        }
+
+                    } else {
+                        $data->$type->$i = $value;
+                    }
                 }
+
+                $i++;
             }
-            $i++;
-        }
+        };
+
+        $processType('panel');
+        $processType('overlay');
+        $processType('component');
 
         $parameter = (array) $data;
 

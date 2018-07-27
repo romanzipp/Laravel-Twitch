@@ -64,7 +64,7 @@ trait ExtentionsTrait
      */
     public function disableUserExtensionById(string $token = null, string $parameter = null): Result
     {
-        return $this->updateUserExtensions("id", $parameter, false);
+        return $this->updateUserExtensions('id', $parameter, false);
     }
 
     /**
@@ -77,7 +77,7 @@ trait ExtentionsTrait
      */
     public function disableUserExtensionByName(string $token = null, string $parameter = null): Result
     {
-        return $this->updateUserExtensions("name", $parameter, false);
+        return $this->updateUserExtensions('name', $parameter, false);
     }
 
     /**
@@ -134,14 +134,12 @@ trait ExtentionsTrait
         $processType('overlay');
         $processType('component');
 
-        $parameter = (array) $data;
-
-        return $this->json('users/extensions', $parameter);
+        return $this->json('PUT', 'users/extensions', (array) $data);
     }
 
     abstract public function get(string $path = '', array $parameters = [], Paginator $paginator = null);
 
-    abstract public function json(string $path = '', array $parameters = []);
+    abstract public function json(string $method, string $path = '', array $body = null);
 
     abstract public function withToken(string $token);
 }

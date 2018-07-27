@@ -19,7 +19,7 @@ trait ExtentionsTrait
         if ($token !== null) {
             $this->withToken($token);
         }
-        return $this->get('users/extensions/list', [], null);
+        return $this->get('users/extensions/list');
     }
 
     /**
@@ -35,7 +35,7 @@ trait ExtentionsTrait
             $this->withToken($token);
         }
 
-        return $this->get('users/extensions', [], null);
+        return $this->get('users/extensions');
     }
 
     /**

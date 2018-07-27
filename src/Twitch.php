@@ -254,7 +254,7 @@ class Twitch
 
         $headers = $this->generateHeaders($jsonBody ? true : false);
 
-        $result = $this->executeQuery($method, $uri, $headers, $jsonBody);
+        $result = $this->executeQuery($method, $uri, $headers, $paginator, $jsonBody);
 
         $this->clearOnce();
 
@@ -269,7 +269,7 @@ class Twitch
      * @param  mixed  $jsonBody JSON Body
      * @return Result
      */
-    private function executeQuery(string $method, string $uri, array $headers, $jsonBody = null): Result
+    private function executeQuery(string $method, string $uri, array $headers, Paginator $paginator = null, $jsonBody = null): Result
     {
         try {
             $request = new Request($method, $uri, $headers, $jsonBody);

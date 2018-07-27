@@ -62,7 +62,7 @@ trait ExtentionsTrait
      * @return Result Result object
      * @see    "https://dev.twitch.tv/docs/api/reference/#update-user-extensions"
      */
-    public function DisableUserExtensionById (string $token = null, string $parameter = null) : Result
+    public function DisableUserExtensionById(string $token = null, string $parameter = null) : Result
     {
         return $this->UpdateUserExtensions("id", $parameter, false);
     }
@@ -75,7 +75,7 @@ trait ExtentionsTrait
      * @return Result Result object
      * @see    "https://dev.twitch.tv/docs/api/reference/#update-user-extensions"
      */
-    public function DisableUserExtensionByName (string $token = null, string $parameter = null) : Result
+    public function DisableUserExtensionByName(string $token = null, string $parameter = null) : Result
     {
         return $this->UpdateUserExtensions("name", $parameter, false);
     }
@@ -89,7 +89,7 @@ trait ExtentionsTrait
      * @return Result Result object
      * @see    "https://dev.twitch.tv/docs/api/reference/#update-user-extensions"
      */
-    public function UpdateUserExtensions (string $method = null, string $parameter = null, bool $disabled = false) : Result
+    public function UpdateUserExtensions(string $method = null, string $parameter = null, bool $disabled = false) : Result
     {
         $apiresult = $this->getAuthedUserActiveExtensions();
 

@@ -317,7 +317,7 @@ class Twitch
         }
         
         $body = $this->generateBody($parameters);
-        
+    
         try {
             $request = new Request($method, $uri, $headers, $body);
             
@@ -330,7 +330,7 @@ class Twitch
             $result = new Result($exception->getResponse(), $exception, null);
         }
         
-        $result->request = $request;     
+        $result->request = $request;
         $result->twitch = $this;
         
         $this->clearOnce();

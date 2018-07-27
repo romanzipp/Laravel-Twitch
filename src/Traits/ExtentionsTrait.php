@@ -19,6 +19,7 @@ trait ExtentionsTrait
         if ($token !== null) {
             $this->withToken($token);
         }
+        
         return $this->get('users/extensions/list');
     }
 

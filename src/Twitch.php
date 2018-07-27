@@ -254,7 +254,7 @@ class Twitch
 
         $headers = $this->generateHeaders($jsonBody ? true : false);
 
-        $result = $this->executeQuery($method, $uri, $headers, $body);
+        $result = $this->executeQuery($method, $uri, $headers, $jsonBody);
 
         $this->clearOnce();
 

@@ -51,37 +51,7 @@ trait ExtentionsTrait
             $this->withToken($token);
         }
 
-        $data = [
-            "panel" => [
-                "1" => [
-                    "active" => false
-                ],
-                "2" => [
-                    "active" => false
-                ],
-                "3" => [
-                    "active" => false
-                ]
-            ],
-            "overlay" => [
-                "1" => [
-                    "active" => false
-                ]
-            ],
-            "component" => [
-                "1" => [
-                    "active" => false
-                ],
-                "2" => [
-                    "active" => false
-                ],
-                "3" => [
-                    "active" => false
-                ]
-            ]
-        ];
-
-        return $this->json('users/extensions', $data);
+        return $this->UpdateUserExtensions(null, null, true);
     }
 
     /**
@@ -94,7 +64,7 @@ trait ExtentionsTrait
      */
     public function DisableUserExtensionById (string $token = null, string $parameter = null) : Result
     {
-        return $this->UpdateUserExtensions("id", $parameter);
+        return $this->UpdateUserExtensions("id", $parameter, false);
     }
 
     /**
@@ -107,7 +77,7 @@ trait ExtentionsTrait
      */
     public function DisableUserExtensionByName (string $token = null, string $parameter = null) : Result
     {
-        return $this->UpdateUserExtensions("name", $parameter);
+        return $this->UpdateUserExtensions("name", $parameter, false);
     }
 
     /**
@@ -115,10 +85,11 @@ trait ExtentionsTrait
      * Note: Bearer OAuth Token and the state "user:edit:broadcast" are both required
      * @param  string $method    method that will be used to disable extensions
      * @param  string $parameter Parameter that will be used to disable Extensions
+     * @param  bool   $disabled  bool if the set value should be false
      * @return Result Result object
      * @see    "https://dev.twitch.tv/docs/api/reference/#update-user-extensions"
      */
-    public function UpdateUserExtensions (string $method = null, string $parameter = null) : Result
+    public function UpdateUserExtensions (string $method = null, string $parameter = null, bool $disabled = false) : Result
     {
         $apiresult = $this->getAuthedUserActiveExtensions();
 
@@ -134,55 +105,69 @@ trait ExtentionsTrait
         $overlays = $extentions['overlay'];
         $components = $extentions['component'];
 
-        $data = [
+        $data = (object) [
             "panel" => $panels,
             "overlay" => $overlays,
             "component" => $components
         ];
 
         $i = 1;
-        foreach ($data['panel'] as $key => $value) {
-            if (array_key_exists($method, $value) === true) {
-                if ($value->$method == $parameter) {
-                    $data['panel']->$i->active = false;
-                } else {
-                    $data['panel']->$i->active = $value->active;
-                }
+        foreach ($data->panel as $key => $value) {
+            if ($disabled === true) {
+                $data->panel->$i->active = false;
             } else {
-                $data['panel']->$i = $value;
+                if (isset($value->$method)) {
+                    if ($value->$method <=> $parameter) {
+                        $data->panel->$i->active = false;
+                    } else {
+                        $data->panel->$i->active = $value->active;
+                    }
+                } else {
+                    $data->panel->$i = $value;
+                }
             }
             $i++;
         }
 
         $i = 1;
-        foreach ($data['overlay'] as $key => $value) {
-            if (array_key_exists($method, $value) === true) {
-                if ($value->$method == $parameter) {
-                    $data['overlay']->$i->active = false;
-                } else {
-                    $data['overlay']->$i->active = $value->active;
-                }
+        foreach ($data->overlay as $key => $value) {
+            if ($disabled === true) {
+                $data->overlay->$i->active = false;
             } else {
-                $data['overlay']->$i = $value;
+                if (isset($value->$method)) {
+                    if ($value->$method <=> $parameter) {
+                        $data->overlay->$i->active = false;
+                    } else {
+                        $data->overlay->$i->active = $value->active;
+                    }
+                } else {
+                    $data->overlay->$i = $value;
+                }
             }
             $i++;
         }
 
         $i = 1;
-        foreach ($data['component'] as $key => $value) {
-            if (array_key_exists($method, $value) === true) {
-                if ($value->$method == $parameter) {
-                    $data['component']->$i->active = false;
-                } else {
-                    $data['component']->$i->active = $value->active;
-                }
+        foreach ($data->component as $key => $value) {
+            if ($disabled === true) {
+                $data->component->$i->active = false;
             } else {
-                $data['component']->$i = $value;
+                if (isset($value->$method)) {
+                    if ($value->$method <=> $parameter) {
+                        $data->component->$i->active = false;
+                    } else {
+                        $data->component->$i->active = $value->active;
+                    }
+                } else {
+                    $data->component->$i = $value;
+                }
             }
             $i++;
         }
 
-        return $this->json('users/extensions', $data);
+        $parameter = (array) $data;
+
+        return $this->json('users/extensions', $parameter);
     }
 
     abstract public function get(string $path = '', array $parameters = [], Paginator $paginator = null);

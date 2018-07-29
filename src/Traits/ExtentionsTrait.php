@@ -94,27 +94,53 @@ trait ExtentionsTrait
     {
         $extensionsResult = $this->getAuthedUserActiveExtensions();
 
-        $extensions  = (object) $extensionsResult->data;
+        $extensions = (array) $extensionsResult->data;
 
+<<<<<<< HEAD
         foreach($extensions  as $index => $component) {
             foreach ($component as $key => $value) {
+=======
+        $data = (object) [
+            'panel' => $extensions['panel'],
+            'overlay' => $extensions['overlay'],
+            'component' => $extensions['component'],
+        ];
+
+        $processType = function (string $type) use (&$data, $method, $parameter, $disabled) {
+
+            $i = 1;
+
+            foreach ($data->$type as $key => $value) {
+
+>>>>>>> parent of 08c61dd... Update the updateUserExtensions() function
                 if ($disabled === true) {
-                    $extensions ->$index->$key->active = false;
+
+                    $data->$type->$i->active = false;
+
                 } else {
+
                     if (isset($value->$method)) {
-                        if ($value->$method === $parameter) {
-                            $extensions->$index->$key->active = false;
+
+                        if ($value->$method <=> $parameter) {
+                            $data->$type->$i->active = false;
                         } else {
-                            $extensions->$index->$key->active = $value->active;
+                            $data->$type->$i->active = $value->active;
                         }
+
                     } else {
-                        $extensions->$index->$key = $value;
+                        $data->$type->$i = $value;
                     }
                 }
-            }
-        }
 
-        return $this->json('PUT', 'users/extensions', (array) $extensions);
+                $i++;
+            }
+        };
+
+        $processType('panel');
+        $processType('overlay');
+        $processType('component');
+
+        return $this->json('PUT', 'users/extensions', (array) $data);
     }
 
     abstract public function get(string $path = '', array $parameters = [], Paginator $paginator = null);

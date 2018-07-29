@@ -98,7 +98,9 @@ trait ExtentionsTrait
 
 <<<<<<< HEAD
         foreach($extensions  as $index => $component) {
+
             foreach ($component as $key => $value) {
+<<<<<<< HEAD
 =======
         $data = (object) [
             'panel' => $extensions['panel'],
@@ -113,6 +115,9 @@ trait ExtentionsTrait
             foreach ($data->$type as $key => $value) {
 
 >>>>>>> parent of 08c61dd... Update the updateUserExtensions() function
+=======
+
+>>>>>>> parent of 0f33f4a... Remove Spaces
                 if ($disabled === true) {
 
                     $data->$type->$i->active = false;

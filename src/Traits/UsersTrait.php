@@ -117,5 +117,5 @@ trait UsersTrait
 
     abstract public function put(string $path = '', array $parameters = [], Paginator $paginator = null);
 
-    abstract public function withToken();
+    abstract public function withToken(string $token);
 }

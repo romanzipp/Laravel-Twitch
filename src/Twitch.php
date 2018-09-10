@@ -227,6 +227,15 @@ class Twitch
         return $this->query('PUT', $path, $parameters, $paginator);
     }
 
+    public function json(string $method, string $path = '', array $body = null)
+    {
+        if ($body) {
+            $body = json_encode(['data' => $body]);
+        }
+
+        return $this->query($method, $path, [], null, $body);
+    }
+
     /**
      * Execute query
      * @param  string $method     HTTP method
@@ -235,7 +244,7 @@ class Twitch
      * @param  mixed  $token      Token String or true/false to obtain by setToken method
      * @return Result             Result object
      */
-    public function query(string $method = 'GET', string $path = '', array $parameters = [], Paginator $paginator = null): Result
+    public function query(string $method = 'GET', string $path = '', array $parameters = [], Paginator $paginator = null, $jsonBody = null): Result
     {
         if ($paginator !== null) {
             $parameters[$paginator->action] = $paginator->cursor();
@@ -243,16 +252,27 @@ class Twitch
 
         $uri = $this->generateUrl($path, $parameters);
 
-        $headers = [
-            'Client-ID' => $this->getClientId(),
-        ];
+        $headers = $this->generateHeaders($jsonBody ? true : false);
 
-        if ($this->token) {
-            $headers['Authorization'] = ($this->legacy ? 'OAuth ' : 'Bearer ') . $this->token;
-        }
+        $result = $this->executeQuery($method, $uri, $headers, $paginator, $jsonBody);
 
+        $this->clearOnce();
+
+        return $result;
+    }
+
+    /**
+     * Execute query
+     * @param  string $method   HTTP method
+     * @param  string $uri      Query path
+     * @param  array  $headers  Query headers
+     * @param  mixed  $jsonBody JSON Body
+     * @return Result
+     */
+    private function executeQuery(string $method, string $uri, array $headers, Paginator $paginator = null, $jsonBody = null): Result
+    {
         try {
-            $request = new Request($method, $uri, $headers, $this->legacy ? true : false);
+            $request = new Request($method, $uri, $headers, $jsonBody);
 
             $response = $this->client->send($request);
 
@@ -266,8 +286,6 @@ class Twitch
         $result->request = $request;
         $result->twitch = $this;
 
-        $this->clearOnce();
-
         return $result;
     }
 
@@ -278,7 +296,7 @@ class Twitch
      * @param  array       $parameters Query parameters
      * @return string                  Full query url
      */
-    public function generateUrl(string $url, array $parameters): string
+    private function generateUrl(string $url, array $parameters): string
     {
         foreach ($parameters as $optionKey => $option) {
             $data = !is_array($option) ? [$option] : $option;
@@ -289,5 +307,27 @@ class Twitch
         }
 
         return $url;
+    }
+
+    /**
+     * Generate headers
+     * @param  bool  $json Body is JSON
+     * @return array
+     */
+    public function generateHeaders(bool $json = false): array
+    {
+        $headers = [
+            'Client-ID' => $this->getClientId(),
+        ];
+
+        if ($this->token) {
+            $headers['Authorization'] = ($this->legacy ? 'OAuth ' : 'Bearer ') . $this->token;
+        }
+
+        if ($json) {
+            $headers['Content-Type'] = 'application/json';
+        }
+
+        return $headers;
     }
 }

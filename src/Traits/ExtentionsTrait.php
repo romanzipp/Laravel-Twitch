@@ -103,25 +103,18 @@ trait ExtentionsTrait
         ];
 
         $processType = function (string $type) use (&$data, $method, $parameter, $disabled) {
-
             $i = 1;
 
             foreach ($data->$type as $key => $value) {
-
                 if ($disabled === true) {
-
                     $data->$type->$i->active = false;
-
                 } else {
-
                     if (isset($value->$method)) {
-
                         if ($value->$method <=> $parameter) {
                             $data->$type->$i->active = false;
                         } else {
                             $data->$type->$i->active = $value->active;
                         }
-
                     } else {
                         $data->$type->$i = $value;
                     }

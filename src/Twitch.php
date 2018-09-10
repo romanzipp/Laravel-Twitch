@@ -277,13 +277,9 @@ class Twitch
             $response = $this->client->send($request);
 
             $result = new Result($response, null, $paginator, $this->legacy ? true : false);
-
         } catch (RequestException $exception) {
-
             $result = new Result($exception->getResponse(), $exception, $paginator);
-
         } catch (ClientException $exception) {
-
             $result = new Result($exception->getResponse(), $exception, $paginator);
         }
 

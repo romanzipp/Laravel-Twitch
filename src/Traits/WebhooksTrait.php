@@ -12,7 +12,7 @@ trait WebhooksTrait
         $attributes = [
             'hub.callback' => $callback,
             'hub.mode' => 'subscribe',
-            'hub.topic' => $topic,
+            'hub.topic' => urlencode($topic),
         ];
 
         if ($lease !== null) {
@@ -31,10 +31,15 @@ trait WebhooksTrait
         $attributes = [
             'hub.callback' => $callback,
             'hub.mode' => 'unsubscribe',
-            'hub.topic' => $topic,
+            'hub.topic' => urlencode($topic),
         ];
 
         return $this->post('webhooks/hub', $attributes);
+    }
+
+    public function getWebhookSubscriptions(array $parameters = []): Result
+    {
+        return $this->get('webhooks/subscriptions', $parameters);
     }
 
     public function webhookTopicStreamMonitor(int $user): string

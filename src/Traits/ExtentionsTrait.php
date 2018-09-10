@@ -19,7 +19,7 @@ trait ExtentionsTrait
         if ($token !== null) {
             $this->withToken($token);
         }
-        
+
         return $this->get('users/extensions/list');
     }
 
@@ -65,6 +65,10 @@ trait ExtentionsTrait
      */
     public function disableUserExtensionById(string $token = null, string $parameter = null): Result
     {
+        if ($token) {
+            $this->withToken($token);
+        }
+
         return $this->updateUserExtensions('id', $parameter, false);
     }
 
@@ -78,6 +82,10 @@ trait ExtentionsTrait
      */
     public function disableUserExtensionByName(string $token = null, string $parameter = null): Result
     {
+        if ($token) {
+            $this->withToken($token);
+        }
+
         return $this->updateUserExtensions('name', $parameter, false);
     }
 

@@ -49,12 +49,12 @@ trait WebhooksTrait
 
     public function webhookTopicUserGainsFollower(int $to): string
     {
-        return static::BASE_URI . 'users/follows?first=1&to_id=' . $from;
+        return static::BASE_URI . 'users/follows?first=1&to_id=' . $to;
     }
 
     public function webhookTopicUserFollowsUser(int $from, int $to): string
     {
-        return static::BASE_URI . 'users/follows?first=1&from_id=' . $from . '&to_id' . $from;
+        return static::BASE_URI . 'users/follows?first=1&from_id=' . $from . '&to_id' . $to;
     }
 
     abstract public function post(string $path = '', array $parameters = [], Paginator $paginator = null);

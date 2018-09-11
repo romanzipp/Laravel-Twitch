@@ -302,7 +302,7 @@ class Twitch
             $data = !is_array($option) ? [$option] : $option;
 
             foreach ($data as $key => $value) {
-                $url .= (parse_url($url, PHP_URL_QUERY) ? '&' : '?') . $optionKey . '=' . $value;
+                $url .= (parse_url($url, PHP_URL_QUERY) ? '&' : '?') . urlencode($optionKey) . '=' . urlencode($value);
             }
         }
 

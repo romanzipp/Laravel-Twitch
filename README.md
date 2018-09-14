@@ -42,7 +42,7 @@ romanzipp\Twitch\Providers\TwitchServiceProvider::class,
 Copy configuration to config folder:
 
 ```
-$ php artisan vendor:publish --provider=romanzipp\Twitch\Providers\TwitchServiceProvider
+$ php artisan vendor:publish --provider="romanzipp\Twitch\Providers\TwitchServiceProvider"
 ```
 
 Add environmental variables to your `.env`

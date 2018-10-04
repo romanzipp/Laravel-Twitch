@@ -62,5 +62,7 @@ trait WebhooksTrait
         return static::BASE_URI . 'users/follows?first=1&from_id=' . $from . '&to_id' . $to;
     }
 
+    abstract public function get(string $path = '', array $parameters = [], Paginator $paginator = null);
+
     abstract public function post(string $path = '', array $parameters = [], Paginator $paginator = null);
 }

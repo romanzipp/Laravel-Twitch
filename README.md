@@ -24,14 +24,14 @@ composer require romanzipp/laravel-twitch
 Or add `romanzipp/laravel-twitch` to your `composer.json`
 
 ```
-"romanzipp/laravel-twitch": "*"
+"romanzipp/laravel-twitch": "^1.0"
 ```
 
-Run composer update to pull the latest version.
+Run `composer install` to pull the latest version.
 
 **If you use Laravel 5.5+ you are already done, otherwise continue:**
 
-1. Add Service Provider to your `app.php` configuration file:
+Add Service Provider to your `app.php` configuration file:
 
 ```php
 romanzipp\Twitch\Providers\TwitchServiceProvider::class,
@@ -58,25 +58,26 @@ TWITCH_HELIX_REDIRECT_URI=http://localhost
 ### With Laravel dependency injection
 
 ```php
-Route::get('/', function (\romanzipp\Twitch\Twitch $twitch) {
+use \romanzipp\Twitch\Twitch;
+
+Route::get('/', function (Twitch $twitch) {
 
     // Get User by Username
-    $userResult = $twitch->getUserByName('staiy');
+    $userResult = $twitch->getUserByName('herrausragend');
 
     // Check, if the query was successfull
     if ($userResult->success()) {
+
         // Shift result to get single user data
         $user = $userResult->shift();
 
-        echo $user['id'];
+        echo $user->id;
     }
-
-    // Use Paginator
 
     // Fetch first set of followers
     $followsResult = $twitch->getFollowsTo(48865821);
 
-    // Fetch next set of followers
+    // Fetch next set of followers using the next() Result method
     $nextFollowsResult = $twitch->getFollowsTo(48865821, $followsResult->next());
 });
 ```

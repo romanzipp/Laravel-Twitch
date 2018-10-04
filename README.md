@@ -186,7 +186,7 @@ $result->insertUsers('from_id', 'from_user'); // Insert users identified by "fro
 function getBitsLeaderboard(array $parameters = []): Result {}
 ```
 
-### Extensions
+### Clips
 
 ```php
 function createClip(int $broadcaster): Result {}

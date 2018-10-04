@@ -6,8 +6,8 @@ use Exception;
 
 class RequestRequiresParameter extends Exception
 {
-    public function __construct($message = 'Request requires parameters')
+    public function __construct($message = 'Request requires parameters', $code = 0, Exception $previous = null)
     {
-        $this->message = $message;
+        parent::__construct($message, $code, $previous);
     }
 }

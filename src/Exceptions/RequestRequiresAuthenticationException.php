@@ -6,8 +6,8 @@ use Exception;
 
 class RequestRequiresAuthenticationException extends Exception
 {
-    public function __construct(string $message = null)
+    public function __construct($message = 'Request requires authentication', $code = 0, Exception $previous = null)
     {
-        $this->message = $message ?? 'Request requires authentication';
+        parent::__construct($message, $code, $previous);
     }
 }

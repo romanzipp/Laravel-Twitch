@@ -78,12 +78,6 @@ class Twitch
     protected $legacy = null;
 
     /**
-     * Attributes saved for one request
-     * @var array
-     */
-    protected $once = [];
-
-    /**
      * Construction
      * @param string $token    Twitch OAuth Token
      * @param string $clientId Twitch client id
@@ -169,7 +163,6 @@ class Twitch
     public function withToken(string $token)
     {
         $this->setToken($token);
-        $this->once[] = 'token';
 
         return $this;
     }
@@ -194,22 +187,8 @@ class Twitch
     public function withLegacy()
     {
         $this->legacy = true;
-        $this->once[] = 'legacy';
-
+  
         return $this;
-    }
-
-    /**
-     * Clear parameters for last request
-     * @return void
-     */
-    public function clearOnce()
-    {
-        foreach ($this->once as $value) {
-            $this->$value = null;
-        }
-
-        $this->once = [];
     }
 
     public function get(string $path = '', array $parameters = [], Paginator $paginator = null)
@@ -255,8 +234,6 @@ class Twitch
         $headers = $this->generateHeaders($jsonBody ? true : false);
 
         $result = $this->executeQuery($method, $uri, $headers, $paginator, $jsonBody);
-
-        $this->clearOnce();
 
         return $result;
     }

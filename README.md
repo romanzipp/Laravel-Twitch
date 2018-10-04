@@ -265,3 +265,17 @@ function webhookTopicUserFollows(int $from): string {}
 function webhookTopicUserGainsFollower(int $to): string {}
 function webhookTopicUserFollowsUser(int $from, int $to): string {}
 ```
+
+### Legacy
+
+#### Root
+
+```php
+function legacyRoot(): Result {}
+```
+
+#### OAuth
+
+```php
+function legacyRefreshToken(string $refreshToken, string $clientSecret = null, string $scope = null): Result {}
+```

@@ -5,7 +5,7 @@ namespace romanzipp\Twitch\Traits;
 use romanzipp\Twitch\Helpers\Paginator;
 use romanzipp\Twitch\Result;
 
-trait ExtentionsTrait
+trait ExtensionsTrait
 {
     /**
      * Get currently authed user's extensions with Bearer Token

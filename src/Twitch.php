@@ -11,7 +11,7 @@ use romanzipp\Twitch\Exceptions\RequestRequiresClientIdException;
 use romanzipp\Twitch\Helpers\Paginator;
 use romanzipp\Twitch\Traits\BitsTrait;
 use romanzipp\Twitch\Traits\ClipsTrait;
-use romanzipp\Twitch\Traits\ExtentionsTrait;
+use romanzipp\Twitch\Traits\ExtensionsTrait;
 use romanzipp\Twitch\Traits\FollowsTrait;
 use romanzipp\Twitch\Traits\GamesTrait;
 use romanzipp\Twitch\Traits\Legacy\OAuthTrait as LegacyOAuthTrait;
@@ -26,7 +26,7 @@ class Twitch
 {
     use BitsTrait;
     use ClipsTrait;
-    use ExtentionsTrait;
+    use ExtensionsTrait;
     use FollowsTrait;
     use GamesTrait;
     use StreamsTrait;

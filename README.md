@@ -118,8 +118,9 @@ do {
     foreach ($result->data as $item) {
 
         Game::updateOrCreate(
-            ['id' => $item->id],
             [
+                'id' => $item->id,
+            ], [
                 'name' => $item->name,
                 'box_art_url' => $item->box_art_url,
             ]
@@ -143,11 +144,11 @@ The new API does not include the user objects in endpoints like followers or bit
 ]
 ```
 
-You can just call the [insertUsers](https://github.com/romanzipp/Laravel-Twitch/blob/master/src/Result.php#L216) method to insert all users.
+You can just call the [insertUsers](https://github.com/romanzipp/Laravel-Twitch/blob/master/src/Result.php#L217) method to insert all users.
 
 ```php
 $result = $twitch->getFollowsTo($userId);
-$result->insertUsers('from_id'); // Insert users identified by "from_id"
+$result->insertUsers('from_id', 'from_user'); // Insert users identified by "from_id" to "from_user"
 ```
 
 **New Result data:**
@@ -158,7 +159,7 @@ $result->insertUsers('from_id'); // Insert users identified by "from_id"
     "from_id": "123456",
     "to_id": "654321",
     "followed_at": "2018-01-01 12:00:00",
-    "user": {
+    "from_user": {
       "id": "123456",
       "display_name": "HerrAusragend",
       "login": "herrausragend"

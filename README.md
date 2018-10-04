@@ -15,6 +15,13 @@ Join the Twitch Dev Discord!
 
 [![Discord](https://discordapp.com/api/guilds/325552783787032576/embed.png?style=banner2)](https://discord.gg/8NXaEyV)
 
+## Table of contents
+
+1. [Installation](https://github.com/romanzipp/Laravel-Twitch#installation)
+2. [Configuration](https://github.com/romanzipp/Laravel-Twitch#configuration)
+3. [Examples](https://github.com/romanzipp/Laravel-Twitch#examples)
+4. [Documentation](https://github.com/romanzipp/Laravel-Twitch#documentation)
+
 ## Installation
 
 ```
@@ -171,6 +178,90 @@ $result->insertUsers('from_id', 'from_user'); // Insert users identified by "fro
 
 ## Documentation
 
-Packages Docs Available in [Wiki Section](https://github.com/romanzipp/Laravel-Twitch/wiki/Full-reference)
+**Twitch Helix API Documentation: https://dev.twitch.tv/docs/api/reference**
 
-**Twitch API Documentation: https://dev.twitch.tv/docs/api/reference**
+### Bits
+
+```php
+function getBitsLeaderboard(array $parameters = []): Result {}
+```
+
+### Extensions
+
+```php
+function createClip(int $broadcaster): Result {}
+function getClip(string $id): Result {}
+function createEntitlementUrl(string $manifest, string $type = 'bulk_drops_grant'): Result {}
+```
+
+### Follows
+
+```php
+function getFollows(int $from = null, int $to = null, Paginator $paginator = null): Result {}
+function getFollowsFrom(int $from, Paginator $paginator = null): Result {}
+function getFollowsTo(int $to, Paginator $paginator = null): Result {}
+```
+
+### Games
+
+```php
+function getGames(array $parameters): Result {}
+function getGameById(int $id): Result {}
+function getGameByName(string $name): Result {}
+function getGamesByIds(array $ids): Result {}
+function getGamesByNames(array $names): Result {}
+function getTopGames(array $parameters = [], Paginator $paginator = null): Result {}
+```
+
+### Streams Metadata
+
+```php
+function getStreamsMetadata(array $parameters = [], Paginator $paginator = null): Result {}
+```
+
+### Streams
+
+```php
+function getStreams(array $parameters = [], Paginator $paginator = null): Result {}
+function getStreamsByUserId(int $id, array $parameters = [], Paginator $paginator = null): Result {}
+function getStreamsByUserName(string $name, array $parameters = [], Paginator $paginator = null): Result {}
+function getStreamsByUserIds(array $ids, array $parameters = [], Paginator $paginator = null): Result {}
+function getStreamsByUserNames(array $names, array $parameters = [], Paginator $paginator = null): Result {}
+function getStreamsByCommunity(int $id, array $parameters = [], Paginator $paginator = null): Result {}
+function getStreamsByCommunities(int $ids, array $parameters = [], Paginator $paginator = null): Result {}
+function getStreamsByGame(int $id, array $parameters = [], Paginator $paginator = null): Result {}
+function getStreamsByGames(int $ids, array $parameters = [], Paginator $paginator = null): Result {}
+```
+
+### Users
+
+```php
+function getAuthedUser(string $token = null): Result {}
+function getUsers(array $parameters): Result {}
+function getUserById(int $id, array $parameters = []): Result {}
+function getUserByName(string $name, array $parameters = []): Result {}
+function getUsersByIds(array $ids, array $parameters = []): Result {}
+function getUsersByNames(array $names, array $parameters = []): Result {}
+function updateUser(string $description): Result {}
+```
+
+### Videos
+
+```php
+function getVideos(array $parameters, Paginator $paginator = null): Result {}
+function getVideosById(int $id, array $parameters = [], Paginator $paginator = null): Result {}
+function getVideosByUser(int $user, array $parameters = [], Paginator $paginator = null): Result {}
+function getVideosByGame(int $game, array $parameters = [], Paginator $paginator = null): Result {}
+```
+
+### Wehooks
+
+```php
+function subscribeWebhook(string $callback, string $topic, int $lease = null, string $secret = null): Result {}
+function unsubscribeWebhook(string $callback, string $topic): Result {}
+function getWebhookSubscriptions(array $parameters = []): Result {}
+function webhookTopicStreamMonitor(int $user): string {}
+function webhookTopicUserFollows(int $from): string {}
+function webhookTopicUserGainsFollower(int $to): string {}
+function webhookTopicUserFollowsUser(int $from, int $to): string {}
+```

@@ -6,8 +6,8 @@ use Exception;
 
 class RateLimitException extends Exception
 {
-    public function __construct()
+    public function __construct($message = 'Rate Limit exceeded', $code = 0, Exception $previous = null)
     {
-        $this->message = 'Rate Limit exceeded';
+        parent::__construct($message, $code, $previous);
     }
 }

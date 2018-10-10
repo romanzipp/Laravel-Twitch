@@ -6,8 +6,8 @@ use Exception;
 
 class RequestRequiresClientIdException extends Exception
 {
-    public function __construct()
+    public function __construct($message = 'Request requires Client-ID', $code = 0, Exception $previous = null)
     {
-        $this->message = 'Request requires Client-ID';
+        parent::__construct($message, $code, $previous);
     }
 }

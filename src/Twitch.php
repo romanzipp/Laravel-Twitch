@@ -10,7 +10,7 @@ use romanzipp\Twitch\Exceptions\RequestRequiresClientIdException;
 use romanzipp\Twitch\Helpers\Paginator;
 use romanzipp\Twitch\Traits\BitsTrait;
 use romanzipp\Twitch\Traits\ClipsTrait;
-use romanzipp\Twitch\Traits\ExtentionsTrait;
+use romanzipp\Twitch\Traits\ExtensionsTrait;
 use romanzipp\Twitch\Traits\FollowsTrait;
 use romanzipp\Twitch\Traits\GamesTrait;
 use romanzipp\Twitch\Traits\Legacy\OAuthTrait as LegacyOAuthTrait;
@@ -25,7 +25,7 @@ class Twitch
 {
     use BitsTrait;
     use ClipsTrait;
-    use ExtentionsTrait;
+    use ExtensionsTrait;
     use FollowsTrait;
     use GamesTrait;
     use StreamsTrait;
@@ -75,12 +75,6 @@ class Twitch
      * @var null|bool
      */
     protected $legacy = null;
-
-    /**
-     * Attributes saved for one request
-     * @var array
-     */
-    protected $once = [];
 
     /**
      * Construction
@@ -168,7 +162,6 @@ class Twitch
     public function withToken(string $token)
     {
         $this->setToken($token);
-        $this->once[] = 'token';
 
         return $this;
     }
@@ -194,22 +187,8 @@ class Twitch
     public function withLegacy()
     {
         $this->legacy = true;
-        $this->once[] = 'legacy';
-
+  
         return $this;
-    }
-
-    /**
-     * Clear parameters for last request
-     * @return void
-     */
-    public function clearOnce()
-    {
-        foreach ($this->once as $value) {
-            $this->$value = null;
-        }
-
-        $this->once = [];
     }
 
     public function get(string $path = '', array $parameters = [], Paginator $paginator = null)
@@ -258,8 +237,6 @@ class Twitch
         $headers = $this->generateHeaders($jsonBody ? true : false);
 
         $result = $this->executeQuery($method, $uri, $headers, $paginator, $jsonBody);
-
-        $this->clearOnce();
 
         return $result;
     }

@@ -15,6 +15,13 @@ Join the Twitch Dev Discord!
 
 [![Discord](https://discordapp.com/api/guilds/325552783787032576/embed.png?style=banner2)](https://discord.gg/8NXaEyV)
 
+## Table of contents
+
+1. [Installation](https://github.com/romanzipp/Laravel-Twitch#installation)
+2. [Configuration](https://github.com/romanzipp/Laravel-Twitch#configuration)
+3. [Examples](https://github.com/romanzipp/Laravel-Twitch#examples)
+4. [Documentation](https://github.com/romanzipp/Laravel-Twitch#documentation)
+
 ## Installation
 
 ```
@@ -24,14 +31,14 @@ composer require romanzipp/laravel-twitch
 Or add `romanzipp/laravel-twitch` to your `composer.json`
 
 ```
-"romanzipp/laravel-twitch": "*"
+"romanzipp/laravel-twitch": "^1.0"
 ```
 
-Run composer update to pull the latest version.
+Run `composer install` to pull the latest version.
 
 **If you use Laravel 5.5+ you are already done, otherwise continue:**
 
-1. Add Service Provider to your `app.php` configuration file:
+Add Service Provider to your `app.php` configuration file:
 
 ```php
 romanzipp\Twitch\Providers\TwitchServiceProvider::class,
@@ -42,7 +49,7 @@ romanzipp\Twitch\Providers\TwitchServiceProvider::class,
 Copy configuration to config folder:
 
 ```
-$ php artisan vendor:publish --provider=romanzipp\Twitch\Providers\TwitchServiceProvider
+$ php artisan vendor:publish --provider="romanzipp\Twitch\Providers\TwitchServiceProvider"
 ```
 
 Add environmental variables to your `.env`
@@ -58,25 +65,26 @@ TWITCH_HELIX_REDIRECT_URI=http://localhost
 ### With Laravel dependency injection
 
 ```php
-Route::get('/', function (\romanzipp\Twitch\Twitch $twitch) {
+use \romanzipp\Twitch\Twitch;
+
+Route::get('/', function (Twitch $twitch) {
 
     // Get User by Username
-    $userResult = $twitch->getUserByName('staiy');
+    $userResult = $twitch->getUserByName('herrausragend');
 
     // Check, if the query was successfull
     if ($userResult->success()) {
+
         // Shift result to get single user data
         $user = $userResult->shift();
 
-        echo $user['id'];
+        echo $user->id;
     }
-
-    // Use Paginator
 
     // Fetch first set of followers
     $followsResult = $twitch->getFollowsTo(48865821);
 
-    // Fetch next set of followers
+    // Fetch next set of followers using the next() Result method
     $nextFollowsResult = $twitch->getFollowsTo(48865821, $followsResult->next());
 });
 ```
@@ -118,8 +126,9 @@ do {
     foreach ($result->data as $item) {
 
         Game::updateOrCreate(
-            ['id' => $item->id],
             [
+                'id' => $item->id,
+            ], [
                 'name' => $item->name,
                 'box_art_url' => $item->box_art_url,
             ]
@@ -143,11 +152,11 @@ The new API does not include the user objects in endpoints like followers or bit
 ]
 ```
 
-You can just call the [insertUsers](https://github.com/romanzipp/Laravel-Twitch/blob/master/src/Result.php#L216) method to insert all users.
+You can just call the [insertUsers](https://github.com/romanzipp/Laravel-Twitch/blob/master/src/Result.php#L217) method to insert all users.
 
 ```php
 $result = $twitch->getFollowsTo($userId);
-$result->insertUsers('from_id'); // Insert users identified by "from_id"
+$result->insertUsers('from_id', 'from_user'); // Insert users identified by "from_id" to "from_user"
 ```
 
 **New Result data:**
@@ -158,7 +167,7 @@ $result->insertUsers('from_id'); // Insert users identified by "from_id"
     "from_id": "123456",
     "to_id": "654321",
     "followed_at": "2018-01-01 12:00:00",
-    "user": {
+    "from_user": {
       "id": "123456",
       "display_name": "HerrAusragend",
       "login": "herrausragend"
@@ -169,6 +178,104 @@ $result->insertUsers('from_id'); // Insert users identified by "from_id"
 
 ## Documentation
 
-Packages Docs Available in [Wiki Section](https://github.com/romanzipp/Laravel-Twitch/wiki/Full-reference)
+**Twitch Helix API Documentation: https://dev.twitch.tv/docs/api/reference**
 
-**Twitch API Documentation: https://dev.twitch.tv/docs/api/reference**
+### Bits
+
+```php
+function getBitsLeaderboard(array $parameters = []): Result {}
+```
+
+### Clips
+
+```php
+function createClip(int $broadcaster): Result {}
+function getClip(string $id): Result {}
+function createEntitlementUrl(string $manifest, string $type = 'bulk_drops_grant'): Result {}
+```
+
+### Follows
+
+```php
+function getFollows(int $from = null, int $to = null, Paginator $paginator = null): Result {}
+function getFollowsFrom(int $from, Paginator $paginator = null): Result {}
+function getFollowsTo(int $to, Paginator $paginator = null): Result {}
+```
+
+### Games
+
+```php
+function getGames(array $parameters): Result {}
+function getGameById(int $id): Result {}
+function getGameByName(string $name): Result {}
+function getGamesByIds(array $ids): Result {}
+function getGamesByNames(array $names): Result {}
+function getTopGames(array $parameters = [], Paginator $paginator = null): Result {}
+```
+
+### Streams Metadata
+
+```php
+function getStreamsMetadata(array $parameters = [], Paginator $paginator = null): Result {}
+```
+
+### Streams
+
+```php
+function getStreams(array $parameters = [], Paginator $paginator = null): Result {}
+function getStreamsByUserId(int $id, array $parameters = [], Paginator $paginator = null): Result {}
+function getStreamsByUserName(string $name, array $parameters = [], Paginator $paginator = null): Result {}
+function getStreamsByUserIds(array $ids, array $parameters = [], Paginator $paginator = null): Result {}
+function getStreamsByUserNames(array $names, array $parameters = [], Paginator $paginator = null): Result {}
+function getStreamsByCommunity(int $id, array $parameters = [], Paginator $paginator = null): Result {}
+function getStreamsByCommunities(int $ids, array $parameters = [], Paginator $paginator = null): Result {}
+function getStreamsByGame(int $id, array $parameters = [], Paginator $paginator = null): Result {}
+function getStreamsByGames(int $ids, array $parameters = [], Paginator $paginator = null): Result {}
+```
+
+### Users
+
+```php
+function getAuthedUser(string $token = null): Result {}
+function getUsers(array $parameters): Result {}
+function getUserById(int $id, array $parameters = []): Result {}
+function getUserByName(string $name, array $parameters = []): Result {}
+function getUsersByIds(array $ids, array $parameters = []): Result {}
+function getUsersByNames(array $names, array $parameters = []): Result {}
+function updateUser(string $description): Result {}
+```
+
+### Videos
+
+```php
+function getVideos(array $parameters, Paginator $paginator = null): Result {}
+function getVideosById(int $id, array $parameters = [], Paginator $paginator = null): Result {}
+function getVideosByUser(int $user, array $parameters = [], Paginator $paginator = null): Result {}
+function getVideosByGame(int $game, array $parameters = [], Paginator $paginator = null): Result {}
+```
+
+### Wehooks
+
+```php
+function subscribeWebhook(string $callback, string $topic, int $lease = null, string $secret = null): Result {}
+function unsubscribeWebhook(string $callback, string $topic): Result {}
+function getWebhookSubscriptions(array $parameters = []): Result {}
+function webhookTopicStreamMonitor(int $user): string {}
+function webhookTopicUserFollows(int $from): string {}
+function webhookTopicUserGainsFollower(int $to): string {}
+function webhookTopicUserFollowsUser(int $from, int $to): string {}
+```
+
+### Legacy
+
+#### Root
+
+```php
+function legacyRoot(): Result {}
+```
+
+#### OAuth
+
+```php
+function legacyRefreshToken(string $refreshToken, string $clientSecret = null, string $scope = null): Result {}
+```

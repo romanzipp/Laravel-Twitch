@@ -3,7 +3,6 @@
 namespace romanzipp\Twitch;
 
 use GuzzleHttp\Client;
-use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Psr7\Request;
 use romanzipp\Twitch\Exceptions\RequestRequiresAuthenticationException;
@@ -117,8 +116,8 @@ class Twitch
 
     /**
      * Get clientId
-     * @param  string $clientId clientId optional
-     * @return string           clientId
+     * @return string clientId
+     * @throws RequestRequiresClientIdException
      */
     public function getClientId()
     {
@@ -140,8 +139,8 @@ class Twitch
 
     /**
      * Get clientSecret
-     * @param  string $clientSecret clientSecret optional
      * @return string               clientSecret
+     * @throws RequestRequiresClientIdException
      */
     public function getClientSecret()
     {
@@ -177,6 +176,7 @@ class Twitch
     /**
      * Get Twitch token
      * @return string Twitch token
+     * @throws RequestRequiresAuthenticationException
      */
     public function getToken()
     {
@@ -238,11 +238,14 @@ class Twitch
 
     /**
      * Execute query
-     * @param  string $method     HTTP method
-     * @param  string $path       Query path
-     * @param  array  $parameters Query parameters
-     * @param  mixed  $token      Token String or true/false to obtain by setToken method
+     * @param  string $method HTTP method
+     * @param  string $path Query path
+     * @param  array $parameters Query parameters
+     * @param Paginator|null $paginator Paginator
+     * @param null $jsonBody
      * @return Result             Result object
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws RequestRequiresClientIdException
      */
     public function query(string $method = 'GET', string $path = '', array $parameters = [], Paginator $paginator = null, $jsonBody = null): Result
     {
@@ -263,23 +266,23 @@ class Twitch
 
     /**
      * Execute query
-     * @param  string $method   HTTP method
-     * @param  string $uri      Query path
-     * @param  array  $headers  Query headers
-     * @param  mixed  $jsonBody JSON Body
+     * @param  string $method HTTP method
+     * @param  string $uri Query path
+     * @param  array $headers Query headers
+     * @param  Paginator|null $paginator Paginator
+     * @param  mixed $jsonBody JSON Body
      * @return Result
+     * @throws \GuzzleHttp\Exception\GuzzleException
      */
     private function executeQuery(string $method, string $uri, array $headers, Paginator $paginator = null, $jsonBody = null): Result
     {
-        try {
-            $request = new Request($method, $uri, $headers, $jsonBody);
+        $request = new Request($method, $uri, $headers, $jsonBody);
 
+        try {
             $response = $this->client->send($request);
 
             $result = new Result($response, null, $paginator, $this->legacy ? true : false);
         } catch (RequestException $exception) {
-            $result = new Result($exception->getResponse(), $exception, $paginator);
-        } catch (ClientException $exception) {
             $result = new Result($exception->getResponse(), $exception, $paginator);
         }
 
@@ -292,7 +295,6 @@ class Twitch
     /**
      * Generate URL for API
      * @param  string      $url        Query uri
-     * @param  null|string $token      Auth token, if required
      * @param  array       $parameters Query parameters
      * @return string                  Full query url
      */
@@ -311,8 +313,9 @@ class Twitch
 
     /**
      * Generate headers
-     * @param  bool  $json Body is JSON
+     * @param  bool $json Body is JSON
      * @return array
+     * @throws RequestRequiresClientIdException
      */
     public function generateHeaders(bool $json = false): array
     {

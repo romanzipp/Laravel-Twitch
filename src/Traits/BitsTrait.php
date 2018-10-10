@@ -10,6 +10,7 @@ trait BitsTrait
 {
     /**
      * Get Bits leaderboard.
+     * @param array $parameters Array of parameters
      * @return Result
      * @see    https://dev.twitch.tv/docs/api/reference/#get-bits-leaderboard
      *

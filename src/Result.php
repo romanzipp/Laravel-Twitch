@@ -71,7 +71,7 @@ class Result
     /**
      * Constructor
      * @param Response        $response  HTTP response
-     * @param Exception|mixed $exception Exception, if present
+     * @param \Exception|mixed $exception Exception, if present
      * @param null|Paginator  $paginator Paginator, if present
      * @param bool            $legacy    Is legacy v5 Request
      */

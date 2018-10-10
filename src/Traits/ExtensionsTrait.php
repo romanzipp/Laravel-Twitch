@@ -90,7 +90,8 @@ trait ExtensionsTrait
     }
 
     /**
-     * Disables all Extensions of the currently authed user's active extensions, that have the given method and parameter with Bearer Token
+     * Updates the activation state, extension ID, and/or version number of installed extensions for a specified user, identified by a Bearer token.
+     * If you try to activate a given extension under multiple extension types, the last write wins (and there is no guarantee of write order).
      * Note: Bearer OAuth Token and the state "user:edit:broadcast" are both required
      * @param  string $method    Method that will be used to disable extensions
      * @param  string $parameter Parameter that will be used to disable Extensions

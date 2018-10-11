@@ -25,10 +25,10 @@ trait WebhooksTrait
      * could not be created. For example, you may not be authorized to access
      * the resource you requested or you may have exceeded the maximum number of subscriptions.
      *
-     * @param string $callback URL where notifications will be delivered.
-     * @param string $topic Topic URL for the topic to subscribe to. topic maps to a new Twitch API endpoint.
-     * @param int|null $lease
-     * @param string|null $secret
+     * @param string        $callback   URL where notifications will be delivered.
+     * @param string        $topic      Topic URL for the topic to subscribe to. topic maps to a new Twitch API endpoint.
+     * @param int|null      $lease
+     * @param string|null   $secret
      * @return Result Result object
      * @see https://dev.twitch.tv/docs/api/webhooks-reference/
      */
@@ -53,8 +53,8 @@ trait WebhooksTrait
 
     /**
      * Unsubscribe from Events
-     * @param string $callback URL where notifications will be delivered.
-     * @param string $topic Topic URL for the topic to unsubscribe from. topic maps to a new Twitch API endpoint.
+     * @param string $callback  URL where notifications will be delivered.
+     * @param string $topic     Topic URL for the topic to unsubscribe from. topic maps to a new Twitch API endpoint.
      * @return Result Result object
      * @see https://dev.twitch.tv/docs/api/webhooks-reference/
      */
@@ -72,8 +72,8 @@ trait WebhooksTrait
     /**
      * Get Webhook Subscriptions
      * Note: Bearer OAuth Token is required
-     * @param array $parameters Array of parameters
-     * @param string|null $token Twitch OAuth Token
+     * @param array         $parameters Array of parameters
+     * @param string|null   $token      Twitch OAuth Token
      * @return Result Result object
      * @see https://dev.twitch.tv/docs/api/reference/#get-webhook-subscriptions
      */

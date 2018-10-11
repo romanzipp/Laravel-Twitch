@@ -13,15 +13,17 @@ trait WebhooksTrait
      * Notice: Twitch sends you an subscription verify or subscription denied request.
      *
      * Subscription verify:
-     *     If your subscription request passes review, Twitch sends you a
-     *     request to confirm that you requested the subscription. To confirm,
-     *     you must respond to the request with the challenge token provided in
-     *     the query parameters and an HTTP success (2xx) response code.
+     *
+     * If your subscription request passes review, Twitch sends you a
+     * request to confirm that you requested the subscription. To confirm,
+     * you must respond to the request with the challenge token provided in
+     * the query parameters and an HTTP success (2xx) response code.
      *
      * Subscription denied:
-     *     In this case, the request payload explains why the subscription
-     *     could not be created. For example, you may not be authorized to access
-     *     the resource you requested or you may have exceeded the maximum number of subscriptions.
+     *
+     * In this case, the request payload explains why the subscription
+     * could not be created. For example, you may not be authorized to access
+     * the resource you requested or you may have exceeded the maximum number of subscriptions.
      *
      * @param string $callback URL where notifications will be delivered.
      * @param string $topic Topic URL for the topic to subscribe to. topic maps to a new Twitch API endpoint.

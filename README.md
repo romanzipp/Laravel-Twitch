@@ -194,6 +194,13 @@ function getClip(string $id): Result {}
 function createEntitlementUrl(string $manifest, string $type = 'bulk_drops_grant'): Result {}
 ```
 
+### Entitlements (Code Redemption)
+
+```php
+function getEntitlementsCodeStatus(array $parameters, string $token = null): Result {}
+function redeemEntitlementsCode(array $parameters, string $token = null): Result {}
+```
+
 ### Follows
 
 ```php

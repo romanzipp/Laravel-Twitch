@@ -256,6 +256,14 @@ function getVideosByUser(int $user, array $parameters = [], Paginator $paginator
 function getVideosByGame(int $game, array $parameters = [], Paginator $paginator = null): Result {}
 ```
 
+### Subscriptions
+
+```php
+public function getSubscriptions(array $parameters = [], Paginator $paginator = null): Result {}
+public function getUserSubscriptions(int $user, Paginator $paginator = null): Result {}
+public function getBroadcasterSubscriptions(int $user, Paginator $paginator = null): Result {}
+```
+
 ### Wehooks
 
 ```php

@@ -8,6 +8,6 @@ class Twitch extends Facade
 {
     protected static function getFacadeAccessor()
     {
-        return 'romanzipp\Twitch\Twitch';
+        return \romanzipp\Twitch\Twitch::class;
     }
 }

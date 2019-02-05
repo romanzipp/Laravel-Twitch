@@ -11,8 +11,8 @@ trait WebhooksTrait
     {
         $attributes = [
             'hub.callback' => $callback,
-            'hub.mode' => 'subscribe',
-            'hub.topic' => urlencode($topic),
+            'hub.mode'     => 'subscribe',
+            'hub.topic'    => urlencode($topic),
         ];
 
         if ($lease !== null) {
@@ -30,8 +30,8 @@ trait WebhooksTrait
     {
         $attributes = [
             'hub.callback' => $callback,
-            'hub.mode' => 'unsubscribe',
-            'hub.topic' => urlencode($topic),
+            'hub.mode'     => 'unsubscribe',
+            'hub.topic'    => urlencode($topic),
         ];
 
         return $this->post('webhooks/hub', $attributes);

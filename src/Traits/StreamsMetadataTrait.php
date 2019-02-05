@@ -9,10 +9,6 @@ trait StreamsMetadataTrait
 {
     /**
      * Gets metadata information about active streams playing Overwatch or Hearthstone
-     * @param  array          $parameters Array of parameters
-     * @param  Paginator|null $paginator  Paginator object
-     * @return Result                     Result object
-     * @see    https://dev.twitch.tv/docs/api/reference#get-streams-metadata
      *
      * Parameters:
      * string   community_id    Returns streams in a specified community ID. You can specify up to 100 IDs.
@@ -21,6 +17,12 @@ trait StreamsMetadataTrait
      * string   type            Stream type: "all", "live", "vodcast". Default: "all".
      * string   user_id         Returns streams broadcast by one or more of the specified user IDs. You can specify up to 100 IDs.
      * string   user_login      Returns streams broadcast by one or more of the specified user login names. You can specify up to 100 names.
+     *
+     * @see    https://dev.twitch.tv/docs/api/reference#get-streams-metadata
+     *
+     * @param  array          $parameters Array of parameters
+     * @param  Paginator|null $paginator  Paginator object
+     * @return Result         Result object
      */
     public function getStreamsMetadata(array $parameters = [], Paginator $paginator = null): Result
     {

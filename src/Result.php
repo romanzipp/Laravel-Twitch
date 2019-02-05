@@ -87,7 +87,7 @@ class Result
 
         $jsonResponse = @json_decode($response->getBody());
 
-        if (!$legacy) {
+        if ( ! $legacy) {
             if ($jsonResponse !== null) {
                 $this->setProperty($jsonResponse, 'data');
                 $this->setProperty($jsonResponse, 'total');
@@ -112,7 +112,7 @@ class Result
     {
         $classAttribute = $attribute ?? $responseProperty;
 
-        if (!empty($jsonResponse) && property_exists($jsonResponse, $responseProperty)) {
+        if ( ! empty($jsonResponse) && property_exists($jsonResponse, $responseProperty)) {
             $this->{$classAttribute} = $jsonResponse->{$responseProperty};
         }
     }
@@ -143,14 +143,14 @@ class Result
     {
         // TODO Switch Exception response parsing to this->data
 
-        if ($this->exception === null || !$this->exception->hasResponse()) {
+        if ($this->exception === null || ! $this->exception->hasResponse()) {
             return 'Twitch API Unavailable';
         }
 
         $exception = (string) $this->exception->getResponse()->getBody();
         $exception = @json_decode($exception);
 
-        if (property_exists($exception, 'message') && !empty($exception->message)) {
+        if (property_exists($exception, 'message') && ! empty($exception->message)) {
             return $exception->message;
         }
 
@@ -163,7 +163,7 @@ class Result
      */
     public function shift()
     {
-        if (!empty($this->data)) {
+        if ( ! empty($this->data)) {
             $data = $this->data;
 
             return array_shift($data);

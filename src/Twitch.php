@@ -111,12 +111,12 @@ class Twitch
 
     /**
      * Get clientId
-     * @param  string $clientId clientId optional
-     * @return string           clientId
+     * @param  string $clientId  clientId optional
+     * @return string clientId
      */
     public function getClientId()
     {
-        if (!$this->clientId) {
+        if ( ! $this->clientId) {
             throw new RequestRequiresClientIdException();
         }
 
@@ -134,12 +134,12 @@ class Twitch
 
     /**
      * Get clientSecret
-     * @param  string $clientSecret clientSecret optional
-     * @return string               clientSecret
+     * @param  string $clientSecret  clientSecret optional
+     * @return string clientSecret
      */
     public function getClientSecret()
     {
-        if (!$this->clientSecret) {
+        if ( ! $this->clientSecret) {
             throw new RequestRequiresClientIdException();
         }
 
@@ -173,7 +173,7 @@ class Twitch
      */
     public function getToken()
     {
-        if (!$this->token) {
+        if ( ! $this->token) {
             throw new RequestRequiresAuthenticationException();
         }
 
@@ -187,7 +187,7 @@ class Twitch
     public function withLegacy()
     {
         $this->legacy = true;
-  
+
         return $this;
     }
 
@@ -221,7 +221,7 @@ class Twitch
      * @param  string $path       Query path
      * @param  array  $parameters Query parameters
      * @param  mixed  $token      Token String or true/false to obtain by setToken method
-     * @return Result             Result object
+     * @return Result Result object
      */
     public function query(string $method = 'GET', string $path = '', array $parameters = [], Paginator $paginator = null, $jsonBody = null): Result
     {
@@ -240,10 +240,10 @@ class Twitch
 
     /**
      * Execute query
-     * @param  string $method   HTTP method
-     * @param  string $uri      Query path
-     * @param  array  $headers  Query headers
-     * @param  mixed  $jsonBody JSON Body
+     * @param  string   $method   HTTP method
+     * @param  string   $uri      Query path
+     * @param  array    $headers  Query headers
+     * @param  mixed    $jsonBody JSON Body
      * @return Result
      */
     private function executeQuery(string $method, string $uri, array $headers, Paginator $paginator = null, $jsonBody = null): Result
@@ -271,12 +271,12 @@ class Twitch
      * @param  string      $url        Query uri
      * @param  null|string $token      Auth token, if required
      * @param  array       $parameters Query parameters
-     * @return string                  Full query url
+     * @return string      Full query url
      */
     private function generateUrl(string $url, array $parameters): string
     {
         foreach ($parameters as $optionKey => $option) {
-            $data = !is_array($option) ? [$option] : $option;
+            $data =  ! is_array($option) ? [$option] : $option;
 
             foreach ($data as $key => $value) {
                 $url .= (parse_url($url, PHP_URL_QUERY) ? '&' : '?') . $optionKey . '=' . $value;
@@ -288,7 +288,7 @@ class Twitch
 
     /**
      * Generate headers
-     * @param  bool  $json Body is JSON
+     * @param  bool    $json Body is JSON
      * @return array
      */
     public function generateHeaders(bool $json = false): array

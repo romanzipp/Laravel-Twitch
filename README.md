@@ -288,3 +288,7 @@ function legacyRoot(): Result {}
 ```php
 function legacyRefreshToken(string $refreshToken, string $clientSecret = null, string $scope = null): Result {}
 ```
+
+## Enums
+
+### [OAuth Scopes](https://github.com/romanzipp/Laravel-Twitch/blob/master/src/Enums/Scope.php)

@@ -1,10 +1,10 @@
 <?php
 
 return [
-    'client_id' => env('TWITCH_HELIX_KEY', ''),
+    'client_id'     => env('TWITCH_HELIX_KEY', ''),
     'client_secret' => env('TWITCH_HELIX_SECRET', ''),
-    'redirect_url' => env('TWITCH_HELIX_REDIRECT_URI', ''),
-    'scopes' => [
+    'redirect_url'  => env('TWITCH_HELIX_REDIRECT_URI', ''),
+    'scopes'        => [
         'channel_check_subscription',
         'channel_commercial',
         'channel_editor',

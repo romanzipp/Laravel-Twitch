@@ -30,8 +30,8 @@ class Paginator
 
     /**
      * Create Paginator from Result object
-     * @param  Result $result Result object
-     * @return self           Paginator object
+     * @param  Result $result   Result object
+     * @return self   Paginator object
      */
     public static function from(Result $result): self
     {

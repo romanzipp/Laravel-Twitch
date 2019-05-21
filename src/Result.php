@@ -11,66 +11,78 @@ use stdClass;
 class Result
 {
     /**
-     * Query successfull
+     * Query successfull.
+     *
      * @var boolean
      */
     public $success = false;
 
     /**
-     * Guzzle exception, if present
+     * Guzzle exception, if present.
+     *
      * @var null|mixed
      */
     public $exception = null;
 
     /**
-     * Query result data
+     * Query result data.
+     *
      * @var array
      */
     public $data = [];
 
     /**
-     * Total amount of result data
+     * Total amount of result data.
+     *
      * @var integer
      */
     public $total = 0;
 
     /**
-     * Status Code
+     * Status Code.
+     *
      * @var integer
      */
     public $status = 0;
 
     /**
-     * Twitch response pagination cursor
+     * Twitch response pagination cursor.
+     *
      * @var null|\stdClass
      */
     public $pagination;
 
     /**
-     * Internal paginator
+     * Internal paginator.
+     *
      * @var null|Paginator
      */
     public $paginator;
 
     /**
-     * Original Guzzle HTTP Response
+     * Original Guzzle HTTP Response.
+     *
      * @var Response
      */
     public $response;
 
     /**
-     * Original Guzzle HTTP Request
+     * Original Guzzle HTTP Request.
+     *
      * @var Request
      */
     public $request;
 
     /**
-     * Original Twitch instance
+     * Original Twitch instance.
+     *
+     * @var \romanzipp\Twitch\Twitch
      */
     public $twitch;
 
     /**
-     * Constructor
+     * Constructor,
+     *
      * @param Response        $response  HTTP response
      * @param Exception|mixed $exception Exception, if present
      * @param null|Paginator  $paginator Paginator, if present
@@ -97,7 +109,8 @@ class Result
     }
 
     /**
-     * Sets a class attribute by given JSON Response Body
+     * Sets a class attribute by given JSON Response Body.
+     *
      * @param stdClass    $jsonResponse     Response Body
      * @param string      $responseProperty Response property name
      * @param string|null $attribute        Class property name
@@ -112,7 +125,8 @@ class Result
     }
 
     /**
-     * Returns wether the query was successfull
+     * Returns wether the query was successfull.
+     *
      * @return bool Success state
      */
     public function success(): bool
@@ -121,7 +135,8 @@ class Result
     }
 
     /**
-     * Get the response data, also available as public attribute
+     * Get the response data, also available as public attribute.
+     *
      * @return mixed
      */
     public function data()
@@ -130,7 +145,8 @@ class Result
     }
 
     /**
-     * Returns the last HTTP or API error
+     * Returns the last HTTP or API error.
+     *
      * @return string Error message
      */
     public function error(): string
@@ -152,7 +168,8 @@ class Result
     }
 
     /**
-     * Shifts the current result (Use for single user/video etc. query)
+     * Shifts the current result (Use for single user/video etc. query).
+     *
      * @return mixed Shifted data
      */
     public function shift()
@@ -167,7 +184,8 @@ class Result
     }
 
     /**
-     * Return the current count of items in dataset
+     * Return the current count of items in dataset.
+     *
      * @return int Count
      */
     public function count(): int
@@ -176,7 +194,8 @@ class Result
     }
 
     /**
-     * Set the Paginator to fetch the first set of results
+     * Set the Paginator to fetch the first set of results.
+     *
      * @return null|Paginator
      */
     public function first()
@@ -185,7 +204,8 @@ class Result
     }
 
     /**
-     * Set the Paginator to fetch the next set of results
+     * Set the Paginator to fetch the next set of results.
+     *
      * @return null|Paginator
      */
     public function next()
@@ -194,7 +214,8 @@ class Result
     }
 
     /**
-     * Set the Paginator to fetch the last set of results
+     * Set the Paginator to fetch the last set of results.
+     *
      * @return null|Paginator
      */
     public function back()
@@ -203,7 +224,8 @@ class Result
     }
 
     /**
-     * Insert users in data response
+     * Insert users in data response.
+     *
      * @param  string $identifierAttribute Attribute to identify the users
      * @param  string $insertTo            Data index to insert user data
      * @return self

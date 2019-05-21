@@ -39,31 +39,36 @@ class Twitch
     const BASE_URI = 'https://api.twitch.tv/helix/';
 
     /**
-     * Guzzle is used to make http requests
+     * Guzzle is used to make http requests.
+     *
      * @var \GuzzleHttp\Client
      */
     protected $client;
 
     /**
-     * Paginator object
+     * Paginator object.
+     *
      * @var Paginator
      */
     protected $paginator;
 
     /**
-     * Twitch token
+     * Twitch token.
+     *
      * @var string
      */
     protected $token = null;
 
     /**
-     * Twitch client id
+     * Twitch client id.
+     *
      * @var string
      */
     protected $clientId = null;
 
     /**
-     * Twitch client secret
+     * Twitch client secret.
+     *
      * @var string
      */
     protected $clientSecret = null;
@@ -87,20 +92,23 @@ class Twitch
     }
 
     /**
-     * Set clientId
-     * @param string $clientId Twitch client id
+     * Set client id.
+     *
+     * @param  string $clientId Twitch client id
+     * @return void
      */
-    public function setClientId($clientId)
+    public function setClientId($clientId): void
     {
         $this->clientId = $clientId;
     }
 
     /**
-     * Get clientId
-     * @param  string $clientId  clientId optional
-     * @return string clientId
+     * Get client id.
+     *
+     * @param  string   $clientId Twitch client id
+     * @return string
      */
-    public function getClientId()
+    public function getClientId(): string
     {
         if ( ! $this->clientId) {
             throw new RequestRequiresClientIdException;
@@ -110,20 +118,23 @@ class Twitch
     }
 
     /**
-     * Set clientSecret
-     * @param string $clientSecret Twitch client id
+     * Set client secret.
+     *
+     * @param  string $clientSecret Twitch client secret
+     * @return void
      */
-    public function setClientSecret($clientSecret)
+    public function setClientSecret($clientSecret): void
     {
         $this->clientSecret = $clientSecret;
     }
 
     /**
-     * Get clientSecret
-     * @param  string $clientSecret  clientSecret optional
-     * @return string clientSecret
+     * Get client secret.
+     *
+     * @param  string   $clientSecret Twitch client secret
+     * @return string
      */
-    public function getClientSecret()
+    public function getClientSecret(): string
     {
         if ( ! $this->clientSecret) {
             throw new RequestRequiresClientIdException;
@@ -133,20 +144,23 @@ class Twitch
     }
 
     /**
-     * Set Twitch OAuth Token
-     * @param string $token OAuth token
+     * Set OAuth token.
+     *
+     * @param  string $token Twitch OAuth token
+     * @return void
      */
-    public function setToken(string $token)
+    public function setToken(string $token): void
     {
         $this->token = $token;
     }
 
     /**
-     * Set Twitch OAuth Token for one request
-     * @param  string $token OAuth token
+     * Fluid OAuth token setter.
+     *
+     * @param  string $token Twitch OAuth token
      * @return self
      */
-    public function withToken(string $token)
+    public function withToken(string $token): self
     {
         $this->setToken($token);
 
@@ -154,8 +168,10 @@ class Twitch
     }
 
     /**
-     * Get Twitch token
-     * @return string Twitch token
+     * Get OAuth token.
+     *
+     * @return string        Twitch token
+     * @return string|null
      */
     public function getToken()
     {
@@ -191,7 +207,8 @@ class Twitch
     }
 
     /**
-     * Execute query
+     * Execute query.
+     *
      * @param  string $method     HTTP method
      * @param  string $path       Query path
      * @param  array  $parameters Query parameters
@@ -214,7 +231,8 @@ class Twitch
     }
 
     /**
-     * Execute query
+     * Execute query.
+     *
      * @param  string   $method   HTTP method
      * @param  string   $uri      Query path
      * @param  array    $headers  Query headers
@@ -242,7 +260,8 @@ class Twitch
     }
 
     /**
-     * Generate URL for API
+     * Generate URL for API.
+     *
      * @param  string      $url        Query uri
      * @param  null|string $token      Auth token, if required
      * @param  array       $parameters Query parameters
@@ -262,7 +281,8 @@ class Twitch
     }
 
     /**
-     * Generate headers
+     * Generate headers.
+     *
      * @param  bool    $json Body is JSON
      * @return array
      */

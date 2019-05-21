@@ -53,7 +53,7 @@ class Twitch
     protected $paginator;
 
     /**
-     * Twitch token.
+     * Twitch OAuth token.
      *
      * @var string
      */
@@ -92,17 +92,6 @@ class Twitch
     }
 
     /**
-     * Set client id.
-     *
-     * @param  string $clientId Twitch client id
-     * @return void
-     */
-    public function setClientId($clientId): void
-    {
-        $this->clientId = $clientId;
-    }
-
-    /**
      * Get client id.
      *
      * @param  string   $clientId Twitch client id
@@ -118,14 +107,27 @@ class Twitch
     }
 
     /**
-     * Set client secret.
+     * Set client id.
      *
-     * @param  string $clientSecret Twitch client secret
+     * @param  string $clientId Twitch client id
      * @return void
      */
-    public function setClientSecret($clientSecret): void
+    public function setClientId(string $clientId): void
     {
-        $this->clientSecret = $clientSecret;
+        $this->clientId = $clientId;
+    }
+
+    /**
+     * Fluid client id setter.
+     *
+     * @param  string $clientId Twitch client id.
+     * @return self
+     */
+    public function withClientId(string $clientId): self
+    {
+        $this->setClientId($clientIdcl);
+
+        return $this;
     }
 
     /**
@@ -141,6 +143,45 @@ class Twitch
         }
 
         return $this->clientSecret;
+    }
+
+    /**
+     * Set client secret.
+     *
+     * @param  string $clientSecret Twitch client secret
+     * @return void
+     */
+    public function setClientSecret(string $clientSecret): void
+    {
+        $this->clientSecret = $clientSecret;
+    }
+
+    /**
+     * Fluid client secret setter.
+     *
+     * @param  string $clientSecret Twitch client secret
+     * @return self
+     */
+    public function withClientSecret(string $clientSecret): self
+    {
+        $this->setClientSecret();
+
+        return $this;
+    }
+
+    /**
+     * Get OAuth token.
+     *
+     * @return string        Twitch token
+     * @return string|null
+     */
+    public function getToken()
+    {
+        if ( ! $this->token) {
+            throw new RequestRequiresAuthenticationException;
+        }
+
+        return $this->token;
     }
 
     /**
@@ -165,21 +206,6 @@ class Twitch
         $this->setToken($token);
 
         return $this;
-    }
-
-    /**
-     * Get OAuth token.
-     *
-     * @return string        Twitch token
-     * @return string|null
-     */
-    public function getToken()
-    {
-        if ( ! $this->token) {
-            throw new RequestRequiresAuthenticationException();
-        }
-
-        return $this->token;
     }
 
     public function get(string $path = '', array $parameters = [], Paginator $paginator = null)
@@ -207,7 +233,7 @@ class Twitch
     }
 
     /**
-     * Execute query.
+     * Build query & execute.
      *
      * @param  string $method     HTTP method
      * @param  string $path       Query path

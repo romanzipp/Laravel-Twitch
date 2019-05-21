@@ -225,6 +225,10 @@ The OAuth Bearer token can now only be set through the instance setters `setToke
 composer test
 ```
 
+```shell
+CLIENT_ID=xxxx composer test
+```
+
 #### Generate Documentation
 
 ```shell

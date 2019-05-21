@@ -13,15 +13,10 @@ trait ExtensionsTrait
      *
      * @see    https://dev.twitch.tv/docs/api/reference#get-user-extensions
      *
-     * @param  string $token Twitch OAuth Token
      * @return Result Result object
      */
-    public function getAuthedUserExtensions(string $token = null): Result
+    public function getAuthedUserExtensions(): Result
     {
-        if ($token !== null) {
-            $this->withToken($token);
-        }
-
         return $this->get('users/extensions/list');
     }
 
@@ -31,15 +26,10 @@ trait ExtensionsTrait
      *
      * @see    https://dev.twitch.tv/docs/api/reference#get-user-active-extensions
      *
-     * @param  string $token Twitch OAuth Token
      * @return Result Result object
      */
-    public function getAuthedUserActiveExtensions(string $token = null): Result
+    public function getAuthedUserActiveExtensions(): Result
     {
-        if ($token !== null) {
-            $this->withToken($token);
-        }
-
         return $this->get('users/extensions');
     }
 
@@ -49,15 +39,10 @@ trait ExtensionsTrait
      *
      * @see    "https://dev.twitch.tv/docs/api/reference/#update-user-extensions"
      *
-     * @param  string $token Twitch OAuth Token
      * @return Result Result object
      */
-    public function disableAllExtensions(string $token = null): Result
+    public function disableAllExtensions(): Result
     {
-        if ($token !== null) {
-            $this->withToken($token);
-        }
-
         return $this->updateUserExtensions(null, null, true);
     }
 
@@ -67,16 +52,11 @@ trait ExtensionsTrait
      *
      * @see    https://dev.twitch.tv/docs/api/reference/#update-user-extensions
      *
-     * @param  string $token     Twitch OAuth Token
      * @param  string $parameter Id of the Extension that should be deactivated
      * @return Result Result object
      */
-    public function disableUserExtensionById(string $token = null, string $parameter = null): Result
+    public function disableUserExtensionById(string $parameter = null): Result
     {
-        if ($token) {
-            $this->withToken($token);
-        }
-
         return $this->updateUserExtensions('id', $parameter, false);
     }
 
@@ -86,16 +66,11 @@ trait ExtensionsTrait
      *
      * @see    https://dev.twitch.tv/docs/api/reference/#update-user-extensions
      *
-     * @param  string $token     Twitch OAuth Token
      * @param  string $parameter Name of the Extension that should be deactivated
      * @return Result Result object
      */
-    public function disableUserExtensionByName(string $token = null, string $parameter = null): Result
+    public function disableUserExtensionByName(string $parameter = null): Result
     {
-        if ($token) {
-            $this->withToken($token);
-        }
-
         return $this->updateUserExtensions('name', $parameter, false);
     }
 
@@ -155,6 +130,4 @@ trait ExtensionsTrait
     abstract public function get(string $path = '', array $parameters = [], Paginator $paginator = null);
 
     abstract public function json(string $method, string $path = '', array $body = null);
-
-    abstract public function withToken(string $token);
 }

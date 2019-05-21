@@ -201,11 +201,11 @@ public function createEntitlementUrl(string $manifest, string $type)
 ### Extensions
 
 ```php
-public function getAuthedUserExtensions(string $token)
-public function getAuthedUserActiveExtensions(string $token)
-public function disableAllExtensions(string $token)
-public function disableUserExtensionById(string $token, string $parameter)
-public function disableUserExtensionByName(string $token, string $parameter)
+public function getAuthedUserExtensions()
+public function getAuthedUserActiveExtensions()
+public function disableAllExtensions()
+public function disableUserExtensionById(string $parameter)
+public function disableUserExtensionByName(string $parameter)
 public function updateUserExtensions(string $method, string $parameter, bool $disabled)
 ```
 
@@ -251,7 +251,7 @@ public function getStreamsMetadata(array $parameters, Paginator $paginator)
 ### Users
 
 ```php
-public function getAuthedUser(string $token)
+public function getAuthedUser()
 public function getUsers(array $parameters)
 public function getUserById(int $id, array $parameters)
 public function getUserByName(string $name, array $parameters)

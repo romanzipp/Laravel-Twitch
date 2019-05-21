@@ -10,17 +10,11 @@ trait UsersTrait
 {
     /**
      * Get currently authed user with Bearer Token
-     * Note: Bearer OAuth Token is required
      *
-     * @param  string $token Twitch OAuth Token
      * @return Result Result object
      */
-    public function getAuthedUser(string $token = null): Result
+    public function getAuthedUser(): Result
     {
-        if ($token !== null) {
-            $this->withToken($token);
-        }
-
         return $this->get('users', [], null);
     }
 
@@ -129,6 +123,4 @@ trait UsersTrait
     abstract public function post(string $path = '', array $parameters = [], Paginator $paginator = null);
 
     abstract public function put(string $path = '', array $parameters = [], Paginator $paginator = null);
-
-    abstract public function withToken(string $token);
 }

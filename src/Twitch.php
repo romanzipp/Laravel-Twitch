@@ -8,12 +8,14 @@ use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Psr7\Request;
 use romanzipp\Twitch\Exceptions\RequestRequiresAuthenticationException;
 use romanzipp\Twitch\Exceptions\RequestRequiresClientIdException;
+use romanzipp\Twitch\Exceptions\RequestRequiresRedirectUriException;
 use romanzipp\Twitch\Helpers\Paginator;
 use romanzipp\Twitch\Traits\BitsTrait;
 use romanzipp\Twitch\Traits\ClipsTrait;
 use romanzipp\Twitch\Traits\ExtensionsTrait;
 use romanzipp\Twitch\Traits\FollowsTrait;
 use romanzipp\Twitch\Traits\GamesTrait;
+use romanzipp\Twitch\Traits\OAuthTrait;
 use romanzipp\Twitch\Traits\StreamsMetadataTrait;
 use romanzipp\Twitch\Traits\StreamsTrait;
 use romanzipp\Twitch\Traits\SubscriptionsTrait;
@@ -23,6 +25,7 @@ use romanzipp\Twitch\Traits\WebhooksTrait;
 
 class Twitch
 {
+    use OAuthTrait;
     use BitsTrait;
     use ClipsTrait;
     use ExtensionsTrait;
@@ -37,6 +40,7 @@ class Twitch
     use WebhooksTrait;
 
     const BASE_URI = 'https://api.twitch.tv/helix/';
+    const OAUTH_BASE_URI = 'https://id.twitch.tv/oauth2/';
 
     /**
      * Guzzle is used to make http requests.
@@ -55,23 +59,30 @@ class Twitch
     /**
      * Twitch OAuth token.
      *
-     * @var string
+     * @var string|null
      */
     protected $token = null;
 
     /**
      * Twitch client id.
      *
-     * @var string
+     * @var string|null
      */
     protected $clientId = null;
 
     /**
      * Twitch client secret.
      *
-     * @var string
+     * @var string|null
      */
     protected $clientSecret = null;
+
+    /**
+     * Twitch OAuth redirect url.
+     *
+     * @var string|null
+     */
+    protected $redirectUri = null;
 
     /**
      * Constructor.
@@ -84,6 +95,10 @@ class Twitch
 
         if ($clientSecret = config('twitch-api.client_secret')) {
             $this->setClientSecret($clientSecret);
+        }
+
+        if ($redirectUri = config('twitch-api.client_secret')) {
+            $this->setredirectUri($redirectUri);
         }
 
         $this->client = new Client([
@@ -165,6 +180,44 @@ class Twitch
     public function withClientSecret(string $clientSecret): self
     {
         $this->setClientSecret($clientSecret);
+
+        return $this;
+    }
+
+    /**
+     * Get redirect url.
+     *
+     * @return string
+     */
+    public function getRedirectUri(): string
+    {
+        if ( ! $this->redirectUri) {
+            throw new RequestRequiresRedirectUriException;
+        }
+
+        return $this->redirectUri;
+    }
+
+    /**
+     * Set redirect url.
+     *
+     * @param  string $redirectUri
+     * @return self
+     */
+    public function setRedirectUri(string $redirectUri): void
+    {
+        $this->redirectUri = $redirectUri;
+    }
+
+    /**
+     * Fluid redirect url setter.
+     *
+     * @param  string $redirectUri
+     * @return self
+     */
+    public function withRedirectUri(string $redirectUri): self
+    {
+        $this->setRedirectUri($redirectUri);
 
         return $this;
     }

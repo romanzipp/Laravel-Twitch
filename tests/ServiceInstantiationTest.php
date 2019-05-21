@@ -3,7 +3,7 @@
 namespace romanzipp\Twitch\Tests;
 
 use romanzipp\Twitch\Facades\Twitch as TwitchFacade;
-use romanzipp\Twitch\Tests\TestCase;
+use romanzipp\Twitch\Tests\TestCases\TestCase;
 use romanzipp\Twitch\Twitch;
 
 class ServiceInstantiationTest extends TestCase

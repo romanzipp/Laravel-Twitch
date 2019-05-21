@@ -33,7 +33,7 @@ composer require romanzipp/laravel-twitch
 Or add `romanzipp/laravel-twitch` to your `composer.json`
 
 ```
-"romanzipp/laravel-twitch": "^1.0"
+"romanzipp/laravel-twitch": "^2.0"
 ```
 
 Run `composer install` to pull the latest version.
@@ -97,7 +97,8 @@ Route::get('/', function (Twitch $twitch) {
 use \romanzipp\Twitch\Twitch;
 
 // Create instance with OAuth Token
-$twitch = new Twitch('843tvnbq35676unzrtvs78');
+$twitch = new Twitch;
+$twitch->setToken('843tvnbq35676unzrtvs78');
 
 $userResult = $twitch->getAuthedUser();
 
@@ -274,20 +275,6 @@ function webhookTopicStreamMonitor(int $user): string {}
 function webhookTopicUserFollows(int $from): string {}
 function webhookTopicUserGainsFollower(int $to): string {}
 function webhookTopicUserFollowsUser(int $from, int $to): string {}
-```
-
-### Legacy
-
-#### Root
-
-```php
-function legacyRoot(): Result {}
-```
-
-#### OAuth
-
-```php
-function legacyRefreshToken(string $refreshToken, string $clientSecret = null, string $scope = null): Result {}
 ```
 
 ## Enums

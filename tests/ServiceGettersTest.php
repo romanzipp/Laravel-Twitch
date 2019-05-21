@@ -4,7 +4,8 @@ namespace romanzipp\Twitch\Tests;
 
 use romanzipp\Twitch\Exceptions\RequestRequiresAuthenticationException;
 use romanzipp\Twitch\Exceptions\RequestRequiresClientIdException;
-use romanzipp\Twitch\Tests\TestCase;
+use romanzipp\Twitch\Exceptions\RequestRequiresRedirectUriException;
+use romanzipp\Twitch\Tests\TestCases\TestCase;
 use romanzipp\Twitch\Twitch;
 
 class ServiceGettersTest extends TestCase
@@ -31,5 +32,13 @@ class ServiceGettersTest extends TestCase
 
         $twitch = new Twitch;
         $twitch->getToken();
+    }
+
+    public function testRedirectUriGetterException()
+    {
+        $this->expectException(RequestRequiresRedirectUriException::class);
+
+        $twitch = new Twitch;
+        $twitch->getRedirectUri();
     }
 }

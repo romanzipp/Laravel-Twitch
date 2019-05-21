@@ -1,6 +1,6 @@
 <?php
 
-namespace romanzipp\Twitch\Tests;
+namespace romanzipp\Twitch\Tests\TestCases;
 
 use Orchestra\Testbench\TestCase as BaseTestCase;
 use romanzipp\Twitch\Facades\Twitch;

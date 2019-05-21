@@ -4,7 +4,7 @@ namespace romanzipp\Twitch\Tests;
 
 use GuzzleHttp\Psr7\Response;
 use romanzipp\Twitch\Result;
-use romanzipp\Twitch\Tests\TestCase;
+use romanzipp\Twitch\Tests\TestCases\TestCase;
 
 class ResultTest extends TestCase
 {

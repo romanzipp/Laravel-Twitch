@@ -4,7 +4,7 @@ namespace romanzipp\Twitch\Tests;
 
 use Illuminate\Support\Str;
 use romanzipp\Twitch\Facades\Twitch as TwitchFacade;
-use romanzipp\Twitch\Tests\TestCase;
+use romanzipp\Twitch\Tests\TestCases\TestCase;
 use romanzipp\Twitch\Twitch;
 
 class ServiceConfigTest extends TestCase

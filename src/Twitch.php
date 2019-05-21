@@ -125,7 +125,7 @@ class Twitch
      */
     public function withClientId(string $clientId): self
     {
-        $this->setClientId($clientIdcl);
+        $this->setClientId($clientId);
 
         return $this;
     }
@@ -164,7 +164,7 @@ class Twitch
      */
     public function withClientSecret(string $clientSecret): self
     {
-        $this->setClientSecret();
+        $this->setClientSecret($clientSecret);
 
         return $this;
     }

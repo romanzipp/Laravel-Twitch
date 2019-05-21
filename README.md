@@ -19,10 +19,11 @@ Join the Twitch Dev Discord!
 
 ## Table of contents
 
-1. [Installation](https://github.com/romanzipp/Laravel-Twitch#installation)
-2. [Configuration](https://github.com/romanzipp/Laravel-Twitch#configuration)
-3. [Examples](https://github.com/romanzipp/Laravel-Twitch#examples)
-4. [Documentation](https://github.com/romanzipp/Laravel-Twitch#documentation)
+1. [Installation](#installation)
+2. [Configuration](#configuration)
+3. [Examples](#examples)
+4. [Documentation](#documentation)
+5. [Development](#Development)
 
 ## Installation
 
@@ -288,9 +289,9 @@ public function webhookTopicUserGainsFollower(int $to)
 public function webhookTopicUserFollowsUser(int $from, int $to)
 ```
 
-## Enums
+### Enums
 
-### [OAuth Scopes](https://github.com/romanzipp/Laravel-Twitch/blob/master/src/Enums/Scope.php)
+#### [OAuth Scopes](https://github.com/romanzipp/Laravel-Twitch/blob/master/src/Enums/Scope.php)
 
 ## Development
 

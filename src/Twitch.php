@@ -312,7 +312,7 @@ class Twitch
      * @param  bool    $json Body is JSON
      * @return array
      */
-    public function generateHeaders(bool $json = false): array
+    private function generateHeaders(bool $json = false): array
     {
         $headers = [
             'Client-ID' => $this->getClientId(),

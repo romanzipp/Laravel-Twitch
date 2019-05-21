@@ -23,4 +23,12 @@ class ApiUsersTest extends ApiTestCase
         $this->assertInstanceOf(Result::class, $result);
         $this->assertEquals('twitch', $result->shift()->login);
     }
+
+    public function testGetUsersByIds()
+    {
+        $this->registerResult($result = Twitch::getUsersByIds([12826, 131784680]));
+
+        $this->assertInstanceOf(Result::class, $result);
+        $this->assertEquals(2, $result->count());
+    }
 }

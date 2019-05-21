@@ -11,19 +11,14 @@ PHP Twitch API Wrapper for Laravel 5+
 
 **NOTICE: This library uses the latest Twitch HELIX API which ist not fully featured yet**
 
-Join the Twitch Dev Discord!
-
-[![Discord](https://discordapp.com/api/guilds/504015559252377601/embed.png?style=banner2)](https://discord.gg/YAMGgZT)
-
-[![Discord](https://discordapp.com/api/guilds/325552783787032576/embed.png?style=banner2)](https://discord.gg/8NXaEyV)
-
 ## Table of contents
 
 1. [Installation](#installation)
 2. [Configuration](#configuration)
 3. [Examples](#examples)
 4. [Documentation](#documentation)
-5. [Development](#Development)
+5. [Upgrading to 2.0](#upgrading)
+6. [Development](#Development)
 
 ## Installation
 
@@ -65,84 +60,91 @@ TWITCH_HELIX_REDIRECT_URI=http://localhost
 
 ## Examples
 
-### With Laravel dependency injection
+#### Basic
 
 ```php
-use \romanzipp\Twitch\Twitch;
+$twitch = new romanzipp\Twitch\Twitch;
 
-Route::get('/', function (Twitch $twitch) {
+// Get User by Username
+$result = $twitch->getUserByName('herrausragend');
 
-    // Get User by Username
-    $userResult = $twitch->getUserByName('herrausragend');
-
-    // Check, if the query was successfull
-    if ($userResult->success()) {
-
-        // Shift result to get single user data
-        $user = $userResult->shift();
-
-        echo $user->id;
-    }
-
-    // Fetch first set of followers
-    $followsResult = $twitch->getFollowsTo(48865821);
-
-    // Fetch next set of followers using the next() Result method
-    $nextFollowsResult = $twitch->getFollowsTo(48865821, $followsResult->next());
-});
-```
-
-### OAuth Tokens
-
-```php
-use \romanzipp\Twitch\Twitch;
-
-// Create instance with OAuth Token
-$twitch = new Twitch;
-$twitch->setToken('843tvnbq35676unzrtvs78');
-
-$userResult = $twitch->getAuthedUser();
-
-if ($userResult->success()) {
-    $user = $userResult->shift();
+// Check, if the query was successfull
+if ( ! $result->success()) {
+    die('Ooops: ' . $result->error());
 }
 
-// Change OAuth Token on the fly
-$twitch->setToken('j8uz457tzv5476v0qp');
+// Shift result to get single user data
+$user = $result->shift();
 
-// Pass Token to methods that accept OAuth Token as parameters
-$userResult = $twitch->getAuthedUser('843tvnbq35676unzrtvs78');
+echo $user->id;
+```
+
+#### Setters
+
+```php
+$twitch = new romanzipp\Twitch\Twitch;
+
+$twitch->setClientId('abc123');
+$twitch->setClientSecret('abc456');
+$twitch->setToken('abcdef123456');
+
+$twitch = $twitch->withClientId('abc123');
+$twitch = $twitch->withClientSecret('abc123');
+$twitch = $twitch->withToken('abcdef123456');
+```
+
+#### OAuth Tokens
+
+```php
+// Create instance with OAuth Token
+$twitch = new romanzipp\Twitch\Twitch;
+$twitch->setToken('abcdef123456');
+
+$result = $twitch->getAuthedUser();
+
+$user = $userResult->shift();
+
+// Change OAuth Token on the fly
+$twitch->setToken('uvwxyz456789');
+$result = $twitch->getAuthedUser();
+
+// Change OAuth Token fluidly
+$result = $twitch->withToken('uvwxyz456789')->getAuthedUser();
 
 ```
 
-### Pagination Loop Example
+#### Facade
+
+```php
+use romanzipp\Twitch\Facades\Twitch;
+
+Twitch::withClientId('abc123')->withToken('abcdef123456')->getAuthedUser();
+```
+
+#### Pagination Loop Example
 
 This example fetches all Twitch Games and stores them into a database.
 
 ```php
-use \romanzipp\Twitch\Twitch;
-
-$twitch = new Twitch;
+$twitch = new romanzipp\Twitch\Twitch;
 
 do {
     $result = $twitch->getTopGames(['first' => 100], isset($result) ? $result->next() : null);
 
     foreach ($result->data as $item) {
 
-        Game::updateOrCreate(
-            [
-                'id' => $item->id,
-            ], [
-                'name' => $item->name,
-                'box_art_url' => $item->box_art_url,
-            ]
-        );
+        Game::updateOrCreate([
+            'id' => $item->id,
+        ], [
+            'name' => $item->name,
+            'box_art_url' => $item->box_art_url,
+        ]);
     }
 
 } while ($result->count() > 0);
 ```
 
-### Insert user objects
+#### Insert user objects
 
 The new API does not include the user objects in endpoints like followers or bits.
 
@@ -156,7 +158,7 @@ The new API does not include the user objects in endpoints like followers or bit
 ]
 ```
 
-You can just call the [insertUsers](https://github.com/romanzipp/Laravel-Twitch/blob/master/src/Result.php#L217) method to insert all users.
+You can just call the [insertUsers](https://github.com/romanzipp/Laravel-Twitch/blob/master/src/Result.php#L233) method to insert all users.
 
 ```php
 $result = $twitch->getFollowsTo($userId);
@@ -186,9 +188,34 @@ $result->insertUsers('from_id', 'from_user'); // Insert users identified by "fro
 
 <!-- GENERATED-DOCS -->
 
-### Enums
+[**OAuth Scopes Enums**](https://github.com/romanzipp/Laravel-Twitch/blob/master/src/Enums/Scope.php)
 
-#### [OAuth Scopes](https://github.com/romanzipp/Laravel-Twitch/blob/master/src/Enums/Scope.php)
+## Upgrading
+
+**Upgrading from 1.0.\* to 2.0.\***
+
+#### Change composer version
+
+```diff
+- "romanzipp/laravel-twitch": "^1.0"
++ "romanzipp/laravel-twitch": "^2.0"
+```
+
+#### Token parameter is removed from all methods
+
+The OAuth Bearer token can now only be set through the instance setters `setToken` or `withToken`.
+
+```diff
+- $twitch->getAuthedUser('abcdef123456');
++ $twitch->withToken('abcdef123456')->getAuthedUser();
+```
+
+#### Legacy Kraken endpoints have been removed
+
+```diff
+- $twitch->legacyRefreshToken();
+- $twitch->legacyRoot();
+```
 
 ## Development
 
@@ -203,3 +230,11 @@ composer test
 ```shell
 composer docs
 ```
+
+---
+
+Join the Twitch Dev Discord!
+
+[![Discord](https://discordapp.com/api/guilds/504015559252377601/embed.png?style=banner2)](https://discord.gg/YAMGgZT)
+
+[![Discord](https://discordapp.com/api/guilds/325552783787032576/embed.png?style=banner2)](https://discord.gg/8NXaEyV)

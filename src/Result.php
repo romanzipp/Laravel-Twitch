@@ -2,6 +2,7 @@
 
 namespace romanzipp\Twitch;
 
+use Exception;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
 use romanzipp\Twitch\Helpers\Paginator;
@@ -73,9 +74,8 @@ class Result
      * @param Response        $response  HTTP response
      * @param Exception|mixed $exception Exception, if present
      * @param null|Paginator  $paginator Paginator, if present
-     * @param bool            $legacy    Is legacy v5 Request
      */
-    public function __construct(Response $response, \Exception $exception = null, Paginator $paginator = null, bool $legacy = false)
+    public function __construct(Response $response, Exception $exception = null, Paginator $paginator = null)
     {
         $this->response = $response;
 
@@ -87,18 +87,12 @@ class Result
 
         $jsonResponse = @json_decode($response->getBody());
 
-        if ( ! $legacy) {
-            if ($jsonResponse !== null) {
-                $this->setProperty($jsonResponse, 'data');
-                $this->setProperty($jsonResponse, 'total');
-                $this->setProperty($jsonResponse, 'pagination');
+        if ($jsonResponse !== null) {
+            $this->setProperty($jsonResponse, 'data');
+            $this->setProperty($jsonResponse, 'total');
+            $this->setProperty($jsonResponse, 'pagination');
 
-                $this->paginator = Paginator::from($this);
-            }
-        } else {
-            $this->data = $jsonResponse;
-
-            $this->setProperty($jsonResponse, '_total', 'total');
+            $this->paginator = Paginator::from($this);
         }
     }
 

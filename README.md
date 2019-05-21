@@ -4,7 +4,8 @@
 [![Total Downloads](https://img.shields.io/packagist/dt/romanzipp/laravel-twitch.svg?style=flat-square)](https://packagist.org/packages/romanzipp/laravel-twitch)
 [![License](https://img.shields.io/packagist/l/romanzipp/laravel-twitch.svg?style=flat-square)](https://packagist.org/packages/romanzipp/laravel-twitch)
 [![Code Quality](https://img.shields.io/scrutinizer/g/romanzipp/laravel-twitch.svg?style=flat-square)](https://scrutinizer-ci.com/g/romanzipp/laravel-twitch/?branch=master)
-[![Build Status](https://img.shields.io/scrutinizer/build/g/romanzipp/laravel-twitch.svg?style=flat-square)](https://scrutinizer-ci.com/g/romanzipp/laravel-twitch/build-status/master)
+[![Scrutinizer Build Status](https://img.shields.io/scrutinizer/build/g/romanzipp/laravel-twitch.svg?style=flat-square)](https://scrutinizer-ci.com/g/romanzipp/laravel-twitch/build-status/master)
+[![Travis Build Status](https://img.shields.io/travis/romanzipp/Laravel-Twitch/master.svg?style=flat-square)](https://travis-ci.org/romanzipp/Laravel-Twitch)
 
 PHP Twitch API Wrapper for Laravel 5+
 

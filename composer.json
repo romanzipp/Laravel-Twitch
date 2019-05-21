@@ -32,7 +32,8 @@
         }
     },
     "scripts": {
-        "test": "vendor/bin/phpunit"
+        "test": "vendor/bin/phpunit",
+        "docs": "php generator/generate-docs.php"
     },
     "extra": {
         "laravel": {

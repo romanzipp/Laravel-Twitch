@@ -224,6 +224,31 @@ class Result
     }
 
     /**
+     * Get rate limit information.
+     *
+     * @param  string|null         $key Get defined index
+     * @return string|array|null
+     */
+    public function rateLimit(string $key = null)
+    {
+        if ( ! $this->response) {
+            return null;
+        }
+
+        $rateLimit = [
+            'limit'     => (int) $this->response->getHeaderLine('Ratelimit-Limit'),
+            'remaining' => (int) $this->response->getHeaderLine('Ratelimit-Remaining'),
+            'reset'     => (int) $this->response->getHeaderLine('Ratelimit-Reset'),
+        ];
+
+        if ($key === null) {
+            return $rateLimit;
+        }
+
+        return $rateLimit[$key];
+    }
+
+    /**
      * Insert users in data response.
      *
      * @param  string $identifierAttribute Attribute to identify the users

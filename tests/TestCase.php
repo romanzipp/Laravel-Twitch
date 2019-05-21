@@ -3,8 +3,8 @@
 namespace romanzipp\Twitch\Tests;
 
 use Orchestra\Testbench\TestCase as BaseTestCase;
+use romanzipp\Twitch\Facades\Twitch;
 use romanzipp\Twitch\Providers\TwitchServiceProvider;
-use romanzipp\Twitch\Twitch;
 
 abstract class TestCase extends BaseTestCase
 {

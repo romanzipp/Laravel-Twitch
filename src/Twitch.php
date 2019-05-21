@@ -74,12 +74,6 @@ class Twitch
     protected $clientSecret = null;
 
     /**
-     * Is legacy Request
-     * @var null|bool
-     */
-    protected $legacy = null;
-
-    /**
      * Construction
      * @param string $token    Twitch OAuth Token
      * @param string $clientId Twitch client id
@@ -182,17 +176,6 @@ class Twitch
         return $this->token;
     }
 
-    /**
-     * Set legacy mode for one Request
-     * @return self
-     */
-    public function withLegacy()
-    {
-        $this->legacy = true;
-
-        return $this;
-    }
-
     public function get(string $path = '', array $parameters = [], Paginator $paginator = null)
     {
         return $this->query('GET', $path, $parameters, $paginator);
@@ -255,7 +238,7 @@ class Twitch
 
             $response = $this->client->send($request);
 
-            $result = new Result($response, null, $paginator, $this->legacy ? true : false);
+            $result = new Result($response, null, $paginator);
         } catch (RequestException $exception) {
             $result = new Result($exception->getResponse(), $exception, $paginator);
         } catch (ClientException $exception) {
@@ -300,7 +283,7 @@ class Twitch
         ];
 
         if ($this->token) {
-            $headers['Authorization'] = ($this->legacy ? 'OAuth ' : 'Bearer ') . $this->token;
+            $headers['Authorization'] = 'Bearer ' . $this->token;
         }
 
         if ($json) {

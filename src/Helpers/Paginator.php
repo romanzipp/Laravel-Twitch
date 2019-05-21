@@ -8,19 +8,22 @@ use stdClass;
 class Paginator
 {
     /**
-     * Twitch response pagination cursor
+     * Twitch response pagination cursor.
+     *
      * @var null|stdClass
      */
     private $pagination;
 
     /**
-     * Next desired action (first, after, before)
+     * Next desired action (first, after, before).
+     *
      * @var null|string
      */
     public $action = null;
 
     /**
-     * Constructor
+     * Constructor.
+     *
      * @param null|stdClass $pagination Twitch response pagination cursor
      */
     public function __construct(stdClass $pagination = null)
@@ -29,7 +32,8 @@ class Paginator
     }
 
     /**
-     * Create Paginator from Result object
+     * Create Paginator from Result object.
+     *
      * @param  Result $result   Result object
      * @return self   Paginator object
      */
@@ -39,7 +43,8 @@ class Paginator
     }
 
     /**
-     * Return the current active cursor
+     * Return the current active cursor.
+     *
      * @return string Twitch cursor
      */
     public function cursor(): string
@@ -48,7 +53,8 @@ class Paginator
     }
 
     /**
-     * Set the Paginator to fetch the next set of results
+     * Set the Paginator to fetch the next set of results.
+     *
      * @return self
      */
     public function first(): self
@@ -59,7 +65,8 @@ class Paginator
     }
 
     /**
-     * Set the Paginator to fetch the first set of results
+     * Set the Paginator to fetch the first set of results.
+     *
      * @return self
      */
     public function next(): self
@@ -70,7 +77,8 @@ class Paginator
     }
 
     /**
-     * Set the Paginator to fetch the last set of results
+     * Set the Paginator to fetch the last set of results.
+     *
      * @return self
      */
     public function back(): self

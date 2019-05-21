@@ -3,7 +3,6 @@
 namespace romanzipp\Twitch;
 
 use Exception;
-use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
 use romanzipp\Twitch\Helpers\Paginator;
 use stdClass;
@@ -65,13 +64,6 @@ class Result
      * @var Response
      */
     public $response;
-
-    /**
-     * Original Guzzle HTTP Request.
-     *
-     * @var Request
-     */
-    public $request;
 
     /**
      * Original Twitch instance.

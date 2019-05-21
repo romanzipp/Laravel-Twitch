@@ -3,7 +3,6 @@
 namespace romanzipp\Twitch;
 
 use GuzzleHttp\Client;
-use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Psr7\Request;
 use romanzipp\Twitch\Exceptions\RequestRequiresAuthenticationException;
@@ -288,11 +287,12 @@ class Twitch
     /**
      * Build query & execute.
      *
-     * @param  string $method     HTTP method
-     * @param  string $path       Query path
-     * @param  array  $parameters Query parameters
-     * @param  mixed  $token      Token String or true/false to obtain by setToken method
-     * @return Result Result object
+     * @param  string     $method     HTTP method
+     * @param  string     $path       Query path
+     * @param  array      $parameters Query parameters
+     * @param  Paginator  $paginator  Paginator object
+     * @param  mixed|null $jsonBody   JSON data
+     * @return Result     Result object
      */
     public function query(string $method = 'GET', string $path = '', array $parameters = [], Paginator $paginator = null, $jsonBody = null): Result
     {
@@ -300,72 +300,54 @@ class Twitch
             $parameters[$paginator->action] = $paginator->cursor();
         }
 
-        $uri = $this->generateUrl($path, $parameters);
-
-        $headers = $this->generateHeaders($jsonBody ? true : false);
-
-        $result = $this->executeQuery($method, $uri, $headers, $paginator, $jsonBody);
-
-        return $result;
-    }
-
-    /**
-     * Execute query.
-     *
-     * @param  string   $method   HTTP method
-     * @param  string   $uri      Query path
-     * @param  array    $headers  Query headers
-     * @param  mixed    $jsonBody JSON Body
-     * @return Result
-     */
-    private function executeQuery(string $method, string $uri, array $headers, Paginator $paginator = null, $jsonBody = null): Result
-    {
         try {
-            $request = new Request($method, $uri, $headers, $jsonBody);
-
-            $response = $this->client->send($request);
+            $response = $this->client->request($method, $path, [
+                'headers' => $this->buildHeaders($jsonBody ? true : false),
+                'query'   => $this->buildQuery($parameters),
+                'json'    => $jsonBody ? $jsonBody : null,
+            ]);
 
             $result = new Result($response, null, $paginator);
+
         } catch (RequestException $exception) {
-            $result = new Result($exception->getResponse(), $exception, $paginator);
-        } catch (ClientException $exception) {
+
             $result = new Result($exception->getResponse(), $exception, $paginator);
         }
 
-        $result->request = $request;
         $result->twitch = $this;
 
         return $result;
     }
 
     /**
-     * Generate URL for API.
+     * Build query with support for multiple smae first-dimension keys.
      *
-     * @param  string      $url        Query uri
-     * @param  null|string $token      Auth token, if required
-     * @param  array       $parameters Query parameters
-     * @return string      Full query url
+     * @param  array    $query
+     * @return string
      */
-    private function generateUrl(string $url, array $parameters): string
+    public function buildQuery(array $query): string
     {
-        foreach ($parameters as $optionKey => $option) {
-            $data =  ! is_array($option) ? [$option] : $option;
+        $parts = [];
 
-            foreach ($data as $key => $value) {
-                $url .= (parse_url($url, PHP_URL_QUERY) ? '&' : '?') . $optionKey . '=' . $value;
-            }
+        foreach ($query as $name => $value) {
+
+            $value = (array) $value;
+
+            array_walk_recursive($value, function ($value) use (&$parts, $name) {
+                $parts[] = urlencode($name) . '=' . urlencode($value);
+            });
         }
 
-        return $url;
+        return implode('&', $parts);
     }
 
     /**
-     * Generate headers.
+     * Build headers for request.
      *
      * @param  bool    $json Body is JSON
      * @return array
      */
-    private function generateHeaders(bool $json = false): array
+    private function buildHeaders(bool $json = false): array
     {
         $headers = [
             'Client-ID' => $this->getClientId(),

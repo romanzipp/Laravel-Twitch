@@ -69,21 +69,16 @@ class Twitch
     protected $clientSecret = null;
 
     /**
-     * Construction
-     * @param string $token    Twitch OAuth Token
-     * @param string $clientId Twitch client id
+     * Constructor.
      */
-    public function __construct(string $token = null, string $clientId = null)
+    public function __construct()
     {
-        if ($token !== null) {
-            $this->setToken($token);
+        if ($clientId = config('twitch-api.client_id')) {
+            $this->setClientId($clientId);
         }
 
-        if ($clientId !== null) {
-            $this->setClientId($clientId);
-        } elseif (config('twitch-api.client_id')) {
-            $this->setClientId(config('twitch-api.client_id'));
-            $this->setClientSecret(config('twitch-api.client_secret'));
+        if ($clientSecret = config('twitch-api.client_secret')) {
+            $this->setClientSecret($clientSecret);
         }
 
         $this->client = new Client([
@@ -108,7 +103,7 @@ class Twitch
     public function getClientId()
     {
         if ( ! $this->clientId) {
-            throw new RequestRequiresClientIdException();
+            throw new RequestRequiresClientIdException;
         }
 
         return $this->clientId;
@@ -131,7 +126,7 @@ class Twitch
     public function getClientSecret()
     {
         if ( ! $this->clientSecret) {
-            throw new RequestRequiresClientIdException();
+            throw new RequestRequiresClientIdException;
         }
 
         return $this->clientSecret;

@@ -42,11 +42,23 @@ class ResultTest extends TestCase
         $this->assertEquals(0, $result->count());
     }
 
-    public function testInvalidResponseResult()
+    public function testUnexpectedResponseResult()
     {
         $response = new Response(200, [], json_encode([
             'foo' => 'bar',
         ]));
+
+        $result = new Result($response);
+
+        $this->assertTrue($result->success());
+        $this->assertEquals([], $result->data());
+        $this->assertEquals(null, $result->shift());
+        $this->assertEquals(0, $result->count());
+    }
+
+    public function testNonJsonResponseResult()
+    {
+        $response = new Response(200, [], '<title>foo</title>');
 
         $result = new Result($response);
 

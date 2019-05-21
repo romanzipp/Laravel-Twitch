@@ -10,7 +10,6 @@
             "homepage": "https://ich.wtf"
         }
     ],
-    "minimum-stability": "dev",
     "require": {
         "php": ">=7.0",
         "laravel/framework": "^5.3",

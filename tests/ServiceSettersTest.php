@@ -4,7 +4,7 @@ namespace romanzipp\Twitch\Tests;
 
 use Illuminate\Support\Str;
 use romanzipp\Twitch\Facades\Twitch as TwitchFacade;
-use romanzipp\Twitch\Tests\TestCase;
+use romanzipp\Twitch\Tests\TestCases\TestCase;
 use romanzipp\Twitch\Twitch;
 
 class ServiceSettersTest extends TestCase
@@ -94,5 +94,34 @@ class ServiceSettersTest extends TestCase
         $twitch = TwitchFacade::withToken($token);
 
         $this->assertEquals($token, $twitch->getToken());
+    }
+
+    public function testRedirectUriSetter()
+    {
+        $uri = Str::random();
+
+        $twitch = new Twitch;
+        $twitch->setRedirectUri($uri);
+
+        $this->assertEquals($uri, $twitch->getRedirectUri());
+    }
+
+    public function testFluidRedirectUriSetter()
+    {
+        $uri = Str::random();
+
+        $twitch = new Twitch;
+        $twitch->withRedirectUri($uri);
+
+        $this->assertEquals($uri, $twitch->getRedirectUri());
+    }
+
+    public function testFluidRedirectUriSetterFacade()
+    {
+        $uri = Str::random();
+
+        $twitch = TwitchFacade::withRedirectUri($uri);
+
+        $this->assertEquals($uri, $twitch->getRedirectUri());
     }
 }

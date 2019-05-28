@@ -65,6 +65,8 @@ TWITCH_HELIX_REDIRECT_URI=http://localhost
 ```php
 $twitch = new romanzipp\Twitch\Twitch;
 
+$twitch->setClientId('abc123');
+
 // Get User by Username
 $result = $twitch->getUserByName('herrausragend');
 
@@ -96,21 +98,24 @@ $twitch = $twitch->withToken('abcdef123456');
 #### OAuth Tokens
 
 ```php
-// Create instance with OAuth Token
 $twitch = new romanzipp\Twitch\Twitch;
+
+$twitch->setClientId('abc123');
 $twitch->setToken('abcdef123456');
 
 $result = $twitch->getAuthedUser();
 
 $user = $userResult->shift();
+```
 
-// Change OAuth Token on the fly
+```php
 $twitch->setToken('uvwxyz456789');
+
 $result = $twitch->getAuthedUser();
+```
 
-// Change OAuth Token fluidly
+```php
 $result = $twitch->withToken('uvwxyz456789')->getAuthedUser();
-
 ```
 
 #### Facade
@@ -185,6 +190,13 @@ $result->insertUsers('from_id', 'from_user'); // Insert users identified by "fro
 ## Documentation
 
 **Twitch Helix API Documentation: https://dev.twitch.tv/docs/api/reference**
+
+### OAuth
+
+```php
+public function getOAuthAuthorizeUrl(string $responseType, array $scopes, string $state, bool $forceVerify)
+public function getOAuthToken()
+```
 
 ### Bits
 
@@ -326,6 +338,10 @@ The OAuth Bearer token can now only be set through the instance setters `setToke
 
 ```shell
 composer test
+```
+
+```shell
+CLIENT_ID=xxxx composer test
 ```
 
 #### Generate Documentation

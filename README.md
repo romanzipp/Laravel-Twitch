@@ -194,14 +194,14 @@ $result->insertUsers('from_id', 'from_user'); // Insert users identified by "fro
 ### OAuth
 
 ```php
-public function getOAuthAuthorizeUrl(string $responseType, array $scopes, string $state, bool $forceVerify)
-public function getOAuthToken()
+public function getOAuthAuthorizeUrl(string $responseType = 'code', array $scopes = array (), string $state = NULL, bool $forceVerify = false)
+public function getOAuthToken(string $code)
 ```
 
 ### Bits
 
 ```php
-public function getBitsLeaderboard(array $parameters)
+public function getBitsLeaderboard(array $parameters = array ())
 ```
 
 ### Clips
@@ -209,7 +209,7 @@ public function getBitsLeaderboard(array $parameters)
 ```php
 public function createClip(int $broadcaster)
 public function getClip(string $id)
-public function createEntitlementUrl(string $manifest, string $type)
+public function createEntitlementUrl(string $manifest, string $type = 'bulk_drops_grant')
 ```
 
 ### Extensions
@@ -218,17 +218,17 @@ public function createEntitlementUrl(string $manifest, string $type)
 public function getAuthedUserExtensions()
 public function getAuthedUserActiveExtensions()
 public function disableAllExtensions()
-public function disableUserExtensionById(string $parameter)
-public function disableUserExtensionByName(string $parameter)
-public function updateUserExtensions(string $method, string $parameter, bool $disabled)
+public function disableUserExtensionById(string $parameter = NULL)
+public function disableUserExtensionByName(string $parameter = NULL)
+public function updateUserExtensions(string $method = NULL, string $parameter = NULL, bool $disabled = false)
 ```
 
 ### Follows
 
 ```php
-public function getFollows(int $from, int $to, Paginator $paginator)
-public function getFollowsFrom(int $from, Paginator $paginator)
-public function getFollowsTo(int $to, Paginator $paginator)
+public function getFollows(int $from = NULL, int $to = NULL, Paginator $paginator = NULL)
+public function getFollowsFrom(int $from, Paginator $paginator = NULL)
+public function getFollowsTo(int $to, Paginator $paginator = NULL)
 ```
 
 ### Games
@@ -239,27 +239,27 @@ public function getGameById(int $id)
 public function getGameByName(string $name)
 public function getGamesByIds(array $ids)
 public function getGamesByNames(array $names)
-public function getTopGames(array $parameters, Paginator $paginator)
+public function getTopGames(array $parameters = array (), Paginator $paginator = NULL)
 ```
 
 ### Streams
 
 ```php
-public function getStreams(array $parameters, Paginator $paginator)
-public function getStreamsByUserId(int $id, array $parameters, Paginator $paginator)
-public function getStreamsByUserName(string $name, array $parameters, Paginator $paginator)
-public function getStreamsByUserIds(array $ids, array $parameters, Paginator $paginator)
-public function getStreamsByUserNames(array $names, array $parameters, Paginator $paginator)
-public function getStreamsByCommunity(int $id, array $parameters, Paginator $paginator)
-public function getStreamsByCommunities(int $ids, array $parameters, Paginator $paginator)
-public function getStreamsByGame(int $id, array $parameters, Paginator $paginator)
-public function getStreamsByGames(int $ids, array $parameters, Paginator $paginator)
+public function getStreams(array $parameters = array (), Paginator $paginator = NULL)
+public function getStreamsByUserId(int $id, array $parameters = array (), Paginator $paginator = NULL)
+public function getStreamsByUserName(string $name, array $parameters = array (), Paginator $paginator = NULL)
+public function getStreamsByUserIds(array $ids, array $parameters = array (), Paginator $paginator = NULL)
+public function getStreamsByUserNames(array $names, array $parameters = array (), Paginator $paginator = NULL)
+public function getStreamsByCommunity(int $id, array $parameters = array (), Paginator $paginator = NULL)
+public function getStreamsByCommunities(int $ids, array $parameters = array (), Paginator $paginator = NULL)
+public function getStreamsByGame(int $id, array $parameters = array (), Paginator $paginator = NULL)
+public function getStreamsByGames(int $ids, array $parameters = array (), Paginator $paginator = NULL)
 ```
 
 ### StreamsMetadata
 
 ```php
-public function getStreamsMetadata(array $parameters, Paginator $paginator)
+public function getStreamsMetadata(array $parameters = array (), Paginator $paginator = NULL)
 ```
 
 ### Users
@@ -267,36 +267,36 @@ public function getStreamsMetadata(array $parameters, Paginator $paginator)
 ```php
 public function getAuthedUser()
 public function getUsers(array $parameters)
-public function getUserById(int $id, array $parameters)
-public function getUserByName(string $name, array $parameters)
-public function getUsersByIds(array $ids, array $parameters)
-public function getUsersByNames(array $names, array $parameters)
+public function getUserById(int $id, array $parameters = array ())
+public function getUserByName(string $name, array $parameters = array ())
+public function getUsersByIds(array $ids, array $parameters = array ())
+public function getUsersByNames(array $names, array $parameters = array ())
 public function updateUser(string $description)
 ```
 
 ### Videos
 
 ```php
-public function getVideos(array $parameters, Paginator $paginator)
-public function getVideosById(int $id, array $parameters, Paginator $paginator)
-public function getVideosByUser(int $user, array $parameters, Paginator $paginator)
-public function getVideosByGame(int $game, array $parameters, Paginator $paginator)
+public function getVideos(array $parameters, Paginator $paginator = NULL)
+public function getVideosById(int $id, array $parameters = array (), Paginator $paginator = NULL)
+public function getVideosByUser(int $user, array $parameters = array (), Paginator $paginator = NULL)
+public function getVideosByGame(int $game, array $parameters = array (), Paginator $paginator = NULL)
 ```
 
 ### Subscriptions
 
 ```php
-public function getSubscriptions(array $parameters, Paginator $paginator)
-public function getUserSubscriptions(int $user, Paginator $paginator)
-public function getBroadcasterSubscriptions(int $user, Paginator $paginator)
+public function getSubscriptions(array $parameters = array (), Paginator $paginator = NULL)
+public function getUserSubscriptions(int $user, Paginator $paginator = NULL)
+public function getBroadcasterSubscriptions(int $user, Paginator $paginator = NULL)
 ```
 
 ### Webhooks
 
 ```php
-public function subscribeWebhook(string $callback, string $topic, int $lease, string $secret)
+public function subscribeWebhook(string $callback, string $topic, int $lease = NULL, string $secret = NULL)
 public function unsubscribeWebhook(string $callback, string $topic)
-public function getWebhookSubscriptions(array $parameters)
+public function getWebhookSubscriptions(array $parameters = array ())
 public function webhookTopicStreamMonitor(int $user)
 public function webhookTopicUserFollows(int $from)
 public function webhookTopicUserGainsFollower(int $to)

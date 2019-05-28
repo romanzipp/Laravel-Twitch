@@ -35,7 +35,19 @@ $markdown = collect(class_uses(Twitch::class))
                 $declaration .= '(';
 
                 $declaration .= collect($method->getParameters())->map(function (ReflectionParameter $parameter) {
-                    return (Arr::last(explode('\\', $parameter->getType()->getName())) . ' ') . '$' . $parameter->getName();
+
+                    $parameterString = Arr::last(explode('\\', $parameter->getType()->getName()));
+                    $parameterString .= ' ';
+                    $parameterString .= '$';
+                    $parameterString .= $parameter->getName();
+
+                    if ($parameter->isDefaultValueAvailable()) {
+                        $parameterString .= ' = ';
+                        $parameterString .= str_replace(PHP_EOL, '', var_export($parameter->getDefaultValue(), true));
+                    }
+
+                    return $parameterString;
+
                 })->join(', ');
 
                 $declaration .= ')';

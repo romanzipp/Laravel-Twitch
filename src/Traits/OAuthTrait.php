@@ -20,11 +20,11 @@ trait OAuthTrait
     public function getOAuthAuthorizeUrl(string $responseType = 'code', array $scopes = [], string $state = null, bool $forceVerify = false): string
     {
         $query = [
-            'client_id'     => $this->getClientId(),
             'response_type' => $responseType,
+            'state'         => $state,
+            'client_id'     => $this->getClientId(),
             'scope'         => $this->buildScopes($scopes),
             'redirect_uri'  => $this->getRedirectUri(),
-            'state'         => $state,
         ];
 
         if ($state !== null) {
@@ -38,9 +38,25 @@ trait OAuthTrait
         return self::OAUTH_BASE_URI . 'authorize?' . http_build_query($query);
     }
 
-    public function getOAuthToken(): Result
+    /**
+     * Get an access token based on the OAuth code flow.
+     *
+     * @see  https://dev.twitch.tv/docs/authentication/getting-tokens-oauth/#oauth-authorization-code-flow
+     *
+     * @param  string   $code
+     * @return Result
+     */
+    public function getOAuthToken(string $code): Result
     {
-        return $this->post(self::OAUTH_BASE_URI . 'token');
+        $parameters = [
+            'code'          => $code,
+            'grant_type'    => 'authorization_code',
+            'client_id'     => $this->getClientId(),
+            'client_secret' => $this->getClientSecret(),
+            'redirect_uri'  => $this->getRedirectUri(),
+        ];
+
+        return $this->post(self::OAUTH_BASE_URI . 'token', $parameters);
     }
 
     /**

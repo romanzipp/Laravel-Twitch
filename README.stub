@@ -26,15 +26,7 @@ PHP Twitch API Wrapper for Laravel 5+
 composer require romanzipp/laravel-twitch
 ```
 
-Or add `romanzipp/laravel-twitch` to your `composer.json`
-
-```
-"romanzipp/laravel-twitch": "^2.0"
-```
-
-Run `composer install` to pull the latest version.
-
-**If you use Laravel 5.5+ you are already done, otherwise continue:**
+**If you use Laravel 5.5+ you are already done, otherwise continue.**
 
 Add Service Provider to your `app.php` configuration file:
 

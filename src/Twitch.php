@@ -96,7 +96,7 @@ class Twitch
             $this->setClientSecret($clientSecret);
         }
 
-        if ($redirectUri = config('twitch-api.client_secret')) {
+        if ($redirectUri = config('twitch-api.redirect_url')) {
             $this->setredirectUri($redirectUri);
         }
 

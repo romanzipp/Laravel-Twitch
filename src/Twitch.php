@@ -97,7 +97,7 @@ class Twitch
         }
 
         if ($redirectUri = config('twitch-api.redirect_url')) {
-            $this->setredirectUri($redirectUri);
+            $this->setRedirectUri($redirectUri);
         }
 
         $this->client = new Client([

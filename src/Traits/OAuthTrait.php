@@ -67,6 +67,6 @@ trait OAuthTrait
      */
     protected function buildScopes(array $scopes): string
     {
-        return implode('+', $scopes);
+        return implode(' ', $scopes);
     }
 }

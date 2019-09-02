@@ -85,13 +85,7 @@ class Result
         $this->success = $exception === null;
         $this->exception = $exception;
 
-        $payload = @json_decode($response->getBody());
-
-        if ($payload !== null) {
-            $this->data = $payload->data ?? [];
-            $this->total = $payload->total ?? 0;
-            $this->pagination = $payload->pagination ?? null;
-        }
+        $this->processPayload($response);
 
         $this->paginator = Paginator::from($this);
     }
@@ -250,5 +244,23 @@ class Result
         $this->data = $dataWithUsers->toArray();
 
         return $this;
+    }
+
+    /**
+     * Map response payload to instance attributes.
+     *
+     * @param \GuzzleHttp\Psr7\Response $response
+     */
+    protected function processPayload(Response $response): void
+    {
+        $payload = @json_decode($response->getBody());
+
+        if ($payload === null) {
+            return;
+        }
+
+        $this->data = $payload->data ?? [];
+        $this->total = $payload->total ?? 0;
+        $this->pagination = $payload->pagination ?? null;
     }
 }

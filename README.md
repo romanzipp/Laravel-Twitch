@@ -283,6 +283,16 @@ public function getUserSubscriptions(int $user, Paginator $paginator = NULL)
 public function getBroadcasterSubscriptions(int $user, Paginator $paginator = NULL)
 ```
 
+### Moderation
+
+```php
+public function checkAutoModStatus(array $parameters = array ())
+public function getBannedEvents(array $parameters = array (), Paginator $paginator = NULL)
+public function getBannedUsers(array $parameters = array (), Paginator $paginator = NULL)
+public function getModerators(array $parameters = array (), Paginator $paginator = NULL)
+public function getModeratorEvents(array $parameters = array (), Paginator $paginator = NULL)
+```
+
 ### Webhooks
 
 ```php

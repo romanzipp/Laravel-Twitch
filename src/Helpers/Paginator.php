@@ -34,7 +34,7 @@ class Paginator
     /**
      * Create Paginator from Result object.
      *
-     * @param  Result $result   Result object
+     * @param Result $result Result object
      * @return self   Paginator object
      */
     public static function from(Result $result): self
@@ -56,6 +56,7 @@ class Paginator
      * Set the Paginator to fetch the next set of results.
      *
      * @return self
+     * @deprecated
      */
     public function first(): self
     {

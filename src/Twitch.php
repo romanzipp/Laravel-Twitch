@@ -342,11 +342,11 @@ class Twitch
                 'json'    => $jsonBody ? $jsonBody : null,
             ]);
 
-            $result = new Result($response, null, $paginator);
+            $result = new Result($response, null);
 
         } catch (RequestException $exception) {
 
-            $result = new Result($exception->getResponse(), $exception, $paginator);
+            $result = new Result($exception->getResponse(), $exception);
         }
 
         $result->twitch = $this;

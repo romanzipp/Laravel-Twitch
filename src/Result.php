@@ -5,7 +5,6 @@ namespace romanzipp\Twitch;
 use Exception;
 use GuzzleHttp\Psr7\Response;
 use romanzipp\Twitch\Helpers\Paginator;
-use stdClass;
 
 class Result
 {
@@ -77,47 +76,28 @@ class Result
      *
      * @param Response        $response  HTTP response
      * @param Exception|mixed $exception Exception, if present
-     * @param null|Paginator  $paginator Paginator, if present
      */
-    public function __construct(Response $response, Exception $exception = null, Paginator $paginator = null)
+    public function __construct(Response $response, Exception $exception = null)
     {
         $this->response = $response;
-
-        $this->success = $exception === null;
-
-        $this->exception = $exception;
-
         $this->status = $response->getStatusCode();
 
-        $jsonResponse = @json_decode($response->getBody());
+        $this->success = $exception === null;
+        $this->exception = $exception;
 
-        if ($jsonResponse !== null) {
-            $this->setProperty($jsonResponse, 'data');
-            $this->setProperty($jsonResponse, 'total');
-            $this->setProperty($jsonResponse, 'pagination');
+        $payload = @json_decode($response->getBody());
 
-            $this->paginator = Paginator::from($this);
+        if ($payload !== null) {
+            $this->data = $payload->data ?? [];
+            $this->total = $payload->total ?? 0;
+            $this->pagination = $payload->pagination ?? null;
         }
+
+        $this->paginator = Paginator::from($this);
     }
 
     /**
-     * Sets a class attribute by given JSON Response Body.
-     *
-     * @param stdClass    $jsonResponse     Response Body
-     * @param string      $responseProperty Response property name
-     * @param string|null $attribute        Class property name
-     */
-    private function setProperty(stdClass $jsonResponse, string $responseProperty, string $attribute = null)
-    {
-        $classAttribute = $attribute ?? $responseProperty;
-
-        if ( ! empty($jsonResponse) && property_exists($jsonResponse, $responseProperty)) {
-            $this->{$classAttribute} = $jsonResponse->{$responseProperty};
-        }
-    }
-
-    /**
-     * Returns wether the query was successfull.
+     * Returns whether the query was successful.
      *
      * @return bool Success state
      */
@@ -218,7 +198,7 @@ class Result
     /**
      * Get rate limit information.
      *
-     * @param  string|null         $key Get defined index
+     * @param string|null $key Get defined index
      * @return string|array|null
      */
     public function rateLimit(string $key = null)
@@ -243,8 +223,8 @@ class Result
     /**
      * Insert users in data response.
      *
-     * @param  string $identifierAttribute Attribute to identify the users
-     * @param  string $insertTo            Data index to insert user data
+     * @param string $identifierAttribute Attribute to identify the users
+     * @param string $insertTo            Data index to insert user data
      * @return self
      */
     public function insertUsers(string $identifierAttribute = 'user_id', string $insertTo = 'user'): self

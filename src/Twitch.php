@@ -201,7 +201,7 @@ class Twitch
      * Set redirect url.
      *
      * @param string $redirectUri
-     * @return self
+     * @return void
      */
     public function setRedirectUri(string $redirectUri): void
     {
@@ -261,21 +261,53 @@ class Twitch
         return $this;
     }
 
+    /**
+     * @param string                                   $path
+     * @param array                                    $parameters
+     * @param \romanzipp\Twitch\Helpers\Paginator|null $paginator
+     * @return \romanzipp\Twitch\Result
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws \romanzipp\Twitch\Exceptions\RequestRequiresClientIdException
+     */
     public function get(string $path = '', array $parameters = [], Paginator $paginator = null)
     {
         return $this->query('GET', $path, $parameters, $paginator);
     }
 
+    /**
+     * @param string                                   $path
+     * @param array                                    $parameters
+     * @param \romanzipp\Twitch\Helpers\Paginator|null $paginator
+     * @return \romanzipp\Twitch\Result
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws \romanzipp\Twitch\Exceptions\RequestRequiresClientIdException
+     */
     public function post(string $path = '', array $parameters = [], Paginator $paginator = null)
     {
         return $this->query('POST', $path, $parameters, $paginator);
     }
 
+    /**
+     * @param string                                   $path
+     * @param array                                    $parameters
+     * @param \romanzipp\Twitch\Helpers\Paginator|null $paginator
+     * @return \romanzipp\Twitch\Result
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws \romanzipp\Twitch\Exceptions\RequestRequiresClientIdException
+     */
     public function put(string $path = '', array $parameters = [], Paginator $paginator = null)
     {
         return $this->query('PUT', $path, $parameters, $paginator);
     }
 
+    /**
+     * @param string     $method
+     * @param string     $path
+     * @param array|null $body
+     * @return \romanzipp\Twitch\Result
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws \romanzipp\Twitch\Exceptions\RequestRequiresClientIdException
+     */
     public function json(string $method, string $path = '', array $body = null)
     {
         if ($body) {

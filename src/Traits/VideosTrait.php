@@ -22,7 +22,7 @@ trait VideosTrait
      *
      * @see    https://dev.twitch.tv/docs/api/reference#get-videos
      *
-     * @param  array  $parameters Array of parameters
+     * @param array $parameters Array of parameters
      * @return Result Result object
      */
     public function getVideos(array $parameters, Paginator $paginator = null): Result
@@ -39,9 +39,9 @@ trait VideosTrait
      *
      * @see    https://dev.twitch.tv/docs/api/reference#get-videos
      *
-     * @param  int            $id         ID of the video being queried
-     * @param  array          $parameters Additional parameters
-     * @param  Paginator|null $paginator  Paginator object
+     * @param int            $id         ID of the video being queried
+     * @param array          $parameters Additional parameters
+     * @param Paginator|null $paginator  Paginator object
      * @return Result         Result object
      */
     public function getVideosById(int $id, array $parameters = [], Paginator $paginator = null): Result
@@ -56,9 +56,9 @@ trait VideosTrait
      *
      * @see    https://dev.twitch.tv/docs/api/reference#get-videos
      *
-     * @param  int            $user       ID of the user who owns the video. Limit 1
-     * @param  array          $parameters Additional parameters
-     * @param  Paginator|null $paginator  Paginator object
+     * @param int            $user       ID of the user who owns the video. Limit 1
+     * @param array          $parameters Additional parameters
+     * @param Paginator|null $paginator  Paginator object
      * @return Result         Result object
      */
     public function getVideosByUser(int $user, array $parameters = [], Paginator $paginator = null): Result
@@ -73,9 +73,9 @@ trait VideosTrait
      *
      * @see    https://dev.twitch.tv/docs/api/reference#get-videos
      *
-     * @param  int            $game       ID of the game the video is of. Limit 1
-     * @param  array          $parameters Additional parameters
-     * @param  Paginator|null $paginator  Paginator object
+     * @param int            $game       ID of the game the video is of. Limit 1
+     * @param array          $parameters Additional parameters
+     * @param Paginator|null $paginator  Paginator object
      * @return Result         Result object
      */
     public function getVideosByGame(int $game, array $parameters = [], Paginator $paginator = null): Result

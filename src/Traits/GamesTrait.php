@@ -17,7 +17,7 @@ trait GamesTrait
      *
      * @see    https://dev.twitch.tv/docs/api/reference#get-games
      *
-     * @param  array  $parameters Array of parameters
+     * @param array $parameters Array of parameters
      * @return Result Result object
      */
     public function getGames(array $parameters): Result
@@ -34,7 +34,7 @@ trait GamesTrait
      *
      * @see    https://dev.twitch.tv/docs/api/reference#get-games
      *
-     * @param  int    $id    Game ID
+     * @param int $id Game ID
      * @return Result Result object
      */
     public function getGameById(int $id): Result
@@ -49,7 +49,8 @@ trait GamesTrait
      *
      * @see    https://dev.twitch.tv/docs/api/reference#get-games
      *
-     * @param  string $name  Game name. The name must be an exact match. For instance, "Pokemon" will not return a list of Pokemon games; instead, query the specific Pokemon game(s) in which you are interested
+     * @param string $name Game name. The name must be an exact match. For instance, "Pokemon" will not return a list of Pokemon games; instead,
+     *                     query the specific Pokemon game(s) in which you are interested
      * @return Result Result object
      */
     public function getGameByName(string $name): Result
@@ -64,7 +65,7 @@ trait GamesTrait
      *
      * @see    https://dev.twitch.tv/docs/api/reference#get-games
      *
-     * @param  array  $ids   Game IDs. At most 100 id values can be specified
+     * @param array $ids Game IDs. At most 100 id values can be specified
      * @return Result Result object
      */
     public function getGamesByIds(array $ids): Result
@@ -79,7 +80,8 @@ trait GamesTrait
      *
      * @see    https://dev.twitch.tv/docs/api/reference#get-games
      *
-     * @param  array  $names Game name. The name must be an exact match. For instance, "Pokemon" will not return a list of Pokemon games; instead, query the specific Pokemon game(s) in which you are interested. At most 100 name values can be specified
+     * @param array $names Game name. The name must be an exact match. For instance, "Pokemon" will not return a list of Pokemon games; instead,
+     *                     query the specific Pokemon game(s) in which you are interested. At most 100 name values can be specified
      * @return Result Result object
      */
     public function getGamesByNames(array $names): Result
@@ -94,8 +96,8 @@ trait GamesTrait
      *
      * @see    https://dev.twitch.tv/docs/api/reference#get-top-games
      *
-     * @param  array          $parameters Array of parameters
-     * @param  Paginator|null $paginator  Paginator object
+     * @param array          $parameters Array of parameters
+     * @param Paginator|null $paginator  Paginator object
      * @return Result         Result object
      */
     public function getTopGames(array $parameters = [], Paginator $paginator = null): Result

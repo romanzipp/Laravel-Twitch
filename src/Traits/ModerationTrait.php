@@ -80,4 +80,8 @@ trait ModerationTrait
     {
         return $this->get('moderation/moderators/events', $parameters, $paginator);
     }
+
+    abstract public function get(string $path = '', array $parameters = [], Paginator $paginator = null);
+
+    abstract public function post(string $path = '', array $parameters = [], Paginator $paginator = null);
 }

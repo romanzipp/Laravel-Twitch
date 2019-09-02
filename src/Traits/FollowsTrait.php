@@ -13,9 +13,9 @@ trait FollowsTrait
      *
      * @see    https://dev.twitch.tv/docs/api/reference#get-users-follows
      *
-     * @param  int            $from      User ID. The request returns information about users who are being followed by the from_id user
-     * @param  int|null       $to        User ID. The request returns information about users who are following the to_id user
-     * @param  Paginator|null $paginator Paginator object
+     * @param int            $from      User ID. The request returns information about users who are being followed by the from_id user
+     * @param int|null       $to        User ID. The request returns information about users who are following the to_id user
+     * @param Paginator|null $paginator Paginator object
      * @return Result         Result object
      */
     public function getFollows(int $from = null, int $to = null, Paginator $paginator = null): Result
@@ -42,8 +42,8 @@ trait FollowsTrait
      *
      * @see    https://dev.twitch.tv/docs/api/reference#get-users-follows
      *
-     * @param  int            $from      User ID. The request returns information about users who are being followed by the from_id user
-     * @param  Paginator|null $paginator Paginator object
+     * @param int            $from      User ID. The request returns information about users who are being followed by the from_id user
+     * @param Paginator|null $paginator Paginator object
      * @return Result         Result object
      */
     public function getFollowsFrom(int $from, Paginator $paginator = null): Result
@@ -56,8 +56,8 @@ trait FollowsTrait
      *
      * @see    https://dev.twitch.tv/docs/api/reference#get-users-follows
      *
-     * @param  int            $to        User ID. The request returns information about users who are following the to_id user
-     * @param  Paginator|null $paginator Paginator object
+     * @param int            $to        User ID. The request returns information about users who are following the to_id user
+     * @param Paginator|null $paginator Paginator object
      * @return Result         Result object
      */
     public function getFollowsTo(int $to, Paginator $paginator = null): Result

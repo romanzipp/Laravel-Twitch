@@ -7,6 +7,13 @@ use romanzipp\Twitch\Result;
 
 trait WebhooksTrait
 {
+    /**
+     * @param string      $callback
+     * @param string      $topic
+     * @param int|null    $lease
+     * @param string|null $secret
+     * @return \romanzipp\Twitch\Result
+     */
     public function subscribeWebhook(string $callback, string $topic, int $lease = null, string $secret = null): Result
     {
         $attributes = [
@@ -26,6 +33,11 @@ trait WebhooksTrait
         return $this->post('webhooks/hub', $attributes);
     }
 
+    /**
+     * @param string $callback
+     * @param string $topic
+     * @return \romanzipp\Twitch\Result
+     */
     public function unsubscribeWebhook(string $callback, string $topic): Result
     {
         $attributes = [
@@ -37,29 +49,50 @@ trait WebhooksTrait
         return $this->post('webhooks/hub', $attributes);
     }
 
+    /**
+     * @param array $parameters
+     * @return \romanzipp\Twitch\Result
+     */
     public function getWebhookSubscriptions(array $parameters = []): Result
     {
         return $this->get('webhooks/subscriptions', $parameters);
     }
 
+    /**
+     * @param int $user
+     * @return string
+     */
     public function webhookTopicStreamMonitor(int $user): string
     {
-        return static::BASE_URI . 'streams?user_id=' . $user;
+        return static::BASE_URI . 'streams?' . http_build_query(['user_id' => $user])
     }
 
+    /**
+     * @param int $from
+     * @return string
+     */
     public function webhookTopicUserFollows(int $from): string
     {
-        return static::BASE_URI . 'users/follows?first=1&from_id=' . $from;
+        return static::BASE_URI . 'users/follows?' . http_build_query(['first' => 1, 'from_id' => $from]);
     }
 
+    /**
+     * @param int $to
+     * @return string
+     */
     public function webhookTopicUserGainsFollower(int $to): string
     {
-        return static::BASE_URI . 'users/follows?first=1&to_id=' . $to;
+        return static::BASE_URI . 'users/follows?' . http_build_query(['first' => 1, 'to_id' => $to]);
     }
 
+    /**
+     * @param int $from
+     * @param int $to
+     * @return string
+     */
     public function webhookTopicUserFollowsUser(int $from, int $to): string
     {
-        return static::BASE_URI . 'users/follows?first=1&from_id=' . $from . '&to_id' . $to;
+        return static::BASE_URI . 'users/follows?' . http_build_query(['first' => 1, 'from_id' => $from, 'to_id' => $to]);
     }
 
     abstract public function get(string $path = '', array $parameters = [], Paginator $paginator = null);

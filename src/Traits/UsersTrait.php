@@ -27,7 +27,7 @@ trait UsersTrait
      *
      * @see    https://dev.twitch.tv/docs/api/reference#get-users
      *
-     * @param  array  $parameters Array of parameters
+     * @param array $parameters Array of parameters
      * @return Result Result object
      */
     public function getUsers(array $parameters): Result
@@ -44,8 +44,8 @@ trait UsersTrait
      *
      * @see    https://dev.twitch.tv/docs/api/reference#get-users
      *
-     * @param  int    $id         User ID
-     * @param  array  $parameters Additional parameters
+     * @param int   $id         User ID
+     * @param array $parameters Additional parameters
      * @return Result Result object
      */
     public function getUserById(int $id, array $parameters = []): Result
@@ -60,8 +60,8 @@ trait UsersTrait
      *
      * @see    https://dev.twitch.tv/docs/api/reference#get-users
      *
-     * @param  string $name       User name
-     * @param  array  $parameters Additional parameters
+     * @param string $name       User name
+     * @param array  $parameters Additional parameters
      * @return Result Result object
      */
     public function getUserByName(string $name, array $parameters = []): Result
@@ -76,8 +76,8 @@ trait UsersTrait
      *
      * @see    https://dev.twitch.tv/docs/api/reference#get-users
      *
-     * @param  int    $id         User IDs
-     * @param  array  $parameters Additional parameters
+     * @param array $ids
+     * @param array $parameters Additional parameters
      * @return Result Result object
      */
     public function getUsersByIds(array $ids, array $parameters = []): Result
@@ -92,8 +92,8 @@ trait UsersTrait
      *
      * @see    https://dev.twitch.tv/docs/api/reference#get-users
      *
-     * @param  int    $id         User names
-     * @param  array  $parameters Additional parameters
+     * @param array $names
+     * @param array $parameters Additional parameters
      * @return Result Result object
      */
     public function getUsersByNames(array $names, array $parameters = []): Result
@@ -108,7 +108,7 @@ trait UsersTrait
      *
      * @see    https://dev.twitch.tv/docs/api/reference#update-user
      *
-     * @param  string $description New description
+     * @param string $description New description
      * @return Result Result object
      */
     public function updateUser(string $description): Result

@@ -11,10 +11,10 @@ trait OAuthTrait
      *
      * @see  https://dev.twitch.tv/docs/authentication/getting-tokens-oauth/
      *
-     * @param  string   $responseType  code / token
-     * @param  array    $scopes
-     * @param  string   $state
-     * @param  bool     $forceVerify
+     * @param string $responseType code / token
+     * @param array  $scopes
+     * @param string $state
+     * @param bool   $forceVerify
      * @return string
      */
     public function getOAuthAuthorizeUrl(string $responseType = 'code', array $scopes = [], string $state = null, bool $forceVerify = false): string
@@ -43,7 +43,7 @@ trait OAuthTrait
      *
      * @see  https://dev.twitch.tv/docs/authentication/getting-tokens-oauth/#oauth-authorization-code-flow
      *
-     * @param  string   $code
+     * @param string $code
      * @return Result
      */
     public function getOAuthToken(string $code): Result
@@ -62,7 +62,7 @@ trait OAuthTrait
     /**
      * Build OAuth scopes to string.
      *
-     * @param  array    $scopes
+     * @param array $scopes
      * @return string
      */
     protected function buildScopes(array $scopes): string

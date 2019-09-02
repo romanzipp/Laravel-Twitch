@@ -64,7 +64,7 @@ trait WebhooksTrait
      */
     public function webhookTopicStreamMonitor(int $user): string
     {
-        return static::BASE_URI . 'streams?' . http_build_query(['user_id' => $user])
+        return static::BASE_URI . 'streams?' . http_build_query(['user_id' => $user]);
     }
 
     /**

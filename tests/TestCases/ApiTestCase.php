@@ -4,7 +4,6 @@ namespace romanzipp\Twitch\Tests\TestCases;
 
 use romanzipp\Twitch\Facades\Twitch;
 use romanzipp\Twitch\Result;
-use romanzipp\Twitch\Tests\TestCases\TestCase;
 
 abstract class ApiTestCase extends TestCase
 {

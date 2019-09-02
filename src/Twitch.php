@@ -13,6 +13,7 @@ use romanzipp\Twitch\Traits\ClipsTrait;
 use romanzipp\Twitch\Traits\ExtensionsTrait;
 use romanzipp\Twitch\Traits\FollowsTrait;
 use romanzipp\Twitch\Traits\GamesTrait;
+use romanzipp\Twitch\Traits\ModerationTrait;
 use romanzipp\Twitch\Traits\OAuthTrait;
 use romanzipp\Twitch\Traits\StreamsMetadataTrait;
 use romanzipp\Twitch\Traits\StreamsTrait;
@@ -34,6 +35,7 @@ class Twitch
     use UsersTrait;
     use VideosTrait;
     use SubscriptionsTrait;
+    use ModerationTrait;
 
     use WebhooksTrait;
 

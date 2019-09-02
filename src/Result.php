@@ -9,7 +9,7 @@ use romanzipp\Twitch\Helpers\Paginator;
 class Result
 {
     /**
-     * Query successfull.
+     * Query successful.
      *
      * @var boolean
      */
@@ -18,14 +18,14 @@ class Result
     /**
      * Guzzle exception, if present.
      *
-     * @var null|mixed
+     * @var mixed|null
      */
     public $exception = null;
 
     /**
      * Query result data.
      *
-     * @var array
+     * @var array|\stdClass
      */
     public $data = [];
 
@@ -46,14 +46,14 @@ class Result
     /**
      * Twitch response pagination cursor.
      *
-     * @var null|\stdClass
+     * @var \stdClass|null
      */
     public $pagination;
 
     /**
      * Internal paginator.
      *
-     * @var null|Paginator
+     * @var Paginator|null
      */
     public $paginator;
 
@@ -140,9 +140,12 @@ class Result
      */
     public function shift()
     {
+        if ( ! is_array($this->data)) {
+            return null;
+        }
+
         if ( ! empty($this->data)) {
             $data = $this->data;
-
             return array_shift($data);
         }
 
@@ -156,6 +159,10 @@ class Result
      */
     public function count(): int
     {
+        if ( ! is_array($this->data)) {
+            return 0;
+        }
+
         return count((array) $this->data);
     }
 
@@ -256,6 +263,11 @@ class Result
         $payload = @json_decode($response->getBody());
 
         if ($payload === null) {
+            return;
+        }
+
+        if ( ! property_exists($payload, 'data')) {
+            $this->data = $payload;
             return;
         }
 

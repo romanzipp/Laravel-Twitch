@@ -51,7 +51,7 @@ class ResultTest extends TestCase
         $result = new Result($response);
 
         $this->assertTrue($result->success());
-        $this->assertEquals([], $result->data());
+        $this->assertEquals((object) ['foo' => 'bar'], $result->data());
         $this->assertEquals(null, $result->shift());
         $this->assertEquals(0, $result->count());
     }
@@ -64,6 +64,50 @@ class ResultTest extends TestCase
 
         $this->assertTrue($result->success());
         $this->assertEquals([], $result->data());
+        $this->assertEquals(null, $result->shift());
+        $this->assertEquals(0, $result->count());
+    }
+
+    public function testProcessDefaultPayload()
+    {
+        $data = [
+            ['user' => 1],
+            ['user' => 2],
+            ['user' => 3],
+        ];
+
+        $response = new Response(200, [], json_encode([
+            'total'      => 3,
+            'data'       => $data,
+            'pagination' => ['cursor' => 'abc'],
+        ]));
+
+        $result = new Result($response);
+
+        $this->assertTrue($result->success());
+        $this->assertEquals(3, $result->count());
+
+        $this->assertEquals(array_map(function ($item) {
+            return (object) $item;
+        }, $data), $result->data());
+    }
+
+    public function testOAuthResponsePayload()
+    {
+        $data = [
+            'access_token'  => 'access_token',
+            'refresh_token' => 'refresh_token',
+            'expires_in'    => 10,
+            'scope'         => ['user:read'],
+            'token_type'    => 'bearer',
+        ];
+
+        $response = new Response(200, [], json_encode($data));
+
+        $result = new Result($response);
+
+        $this->assertTrue($result->success());
+        $this->assertEquals((object) $data, $result->data());
         $this->assertEquals(null, $result->shift());
         $this->assertEquals(0, $result->count());
     }

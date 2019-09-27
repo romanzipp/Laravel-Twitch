@@ -8,9 +8,9 @@ use romanzipp\Twitch\Result;
 trait WebhooksTrait
 {
     /**
-     * @param string      $callback
-     * @param string      $topic
-     * @param int|null    $lease
+     * @param string $callback
+     * @param string $topic
+     * @param int|null $lease
      * @param string|null $secret
      * @return \romanzipp\Twitch\Result
      */
@@ -19,7 +19,7 @@ trait WebhooksTrait
         $attributes = [
             'hub.callback' => $callback,
             'hub.mode'     => 'subscribe',
-            'hub.topic'    => urlencode($topic),
+            'hub.topic'    => $topic,
         ];
 
         if ($lease !== null) {
@@ -43,7 +43,7 @@ trait WebhooksTrait
         $attributes = [
             'hub.callback' => $callback,
             'hub.mode'     => 'unsubscribe',
-            'hub.topic'    => urlencode($topic),
+            'hub.topic'    => $topic,
         ];
 
         return $this->post('webhooks/hub', $attributes);

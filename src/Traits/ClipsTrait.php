@@ -43,7 +43,7 @@ trait ClipsTrait
      * @see    https://dev.twitch.tv/docs/api/reference#create-entitlement-grants-upload-url
      *
      * @param string $manifest Unique identifier of the manifest file to be uploaded. Must be 1-64 characters.
-     * @param string $type     Type of entitlement being granted. Only bulk_drops_grant is supported.
+     * @param string $type Type of entitlement being granted. Only bulk_drops_grant is supported.
      * @return Result Result object
      */
     public function createEntitlementUrl(string $manifest, string $type = 'bulk_drops_grant'): Result

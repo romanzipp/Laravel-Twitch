@@ -264,8 +264,8 @@ class Twitch
     }
 
     /**
-     * @param string                                   $path
-     * @param array                                    $parameters
+     * @param string $path
+     * @param array $parameters
      * @param \romanzipp\Twitch\Helpers\Paginator|null $paginator
      * @return \romanzipp\Twitch\Result
      * @throws \GuzzleHttp\Exception\GuzzleException
@@ -277,8 +277,8 @@ class Twitch
     }
 
     /**
-     * @param string                                   $path
-     * @param array                                    $parameters
+     * @param string $path
+     * @param array $parameters
      * @param \romanzipp\Twitch\Helpers\Paginator|null $paginator
      * @return \romanzipp\Twitch\Result
      * @throws \GuzzleHttp\Exception\GuzzleException
@@ -290,8 +290,8 @@ class Twitch
     }
 
     /**
-     * @param string                                   $path
-     * @param array                                    $parameters
+     * @param string $path
+     * @param array $parameters
      * @param \romanzipp\Twitch\Helpers\Paginator|null $paginator
      * @return \romanzipp\Twitch\Result
      * @throws \GuzzleHttp\Exception\GuzzleException
@@ -303,8 +303,8 @@ class Twitch
     }
 
     /**
-     * @param string     $method
-     * @param string     $path
+     * @param string $method
+     * @param string $path
      * @param array|null $body
      * @return \romanzipp\Twitch\Result
      * @throws \GuzzleHttp\Exception\GuzzleException
@@ -322,11 +322,11 @@ class Twitch
     /**
      * Build query & execute.
      *
-     * @param string     $method     HTTP method
-     * @param string     $path       Query path
-     * @param array      $parameters Query parameters
-     * @param Paginator  $paginator  Paginator object
-     * @param mixed|null $jsonBody   JSON data
+     * @param string $method HTTP method
+     * @param string $path Query path
+     * @param array $parameters Query parameters
+     * @param Paginator $paginator Paginator object
+     * @param mixed|null $jsonBody JSON data
      * @return Result     Result object
      * @throws \GuzzleHttp\Exception\GuzzleException
      * @throws \romanzipp\Twitch\Exceptions\RequestRequiresClientIdException

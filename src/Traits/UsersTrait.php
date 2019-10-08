@@ -44,7 +44,7 @@ trait UsersTrait
      *
      * @see    https://dev.twitch.tv/docs/api/reference#get-users
      *
-     * @param int   $id         User ID
+     * @param int $id User ID
      * @param array $parameters Additional parameters
      * @return Result Result object
      */
@@ -60,8 +60,8 @@ trait UsersTrait
      *
      * @see    https://dev.twitch.tv/docs/api/reference#get-users
      *
-     * @param string $name       User name
-     * @param array  $parameters Additional parameters
+     * @param string $name User name
+     * @param array $parameters Additional parameters
      * @return Result Result object
      */
     public function getUserByName(string $name, array $parameters = []): Result

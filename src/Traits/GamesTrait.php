@@ -96,8 +96,8 @@ trait GamesTrait
      *
      * @see    https://dev.twitch.tv/docs/api/reference#get-top-games
      *
-     * @param array          $parameters Array of parameters
-     * @param Paginator|null $paginator  Paginator object
+     * @param array $parameters Array of parameters
+     * @param Paginator|null $paginator Paginator object
      * @return Result         Result object
      */
     public function getTopGames(array $parameters = [], Paginator $paginator = null): Result

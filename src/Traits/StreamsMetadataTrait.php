@@ -20,8 +20,8 @@ trait StreamsMetadataTrait
      *
      * @see    https://dev.twitch.tv/docs/api/reference#get-streams-metadata
      *
-     * @param array          $parameters Array of parameters
-     * @param Paginator|null $paginator  Paginator object
+     * @param array $parameters Array of parameters
+     * @param Paginator|null $paginator Paginator object
      * @return Result         Result object
      */
     public function getStreamsMetadata(array $parameters = [], Paginator $paginator = null): Result

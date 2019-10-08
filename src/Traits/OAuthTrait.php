@@ -12,9 +12,9 @@ trait OAuthTrait
      * @see  https://dev.twitch.tv/docs/authentication/getting-tokens-oauth/
      *
      * @param string $responseType code / token
-     * @param array  $scopes
+     * @param array $scopes
      * @param string $state
-     * @param bool   $forceVerify
+     * @param bool $forceVerify
      * @return string
      */
     public function getOAuthAuthorizeUrl(string $responseType = 'code', array $scopes = [], string $state = null, bool $forceVerify = false): string

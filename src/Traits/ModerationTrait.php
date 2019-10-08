@@ -30,7 +30,7 @@ trait ModerationTrait
      *
      * @see https://dev.twitch.tv/docs/api/reference/#get-banned-events
      *
-     * @param array                                    $parameters
+     * @param array $parameters
      * @param \romanzipp\Twitch\Helpers\Paginator|null $paginator
      * @return \romanzipp\Twitch\Result
      */
@@ -44,7 +44,7 @@ trait ModerationTrait
      *
      * @see https://dev.twitch.tv/docs/api/reference/#get-banned-users
      *
-     * @param array                                    $parameters
+     * @param array $parameters
      * @param \romanzipp\Twitch\Helpers\Paginator|null $paginator
      * @return \romanzipp\Twitch\Result
      */
@@ -58,7 +58,7 @@ trait ModerationTrait
      *
      * @see https://dev.twitch.tv/docs/api/reference/#get-moderators
      *
-     * @param array                                    $parameters
+     * @param array $parameters
      * @param \romanzipp\Twitch\Helpers\Paginator|null $paginator
      * @return \romanzipp\Twitch\Result
      */
@@ -72,7 +72,7 @@ trait ModerationTrait
      *
      * @see https://dev.twitch.tv/docs/api/reference/#get-moderator-events
      *
-     * @param array                                    $parameters
+     * @param array $parameters
      * @param \romanzipp\Twitch\Helpers\Paginator|null $paginator
      * @return \romanzipp\Twitch\Result
      */

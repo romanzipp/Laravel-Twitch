@@ -17,8 +17,8 @@ trait SubscriptionsTrait
      *
      * @see  https://dev.twitch.tv/docs/api/reference/#get-user-subscriptions
      *
-     * @param array          $parameters Array of parameters
-     * @param Paginator|null $paginator  Paginator object
+     * @param array $parameters Array of parameters
+     * @param Paginator|null $paginator Paginator object
      * @return Result         Result object
      */
     public function getSubscriptions(array $parameters = [], Paginator $paginator = null): Result
@@ -32,7 +32,7 @@ trait SubscriptionsTrait
      *
      * @see  https://dev.twitch.tv/docs/api/reference/#get-broadcaster-subscriptions
      *
-     * @param int            $user      User ID
+     * @param int $user User ID
      * @param Paginator|null $paginator Paginator object
      * @return Result         Result object
      */
@@ -47,7 +47,7 @@ trait SubscriptionsTrait
      *
      * @see  https://dev.twitch.tv/docs/api/reference/#get-broadcaster-subscriptions
      *
-     * @param int            $user      Broadcaster ID
+     * @param int $user Broadcaster ID
      * @param Paginator|null $paginator Paginator object
      * @return Result         Result object
      */

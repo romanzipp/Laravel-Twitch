@@ -74,7 +74,7 @@ class Result
     /**
      * Constructor,
      *
-     * @param Response        $response  HTTP response
+     * @param Response $response HTTP response
      * @param Exception|mixed $exception Exception, if present
      */
     public function __construct(Response $response, Exception $exception = null)
@@ -225,7 +225,7 @@ class Result
      * Insert users in data response.
      *
      * @param string $identifierAttribute Attribute to identify the users
-     * @param string $insertTo            Data index to insert user data
+     * @param string $insertTo Data index to insert user data
      * @return self
      */
     public function insertUsers(string $identifierAttribute = 'user_id', string $insertTo = 'user'): self

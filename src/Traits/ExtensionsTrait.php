@@ -81,9 +81,9 @@ trait ExtensionsTrait
      *
      * @see    https://dev.twitch.tv/docs/api/reference/#update-user-extensions
      *
-     * @param string $method    Method that will be used to disable extensions
+     * @param string $method Method that will be used to disable extensions
      * @param string $parameter Parameter that will be used to disable Extensions
-     * @param bool   $disabled  Weather the set value should be false
+     * @param bool $disabled Weather the set value should be false
      * @return Result Result object
      */
     public function updateUserExtensions(string $method = null, string $parameter = null, bool $disabled = false): Result

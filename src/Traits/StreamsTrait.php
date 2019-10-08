@@ -19,8 +19,8 @@ trait StreamsTrait
      *
      * @see    https://dev.twitch.tv/docs/api/reference#get-streams
      *
-     * @param array          $parameters Array of parameters
-     * @param Paginator|null $paginator  Paginator object
+     * @param array $parameters Array of parameters
+     * @param Paginator|null $paginator Paginator object
      * @return Result         Result object
      */
     public function getStreams(array $parameters = [], Paginator $paginator = null): Result
@@ -33,9 +33,9 @@ trait StreamsTrait
      *
      * @see    https://dev.twitch.tv/docs/api/reference#get-streams
      *
-     * @param int            $id         Returns streams broadcast by one specified user ID
-     * @param array          $parameters Additional parameters
-     * @param Paginator|null $paginator  Paginator object
+     * @param int $id Returns streams broadcast by one specified user ID
+     * @param array $parameters Additional parameters
+     * @param Paginator|null $paginator Paginator object
      * @return Result         Result object
      */
     public function getStreamsByUserId(int $id, array $parameters = [], Paginator $paginator = null): Result
@@ -50,9 +50,9 @@ trait StreamsTrait
      *
      * @see    https://dev.twitch.tv/docs/api/reference#get-streams
      *
-     * @param int            $name       Returns streams broadcast by one specified user login name
-     * @param array          $parameters Additional parameters
-     * @param Paginator|null $paginator  Paginator object
+     * @param int $name Returns streams broadcast by one specified user login name
+     * @param array $parameters Additional parameters
+     * @param Paginator|null $paginator Paginator object
      * @return Result         Result object
      */
     public function getStreamsByUserName(string $name, array $parameters = [], Paginator $paginator = null): Result
@@ -67,9 +67,9 @@ trait StreamsTrait
      *
      * @see    https://dev.twitch.tv/docs/api/reference#get-streams
      *
-     * @param array          $ids        Returns streams broadcast by one or more specified user IDs. You can specify up to 100 IDs
-     * @param array          $parameters Additional parameters
-     * @param Paginator|null $paginator  Paginator object
+     * @param array $ids Returns streams broadcast by one or more specified user IDs. You can specify up to 100 IDs
+     * @param array $parameters Additional parameters
+     * @param Paginator|null $paginator Paginator object
      * @return Result         Result object
      */
     public function getStreamsByUserIds(array $ids, array $parameters = [], Paginator $paginator = null): Result
@@ -84,9 +84,9 @@ trait StreamsTrait
      *
      * @see    https://dev.twitch.tv/docs/api/reference#get-streams
      *
-     * @param array          $names
-     * @param array          $parameters Additional parameters
-     * @param Paginator|null $paginator  Paginator object
+     * @param array $names
+     * @param array $parameters Additional parameters
+     * @param Paginator|null $paginator Paginator object
      * @return Result         Result object
      */
     public function getStreamsByUserNames(array $names, array $parameters = [], Paginator $paginator = null): Result
@@ -101,9 +101,9 @@ trait StreamsTrait
      *
      * @see    https://dev.twitch.tv/docs/api/reference#get-streams
      *
-     * @param int            $id         Returns streams in a specified community ID
-     * @param array          $parameters Additional parameters
-     * @param Paginator|null $paginator  Paginator object
+     * @param int $id Returns streams in a specified community ID
+     * @param array $parameters Additional parameters
+     * @param Paginator|null $paginator Paginator object
      * @return Result         Result object
      */
     public function getStreamsByCommunity(int $id, array $parameters = [], Paginator $paginator = null): Result
@@ -118,9 +118,9 @@ trait StreamsTrait
      *
      * @see    https://dev.twitch.tv/docs/api/reference#get-streams
      *
-     * @param int            $ids        Returns streams in a specified community IDs. You can specify up to 100 IDs
-     * @param array          $parameters Additional parameters
-     * @param Paginator|null $paginator  Paginator object
+     * @param int $ids Returns streams in a specified community IDs. You can specify up to 100 IDs
+     * @param array $parameters Additional parameters
+     * @param Paginator|null $paginator Paginator object
      * @return Result         Result object
      */
     public function getStreamsByCommunities(int $ids, array $parameters = [], Paginator $paginator = null): Result
@@ -135,9 +135,9 @@ trait StreamsTrait
      *
      * @see    https://dev.twitch.tv/docs/api/reference#get-streams
      *
-     * @param int            $id         Returns streams in a specified game ID
-     * @param array          $parameters Additional parameters
-     * @param Paginator|null $paginator  Paginator object
+     * @param int $id Returns streams in a specified game ID
+     * @param array $parameters Additional parameters
+     * @param Paginator|null $paginator Paginator object
      * @return Result         Result object
      */
     public function getStreamsByGame(int $id, array $parameters = [], Paginator $paginator = null): Result
@@ -152,9 +152,9 @@ trait StreamsTrait
      *
      * @see    https://dev.twitch.tv/docs/api/reference#get-streams
      *
-     * @param int            $ids        Returns streams in a specified game IDs. You can specify up to 100 IDs
-     * @param array          $parameters Additional parameters
-     * @param Paginator|null $paginator  Paginator object
+     * @param int $ids Returns streams in a specified game IDs. You can specify up to 100 IDs
+     * @param array $parameters Additional parameters
+     * @param Paginator|null $paginator Paginator object
      * @return Result         Result object
      */
     public function getStreamsByGames(int $ids, array $parameters = [], Paginator $paginator = null): Result

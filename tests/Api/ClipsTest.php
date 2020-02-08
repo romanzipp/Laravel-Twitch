@@ -4,7 +4,7 @@ namespace romanzipp\Twitch\Tests\Api;
 
 use romanzipp\Twitch\Tests\TestCases\ApiTestCase;
 
-class ApiClipsTest extends ApiTestCase
+class ClipsTest extends ApiTestCase
 {
     public function testCreateClipUnauthenticated()
     {

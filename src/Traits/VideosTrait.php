@@ -23,6 +23,7 @@ trait VideosTrait
      * @see    https://dev.twitch.tv/docs/api/reference#get-videos
      *
      * @param array $parameters Array of parameters
+     * @param \romanzipp\Twitch\Helpers\Paginator|null $paginator
      * @return Result Result object
      */
     public function getVideos(array $parameters, Paginator $paginator = null): Result

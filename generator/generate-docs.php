@@ -15,16 +15,16 @@ $markdown = collect(class_uses(Twitch::class))
         $reflection = new ReflectionClass($trait);
 
         collect($reflection->getMethods())
-            ->reject(function ($method) {
+            ->reject(function (ReflectionMethod $method) {
                 return $method->isAbstract();
             })
-            ->reject(function ($method) {
+            ->reject(function (ReflectionMethod $method) {
                 return $method->isPrivate() || $method->isProtected();
             })
-            ->reject(function ($method) {
+            ->reject(function (ReflectionMethod $method) {
                 return $method->isConstructor();
             })
-            ->each(function ($method) use (&$methods, $title, $trait) {
+            ->each(function (ReflectionMethod $method) use (&$methods, $title, $trait) {
 
                 $declaration = collect($method->getModifiers())->map(function (int $modifier) {
                     return $modifier == ReflectionMethod::IS_PUBLIC ? 'public ' : '';
@@ -59,7 +59,7 @@ $markdown = collect(class_uses(Twitch::class))
     })
     ->map(function ($args) {
 
-        list($title, $methods) = $args;
+        [$title, $methods] = $args;
 
         $markdown = '### ' . $title;
         $markdown .= PHP_EOL . PHP_EOL;

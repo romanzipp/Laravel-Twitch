@@ -328,7 +328,6 @@ class Twitch
      * @param Paginator $paginator Paginator object
      * @param mixed|null $jsonBody JSON data
      * @return Result     Result object
-     * @throws \GuzzleHttp\Exception\GuzzleException
      * @throws \romanzipp\Twitch\Exceptions\RequestRequiresClientIdException
      */
     public function query(string $method = 'GET', string $path = '', array $parameters = [], Paginator $paginator = null, $jsonBody = null): Result
@@ -338,6 +337,7 @@ class Twitch
         }
 
         try {
+            /** @var \GuzzleHttp\Psr7\Response $response */
             $response = $this->client->request($method, $path, [
                 'headers' => $this->buildHeaders($jsonBody ? true : false),
                 'query'   => $this->buildQuery($parameters),
@@ -357,7 +357,7 @@ class Twitch
     }
 
     /**
-     * Build query with support for multiple smae first-dimension keys.
+     * Build query with support for multiple same first-dimension keys.
      *
      * @param array $query
      * @return string

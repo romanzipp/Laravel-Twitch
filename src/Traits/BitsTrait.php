@@ -17,6 +17,7 @@ trait BitsTrait
      *
      * @see    https://dev.twitch.tv/docs/api/reference/#get-bits-leaderboard
      *
+     * @param array $parameters
      * @return Result
      */
     public function getBitsLeaderboard(array $parameters = []): Result

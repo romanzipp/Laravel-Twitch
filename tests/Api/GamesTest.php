@@ -4,7 +4,7 @@ namespace romanzipp\Twitch\Tests\Api;
 
 use romanzipp\Twitch\Tests\TestCases\ApiTestCase;
 
-class ApiGamesTest extends ApiTestCase
+class GamesTest extends ApiTestCase
 {
     public function testNextPagination()
     {

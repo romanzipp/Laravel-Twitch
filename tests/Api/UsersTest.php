@@ -5,7 +5,7 @@ namespace romanzipp\Twitch\Tests\Api;
 use romanzipp\Twitch\Result;
 use romanzipp\Twitch\Tests\TestCases\ApiTestCase;
 
-class ApiUsersTest extends ApiTestCase
+class UsersTest extends ApiTestCase
 {
     public function testGetUserByName()
     {

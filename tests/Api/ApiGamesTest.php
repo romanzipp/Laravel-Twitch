@@ -2,27 +2,35 @@
 
 namespace romanzipp\Twitch\Tests\Api;
 
-use romanzipp\Twitch\Facades\Twitch;
-use romanzipp\Twitch\Result;
 use romanzipp\Twitch\Tests\TestCases\ApiTestCase;
 
 class ApiGamesTest extends ApiTestCase
 {
     public function testNextPagination()
     {
-        $this->registerResult($result = Twitch::getTopGames());
+        $this->registerResult(
+            $result = $this->twitch()->getTopGames()
+        );
+
+        $this->assertTrue($result->success);
 
         $first = $result->data()[0];
 
-        $this->assertInstanceOf(Result::class, $result);
+        $this->registerResult(
+            $result = $this->twitch()->getTopGames([], $result->next())
+        );
 
-        $this->registerResult($result = Twitch::getTopGames([], $result->next()));
+        $this->assertTrue($result->success);
 
         $second = $result->data()[0];
 
         $this->assertNotEquals($first->id, $second->id);
 
-        $this->registerResult($result = Twitch::getTopGames([], $result->back()));
+        $this->registerResult(
+            $result = $this->twitch()->getTopGames([], $result->back())
+        );
+
+        $this->assertTrue($result->success);
 
         $third = $result->data()[0];
 

@@ -7,7 +7,10 @@ use romanzipp\Twitch\Twitch;
 
 abstract class ApiTestCase extends TestCase
 {
-    protected static $rateLimitRemaining = null;
+    /**
+     * @var Result|null
+     */
+    protected static $lastResult = null;
 
     /**
      * @var Twitch
@@ -22,9 +25,9 @@ abstract class ApiTestCase extends TestCase
             $this->markTestSkipped('No Client-ID given');
         }
 
-        if (self::$rateLimitRemaining !== null && self::$rateLimitRemaining < 3) {
+        if (self::$lastResult !== null && self::$lastResult->rateLimit() !== null && self::$lastResult->rateLimit('remaining') < 3) {
             $this->markTestSkipped(
-                sprintf('Rate Limit exceeded (%s)', self::$rateLimitRemaining)
+                sprintf('Rate Limit exceeded (%d/%d)', self::$lastResult->rateLimit('remaining'), self::$lastResult->rateLimit('limit'))
             );
         }
 
@@ -43,7 +46,7 @@ abstract class ApiTestCase extends TestCase
     {
         $this->assertInstanceOf(Result::class, $result);
 
-        self::$rateLimitRemaining = $result->rateLimit('remaining');
+        self::$lastResult = $result;
 
         return $result;
     }

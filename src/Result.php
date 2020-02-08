@@ -204,7 +204,7 @@ class Result
      */
     public function rateLimit(string $key = null)
     {
-        if ( ! $this->response) {
+        if ( ! $this->response || ! $this->response->hasHeader('Ratelimit-Remaining')) {
             return null;
         }
 

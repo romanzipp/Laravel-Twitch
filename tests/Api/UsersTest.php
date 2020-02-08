@@ -2,11 +2,18 @@
 
 namespace romanzipp\Twitch\Tests\Api;
 
-use romanzipp\Twitch\Result;
+use BadMethodCallException;
 use romanzipp\Twitch\Tests\TestCases\ApiTestCase;
 
 class UsersTest extends ApiTestCase
 {
+    public function testGetUsersMissingParameters()
+    {
+        $this->expectException(BadMethodCallException::class);
+
+        $this->twitch()->getUsers([]);
+    }
+
     public function testGetUserByName()
     {
         $this->registerResult(

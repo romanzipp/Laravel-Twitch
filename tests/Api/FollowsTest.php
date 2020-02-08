@@ -22,6 +22,7 @@ class FollowsTest extends ApiTestCase
 
         $this->assertTrue($result->success());
         $this->assertNotEmpty($result->data());
+        $this->assertHasProperties(['from_id', 'from_name', 'to_id', 'to_name', 'followed_at'], $result->shift());
         $this->assertEquals(12826, (int) $result->shift()->from_id);
     }
 
@@ -33,6 +34,7 @@ class FollowsTest extends ApiTestCase
 
         $this->assertTrue($result->success());
         $this->assertNotEmpty($result->data());
+        $this->assertHasProperties(['from_id', 'from_name', 'to_id', 'to_name', 'followed_at'], $result->shift());
         $this->assertEquals(12826, (int) $result->shift()->to_id);
     }
 }

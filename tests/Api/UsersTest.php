@@ -13,17 +13,25 @@ class UsersTest extends ApiTestCase
             $result = $this->twitch()->getUserByName('twitch')
         );
 
-        $this->assertInstanceOf(Result::class, $result);
-        $this->assertEquals('12826', $result->shift()->id);
+        $this->assertTrue($result->success());
+        $this->assertHasProperties([
+            'id', 'login', 'display_name', 'type', 'broadcaster_type', 'description',
+            'profile_image_url', 'offline_image_url', 'view_count',
+        ], $result->shift());
+        $this->assertEquals(12826, (int) $result->shift()->id);
     }
 
     public function testGetUserById()
     {
         $this->registerResult(
-            $result = $this->twitch()->getUserById('12826')
+            $result = $this->twitch()->getUserById(12826)
         );
 
-        $this->assertInstanceOf(Result::class, $result);
+        $this->assertTrue($result->success());
+        $this->assertHasProperties([
+            'id', 'login', 'display_name', 'type', 'broadcaster_type', 'description',
+            'profile_image_url', 'offline_image_url', 'view_count',
+        ], $result->shift());
         $this->assertEquals('twitch', $result->shift()->login);
     }
 
@@ -33,7 +41,7 @@ class UsersTest extends ApiTestCase
             $result = $this->twitch()->getUsersByIds([12826, 131784680])
         );
 
-        $this->assertInstanceOf(Result::class, $result);
+        $this->assertTrue($result->success());
         $this->assertEquals(2, $result->count());
     }
 }

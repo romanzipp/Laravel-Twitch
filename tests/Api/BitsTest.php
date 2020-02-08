@@ -13,6 +13,6 @@ class BitsTest extends ApiTestCase
         );
 
         $this->assertFalse($result->success());
-        $this->assertEquals(401,$result->status());
+        $this->assertEquals(401, $result->status());
     }
 }

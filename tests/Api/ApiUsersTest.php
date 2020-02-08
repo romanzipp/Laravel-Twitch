@@ -2,7 +2,6 @@
 
 namespace romanzipp\Twitch\Tests\Api;
 
-use romanzipp\Twitch\Facades\Twitch;
 use romanzipp\Twitch\Result;
 use romanzipp\Twitch\Tests\TestCases\ApiTestCase;
 
@@ -10,7 +9,9 @@ class ApiUsersTest extends ApiTestCase
 {
     public function testGetUserByName()
     {
-        $this->registerResult($result = Twitch::getUserByName('twitch'));
+        $this->registerResult(
+            $result = $this->twitch()->getUserByName('twitch')
+        );
 
         $this->assertInstanceOf(Result::class, $result);
         $this->assertEquals('12826', $result->shift()->id);
@@ -18,7 +19,9 @@ class ApiUsersTest extends ApiTestCase
 
     public function testGetUserById()
     {
-        $this->registerResult($result = Twitch::getUserById('12826'));
+        $this->registerResult(
+            $result = $this->twitch()->getUserById('12826')
+        );
 
         $this->assertInstanceOf(Result::class, $result);
         $this->assertEquals('twitch', $result->shift()->login);
@@ -26,7 +29,9 @@ class ApiUsersTest extends ApiTestCase
 
     public function testGetUsersByIds()
     {
-        $this->registerResult($result = Twitch::getUsersByIds([12826, 131784680]));
+        $this->registerResult(
+            $result = $this->twitch()->getUsersByIds([12826, 131784680])
+        );
 
         $this->assertInstanceOf(Result::class, $result);
         $this->assertEquals(2, $result->count());

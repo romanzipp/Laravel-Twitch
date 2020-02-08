@@ -268,7 +268,6 @@ class Twitch
      * @param array $parameters
      * @param \romanzipp\Twitch\Helpers\Paginator|null $paginator
      * @return \romanzipp\Twitch\Result
-     * @throws \GuzzleHttp\Exception\GuzzleException
      * @throws \romanzipp\Twitch\Exceptions\RequestRequiresClientIdException
      */
     public function get(string $path = '', array $parameters = [], Paginator $paginator = null)
@@ -281,7 +280,6 @@ class Twitch
      * @param array $parameters
      * @param \romanzipp\Twitch\Helpers\Paginator|null $paginator
      * @return \romanzipp\Twitch\Result
-     * @throws \GuzzleHttp\Exception\GuzzleException
      * @throws \romanzipp\Twitch\Exceptions\RequestRequiresClientIdException
      */
     public function post(string $path = '', array $parameters = [], Paginator $paginator = null)
@@ -294,7 +292,6 @@ class Twitch
      * @param array $parameters
      * @param \romanzipp\Twitch\Helpers\Paginator|null $paginator
      * @return \romanzipp\Twitch\Result
-     * @throws \GuzzleHttp\Exception\GuzzleException
      * @throws \romanzipp\Twitch\Exceptions\RequestRequiresClientIdException
      */
     public function put(string $path = '', array $parameters = [], Paginator $paginator = null)
@@ -307,7 +304,6 @@ class Twitch
      * @param string $path
      * @param array|null $body
      * @return \romanzipp\Twitch\Result
-     * @throws \GuzzleHttp\Exception\GuzzleException
      * @throws \romanzipp\Twitch\Exceptions\RequestRequiresClientIdException
      */
     public function json(string $method, string $path = '', array $body = null)

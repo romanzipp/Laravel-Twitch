@@ -9,7 +9,7 @@ use romanzipp\Twitch\Result;
 trait UsersTrait
 {
     /**
-     * Get currently authed user with Bearer Token
+     * Get currently authenticated user with Bearer Token
      *
      * @return Result Result object
      */

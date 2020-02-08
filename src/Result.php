@@ -111,6 +111,16 @@ class Result
     }
 
     /**
+     * Get the response status code.
+     *
+     * @return int
+     */
+    public function status(): int
+    {
+        return $this->status;
+    }
+
+    /**
      * Returns the last HTTP or API error.
      *
      * @return string Error message

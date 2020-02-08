@@ -13,7 +13,7 @@ class ClipsTest extends ApiTestCase
         );
 
         $this->assertFalse($result->success());
-        $this->assertEquals(401, $result->status);
+        $this->assertEquals(401, $result->status());
     }
 
     public function testGetClip()
@@ -23,7 +23,10 @@ class ClipsTest extends ApiTestCase
         );
 
         $this->assertTrue($result->success());
-
+        $this->assertHasProperties([
+            'id', 'url', 'embed_url', 'broadcaster_id', 'broadcaster_name', 'creator_id', 'creator_name',
+            'video_id', 'game_id', 'language', 'title', 'view_count', 'created_at', 'thumbnail_url',
+        ], $result->shift());
         $this->assertEquals('BashfulHelpfulSalamanderPrimeMe', $result->shift()->id);
         $this->assertEquals('Xbox', $result->shift()->broadcaster_name);
     }

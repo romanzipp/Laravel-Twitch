@@ -388,7 +388,7 @@ class Twitch
         ];
 
         if ($this->token) {
-            $headers['Authorization'] = 'Bearer ' . $this->token;
+            $headers['Authorization'] = sprintf('Bearer %s', $this->token);
         }
 
         if ($json) {

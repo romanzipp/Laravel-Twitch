@@ -1,6 +1,6 @@
 <?php
 
-namespace romanzipp\Twitch\Tests;
+namespace romanzipp\Twitch\Tests\Api;
 
 use romanzipp\Twitch\Facades\Twitch;
 use romanzipp\Twitch\Result;

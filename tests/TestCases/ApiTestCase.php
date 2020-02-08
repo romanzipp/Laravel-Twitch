@@ -18,7 +18,9 @@ abstract class ApiTestCase extends TestCase
         }
 
         if (self::$rateLimitRemaining !== null && self::$rateLimitRemaining < 3) {
-            $this->markTestSkipped('Rate Limit exceeded (' . self::$rateLimitRemaining . ')');
+            $this->markTestSkipped(
+                sprintf('Rate Limit exceeded (%s)', self::$rateLimitRemaining)
+            );
         }
 
         Twitch::setClientId($this->getClientId());

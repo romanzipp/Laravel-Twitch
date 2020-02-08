@@ -2,12 +2,17 @@
 
 namespace romanzipp\Twitch\Tests\TestCases;
 
-use romanzipp\Twitch\Facades\Twitch;
 use romanzipp\Twitch\Result;
+use romanzipp\Twitch\Twitch;
 
 abstract class ApiTestCase extends TestCase
 {
     protected static $rateLimitRemaining = null;
+
+    /**
+     * @var Twitch
+     */
+    protected $twitch;
 
     protected function setUp(): void
     {
@@ -23,11 +28,21 @@ abstract class ApiTestCase extends TestCase
             );
         }
 
-        Twitch::setClientId($this->getClientId());
+        $this->twitch = app(Twitch::class);
+        $this->twitch->setClientId(
+            $this->getClientId()
+        );
+    }
+
+    protected function twitch(): Twitch
+    {
+        return $this->twitch;
     }
 
     protected function registerResult(Result $result): Result
     {
+        $this->assertInstanceOf(Result::class, $result);
+
         self::$rateLimitRemaining = $result->rateLimit('remaining');
 
         return $result;

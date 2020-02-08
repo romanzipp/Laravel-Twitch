@@ -22,7 +22,7 @@ abstract class ApiTestCase extends TestCase
         parent::setUp();
 
         if ( ! $this->getClientId()) {
-            $this->markTestSkipped('No Client-ID given');
+            $this->markTestSkipped('No Client-ID provided');
         }
 
         if (self::$lastResult !== null && self::$lastResult->rateLimit() !== null && self::$lastResult->rateLimit('remaining') < 3) {

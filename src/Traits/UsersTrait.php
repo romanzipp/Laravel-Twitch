@@ -12,6 +12,7 @@ trait UsersTrait
      * Get currently authenticated user with Bearer Token
      *
      * @return Result Result object
+     * @deprecated
      */
     public function getAuthedUser(): Result
     {

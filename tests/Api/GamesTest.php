@@ -15,6 +15,7 @@ class GamesTest extends ApiTestCase
 
         $this->assertTrue($result->success());
         $this->assertNotEmpty($result->data());
+        $this->assertHasProperties(['id', 'name', 'box_art_url'], $result->shift());
     }
 
     public function testGetGameById()

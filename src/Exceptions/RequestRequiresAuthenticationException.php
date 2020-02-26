@@ -2,11 +2,11 @@
 
 namespace romanzipp\Twitch\Exceptions;
 
-use Exception;
+use Throwable;
 
-class RequestRequiresAuthenticationException extends Exception
+class RequestRequiresAuthenticationException extends Throwable
 {
-    public function __construct($message = 'Request requires authentication', $code = 0, Exception $previous = null)
+    public function __construct($message = 'Request requires authentication', $code = 0, Throwable $previous = null)
     {
         parent::__construct($message, $code, $previous);
     }

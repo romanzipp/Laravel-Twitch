@@ -52,7 +52,7 @@ TWITCH_HELIX_REDIRECT_URI=http://localhost
 
 ## Examples
 
-#### Basic
+### Basic
 
 ```php
 $twitch = new romanzipp\Twitch\Twitch;
@@ -73,7 +73,7 @@ $user = $result->shift();
 echo $user->id;
 ```
 
-#### Setters
+### Setters
 
 ```php
 $twitch = new romanzipp\Twitch\Twitch;
@@ -87,7 +87,7 @@ $twitch = $twitch->withClientSecret('abc123');
 $twitch = $twitch->withToken('abcdef123456');
 ```
 
-#### OAuth Tokens
+### OAuth Tokens
 
 ```php
 $twitch = new romanzipp\Twitch\Twitch;
@@ -110,7 +110,7 @@ $result = $twitch->getAuthedUser();
 $result = $twitch->withToken('uvwxyz456789')->getAuthedUser();
 ```
 
-#### Facade
+### Facade
 
 ```php
 use romanzipp\Twitch\Facades\Twitch;
@@ -118,7 +118,7 @@ use romanzipp\Twitch\Facades\Twitch;
 Twitch::withClientId('abc123')->withToken('abcdef123456')->getAuthedUser();
 ```
 
-#### Pagination Loop Example
+### Pagination Loop Example
 
 This example fetches all Twitch Games and stores them into a database.
 
@@ -141,7 +141,7 @@ do {
 } while ($result->count() > 0);
 ```
 
-#### Insert user objects
+### Insert user objects
 
 The new API does not include the user objects in endpoints like followers or bits.
 
@@ -189,7 +189,7 @@ $result->insertUsers('from_id', 'from_user'); // Insert users identified by "fro
 
 ## Upgrading
 
-**Upgrading from 1.0.\* to 2.0.\***
+### Upgrading from 1.0.\* to 2.0.\*
 
 #### Change composer version
 

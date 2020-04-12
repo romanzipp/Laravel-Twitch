@@ -2,6 +2,7 @@
 
 namespace romanzipp\Twitch\Traits;
 
+use InvalidArgumentException;
 use romanzipp\Twitch\Helpers\Paginator;
 use romanzipp\Twitch\Result;
 
@@ -12,7 +13,7 @@ trait SubscriptionsTrait
      * Required OAuth Scope: channel:read:subscriptions
      *
      * Parameters:
-     * string broadcaster_id  ID of the broadcaster. Must match the User ID in the Bearer token.
+     * string broadcaster_id  ID of the broadcaster. Must match the User ID in the Bearer token. (required)
      * string user_id         Unique identifier of account to get subscription status of. Accepts up to 100 values.
      *
      * @see  https://dev.twitch.tv/docs/api/reference/#get-user-subscriptions
@@ -23,6 +24,10 @@ trait SubscriptionsTrait
      */
     public function getSubscriptions(array $parameters = [], Paginator $paginator = null): Result
     {
+        if ( ! array_key_exists('broadcaster_id', $parameters)) {
+            throw new InvalidArgumentException('Parameter required missing: broadcaster_id');
+        }
+
         return $this->get('subscriptions', $parameters, $paginator);
     }
 
@@ -30,11 +35,15 @@ trait SubscriptionsTrait
      * Get all of a user's subscriptions.
      * Required OAuth Scope: channel:read:subscriptions
      *
+     * !!! The option to retrieve all users subscriptions without a broadcaster id has been removed.
+     *
      * @see  https://dev.twitch.tv/docs/api/reference/#get-broadcaster-subscriptions
      *
      * @param int $user User ID
      * @param Paginator|null $paginator Paginator object
      * @return Result         Result object
+     * @deprecated
+     *
      */
     public function getUserSubscriptions(int $user, Paginator $paginator = null): Result
     {

@@ -32,7 +32,7 @@ trait OAuthTrait
         }
 
         if ($forceVerify === true) {
-            $query['force_verify'] = 1;
+            $query['force_verify'] = 'true';
         }
 
         return self::OAUTH_BASE_URI . 'authorize?' . http_build_query($query);

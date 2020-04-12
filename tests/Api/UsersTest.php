@@ -3,13 +3,14 @@
 namespace romanzipp\Twitch\Tests\Api;
 
 use BadMethodCallException;
+use InvalidArgumentException;
 use romanzipp\Twitch\Tests\TestCases\ApiTestCase;
 
 class UsersTest extends ApiTestCase
 {
     public function testGetUsersMissingParameters()
     {
-        $this->expectException(BadMethodCallException::class);
+        $this->expectException(InvalidArgumentException::class);
 
         $this->twitch()->getUsers([]);
     }

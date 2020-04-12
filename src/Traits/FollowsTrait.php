@@ -2,7 +2,7 @@
 
 namespace romanzipp\Twitch\Traits;
 
-use BadMethodCallException;
+use InvalidArgumentException;
 use romanzipp\Twitch\Helpers\Paginator;
 use romanzipp\Twitch\Result;
 
@@ -21,7 +21,7 @@ trait FollowsTrait
     public function getFollows(int $from = null, int $to = null, Paginator $paginator = null): Result
     {
         if ($from === null && $to === null) {
-            throw new BadMethodCallException('At minimum, from or to must be provided for a query to be valid');
+            throw new InvalidArgumentException('At minimum, from or to must be provided for a query to be valid');
         }
 
         $parameters = [];

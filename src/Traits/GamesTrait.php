@@ -2,7 +2,7 @@
 
 namespace romanzipp\Twitch\Traits;
 
-use BadMethodCallException;
+use InvalidArgumentException;
 use romanzipp\Twitch\Helpers\Paginator;
 use romanzipp\Twitch\Result;
 
@@ -23,7 +23,7 @@ trait GamesTrait
     public function getGames(array $parameters): Result
     {
         if ( ! array_key_exists('name', $parameters) && ! array_key_exists('id', $parameters)) {
-            throw new BadMethodCallException('Parameter required missing: name or id');
+            throw new InvalidArgumentException('Parameter required missing: name or id');
         }
 
         return $this->get('games', $parameters);

@@ -54,8 +54,11 @@ trait OAuthTrait
             'grant_type' => $grantType,
             'client_id' => $this->getClientId(),
             'client_secret' => $this->getClientSecret(),
-            'redirect_uri' => $this->getRedirectUri(),
         ];
+
+        if ($grantType === GrantType::AUTHORIZATION_CODE) {
+            $parameters['redirect_uri'] = $this->getRedirectUri();
+        }
 
         if ($code !== null) {
             $parameters['code'] = $code;

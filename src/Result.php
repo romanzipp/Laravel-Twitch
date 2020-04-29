@@ -4,6 +4,7 @@ namespace romanzipp\Twitch;
 
 use Exception;
 use GuzzleHttp\Psr7\Response;
+use Psr\Http\Message\ResponseInterface;
 use romanzipp\Twitch\Helpers\Paginator;
 
 class Result
@@ -74,10 +75,10 @@ class Result
     /**
      * Constructor,
      *
-     * @param Response $response HTTP response
+     * @param ResponseInterface $response HTTP response
      * @param Exception|mixed $exception Exception, if present
      */
-    public function __construct(Response $response, Exception $exception = null)
+    public function __construct(ResponseInterface $response, Exception $exception = null)
     {
         $this->response = $response;
         $this->status = $response->getStatusCode();
@@ -266,9 +267,9 @@ class Result
     /**
      * Map response payload to instance attributes.
      *
-     * @param \GuzzleHttp\Psr7\Response $response
+     * @param ResponseInterface $response
      */
-    protected function processPayload(Response $response): void
+    protected function processPayload(ResponseInterface $response): void
     {
         $payload = @json_decode($response->getBody());
 

@@ -345,7 +345,11 @@ class Twitch
 
         } catch (RequestException $exception) {
 
-            $result = new Result($exception->getResponse(), $exception);
+            if ( ! $response = $exception->getResponse()) {
+                throw $exception;
+            }
+
+            $result = new Result($response, $exception);
         }
 
         $result->twitch = $this;

@@ -265,6 +265,16 @@ class Twitch
     }
 
     /**
+     * Set the guzzle client.
+     *
+     * @param \GuzzleHttp\Client $client
+     */
+    public function setRequestClient(Client $client): void
+    {
+        $this->client = $client;
+    }
+
+    /**
      * @param string $path
      * @param array $parameters
      * @param \romanzipp\Twitch\Helpers\Paginator|null $paginator

@@ -21,10 +21,10 @@ trait OAuthTrait
     {
         $query = [
             'response_type' => $responseType,
-            'state'         => $state,
-            'client_id'     => $this->getClientId(),
-            'scope'         => $this->buildScopes($scopes),
-            'redirect_uri'  => $this->getRedirectUri(),
+            'state' => $state,
+            'client_id' => $this->getClientId(),
+            'scope' => $this->buildScopes($scopes),
+            'redirect_uri' => $this->getRedirectUri(),
         ];
 
         if ($state !== null) {
@@ -49,11 +49,11 @@ trait OAuthTrait
     public function getOAuthToken(string $code): Result
     {
         $parameters = [
-            'code'          => $code,
-            'grant_type'    => 'authorization_code',
-            'client_id'     => $this->getClientId(),
+            'code' => $code,
+            'grant_type' => 'authorization_code',
+            'client_id' => $this->getClientId(),
             'client_secret' => $this->getClientSecret(),
-            'redirect_uri'  => $this->getRedirectUri(),
+            'redirect_uri' => $this->getRedirectUri(),
         ];
 
         return $this->post(self::OAUTH_BASE_URI . 'token', $parameters);

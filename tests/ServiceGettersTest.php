@@ -4,6 +4,7 @@ namespace romanzipp\Twitch\Tests;
 
 use romanzipp\Twitch\Exceptions\RequestRequiresAuthenticationException;
 use romanzipp\Twitch\Exceptions\RequestRequiresClientIdException;
+use romanzipp\Twitch\Exceptions\RequestRequiresClientSecretException;
 use romanzipp\Twitch\Exceptions\RequestRequiresRedirectUriException;
 use romanzipp\Twitch\Tests\TestCases\TestCase;
 use romanzipp\Twitch\Twitch;
@@ -20,7 +21,7 @@ class ServiceGettersTest extends TestCase
 
     public function testClientSecretGetterException()
     {
-        $this->expectException(RequestRequiresClientIdException::class);
+        $this->expectException(RequestRequiresClientSecretException::class);
 
         $twitch = new Twitch;
         $twitch->getClientSecret();

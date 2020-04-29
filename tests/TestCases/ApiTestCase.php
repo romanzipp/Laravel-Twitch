@@ -21,9 +21,7 @@ abstract class ApiTestCase extends TestCase
     {
         parent::setUp();
 
-        if ( ! $this->getClientId()) {
-            $this->markTestSkipped('No Client-ID provided');
-        }
+        $this->skipIfClientIdMissing();
 
         if (self::$lastResult !== null && self::$lastResult->rateLimit() !== null && self::$lastResult->rateLimit('remaining') < 3) {
             $this->markTestSkipped(
@@ -32,9 +30,14 @@ abstract class ApiTestCase extends TestCase
         }
 
         $this->twitch = app(Twitch::class);
+
         $this->twitch->setClientId(
             $this->getClientId()
         );
+
+        if ($secret = $this->getClientSecret()) {
+            $this->twitch->setClientSecret($secret);
+        }
     }
 
     protected function twitch(): Twitch
@@ -49,6 +52,29 @@ abstract class ApiTestCase extends TestCase
         self::$lastResult = $result;
 
         return $result;
+    }
+
+    protected function skipIfClientSecretMissing(): void
+    {
+        if ($this->getClientSecret()) {
+            return;
+        }
+
+        $this->markTestSkipped('No Client-Secret provided');
+    }
+
+    protected function skipIfClientIdMissing(): void
+    {
+        if ($this->getClientId()) {
+            return;
+        }
+
+        $this->markTestSkipped('No Client-ID provided');
+    }
+
+    protected function getClientSecret()
+    {
+        return getenv('CLIENT_SECRET');
     }
 
     protected function getClientId()

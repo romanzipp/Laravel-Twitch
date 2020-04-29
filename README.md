@@ -308,30 +308,7 @@ public function webhookTopicUserFollowsUser(int $from, int $to)
 
 ## Upgrading
 
-### Upgrading from 1.0.\* to 2.0.\*
-
-#### Change composer version
-
-```diff
-- "romanzipp/laravel-twitch": "^1.0"
-+ "romanzipp/laravel-twitch": "^2.0"
-```
-
-#### Token parameter is removed from all methods
-
-The OAuth Bearer token can now only be set through the instance setters `setToken` or `withToken`.
-
-```diff
-- $twitch->getAuthedUser('abcdef123456');
-+ $twitch->withToken('abcdef123456')->getAuthedUser();
-```
-
-#### Legacy Kraken endpoints have been removed
-
-```diff
-- $twitch->legacyRefreshToken();
-- $twitch->legacyRoot();
-```
+- [Upgrade from 1.0 to 2.0](https://github.com/romanzipp/Laravel-Twitch/releases/tag/2.0.0)
 
 ## Development
 
@@ -343,6 +320,10 @@ composer test
 
 ```shell
 CLIENT_ID=xxxx composer test
+```
+
+```shell
+CLIENT_ID=xxxx CLIENT_SECRET=xxxx composer test
 ```
 
 #### Generate Documentation

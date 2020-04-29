@@ -39,8 +39,9 @@ class Twitch
 
     use WebhooksTrait;
 
-    const BASE_URI = 'https://api.twitch.tv/helix/';
-    const OAUTH_BASE_URI = 'https://id.twitch.tv/oauth2/';
+    public const BASE_URI = 'https://api.twitch.tv/helix/';
+
+    public const OAUTH_BASE_URI = 'https://id.twitch.tv/oauth2/';
 
     /**
      * Guzzle is used to make http requests.
@@ -230,7 +231,7 @@ class Twitch
      * @return string|null
      * @throws \romanzipp\Twitch\Exceptions\RequestRequiresAuthenticationException
      */
-    public function getToken()
+    public function getToken(): ?string
     {
         if ( ! $this->token) {
             throw new RequestRequiresAuthenticationException;
@@ -270,7 +271,7 @@ class Twitch
      * @return \romanzipp\Twitch\Result
      * @throws \romanzipp\Twitch\Exceptions\RequestRequiresClientIdException
      */
-    public function get(string $path = '', array $parameters = [], Paginator $paginator = null)
+    public function get(string $path = '', array $parameters = [], Paginator $paginator = null): Result
     {
         return $this->query('GET', $path, $parameters, $paginator);
     }
@@ -282,7 +283,7 @@ class Twitch
      * @return \romanzipp\Twitch\Result
      * @throws \romanzipp\Twitch\Exceptions\RequestRequiresClientIdException
      */
-    public function post(string $path = '', array $parameters = [], Paginator $paginator = null)
+    public function post(string $path = '', array $parameters = [], Paginator $paginator = null): Result
     {
         return $this->query('POST', $path, $parameters, $paginator);
     }
@@ -294,7 +295,7 @@ class Twitch
      * @return \romanzipp\Twitch\Result
      * @throws \romanzipp\Twitch\Exceptions\RequestRequiresClientIdException
      */
-    public function put(string $path = '', array $parameters = [], Paginator $paginator = null)
+    public function put(string $path = '', array $parameters = [], Paginator $paginator = null): Result
     {
         return $this->query('PUT', $path, $parameters, $paginator);
     }
@@ -306,7 +307,7 @@ class Twitch
      * @return \romanzipp\Twitch\Result
      * @throws \romanzipp\Twitch\Exceptions\RequestRequiresClientIdException
      */
-    public function json(string $method, string $path = '', array $body = null)
+    public function json(string $method, string $path = '', array $body = null): Result
     {
         if ($body) {
             $body = json_encode(['data' => $body]);
@@ -336,8 +337,8 @@ class Twitch
             /** @var \GuzzleHttp\Psr7\Response $response */
             $response = $this->client->request($method, $path, [
                 'headers' => $this->buildHeaders($jsonBody ? true : false),
-                'query'   => $this->buildQuery($parameters),
-                'json'    => $jsonBody ? $jsonBody : null,
+                'query' => $this->buildQuery($parameters),
+                'json' => $jsonBody ? $jsonBody : null,
             ]);
 
             $result = new Result($response, null);

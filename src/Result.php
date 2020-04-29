@@ -179,9 +179,9 @@ class Result
     /**
      * Set the Paginator to fetch the first set of results.
      *
-     * @return null|Paginator
+     * @return Paginator|null
      */
-    public function first()
+    public function first(): ?Paginator
     {
         return $this->paginator !== null ? $this->paginator->first() : null;
     }
@@ -189,9 +189,9 @@ class Result
     /**
      * Set the Paginator to fetch the next set of results.
      *
-     * @return null|Paginator
+     * @return Paginator|null
      */
-    public function next()
+    public function next(): ?Paginator
     {
         return $this->paginator !== null ? $this->paginator->next() : null;
     }
@@ -199,9 +199,9 @@ class Result
     /**
      * Set the Paginator to fetch the last set of results.
      *
-     * @return null|Paginator
+     * @return Paginator|null
      */
-    public function back()
+    public function back(): ?Paginator
     {
         return $this->paginator !== null ? $this->paginator->back() : null;
     }
@@ -219,9 +219,9 @@ class Result
         }
 
         $rateLimit = [
-            'limit'     => (int) $this->response->getHeaderLine('Ratelimit-Limit'),
+            'limit' => (int) $this->response->getHeaderLine('Ratelimit-Limit'),
             'remaining' => (int) $this->response->getHeaderLine('Ratelimit-Remaining'),
-            'reset'     => (int) $this->response->getHeaderLine('Ratelimit-Reset'),
+            'reset' => (int) $this->response->getHeaderLine('Ratelimit-Reset'),
         ];
 
         if ($key === null) {
@@ -246,7 +246,7 @@ class Result
             return $item->{$identifierAttribute};
         })->toArray();
 
-        if (count($userIds) == 0) {
+        if (count($userIds) === 0) {
             return $this;
         }
 

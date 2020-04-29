@@ -34,3 +34,4 @@ jobs:
         run: vendor/bin/phpunit
         env:
           CLIENT_ID: ${{ secrets.TWITCH_CLIENT_ID }}
+          CLIENT_SECRET: ${{ secrets.TWITCH_CLIENT_SECRET }}

@@ -2,6 +2,7 @@
 
 namespace romanzipp\Twitch\Traits;
 
+use romanzipp\Twitch\Enums\GrantType;
 use romanzipp\Twitch\Result;
 
 trait OAuthTrait
@@ -42,18 +43,27 @@ trait OAuthTrait
      *
      * @see  https://dev.twitch.tv/docs/authentication/getting-tokens-oauth/#oauth-authorization-code-flow
      *
-     * @param string $code
+     * @param string|null $code
+     * @param string $grantType
+     * @param array $scopes
      * @return Result
      */
-    public function getOAuthToken(string $code): Result
+    public function getOAuthToken(?string $code = null, string $grantType = GrantType::AUTHORIZATION_CODE, array $scopes = []): Result
     {
         $parameters = [
-            'code' => $code,
-            'grant_type' => 'authorization_code',
+            'grant_type' => $grantType,
             'client_id' => $this->getClientId(),
             'client_secret' => $this->getClientSecret(),
             'redirect_uri' => $this->getRedirectUri(),
         ];
+
+        if ($code !== null) {
+            $parameters['code'] = $code;
+        }
+
+        if ( ! empty($scopes)) {
+            $parameters['scope'] = $this->buildScopes($scopes);
+        }
 
         return $this->post(self::OAUTH_BASE_URI . 'token', $parameters);
     }

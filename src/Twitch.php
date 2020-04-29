@@ -6,6 +6,7 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
 use romanzipp\Twitch\Exceptions\RequestRequiresAuthenticationException;
 use romanzipp\Twitch\Exceptions\RequestRequiresClientIdException;
+use romanzipp\Twitch\Exceptions\RequestRequiresClientSecretException;
 use romanzipp\Twitch\Exceptions\RequestRequiresRedirectUriException;
 use romanzipp\Twitch\Helpers\Paginator;
 use romanzipp\Twitch\Traits\BitsTrait;
@@ -150,12 +151,12 @@ class Twitch
      * Get client secret.
      *
      * @return string
-     * @throws \romanzipp\Twitch\Exceptions\RequestRequiresClientIdException
+     * @throws \romanzipp\Twitch\Exceptions\RequestRequiresClientSecretException
      */
     public function getClientSecret(): string
     {
         if ( ! $this->clientSecret) {
-            throw new RequestRequiresClientIdException;
+            throw new RequestRequiresClientSecretException;
         }
 
         return $this->clientSecret;

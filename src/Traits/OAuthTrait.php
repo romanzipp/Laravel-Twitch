@@ -21,7 +21,6 @@ trait OAuthTrait
     {
         $query = [
             'response_type' => $responseType,
-            'state' => $state,
             'client_id' => $this->getClientId(),
             'scope' => $this->buildScopes($scopes),
             'redirect_uri' => $this->getRedirectUri(),

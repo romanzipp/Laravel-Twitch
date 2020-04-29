@@ -36,7 +36,13 @@ $markdown = collect(class_uses(Twitch::class))
 
                 $declaration .= collect($method->getParameters())->map(function (ReflectionParameter $parameter) {
 
-                    $parameterString = Arr::last(explode('\\', $parameter->getType()->getName()));
+                    $parameterString = '';
+
+                    if ($parameter->allowsNull()) {
+                        $parameterString .= '?';
+                    }
+
+                    $parameterString .= Arr::last(explode('\\', $parameter->getType()->getName()));
                     $parameterString .= ' ';
                     $parameterString .= '$';
                     $parameterString .= $parameter->getName();

@@ -43,7 +43,13 @@ $markdown = collect(class_uses(Twitch::class))
 
                     if ($parameter->isDefaultValueAvailable()) {
                         $parameterString .= ' = ';
-                        $parameterString .= str_replace(PHP_EOL, '', var_export($parameter->getDefaultValue(), true));
+                        $parameterString .= str_replace([
+                            PHP_EOL,
+                            'array ()',
+                        ], [
+                            '',
+                            '[]',
+                        ], var_export($parameter->getDefaultValue(), true));
                     }
 
                     return $parameterString;

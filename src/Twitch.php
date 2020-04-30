@@ -109,6 +109,16 @@ class Twitch
     }
 
     /**
+     * Check if a Client ID has been set.
+     *
+     * @return bool
+     */
+    public function hasClientId(): bool
+    {
+        return ! empty($this->clientId);
+    }
+
+    /**
      * Get client id.
      *
      * @return string
@@ -145,6 +155,16 @@ class Twitch
         $this->setClientId($clientId);
 
         return $this;
+    }
+
+    /**
+     * Check if a Client Secret has been set.
+     *
+     * @return bool
+     */
+    public function hasClientSecret(): bool
+    {
+        return ! empty($this->clientSecret);
     }
 
     /**
@@ -187,7 +207,17 @@ class Twitch
     }
 
     /**
-     * Get redirect url.
+     * Check if a Redirect URI has been set.
+     *
+     * @return bool
+     */
+    public function hasRedirectUri(): bool
+    {
+        return ! empty($this->redirectUri);
+    }
+
+    /**
+     * Get Redirect URI.
      *
      * @return string
      * @throws \romanzipp\Twitch\Exceptions\RequestRequiresRedirectUriException
@@ -202,7 +232,7 @@ class Twitch
     }
 
     /**
-     * Set redirect url.
+     * Set Redirect URI.
      *
      * @param string $redirectUri
      * @return void

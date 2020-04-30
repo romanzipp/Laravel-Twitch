@@ -2,7 +2,7 @@
 
 namespace romanzipp\Twitch\Concerns\Api;
 
-use romanzipp\Twitch\Objects\Paginator;
+use romanzipp\Twitch\Helpers\Paginator;
 use romanzipp\Twitch\Result;
 
 trait ModerationTrait
@@ -31,7 +31,7 @@ trait ModerationTrait
      * @see https://dev.twitch.tv/docs/api/reference/#get-banned-events
      *
      * @param array $parameters
-     * @param \romanzipp\Twitch\Objects\Paginator|null $paginator
+     * @param \romanzipp\Twitch\Helpers\Paginator|null $paginator
      * @return \romanzipp\Twitch\Result
      */
     public function getBannedEvents(array $parameters = [], Paginator $paginator = null): Result
@@ -45,7 +45,7 @@ trait ModerationTrait
      * @see https://dev.twitch.tv/docs/api/reference/#get-banned-users
      *
      * @param array $parameters
-     * @param \romanzipp\Twitch\Objects\Paginator|null $paginator
+     * @param \romanzipp\Twitch\Helpers\Paginator|null $paginator
      * @return \romanzipp\Twitch\Result
      */
     public function getBannedUsers(array $parameters = [], Paginator $paginator = null): Result
@@ -59,7 +59,7 @@ trait ModerationTrait
      * @see https://dev.twitch.tv/docs/api/reference/#get-moderators
      *
      * @param array $parameters
-     * @param \romanzipp\Twitch\Objects\Paginator|null $paginator
+     * @param \romanzipp\Twitch\Helpers\Paginator|null $paginator
      * @return \romanzipp\Twitch\Result
      */
     public function getModerators(array $parameters = [], Paginator $paginator = null): Result
@@ -73,7 +73,7 @@ trait ModerationTrait
      * @see https://dev.twitch.tv/docs/api/reference/#get-moderator-events
      *
      * @param array $parameters
-     * @param \romanzipp\Twitch\Objects\Paginator|null $paginator
+     * @param \romanzipp\Twitch\Helpers\Paginator|null $paginator
      * @return \romanzipp\Twitch\Result
      */
     public function getModeratorEvents(array $parameters = [], Paginator $paginator = null): Result

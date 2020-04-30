@@ -1,6 +1,6 @@
 <?php
 
-namespace romanzipp\Twitch\Objects;
+namespace romanzipp\Twitch\Helpers;
 
 use romanzipp\Twitch\Result;
 use stdClass;

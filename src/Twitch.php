@@ -22,7 +22,7 @@ use romanzipp\Twitch\Exceptions\RequestRequiresAuthenticationException;
 use romanzipp\Twitch\Exceptions\RequestRequiresClientIdException;
 use romanzipp\Twitch\Exceptions\RequestRequiresClientSecretException;
 use romanzipp\Twitch\Exceptions\RequestRequiresRedirectUriException;
-use romanzipp\Twitch\Objects\Paginator;
+use romanzipp\Twitch\Helpers\Paginator;
 
 class Twitch
 {
@@ -321,7 +321,7 @@ class Twitch
     /**
      * @param string $path
      * @param array $parameters
-     * @param \romanzipp\Twitch\Objects\Paginator|null $paginator
+     * @param \romanzipp\Twitch\Helpers\Paginator|null $paginator
      * @return \romanzipp\Twitch\Result
      * @throws \romanzipp\Twitch\Exceptions\RequestRequiresClientIdException
      */
@@ -333,7 +333,7 @@ class Twitch
     /**
      * @param string $path
      * @param array $parameters
-     * @param \romanzipp\Twitch\Objects\Paginator|null $paginator
+     * @param \romanzipp\Twitch\Helpers\Paginator|null $paginator
      * @return \romanzipp\Twitch\Result
      * @throws \romanzipp\Twitch\Exceptions\RequestRequiresClientIdException
      */
@@ -345,7 +345,7 @@ class Twitch
     /**
      * @param string $path
      * @param array $parameters
-     * @param \romanzipp\Twitch\Objects\Paginator|null $paginator
+     * @param \romanzipp\Twitch\Helpers\Paginator|null $paginator
      * @return \romanzipp\Twitch\Result
      * @throws \romanzipp\Twitch\Exceptions\RequestRequiresClientIdException
      */

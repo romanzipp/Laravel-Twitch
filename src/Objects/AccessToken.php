@@ -17,6 +17,8 @@ class AccessToken implements Arrayable
 
     public $tokenType;
 
+    public $expiresAt;
+
     public function __construct(stdClass $data)
     {
         $this->accessToken = $data->access_token;
@@ -24,6 +26,7 @@ class AccessToken implements Arrayable
         $this->expiresIn = $data->expires_in;
         $this->scope = $data->scope ?? [];
         $this->tokenType = $data->token_type;
+        $this->expiresAt = $data->expires_at ?? time() + $this->expiresIn;
     }
 
     public function toArray()
@@ -34,11 +37,16 @@ class AccessToken implements Arrayable
             'expires_in' => $this->expiresIn,
             'scope' => $this->scope,
             'token_type' => $this->tokenType,
+            'expires_at' => $this->expiresAt,
         ];
     }
 
     public function isExpired(): bool
     {
-        return true;
+        if ($this->expiresAt === null) {
+            return true;
+        }
+
+        return time() > $this->expiresAt;
     }
 }

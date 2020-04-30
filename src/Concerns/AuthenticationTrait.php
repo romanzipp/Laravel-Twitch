@@ -52,7 +52,7 @@ trait AuthenticationTrait
         }
 
         $token = new AccessToken(
-            $result->data()
+            (array) $result->data()
         );
 
         if ($this->shouldCacheClientCredentials()) {

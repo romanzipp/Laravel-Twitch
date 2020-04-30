@@ -379,7 +379,7 @@ class Twitch
             $response = $this->client->request($method, $path, [
                 'headers' => $this->buildHeaders($jsonBody ? true : false),
                 'query' => $this->buildQuery($parameters),
-                'json' => $jsonBody ? $jsonBody : null,
+                'json' => $jsonBody ?: null,
             ]);
 
             $result = new Result($response, null);

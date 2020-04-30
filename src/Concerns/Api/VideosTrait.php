@@ -3,7 +3,7 @@
 namespace romanzipp\Twitch\Concerns\Api;
 
 use BadMethodCallException;
-use romanzipp\Twitch\Helpers\Paginator;
+use romanzipp\Twitch\Objects\Paginator;
 use romanzipp\Twitch\Result;
 
 trait VideosTrait
@@ -23,7 +23,7 @@ trait VideosTrait
      * @see    https://dev.twitch.tv/docs/api/reference#get-videos
      *
      * @param array $parameters Array of parameters
-     * @param \romanzipp\Twitch\Helpers\Paginator|null $paginator
+     * @param \romanzipp\Twitch\Objects\Paginator|null $paginator
      * @return Result Result object
      */
     public function getVideos(array $parameters, Paginator $paginator = null): Result

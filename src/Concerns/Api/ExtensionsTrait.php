@@ -2,7 +2,7 @@
 
 namespace romanzipp\Twitch\Concerns\Api;
 
-use romanzipp\Twitch\Helpers\Paginator;
+use romanzipp\Twitch\Objects\Paginator;
 use romanzipp\Twitch\Result;
 
 trait ExtensionsTrait

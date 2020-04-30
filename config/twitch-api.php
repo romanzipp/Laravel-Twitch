@@ -38,6 +38,11 @@ return [
         'cache_driver' => null,
 
         /*
+        * The cache store to use for storing Client Credentials.
+        */
+        'cache_store' => null,
+
+        /*
          * The cache key to use for storing information.
          */
         'cache_key' => 'twitch-api-client-credentials',

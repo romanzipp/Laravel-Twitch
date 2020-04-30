@@ -15,6 +15,8 @@ This can be achieved by requesting an OAuth Token using the [Client Credentials 
 
 If you don't handle this by yourself, be sure to enable the built-in feature via the `oauth_client_credentials.auto_generate` configuration entry.
 
+Be sure to set the **Client ID** and **Client Secret** via your config or the available setters.
+
 See the [full config](https://github.com/romanzipp/Laravel-Twitch/blob/master/config/twitch-api.php) for more details.
 
 ## Table of contents

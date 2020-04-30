@@ -9,19 +9,19 @@ use romanzipp\Twitch\Exceptions\RequestRequiresClientIdException;
 use romanzipp\Twitch\Exceptions\RequestRequiresClientSecretException;
 use romanzipp\Twitch\Exceptions\RequestRequiresRedirectUriException;
 use romanzipp\Twitch\Helpers\Paginator;
-use romanzipp\Twitch\Traits\BitsTrait;
-use romanzipp\Twitch\Traits\ClipsTrait;
-use romanzipp\Twitch\Traits\ExtensionsTrait;
-use romanzipp\Twitch\Traits\FollowsTrait;
-use romanzipp\Twitch\Traits\GamesTrait;
-use romanzipp\Twitch\Traits\ModerationTrait;
-use romanzipp\Twitch\Traits\OAuthTrait;
-use romanzipp\Twitch\Traits\StreamsMetadataTrait;
-use romanzipp\Twitch\Traits\StreamsTrait;
-use romanzipp\Twitch\Traits\SubscriptionsTrait;
-use romanzipp\Twitch\Traits\UsersTrait;
-use romanzipp\Twitch\Traits\VideosTrait;
-use romanzipp\Twitch\Traits\WebhooksTrait;
+use romanzipp\Twitch\Concerns\Api\BitsTrait;
+use romanzipp\Twitch\Concerns\Api\ClipsTrait;
+use romanzipp\Twitch\Concerns\Api\ExtensionsTrait;
+use romanzipp\Twitch\Concerns\Api\FollowsTrait;
+use romanzipp\Twitch\Concerns\Api\GamesTrait;
+use romanzipp\Twitch\Concerns\Api\ModerationTrait;
+use romanzipp\Twitch\Concerns\Api\OAuthTrait;
+use romanzipp\Twitch\Concerns\Api\StreamsMetadataTrait;
+use romanzipp\Twitch\Concerns\Api\StreamsTrait;
+use romanzipp\Twitch\Concerns\Api\SubscriptionsTrait;
+use romanzipp\Twitch\Concerns\Api\UsersTrait;
+use romanzipp\Twitch\Concerns\Api\VideosTrait;
+use romanzipp\Twitch\Concerns\Api\WebhooksTrait;
 
 class Twitch
 {

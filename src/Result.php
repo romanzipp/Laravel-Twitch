@@ -5,7 +5,7 @@ namespace romanzipp\Twitch;
 use Exception;
 use GuzzleHttp\Psr7\Response;
 use Psr\Http\Message\ResponseInterface;
-use romanzipp\Twitch\Objects\Paginator;
+use romanzipp\Twitch\Helpers\Paginator;
 
 class Result
 {

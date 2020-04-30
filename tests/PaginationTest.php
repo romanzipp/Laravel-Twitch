@@ -3,7 +3,7 @@
 namespace romanzipp\Twitch\Tests;
 
 use GuzzleHttp\Psr7\Response;
-use romanzipp\Twitch\Objects\Paginator;
+use romanzipp\Twitch\Helpers\Paginator;
 use romanzipp\Twitch\Result;
 use romanzipp\Twitch\Tests\TestCases\TestCase;
 

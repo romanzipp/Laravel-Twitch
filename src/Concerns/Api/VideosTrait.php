@@ -1,6 +1,6 @@
 <?php
 
-namespace romanzipp\Twitch\Traits;
+namespace romanzipp\Twitch\Concerns\Api;
 
 use BadMethodCallException;
 use romanzipp\Twitch\Helpers\Paginator;

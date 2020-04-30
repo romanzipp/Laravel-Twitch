@@ -88,7 +88,7 @@ $markdown = collect(class_uses(Twitch::class))
         return $markdown;
     })->join(PHP_EOL . PHP_EOL);
 
-$content = file_get_contents(__DIR__ . '/../README.stub');
+$content = file_get_contents(__DIR__ . '/../README.stub.md');
 
 $content = str_replace('<!-- GENERATED-DOCS -->', $markdown, $content);
 

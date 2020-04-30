@@ -123,7 +123,7 @@ trait AuthenticationTrait
 
     public function isAuthenticationUri(string $uri): bool
     {
-        return substr($uri, 0, strlen(self::OAUTH_BASE_URI)) === self::OAUTH_BASE_URI;
+        return strpos($uri, self::OAUTH_BASE_URI) === 0;
     }
 
     abstract public function getOAuthToken(?string $code = null, string $grantType = GrantType::AUTHORIZATION_CODE, array $scopes = []): Result;

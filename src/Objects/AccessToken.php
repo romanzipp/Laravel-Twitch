@@ -3,7 +3,6 @@
 namespace romanzipp\Twitch\Objects;
 
 use Illuminate\Contracts\Support\Arrayable;
-use stdClass;
 
 class AccessToken implements Arrayable
 {
@@ -19,14 +18,14 @@ class AccessToken implements Arrayable
 
     public $expiresAt;
 
-    public function __construct(stdClass $data)
+    public function __construct(array $data)
     {
-        $this->accessToken = $data->access_token;
-        $this->refreshToken = $data->refresh_token ?? null;
-        $this->expiresIn = $data->expires_in;
-        $this->scope = $data->scope ?? [];
-        $this->tokenType = $data->token_type;
-        $this->expiresAt = $data->expires_at ?? time() + $this->expiresIn;
+        $this->accessToken = $data['access_token'];
+        $this->refreshToken = $data['refresh_token'] ?? null;
+        $this->expiresIn = $data['expires_in'];
+        $this->scope = $data['scope'] ?? [];
+        $this->tokenType = $data['token_type'];
+        $this->expiresAt = $data['expires_at'] ?? time() + $this->expiresIn;
     }
 
     public function toArray()

@@ -19,7 +19,7 @@ class AccessTokenExpirationTest extends TestCase
 
     private function token(int $expiresAt): AccessToken
     {
-        $token = new AccessToken((object) [
+        $token = new AccessToken([
             'access_token' => 'foo',
             'expires_in' => time() - $expiresAt,
             'token_type' => 'client_credentials',

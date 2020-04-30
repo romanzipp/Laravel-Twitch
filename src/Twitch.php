@@ -4,11 +4,6 @@ namespace romanzipp\Twitch;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
-use romanzipp\Twitch\Exceptions\RequestRequiresAuthenticationException;
-use romanzipp\Twitch\Exceptions\RequestRequiresClientIdException;
-use romanzipp\Twitch\Exceptions\RequestRequiresClientSecretException;
-use romanzipp\Twitch\Exceptions\RequestRequiresRedirectUriException;
-use romanzipp\Twitch\Helpers\Paginator;
 use romanzipp\Twitch\Concerns\Api\BitsTrait;
 use romanzipp\Twitch\Concerns\Api\ClipsTrait;
 use romanzipp\Twitch\Concerns\Api\ExtensionsTrait;
@@ -22,9 +17,17 @@ use romanzipp\Twitch\Concerns\Api\SubscriptionsTrait;
 use romanzipp\Twitch\Concerns\Api\UsersTrait;
 use romanzipp\Twitch\Concerns\Api\VideosTrait;
 use romanzipp\Twitch\Concerns\Api\WebhooksTrait;
+use romanzipp\Twitch\Concerns\AuthenticationTrait;
+use romanzipp\Twitch\Exceptions\RequestRequiresAuthenticationException;
+use romanzipp\Twitch\Exceptions\RequestRequiresClientIdException;
+use romanzipp\Twitch\Exceptions\RequestRequiresClientSecretException;
+use romanzipp\Twitch\Exceptions\RequestRequiresRedirectUriException;
+use romanzipp\Twitch\Objects\Paginator;
 
 class Twitch
 {
+    use AuthenticationTrait;
+
     use OAuthTrait;
     use BitsTrait;
     use ClipsTrait;
@@ -318,7 +321,7 @@ class Twitch
     /**
      * @param string $path
      * @param array $parameters
-     * @param \romanzipp\Twitch\Helpers\Paginator|null $paginator
+     * @param \romanzipp\Twitch\Objects\Paginator|null $paginator
      * @return \romanzipp\Twitch\Result
      * @throws \romanzipp\Twitch\Exceptions\RequestRequiresClientIdException
      */
@@ -330,7 +333,7 @@ class Twitch
     /**
      * @param string $path
      * @param array $parameters
-     * @param \romanzipp\Twitch\Helpers\Paginator|null $paginator
+     * @param \romanzipp\Twitch\Objects\Paginator|null $paginator
      * @return \romanzipp\Twitch\Result
      * @throws \romanzipp\Twitch\Exceptions\RequestRequiresClientIdException
      */
@@ -342,7 +345,7 @@ class Twitch
     /**
      * @param string $path
      * @param array $parameters
-     * @param \romanzipp\Twitch\Helpers\Paginator|null $paginator
+     * @param \romanzipp\Twitch\Objects\Paginator|null $paginator
      * @return \romanzipp\Twitch\Result
      * @throws \romanzipp\Twitch\Exceptions\RequestRequiresClientIdException
      */
@@ -382,6 +385,12 @@ class Twitch
     {
         if ($paginator !== null) {
             $parameters[$paginator->action] = $paginator->cursor();
+        }
+
+        if ( ! $this->isAuthenticationUri($path) && ! $this->hasToken() && $this->shouldFetchClientCredentials()) {
+            $this->setToken(
+                $this->getClientCredentials()->accessToken
+            );
         }
 
         try {

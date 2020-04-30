@@ -388,9 +388,14 @@ class Twitch
         }
 
         if ( ! $this->isAuthenticationUri($path) && ! $this->hasToken() && $this->shouldFetchClientCredentials()) {
-            $this->setToken(
-                $this->getClientCredentials()->accessToken
-            );
+
+            $token = $this->getClientCredentials();
+
+            if ($token === null) {
+                throw new RequestRequiresAuthenticationException('The request requires an OAuth access token');
+            }
+
+            $this->setToken($token->accessToken);
         }
 
         try {

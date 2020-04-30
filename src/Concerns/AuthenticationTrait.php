@@ -67,6 +67,7 @@ trait AuthenticationTrait
      *
      * @return \romanzipp\Twitch\Objects\AccessToken|null
      * @throws \Psr\SimpleCache\InvalidArgumentException
+     * @throws \Exception
      */
     protected function getCachedClientCredentialsToken(): ?AccessToken
     {
@@ -106,6 +107,7 @@ trait AuthenticationTrait
     /**
      * Get the cache driver instance used for storing the client credentials.
      *
+     * @return Repository
      * @throws \Exception
      */
     protected function getClientCredentialsCacheRepository(): Repository

@@ -66,21 +66,21 @@ class Twitch
     protected $token = null;
 
     /**
-     * Twitch client id.
+     * Twitch Client ID.
      *
      * @var string|null
      */
     protected $clientId = null;
 
     /**
-     * Twitch client secret.
+     * Twitch Client Secret.
      *
      * @var string|null
      */
     protected $clientSecret = null;
 
     /**
-     * Twitch OAuth redirect url.
+     * Twitch OAuth Redirect URI.
      *
      * @var string|null
      */
@@ -253,6 +253,16 @@ class Twitch
         $this->setRedirectUri($redirectUri);
 
         return $this;
+    }
+
+    /**
+     * Check if a OAuth token has been set.
+     *
+     * @return bool
+     */
+    public function hasToken(): bool
+    {
+        return ! empty($this->token);
     }
 
     /**
@@ -433,8 +443,8 @@ class Twitch
             'Client-ID' => $this->getClientId(),
         ];
 
-        if ($this->token) {
-            $headers['Authorization'] = sprintf('Bearer %s', $this->token);
+        if ($this->hasToken()) {
+            $headers['Authorization'] = sprintf('Bearer %s', $this->getToken());
         }
 
         if ($json) {

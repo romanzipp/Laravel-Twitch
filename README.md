@@ -61,15 +61,15 @@ $twitch->setClientId('abc123');
 // Get User by Username
 $result = $twitch->getUserByName('herrausragend');
 
-// Check, if the query was successfull
+// Check, if the query was successful
 if ( ! $result->success()) {
-    die('Ooops: ' . $result->error());
+    return null;
 }
 
 // Shift result to get single user data
 $user = $result->shift();
 
-echo $user->id;
+return $user->id;
 ```
 
 ### Setters
@@ -94,19 +94,29 @@ $twitch = new romanzipp\Twitch\Twitch;
 $twitch->setClientId('abc123');
 $twitch->setToken('abcdef123456');
 
-$result = $twitch->getAuthedUser();
-
-$user = $userResult->shift();
+$result = $twitch->getUserByName('herrausragend');
 ```
 
-```php
-$twitch->setToken('uvwxyz456789');
+### OAuth Client Credentials Flow
 
-$result = $twitch->getAuthedUser();
-```
+Since May 01, 2020, every request requires an OAuth token which can be issued using the [OAuth Client Credentials Flow](https://dev.twitch.tv/docs/authentication/getting-tokens-oauth/#oauth-client-credentials-flow).
 
 ```php
-$result = $twitch->withToken('uvwxyz456789')->getAuthedUser();
+use romanzipp\Twitch\Enums\GrantType;
+
+$twitch = new romanzipp\Twitch\Twitch;
+
+$twitch->setClientId('abc123');
+$twitch->setClientSecret('def123');
+$twitch->setToken('abcdef123456');
+
+$result = $twitch->getOAuthToken(null, GrantType::CLIENT_CREDENTIALS, ['user:read']);
+
+if ( ! $result->success()) {
+    return;
+}
+
+$accessToken = $result->data()->access_token;
 ```
 
 ### Facade
@@ -125,10 +135,12 @@ This example fetches all Twitch Games and stores them into a database.
 $twitch = new romanzipp\Twitch\Twitch;
 
 do {
-    $result = $twitch->getTopGames(['first' => 100], isset($result) ? $result->next() : null);
+    // If this is not the first iteration, get the page cursor to the next set of results
+    $result = $twitch->getTopGames(['first' => 100], $result->next() ?? null);
 
     foreach ($result->data as $item) {
-
+    
+        // Update or create the optional Game model
         Game::updateOrCreate([
             'id' => $item->id,
         ], [
@@ -137,6 +149,7 @@ do {
         ]);
     }
 
+    // Continue until there are no results left
 } while ($result->count() > 0);
 ```
 
@@ -154,11 +167,12 @@ The new API does not include the user objects in endpoints like followers or bit
 ]
 ```
 
-You can just call the [insertUsers](https://github.com/romanzipp/Laravel-Twitch/blob/master/src/Result.php#L233) method to insert all users.
+You can just call the [insertUsers](https://github.com/romanzipp/Laravel-Twitch/blob/master/src/Result.php#L233) method to insert all user data identified by `from_id` into `from_user`
 
 ```php
-$result = $twitch->getFollowsTo($userId);
-$result->insertUsers('from_id', 'from_user'); // Insert users identified by "from_id" to "from_user"
+$result = $twitch->getFollowsTo(654321);
+
+$result->insertUsers('from_id', 'from_user');
 ```
 
 **New Result data:**

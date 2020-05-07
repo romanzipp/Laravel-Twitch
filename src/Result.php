@@ -185,7 +185,11 @@ class Result
      */
     public function first(): ?Paginator
     {
-        return $this->paginator !== null ? $this->paginator->first() : null;
+        if ($this->paginator === null) {
+            return null;
+        }
+
+        return $this->paginator->first();
     }
 
     /**
@@ -195,7 +199,11 @@ class Result
      */
     public function next(): ?Paginator
     {
-        return $this->paginator !== null ? $this->paginator->next() : null;
+        if ($this->paginator === null) {
+            return null;
+        }
+
+        return $this->paginator->next();
     }
 
     /**
@@ -205,7 +213,25 @@ class Result
      */
     public function back(): ?Paginator
     {
-        return $this->paginator !== null ? $this->paginator->back() : null;
+        if ($this->paginator === null) {
+            return null;
+        }
+
+        return $this->paginator->back();
+    }
+
+    /**
+     * Check if the response contains a cursor to the next set of results.
+     *
+     * @return bool
+     */
+    public function hasMoreResults(): bool
+    {
+        if ($this->paginator === null) {
+            return false;
+        }
+
+        return $this->paginator->cursor() !== null;
     }
 
     /**

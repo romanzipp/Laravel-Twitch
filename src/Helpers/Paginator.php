@@ -45,11 +45,11 @@ class Paginator
     /**
      * Return the current active cursor.
      *
-     * @return string Twitch cursor
+     * @return string|null Twitch cursor
      */
-    public function cursor(): string
+    public function cursor(): ?string
     {
-        return $this->pagination->cursor;
+        return $this->pagination->cursor ?? null;
     }
 
     /**

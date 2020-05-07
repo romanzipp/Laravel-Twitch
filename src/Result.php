@@ -181,6 +181,7 @@ class Result
      * Set the Paginator to fetch the first set of results.
      *
      * @return Paginator|null
+     * @deprecated
      */
     public function first(): ?Paginator
     {

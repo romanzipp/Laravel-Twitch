@@ -128,6 +128,27 @@ if ( ! $result->success()) {
 $accessToken = $result->data()->access_token;
 ```
 
+### Pagination
+
+The Twitch API returns a `paginator` field with paginated results like `/streams`, `/follows`or `/games`. To jump between pages, the given cursor must be appended to the following query using the direction attributes `after` or `before`.
+
+In this example, we will fetch a set of streams and use the provided cursor to switch to the next/previous set of data.
+
+❗️ To prevent infinite loops or errors, use the `Result::hasMoreResults()` method to check if there are more results available.
+
+```php
+$twitch = new romanzipp\Twitch\Twitch;
+
+// Page 1
+$firstResult = $twitch->getStreams(['language' => 'de']);
+
+// Page 2
+$secondResult = $twitch->getStreams(['language' => 'de'], $firstResult->next());
+
+// Page 1 (again)
+$thirdResult = $twitch->getStreams(['language' => 'de'], $secondResult->back());
+```
+
 ### Facade
 
 ```php
@@ -144,8 +165,15 @@ This example fetches all Twitch Games and stores them into a database.
 $twitch = new romanzipp\Twitch\Twitch;
 
 do {
+    $nextCursor = null;
+
     // If this is not the first iteration, get the page cursor to the next set of results
-    $result = $twitch->getTopGames(['first' => 100], $result->next() ?? null);
+    if (isset($result)) {
+        $nextCursor = $result->next();
+    }
+
+    // Query the API with an optional cursor to the next results page
+    $result = $twitch->getTopGames(['first' => 100], $nextCursor);
 
     foreach ($result->data as $item) {
     
@@ -159,7 +187,7 @@ do {
     }
 
     // Continue until there are no results left
-} while ($result->count() > 0);
+} while ($result->hasMoreResults());
 ```
 
 ### Insert user objects

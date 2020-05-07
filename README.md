@@ -300,7 +300,7 @@ public function getStreamsMetadata(array $parameters = [], ?Paginator $paginator
 ### Users
 
 ```php
-public function getAuthedUser()
+public function getAuthedUser() // DEPRECATED
 public function getUsers(array $parameters)
 public function getUserById(int $id, array $parameters = [])
 public function getUserByName(string $name, array $parameters = [])
@@ -322,7 +322,7 @@ public function getVideosByGame(int $game, array $parameters = [], ?Paginator $p
 
 ```php
 public function getSubscriptions(array $parameters = [], ?Paginator $paginator = NULL)
-public function getUserSubscriptions(int $user, ?Paginator $paginator = NULL)
+public function getUserSubscriptions(int $user, ?Paginator $paginator = NULL) // DEPRECATED
 public function getBroadcasterSubscriptions(int $user, ?Paginator $paginator = NULL)
 ```
 

@@ -3,6 +3,7 @@
 require __DIR__ . '/../vendor/autoload.php';
 
 use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
 use romanzipp\Twitch\Twitch;
 
 $markdown = collect(class_uses(Twitch::class))
@@ -67,6 +68,11 @@ $markdown = collect(class_uses(Twitch::class))
                 })->join(', ');
 
                 $declaration .= ')';
+
+                // $method->isDeprecated() dos not work for whatever reason
+                if (Str::contains($method->getDocComment(), '@deprecated')) {
+                    $declaration .= ' // DEPRECATED';
+                }
 
                 $methods[] = $declaration;
             });

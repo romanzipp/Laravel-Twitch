@@ -71,14 +71,4 @@ abstract class ApiTestCase extends TestCase
 
         $this->markTestSkipped('No Client-ID provided');
     }
-
-    protected function getClientSecret()
-    {
-        return getenv('CLIENT_SECRET');
-    }
-
-    protected function getClientId()
-    {
-        return getenv('CLIENT_ID');
-    }
 }

@@ -227,6 +227,10 @@ class Result
      */
     public function hasMoreResults(): bool
     {
+        if ($this->count() === 0) {
+            return false;
+        }
+
         if ($this->paginator === null) {
             return false;
         }

@@ -16,15 +16,6 @@ class StreamsTest extends ApiTestCase
         $this->assertTrue($firstResult->hasMoreResults());
 
         $this->registerResult(
-            $duplicateFirstResult = $this->twitch()->getStreams([])
-        );
-
-        $this->assertTrue($duplicateFirstResult->success());
-        $this->assertTrue($duplicateFirstResult->hasMoreResults());
-
-        $this->assertEquals($firstResult->paginator->cursor(), $duplicateFirstResult->paginator->cursor());
-
-        $this->registerResult(
             $nextResult = $this->twitch()->getStreams([], $firstResult->next())
         );
 

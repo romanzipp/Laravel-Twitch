@@ -176,14 +176,7 @@ do {
     $result = $twitch->getTopGames(['first' => 100], $nextCursor);
 
     foreach ($result->data as $item) {
-    
-        // Update or create the optional Game model
-        Game::updateOrCreate([
-            'id' => $item->id,
-        ], [
-            'name' => $item->name,
-            'box_art_url' => $item->box_art_url,
-        ]);
+        // Process the games result data
     }
 
     // Continue until there are no results left

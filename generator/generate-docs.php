@@ -10,6 +10,10 @@ $markdown = collect(class_uses(Twitch::class))
 
         $title = str_replace('Trait', '', Arr::last(explode('\\', $trait)));
 
+        if (in_array($title, ['Authentication'])) {
+            return null;
+        }
+
         $methods = [];
 
         $reflection = new ReflectionClass($trait);
@@ -68,6 +72,9 @@ $markdown = collect(class_uses(Twitch::class))
             });
 
         return [$title, $methods];
+    })
+    ->filter(function ($args) {
+        return ! empty($args);
     })
     ->map(function ($args) {
 

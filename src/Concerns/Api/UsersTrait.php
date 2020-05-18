@@ -2,7 +2,6 @@
 
 namespace romanzipp\Twitch\Concerns\Api;
 
-use InvalidArgumentException;
 use romanzipp\Twitch\Helpers\Paginator;
 use romanzipp\Twitch\Result;
 
@@ -12,7 +11,7 @@ trait UsersTrait
      * Get currently authenticated user with Bearer Token
      *
      * @return Result Result object
-     * @deprecated
+     * @deprecated Please use the getUsers() method.
      */
     public function getAuthedUser(): Result
     {
@@ -20,7 +19,8 @@ trait UsersTrait
     }
 
     /**
-     * Gets information about one or more specified Twitch users
+     * Gets information about one or more specified Twitch users. Returns the currently authenticated
+     * user if no parameters are specified and an OAuth Token has been specified.
      *
      * Parameters:
      * string   id     User ID. Multiple user IDs can be specified. Limit: 100.
@@ -31,12 +31,8 @@ trait UsersTrait
      * @param array $parameters Array of parameters
      * @return Result Result object
      */
-    public function getUsers(array $parameters): Result
+    public function getUsers(array $parameters = []): Result
     {
-        if ( ! array_key_exists('login', $parameters) && ! array_key_exists('id', $parameters)) {
-            throw new InvalidArgumentException('Parameter required missing: name or id');
-        }
-
         return $this->get('users', $parameters);
     }
 

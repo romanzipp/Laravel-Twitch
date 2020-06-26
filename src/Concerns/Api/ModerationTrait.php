@@ -2,11 +2,15 @@
 
 namespace romanzipp\Twitch\Concerns\Api;
 
+use romanzipp\Twitch\Concerns\Operations\GetTrait;
+use romanzipp\Twitch\Concerns\Operations\PostTrait;
 use romanzipp\Twitch\Helpers\Paginator;
 use romanzipp\Twitch\Result;
 
 trait ModerationTrait
 {
+    use GetTrait, PostTrait;
+
     /**
      * Determines whether a string message meets the channel’s AutoMod requirements.
      *
@@ -80,8 +84,4 @@ trait ModerationTrait
     {
         return $this->get('moderation/moderators/events', $parameters, $paginator);
     }
-
-    abstract public function get(string $path = '', array $parameters = [], Paginator $paginator = null);
-
-    abstract public function post(string $path = '', array $parameters = [], Paginator $paginator = null);
 }

@@ -2,11 +2,14 @@
 
 namespace romanzipp\Twitch\Concerns\Api;
 
-use romanzipp\Twitch\Helpers\Paginator;
+use romanzipp\Twitch\Concerns\Operations\GetTrait;
+use romanzipp\Twitch\Concerns\Operations\PostTrait;
 use romanzipp\Twitch\Result;
 
 trait WebhooksTrait
 {
+    use GetTrait, PostTrait;
+
     /**
      * @param string $callback
      * @param string $topic
@@ -94,8 +97,4 @@ trait WebhooksTrait
     {
         return static::BASE_URI . 'users/follows?' . http_build_query(['first' => 1, 'from_id' => $from, 'to_id' => $to]);
     }
-
-    abstract public function get(string $path = '', array $parameters = [], Paginator $paginator = null);
-
-    abstract public function post(string $path = '', array $parameters = [], Paginator $paginator = null);
 }

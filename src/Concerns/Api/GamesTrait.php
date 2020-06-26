@@ -3,11 +3,16 @@
 namespace romanzipp\Twitch\Concerns\Api;
 
 use InvalidArgumentException;
+use romanzipp\Twitch\Concerns\Operations\GetTrait;
+use romanzipp\Twitch\Concerns\Operations\PostTrait;
+use romanzipp\Twitch\Concerns\Operations\PutTrait;
 use romanzipp\Twitch\Helpers\Paginator;
 use romanzipp\Twitch\Result;
 
 trait GamesTrait
 {
+    use GetTrait, PostTrait, PutTrait;
+
     /**
      * Gets game information by given parameters
      *
@@ -104,10 +109,4 @@ trait GamesTrait
     {
         return $this->get('games/top', $parameters, $paginator);
     }
-
-    abstract public function get(string $path = '', array $parameters = [], Paginator $paginator = null);
-
-    abstract public function post(string $path = '', array $parameters = [], Paginator $paginator = null);
-
-    abstract public function put(string $path = '', array $parameters = [], Paginator $paginator = null);
 }

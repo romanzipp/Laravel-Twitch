@@ -2,11 +2,14 @@
 
 namespace romanzipp\Twitch\Concerns\Api;
 
+use romanzipp\Twitch\Concerns\Operations\GetTrait;
 use romanzipp\Twitch\Helpers\Paginator;
 use romanzipp\Twitch\Result;
 
 trait StreamsTrait
 {
+    use GetTrait;
+
     /**
      * Gets information about active streams
      * Parameters:
@@ -163,10 +166,4 @@ trait StreamsTrait
 
         return $this->getStreams($parameters, $paginator);
     }
-
-    abstract public function get(string $path = '', array $parameters = [], Paginator $paginator = null);
-
-    abstract public function post(string $path = '', array $parameters = [], Paginator $paginator = null);
-
-    abstract public function put(string $path = '', array $parameters = [], Paginator $paginator = null);
 }

@@ -3,11 +3,14 @@
 namespace romanzipp\Twitch\Concerns\Api;
 
 use InvalidArgumentException;
+use romanzipp\Twitch\Concerns\Operations\GetTrait;
 use romanzipp\Twitch\Helpers\Paginator;
 use romanzipp\Twitch\Result;
 
 trait SubscriptionsTrait
 {
+    use GetTrait;
+
     /**
      * Gets subscriptions by user ID (one or more).
      * Required OAuth Scope: channel:read:subscriptions
@@ -64,6 +67,4 @@ trait SubscriptionsTrait
     {
         return $this->getSubscriptions(['broadcaster_id' => $user], $paginator);
     }
-
-    abstract public function get(string $path = '', array $parameters = [], Paginator $paginator = null);
 }

@@ -2,11 +2,14 @@
 
 namespace romanzipp\Twitch\Concerns\Api;
 
+use romanzipp\Twitch\Concerns\Operations\GetTrait;
 use romanzipp\Twitch\Helpers\Paginator;
 use romanzipp\Twitch\Result;
 
 trait StreamsMetadataTrait
 {
+    use GetTrait;
+
     /**
      * Gets metadata information about active streams playing Overwatch or Hearthstone
      *
@@ -28,10 +31,4 @@ trait StreamsMetadataTrait
     {
         return $this->get('streams/metadata', $parameters, $paginator);
     }
-
-    abstract public function get(string $path = '', array $parameters = [], Paginator $paginator = null);
-
-    abstract public function post(string $path = '', array $parameters = [], Paginator $paginator = null);
-
-    abstract public function put(string $path = '', array $parameters = [], Paginator $paginator = null);
 }

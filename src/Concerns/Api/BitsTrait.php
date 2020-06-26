@@ -2,11 +2,13 @@
 
 namespace romanzipp\Twitch\Concerns\Api;
 
-use romanzipp\Twitch\Helpers\Paginator;
+use romanzipp\Twitch\Concerns\Operations\GetTrait;
 use romanzipp\Twitch\Result;
 
 trait BitsTrait
 {
+    use GetTrait;
+
     /**
      * Get Bits leaderboard.
      * Parameters:
@@ -24,6 +26,4 @@ trait BitsTrait
     {
         return $this->get('bits/leaderboard', $parameters);
     }
-
-    abstract public function get(string $path = '', array $parameters = [], Paginator $paginator = null);
 }

@@ -2,11 +2,14 @@
 
 namespace romanzipp\Twitch\Concerns\Api;
 
-use romanzipp\Twitch\Helpers\Paginator;
+use romanzipp\Twitch\Concerns\Operations\GetTrait;
+use romanzipp\Twitch\Concerns\Operations\PutTrait;
 use romanzipp\Twitch\Result;
 
 trait UsersTrait
 {
+    use GetTrait, PutTrait;
+
     /**
      * Get currently authenticated user with Bearer Token
      *
@@ -114,10 +117,4 @@ trait UsersTrait
             'description' => $description,
         ]);
     }
-
-    abstract public function get(string $path = '', array $parameters = [], Paginator $paginator = null);
-
-    abstract public function post(string $path = '', array $parameters = [], Paginator $paginator = null);
-
-    abstract public function put(string $path = '', array $parameters = [], Paginator $paginator = null);
 }

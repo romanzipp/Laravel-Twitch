@@ -4,19 +4,7 @@ namespace romanzipp\Twitch;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
-use romanzipp\Twitch\Concerns\Api\BitsTrait;
-use romanzipp\Twitch\Concerns\Api\ClipsTrait;
-use romanzipp\Twitch\Concerns\Api\ExtensionsTrait;
-use romanzipp\Twitch\Concerns\Api\FollowsTrait;
-use romanzipp\Twitch\Concerns\Api\GamesTrait;
-use romanzipp\Twitch\Concerns\Api\ModerationTrait;
-use romanzipp\Twitch\Concerns\Api\OAuthTrait;
-use romanzipp\Twitch\Concerns\Api\StreamsMetadataTrait;
-use romanzipp\Twitch\Concerns\Api\StreamsTrait;
-use romanzipp\Twitch\Concerns\Api\SubscriptionsTrait;
-use romanzipp\Twitch\Concerns\Api\UsersTrait;
-use romanzipp\Twitch\Concerns\Api\VideosTrait;
-use romanzipp\Twitch\Concerns\Api\WebhooksTrait;
+use romanzipp\Twitch\Concerns\Api;
 use romanzipp\Twitch\Concerns\AuthenticationTrait;
 use romanzipp\Twitch\Exceptions\RequestRequiresAuthenticationException;
 use romanzipp\Twitch\Exceptions\RequestRequiresClientIdException;
@@ -28,20 +16,19 @@ class Twitch
 {
     use AuthenticationTrait;
 
-    use OAuthTrait;
-    use BitsTrait;
-    use ClipsTrait;
-    use ExtensionsTrait;
-    use FollowsTrait;
-    use GamesTrait;
-    use StreamsTrait;
-    use StreamsMetadataTrait;
-    use UsersTrait;
-    use VideosTrait;
-    use SubscriptionsTrait;
-    use ModerationTrait;
-
-    use WebhooksTrait;
+    use Api\OAuthTrait;
+    use Api\BitsTrait;
+    use Api\ClipsTrait;
+    use Api\ExtensionsTrait;
+    use Api\FollowsTrait;
+    use Api\GamesTrait;
+    use Api\StreamsTrait;
+    use Api\StreamsMetadataTrait;
+    use Api\UsersTrait;
+    use Api\VideosTrait;
+    use Api\SubscriptionsTrait;
+    use Api\ModerationTrait;
+    use Api\WebhooksTrait;
 
     public const BASE_URI = 'https://api.twitch.tv/helix/';
 

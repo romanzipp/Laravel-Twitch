@@ -3,11 +3,14 @@
 namespace romanzipp\Twitch\Concerns\Api;
 
 use BadMethodCallException;
+use romanzipp\Twitch\Concerns\Operations\GetTrait;
 use romanzipp\Twitch\Helpers\Paginator;
 use romanzipp\Twitch\Result;
 
 trait VideosTrait
 {
+    use GetTrait;
+
     /**
      * Gets video information by video ID (one or more), user ID (one only), or game ID (one only)
      *
@@ -85,10 +88,4 @@ trait VideosTrait
 
         return $this->getVideos($parameters, $paginator);
     }
-
-    abstract public function get(string $path = '', array $parameters = [], Paginator $paginator = null);
-
-    abstract public function post(string $path = '', array $parameters = [], Paginator $paginator = null);
-
-    abstract public function put(string $path = '', array $parameters = [], Paginator $paginator = null);
 }

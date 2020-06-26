@@ -2,11 +2,14 @@
 
 namespace romanzipp\Twitch\Concerns\Api;
 
-use romanzipp\Twitch\Helpers\Paginator;
+use romanzipp\Twitch\Concerns\Operations\GetTrait;
+use romanzipp\Twitch\Concerns\Operations\PostTrait;
 use romanzipp\Twitch\Result;
 
 trait ClipsTrait
 {
+    use GetTrait, PostTrait;
+
     /**
      * Creates a clip programmatically. This returns both an ID and an edit URL for the new clip.
      *
@@ -53,10 +56,4 @@ trait ClipsTrait
             'type'        => $type,
         ]);
     }
-
-    abstract public function get(string $path = '', array $parameters = [], Paginator $paginator = null);
-
-    abstract public function post(string $path = '', array $parameters = [], Paginator $paginator = null);
-
-    abstract public function put(string $path = '', array $parameters = [], Paginator $paginator = null);
 }

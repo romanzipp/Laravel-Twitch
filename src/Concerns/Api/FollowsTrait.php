@@ -3,11 +3,14 @@
 namespace romanzipp\Twitch\Concerns\Api;
 
 use InvalidArgumentException;
+use romanzipp\Twitch\Concerns\Operations\GetTrait;
 use romanzipp\Twitch\Helpers\Paginator;
 use romanzipp\Twitch\Result;
 
 trait FollowsTrait
 {
+    use GetTrait;
+
     /**
      * Gets information on follow relationships between two Twitch users
      *
@@ -64,10 +67,4 @@ trait FollowsTrait
     {
         return $this->getFollows(null, $to, $paginator);
     }
-
-    abstract public function get(string $path = '', array $parameters = [], Paginator $paginator = null);
-
-    abstract public function post(string $path = '', array $parameters = [], Paginator $paginator = null);
-
-    abstract public function put(string $path = '', array $parameters = [], Paginator $paginator = null);
 }

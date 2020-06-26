@@ -2,11 +2,14 @@
 
 namespace romanzipp\Twitch\Concerns\Api;
 
-use romanzipp\Twitch\Helpers\Paginator;
+use romanzipp\Twitch\Concerns\Operations\GetTrait;
+use romanzipp\Twitch\Concerns\Operations\JsonTrait;
 use romanzipp\Twitch\Result;
 
 trait ExtensionsTrait
 {
+    use GetTrait, JsonTrait;
+
     /**
      * Get currently authed user's extensions with Bearer Token
      * Note: Bearer OAuth Token and the state "user:edit:broadcast" are both required
@@ -126,8 +129,4 @@ trait ExtensionsTrait
 
         return $this->json('PUT', 'users/extensions', (array) $data);
     }
-
-    abstract public function get(string $path = '', array $parameters = [], Paginator $paginator = null);
-
-    abstract public function json(string $method, string $path = '', array $body = null);
 }

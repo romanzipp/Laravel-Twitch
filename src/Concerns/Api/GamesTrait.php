@@ -11,7 +11,9 @@ use romanzipp\Twitch\Result;
 
 trait GamesTrait
 {
-    use GetTrait, PostTrait, PutTrait;
+    use GetTrait;
+    use PostTrait;
+    use PutTrait;
 
     /**
      * Gets game information by given parameters

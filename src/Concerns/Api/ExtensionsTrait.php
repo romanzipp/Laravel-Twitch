@@ -8,7 +8,8 @@ use romanzipp\Twitch\Result;
 
 trait ExtensionsTrait
 {
-    use GetTrait, JsonTrait;
+    use GetTrait;
+    use JsonTrait;
 
     /**
      * Get currently authed user's extensions with Bearer Token

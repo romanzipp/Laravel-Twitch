@@ -8,7 +8,8 @@ use romanzipp\Twitch\Result;
 
 trait ClipsTrait
 {
-    use GetTrait, PostTrait;
+    use GetTrait;
+    use PostTrait;
 
     /**
      * Creates a clip programmatically. This returns both an ID and an edit URL for the new clip.

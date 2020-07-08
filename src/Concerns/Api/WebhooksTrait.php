@@ -8,7 +8,8 @@ use romanzipp\Twitch\Result;
 
 trait WebhooksTrait
 {
-    use GetTrait, PostTrait;
+    use GetTrait;
+    use PostTrait;
 
     /**
      * @param string $callback

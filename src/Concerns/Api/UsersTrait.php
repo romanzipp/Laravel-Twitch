@@ -8,7 +8,8 @@ use romanzipp\Twitch\Result;
 
 trait UsersTrait
 {
-    use GetTrait, PutTrait;
+    use GetTrait;
+    use PutTrait;
 
     /**
      * Get currently authenticated user with Bearer Token

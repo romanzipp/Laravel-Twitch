@@ -9,7 +9,8 @@ use romanzipp\Twitch\Result;
 
 trait ModerationTrait
 {
-    use GetTrait, PostTrait;
+    use GetTrait;
+    use PostTrait;
 
     /**
      * Determines whether a string message meets the channel’s AutoMod requirements.

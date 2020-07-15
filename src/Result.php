@@ -31,6 +31,13 @@ class Result
     public $data = [];
 
     /**
+     * Message field, if present.
+     *
+     * @var string|null
+     */
+    public $message = null;
+
+    /**
      * Total amount of result data.
      *
      * @var integer
@@ -128,20 +135,15 @@ class Result
      */
     public function error(): string
     {
-        // TODO Switch Exception response parsing to this->data
-
         if ($this->exception === null || ! $this->exception->hasResponse()) {
             return 'Twitch API Unavailable';
         }
 
-        $exception = (string) $this->exception->getResponse()->getBody();
-        $exception = @json_decode($exception);
-
-        if (property_exists($exception, 'message') && ! empty($exception->message)) {
-            return $exception->message;
+        if ($this->message === null || ! is_string($this->message)) {
+            return $this->exception->getMessage();
         }
 
-        return $this->exception->getMessage();
+        return $this->message;
     }
 
     /**
@@ -307,13 +309,15 @@ class Result
             return;
         }
 
+        $this->message = $payload->message ?? null;
+        $this->total = $payload->total ?? 0;
+        $this->pagination = $payload->pagination ?? null;
+
         if ( ! property_exists($payload, 'data')) {
             $this->data = $payload;
             return;
         }
 
         $this->data = $payload->data ?? [];
-        $this->total = $payload->total ?? 0;
-        $this->pagination = $payload->pagination ?? null;
     }
 }

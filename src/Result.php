@@ -240,7 +240,7 @@ class Result
     /**
      * Get rate limit information.
      *
-     * @param string|null $key Get defined index
+     * @param string|null $key Get an index value. Available: limit, remaining, reset
      * @return string|array|null
      */
     public function rateLimit(string $key = null)
@@ -259,7 +259,7 @@ class Result
             return $rateLimit;
         }
 
-        return $rateLimit[$key];
+        return $rateLimit[$key] ?? null;
     }
 
     /**

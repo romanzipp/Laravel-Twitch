@@ -301,7 +301,7 @@ public function getStreamsMetadata(array $parameters = [], ?Paginator $paginator
 
 ```php
 public function getAuthedUser() // DEPRECATED
-public function getUsers(array $parameters)
+public function getUsers(array $parameters = [])
 public function getUserById(int $id, array $parameters = [])
 public function getUserByName(string $name, array $parameters = [])
 public function getUsersByIds(array $ids, array $parameters = [])

@@ -13,8 +13,8 @@ class ResultTest extends TestCase
         $data = ['user' => '123'];
 
         $response = new Response(200, [], json_encode([
-            'data'       => [$data],
-            'total'      => 1,
+            'data' => [$data],
+            'total' => 1,
             'pagination' => ['cursor' => 'abc'],
         ]));
 
@@ -29,8 +29,8 @@ class ResultTest extends TestCase
     public function testEmptyResponseResult()
     {
         $response = new Response(200, [], json_encode([
-            'data'       => [],
-            'total'      => 1,
+            'data' => [],
+            'total' => 1,
             'pagination' => ['cursor' => 'abc'],
         ]));
 
@@ -77,8 +77,8 @@ class ResultTest extends TestCase
         ];
 
         $response = new Response(200, [], json_encode([
-            'total'      => 3,
-            'data'       => $data,
+            'total' => 3,
+            'data' => $data,
             'pagination' => ['cursor' => 'abc'],
         ]));
 
@@ -95,11 +95,11 @@ class ResultTest extends TestCase
     public function testOAuthResponsePayload()
     {
         $data = [
-            'access_token'  => 'access_token',
+            'access_token' => 'access_token',
             'refresh_token' => 'refresh_token',
-            'expires_in'    => 10,
-            'scope'         => ['user:read'],
-            'token_type'    => 'bearer',
+            'expires_in' => 10,
+            'scope' => ['user:read'],
+            'token_type' => 'bearer',
         ];
 
         $response = new Response(200, [], json_encode($data));

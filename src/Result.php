@@ -155,8 +155,7 @@ class Result
             return null;
         }
 
-        if ( ! empty($this->data)) {
-            $data = $this->data;
+        if ( ! empty($data = $this->data)) {
             return array_shift($data);
         }
 

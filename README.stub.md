@@ -10,14 +10,12 @@ PHP Twitch Helix API Wrapper for Laravel 5+
 
 ## ⚠️ Changes on May 01, 2020
 
-Since May 01, 2020, Twitch requires all requests to contain a valid OAuth Token.
+Since May 01, 2020, Twitch requires all requests to contain a valid OAuth Access Token.
 This can be achieved by requesting an OAuth Token using the [Client Credentials Flow](https://dev.twitch.tv/docs/authentication/getting-tokens-oauth#oauth-client-credentials-flow).
 
-If you don't handle this by yourself, be sure to enable the built-in feature via the `oauth_client_credentials.auto_generate` configuration entry.
+If you don't handle this by yourself, be sure to enable the built-in Access Token generation feature via the `oauth_client_credentials.auto_generate` configuration entry.
 
-Be sure to set the **Client ID** and **Client Secret** via your config or the available setters.
-
-See the [full config](https://github.com/romanzipp/Laravel-Twitch/blob/master/config/twitch-api.php) for more details.
+You will need define a valid **Client ID** and **Client Secret** via your config or the available setters! See the [full config](https://github.com/romanzipp/Laravel-Twitch/blob/master/config/twitch-api.php) for more details.
 
 ## Table of contents
 

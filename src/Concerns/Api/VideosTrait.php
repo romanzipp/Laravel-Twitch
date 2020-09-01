@@ -3,13 +3,13 @@
 namespace romanzipp\Twitch\Concerns\Api;
 
 use BadMethodCallException;
-use romanzipp\Twitch\Concerns\Operations\AbstractGetTrait;
+use romanzipp\Twitch\Concerns\Operations\AbstractOperationsTrait;
 use romanzipp\Twitch\Helpers\Paginator;
 use romanzipp\Twitch\Result;
 
 trait VideosTrait
 {
-    use AbstractGetTrait;
+    use AbstractOperationsTrait;
 
     /**
      * Gets video information by video ID (one or more), user ID (one only), or game ID (one only)

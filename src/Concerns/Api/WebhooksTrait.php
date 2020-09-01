@@ -2,14 +2,12 @@
 
 namespace romanzipp\Twitch\Concerns\Api;
 
-use romanzipp\Twitch\Concerns\Operations\AbstractGetTrait;
-use romanzipp\Twitch\Concerns\Operations\AbstractPostTrait;
+use romanzipp\Twitch\Concerns\Operations\AbstractOperationsTrait;
 use romanzipp\Twitch\Result;
 
 trait WebhooksTrait
 {
-    use AbstractGetTrait;
-    use AbstractPostTrait;
+    use AbstractOperationsTrait;
 
     /**
      * Subscribe to a webhook.
@@ -22,21 +20,21 @@ trait WebhooksTrait
      */
     public function subscribeWebhook(string $callback, string $topic, int $lease = null, string $secret = null): Result
     {
-        $attributes = [
+        $parameters = [
             'hub.callback' => $callback,
             'hub.mode' => 'subscribe',
             'hub.topic' => $topic,
         ];
 
         if ($lease !== null) {
-            $attributes['hub.lease_seconds'] = $lease;
+            $parameters['hub.lease_seconds'] = $lease;
         }
 
         if ($secret !== null) {
-            $attributes['hub.secret'] = $secret;
+            $parameters['hub.secret'] = $secret;
         }
 
-        return $this->post('webhooks/hub', $attributes);
+        return $this->post('webhooks/hub', $parameters);
     }
 
     /**
@@ -48,13 +46,13 @@ trait WebhooksTrait
      */
     public function unsubscribeWebhook(string $callback, string $topic): Result
     {
-        $attributes = [
+        $parameters = [
             'hub.callback' => $callback,
             'hub.mode' => 'unsubscribe',
             'hub.topic' => $topic,
         ];
 
-        return $this->post('webhooks/hub', $attributes);
+        return $this->post('webhooks/hub', $parameters);
     }
 
     /**

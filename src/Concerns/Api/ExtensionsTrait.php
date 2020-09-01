@@ -2,12 +2,12 @@
 
 namespace romanzipp\Twitch\Concerns\Api;
 
-use romanzipp\Twitch\Concerns\Operations\AbstractGetTrait;
+use romanzipp\Twitch\Concerns\Operations\AbstractOperationsTrait;
 use romanzipp\Twitch\Result;
 
 trait ExtensionsTrait
 {
-    use AbstractGetTrait;
+    use AbstractOperationsTrait;
 
     /**
      * Get currently authed user's extensions with Bearer Token

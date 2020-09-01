@@ -2,13 +2,13 @@
 
 namespace romanzipp\Twitch\Concerns\Api;
 
-use romanzipp\Twitch\Concerns\Operations\AbstractPostTrait;
+use romanzipp\Twitch\Concerns\Operations\AbstractOperationsTrait;
 use romanzipp\Twitch\Enums\GrantType;
 use romanzipp\Twitch\Result;
 
 trait OAuthTrait
 {
-    use AbstractPostTrait;
+    use AbstractOperationsTrait;
 
     /**
      * Get OAuth authorize url.

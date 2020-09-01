@@ -14,4 +14,6 @@ trait AbstractOperationsTrait
     abstract public function put(string $path = '', array $parameters = [], Paginator $paginator = null, array $body = null): Result;
 
     abstract public function patch(string $path = '', array $parameters = [], Paginator $paginator = null, array $body = null): Result;
+
+    abstract public function delete(string $path = '', array $parameters = [], Paginator $paginator = null, array $body = null): Result;
 }

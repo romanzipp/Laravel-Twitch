@@ -2,14 +2,14 @@
 
 namespace romanzipp\Twitch\Tests\Api;
 
-use BadMethodCallException;
+use InvalidArgumentException;
 use romanzipp\Twitch\Tests\TestCases\ApiTestCase;
 
 class VideosTest extends ApiTestCase
 {
     public function testGetVideosMissingParameters()
     {
-        $this->expectException(BadMethodCallException::class);
+        $this->expectException(InvalidArgumentException::class);
 
         $this->twitch()->getVideos([]);
     }
@@ -17,7 +17,7 @@ class VideosTest extends ApiTestCase
     public function testGetVideosById()
     {
         $this->registerResult(
-            $result = $this->twitch()->getVideosById(327720797)
+            $result = $this->twitch()->getVideos(['id' => 327720797])
         );
 
         $this->assertTrue($result->success());
@@ -32,7 +32,7 @@ class VideosTest extends ApiTestCase
     public function testGetVideosByUser()
     {
         $this->registerResult(
-            $result = $this->twitch()->getVideosByUser(12826)
+            $result = $this->twitch()->getVideos(['user_id' => 12826])
         );
 
         $this->assertTrue($result->success());
@@ -47,7 +47,7 @@ class VideosTest extends ApiTestCase
     public function testGetVideosByGame()
     {
         $this->registerResult(
-            $result = $this->twitch()->getVideosByGame(511224)
+            $result = $this->twitch()->getVideos(['game_id' => 511224])
         );
 
         $this->assertTrue($result->success());

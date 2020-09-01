@@ -11,13 +11,13 @@ class FollowsTest extends ApiTestCase
     {
         $this->expectException(InvalidArgumentException::class);
 
-        $this->twitch()->getFollows();
+        $this->twitch()->getUsersFollows();
     }
 
     public function testGetFollowsWithFrom()
     {
         $this->registerResult(
-            $result = $this->twitch()->getFollowsFrom(12826)
+            $result = $this->twitch()->getUsersFollows(['from_id' => 12826])
         );
 
         $this->assertTrue($result->success());
@@ -29,7 +29,7 @@ class FollowsTest extends ApiTestCase
     public function testGetFollowsWithTo()
     {
         $this->registerResult(
-            $result = $this->twitch()->getFollowsTo(12826)
+            $result = $this->twitch()->getUsersFollows(['to_id' => 12826])
         );
 
         $this->assertTrue($result->success());

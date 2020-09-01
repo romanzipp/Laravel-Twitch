@@ -26,4 +26,37 @@ trait BitsTrait
     {
         return $this->get('bits/leaderboard', $parameters);
     }
+
+    /**
+     * Retrieves the list of available Cheermotes, animated emotes to which viewers can assign Bits, to cheer in chat.
+     * Cheermotes returned are available throughout Twitch, in all Bits-enabled channels.
+     *
+     * @see https://dev.twitch.tv/docs/api/reference#get-cheermotes
+     *
+     * @param array $parameters
+     * @return \romanzipp\Twitch\Result
+     * @throws \romanzipp\Twitch\Exceptions\RequestRequiresClientIdException
+     */
+    public function getCheermotes(array $parameters = []): Result
+    {
+        return $this->get('bits/cheermotes', $parameters);
+    }
+
+    /**
+     * Retrieves the list of available Cheermotes, animated emotes to which viewers can assign Bits, to cheer in chat.
+     * Cheermotes returned are available throughout Twitch, in all Bits-enabled channels.
+     *
+     * @see https://dev.twitch.tv/docs/api/reference#get-cheermotes
+     *
+     * @param string $broadcasterId
+     * @param array $parameters
+     * @return \romanzipp\Twitch\Result
+     * @throws \romanzipp\Twitch\Exceptions\RequestRequiresClientIdException
+     */
+    public function getCheermotesByBroadcasterId(string $broadcasterId, array $parameters = []): Result
+    {
+        $parameters['broadcaster_id'] = $broadcasterId;
+
+        return $this->getCheermotes($parameters);
+    }
 }

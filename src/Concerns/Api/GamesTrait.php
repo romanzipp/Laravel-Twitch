@@ -43,7 +43,7 @@ trait GamesTrait
     public function getGames(array $parameters): Result
     {
         if ( ! array_key_exists('name', $parameters) && ! array_key_exists('id', $parameters)) {
-            throw new InvalidArgumentException('Parameter required missing: name or id');
+            throw new InvalidArgumentException('Required parameter missing: name or id');
         }
 
         return $this->get('games', $parameters);

@@ -43,11 +43,11 @@ trait EntitlementsTrait
     public function getEntitlementsCodeStatus(array $parameters = []): Result
     {
         if ( ! array_key_exists('code', $parameters)) {
-            throw new InvalidArgumentException('Parameter required missing: code');
+            throw new InvalidArgumentException('Required parameter missing: code');
         }
 
         if ( ! array_key_exists('user_id', $parameters)) {
-            throw new InvalidArgumentException('Parameter required missing: user_id');
+            throw new InvalidArgumentException('Required parameter missing: user_id');
         }
 
         return $this->get('entitlements/codes', $parameters);

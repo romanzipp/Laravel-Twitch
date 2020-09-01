@@ -22,7 +22,7 @@ trait BitsTrait
     public function getCheermotes(array $parameters = []): Result
     {
         if ( ! array_key_exists('broadcaster_id', $parameters)) {
-            throw new InvalidArgumentException('Parameter required missing: broadcaster_id');
+            throw new InvalidArgumentException('Required parameter missing: broadcaster_id');
         }
 
         return $this->get('bits/cheermotes', $parameters);
@@ -52,7 +52,7 @@ trait BitsTrait
     public function getExtensionTransactions(array $parameters = []): Result
     {
         if ( ! array_key_exists('extension_id', $parameters)) {
-            throw new InvalidArgumentException('Parameter required missing: extension_id');
+            throw new InvalidArgumentException('Required parameter missing: extension_id');
         }
 
         return $this->get('extensions/transactions', $parameters);

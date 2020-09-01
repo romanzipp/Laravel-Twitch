@@ -11,7 +11,7 @@ $markdown = collect(class_uses(Twitch::class))
 
         $title = str_replace('Trait', '', Arr::last(explode('\\', $trait)));
 
-        if (in_array($title, ['Authentication'])) {
+        if (in_array($title, ['Authentication', 'Validation'])) {
             return null;
         }
 

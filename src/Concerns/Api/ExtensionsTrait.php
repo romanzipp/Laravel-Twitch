@@ -56,7 +56,7 @@ trait ExtensionsTrait
      *
      * @see https://dev.twitch.tv/docs/api/reference/#update-user-extensions
      *
-     * @param string $parameter Id of the Extension that should be deactivated
+     * @param string|null $parameter Id of the Extension that should be deactivated
      * @return \romanzipp\Twitch\Result Result instance
      */
     public function disableUserExtensionById(string $parameter = null): Result
@@ -70,7 +70,7 @@ trait ExtensionsTrait
      *
      * @see https://dev.twitch.tv/docs/api/reference/#update-user-extensions
      *
-     * @param string $parameter Name of the Extension that should be deactivated
+     * @param string|null $parameter Name of the Extension that should be deactivated
      * @return \romanzipp\Twitch\Result Result instance
      */
     public function disableUserExtensionByName(string $parameter = null): Result
@@ -85,8 +85,8 @@ trait ExtensionsTrait
      *
      * @see https://dev.twitch.tv/docs/api/reference/#update-user-extensions
      *
-     * @param string $method Method that will be used to disable extensions
-     * @param string $parameter Parameter that will be used to disable Extensions
+     * @param string|null $method Method that will be used to disable extensions
+     * @param string|null $parameter Parameter that will be used to disable Extensions
      * @param bool $disabled Weather the set value should be false
      * @return \romanzipp\Twitch\Result Result instance
      */
@@ -97,8 +97,8 @@ trait ExtensionsTrait
         $extensions = (array) $extensionsResult->data;
 
         $data = (object) [
-            'panel'     => $extensions['panel'],
-            'overlay'   => $extensions['overlay'],
+            'panel' => $extensions['panel'],
+            'overlay' => $extensions['overlay'],
             'component' => $extensions['component'],
         ];
 

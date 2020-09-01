@@ -23,7 +23,7 @@ You will need define a valid **Client ID** and **Client Secret** via your config
 2. [Configuration](#configuration)
 3. [Examples](#examples)
 4. [Documentation](#documentation)
-5. [Upgrading to 2.0](#upgrading)
+5. [Upgrading](#upgrading)
 6. [Development](#Development)
 
 ## Installation
@@ -366,6 +366,7 @@ public function buildWebhookTopic(string $path, array $parameters = [])
 
 ## Upgrading
 
+- [Upgrade from 2.0 to 3.0](https://github.com/romanzipp/Laravel-Twitch/releases/tag/3.0.0)
 - [Upgrade from 1.0 to 2.0](https://github.com/romanzipp/Laravel-Twitch/releases/tag/2.0.0)
 
 ## Development

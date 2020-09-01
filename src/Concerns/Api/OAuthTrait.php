@@ -17,7 +17,7 @@ trait OAuthTrait
      *
      * @param string $responseType code / token
      * @param array $scopes
-     * @param string $state
+     * @param string|null $state
      * @param bool $forceVerify
      * @return string
      */
@@ -49,7 +49,7 @@ trait OAuthTrait
      * @param string|null $code
      * @param string $grantType
      * @param array $scopes
-     * @return Result
+     * @return \romanzipp\Twitch\Result
      */
     public function getOAuthToken(?string $code = null, string $grantType = GrantType::AUTHORIZATION_CODE, array $scopes = []): Result
     {

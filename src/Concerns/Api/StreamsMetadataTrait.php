@@ -21,11 +21,11 @@ trait StreamsMetadataTrait
      * string   user_id         Returns streams broadcast by one or more of the specified user IDs. You can specify up to 100 IDs.
      * string   user_login      Returns streams broadcast by one or more of the specified user login names. You can specify up to 100 names.
      *
-     * @see    https://dev.twitch.tv/docs/api/reference#get-streams-metadata
+     * @see https://dev.twitch.tv/docs/api/reference#get-streams-metadata
      *
      * @param array $parameters Array of parameters
-     * @param Paginator|null $paginator Paginator object
-     * @return Result         Result object
+     * @param \romanzipp\Twitch\Helpers\Paginator|null $paginator Paginator instance
+     * @return \romanzipp\Twitch\Result Result instance
      */
     public function getStreamsMetadata(array $parameters = [], Paginator $paginator = null): Result
     {

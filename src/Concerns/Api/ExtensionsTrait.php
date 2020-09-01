@@ -15,9 +15,9 @@ trait ExtensionsTrait
      * Get currently authed user's extensions with Bearer Token
      * Note: Bearer OAuth Token and the state "user:edit:broadcast" are both required
      *
-     * @see    https://dev.twitch.tv/docs/api/reference#get-user-extensions
+     * @see https://dev.twitch.tv/docs/api/reference#get-user-extensions
      *
-     * @return Result Result object
+     * @return \romanzipp\Twitch\Result Result instance
      */
     public function getAuthedUserExtensions(): Result
     {
@@ -28,9 +28,9 @@ trait ExtensionsTrait
      * Get currently authed user's active extensions with Bearer Token
      * Note: Bearer OAuth Token and the state "user:edit:broadcast" are both required
      *
-     * @see    https://dev.twitch.tv/docs/api/reference#get-user-active-extensions
+     * @see https://dev.twitch.tv/docs/api/reference#get-user-active-extensions
      *
-     * @return Result Result object
+     * @return \romanzipp\Twitch\Result Result instance
      */
     public function getAuthedUserActiveExtensions(): Result
     {
@@ -41,9 +41,9 @@ trait ExtensionsTrait
      * Disable all Extensions of the currently authed user's active extensions with Bearer Token
      * Note: Bearer OAuth Token and the state "user:edit:broadcast" are both required
      *
-     * @see    "https://dev.twitch.tv/docs/api/reference/#update-user-extensions"
+     * @see "https://dev.twitch.tv/docs/api/reference/#update-user-extensions"
      *
-     * @return Result Result object
+     * @return \romanzipp\Twitch\Result Result instance
      */
     public function disableAllExtensions(): Result
     {
@@ -54,10 +54,10 @@ trait ExtensionsTrait
      * Disables all Extensions of the currently authed user's active extensions, that have the given id with Bearer Token
      * Note: Bearer OAuth Token and the state "user:edit:broadcast" are both required
      *
-     * @see    https://dev.twitch.tv/docs/api/reference/#update-user-extensions
+     * @see https://dev.twitch.tv/docs/api/reference/#update-user-extensions
      *
      * @param string $parameter Id of the Extension that should be deactivated
-     * @return Result Result object
+     * @return \romanzipp\Twitch\Result Result instance
      */
     public function disableUserExtensionById(string $parameter = null): Result
     {
@@ -68,10 +68,10 @@ trait ExtensionsTrait
      * Disables all Extensions of the currently authed user's active extensions, that have the given Name with Bearer Token
      * Note: Bearer OAuth Token and the state "user:edit:broadcast" are both required
      *
-     * @see    https://dev.twitch.tv/docs/api/reference/#update-user-extensions
+     * @see https://dev.twitch.tv/docs/api/reference/#update-user-extensions
      *
      * @param string $parameter Name of the Extension that should be deactivated
-     * @return Result Result object
+     * @return \romanzipp\Twitch\Result Result instance
      */
     public function disableUserExtensionByName(string $parameter = null): Result
     {
@@ -83,12 +83,12 @@ trait ExtensionsTrait
      * If you try to activate a given extension under multiple extension types, the last write wins (and there is no guarantee of write order).
      * Note: Bearer OAuth Token and the state "user:edit:broadcast" are both required
      *
-     * @see    https://dev.twitch.tv/docs/api/reference/#update-user-extensions
+     * @see https://dev.twitch.tv/docs/api/reference/#update-user-extensions
      *
      * @param string $method Method that will be used to disable extensions
      * @param string $parameter Parameter that will be used to disable Extensions
      * @param bool $disabled Weather the set value should be false
-     * @return Result Result object
+     * @return \romanzipp\Twitch\Result Result instance
      */
     public function updateUserExtensions(string $method = null, string $parameter = null, bool $disabled = false): Result
     {

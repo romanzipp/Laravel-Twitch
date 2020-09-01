@@ -23,11 +23,11 @@ trait VideosTrait
      * string   sort        Sort order of the videos. Valid values: "time", "trending", and "views". Default: "time".
      * string   type        Type of video. Valid values: "all", "upload", "archive", and "highlight". Default: "all".
      *
-     * @see    https://dev.twitch.tv/docs/api/reference#get-videos
+     * @see https://dev.twitch.tv/docs/api/reference#get-videos
      *
      * @param array $parameters Array of parameters
      * @param \romanzipp\Twitch\Helpers\Paginator|null $paginator
-     * @return Result Result object
+     * @return \romanzipp\Twitch\Result Result instance
      */
     public function getVideos(array $parameters, Paginator $paginator = null): Result
     {
@@ -41,12 +41,12 @@ trait VideosTrait
     /**
      * Gets video information by video ID
      *
-     * @see    https://dev.twitch.tv/docs/api/reference#get-videos
+     * @see https://dev.twitch.tv/docs/api/reference#get-videos
      *
      * @param int $id ID of the video being queried
      * @param array $parameters Additional parameters
-     * @param Paginator|null $paginator Paginator object
-     * @return Result         Result object
+     * @param \romanzipp\Twitch\Helpers\Paginator|null $paginator Paginator instance
+     * @return \romanzipp\Twitch\Result Result instance
      */
     public function getVideosById(int $id, array $parameters = [], Paginator $paginator = null): Result
     {
@@ -58,12 +58,12 @@ trait VideosTrait
     /**
      * Gets video information by user ID
      *
-     * @see    https://dev.twitch.tv/docs/api/reference#get-videos
+     * @see https://dev.twitch.tv/docs/api/reference#get-videos
      *
      * @param int $user ID of the user who owns the video. Limit 1
      * @param array $parameters Additional parameters
-     * @param Paginator|null $paginator Paginator object
-     * @return Result         Result object
+     * @param \romanzipp\Twitch\Helpers\Paginator|null $paginator Paginator instance
+     * @return \romanzipp\Twitch\Result Result instance
      */
     public function getVideosByUser(int $user, array $parameters = [], Paginator $paginator = null): Result
     {
@@ -75,12 +75,12 @@ trait VideosTrait
     /**
      * Gets video information by game ID
      *
-     * @see    https://dev.twitch.tv/docs/api/reference#get-videos
+     * @see https://dev.twitch.tv/docs/api/reference#get-videos
      *
      * @param int $game ID of the game the video is of. Limit 1
      * @param array $parameters Additional parameters
-     * @param Paginator|null $paginator Paginator object
-     * @return Result         Result object
+     * @param \romanzipp\Twitch\Helpers\Paginator|null $paginator Paginator instance
+     * @return \romanzipp\Twitch\Result Result instance
      */
     public function getVideosByGame(int $game, array $parameters = [], Paginator $paginator = null): Result
     {

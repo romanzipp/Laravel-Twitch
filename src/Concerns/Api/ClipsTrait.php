@@ -14,10 +14,10 @@ trait ClipsTrait
     /**
      * Creates a clip programmatically. This returns both an ID and an edit URL for the new clip.
      *
-     * @see    https://dev.twitch.tv/docs/api/reference#create-clip
+     * @see https://dev.twitch.tv/docs/api/reference#create-clip
      *
      * @param int $broadcaster ID of the stream from which the clip will be made.
-     * @return Result Result object
+     * @return \romanzipp\Twitch\Result Result instance
      */
     public function createClip(int $broadcaster): Result
     {
@@ -29,10 +29,10 @@ trait ClipsTrait
     /**
      * Gets information about a specified clip.
      *
-     * @see    https://dev.twitch.tv/docs/api/reference#get-clip
+     * @see https://dev.twitch.tv/docs/api/reference#get-clip
      *
      * @param string $id ID of the clip being queried. Limit 1.
-     * @return Result Result object
+     * @return \romanzipp\Twitch\Result Result instance
      */
     public function getClip(string $id): Result
     {
@@ -44,11 +44,11 @@ trait ClipsTrait
     /**
      * Create Entitlement Grants Upload URL
      *
-     * @see    https://dev.twitch.tv/docs/api/reference#create-entitlement-grants-upload-url
+     * @see https://dev.twitch.tv/docs/api/reference#create-entitlement-grants-upload-url
      *
      * @param string $manifest Unique identifier of the manifest file to be uploaded. Must be 1-64 characters.
      * @param string $type Type of entitlement being granted. Only bulk_drops_grant is supported.
-     * @return Result Result object
+     * @return \romanzipp\Twitch\Result Result instance
      */
     public function createEntitlementUrl(string $manifest, string $type = 'bulk_drops_grant'): Result
     {

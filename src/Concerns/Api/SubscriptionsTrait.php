@@ -22,8 +22,8 @@ trait SubscriptionsTrait
      * @see  https://dev.twitch.tv/docs/api/reference/#get-user-subscriptions
      *
      * @param array $parameters Array of parameters
-     * @param Paginator|null $paginator Paginator object
-     * @return Result         Result object
+     * @param \romanzipp\Twitch\Helpers\Paginator|null $paginator Paginator instance
+     * @return \romanzipp\Twitch\Result Result instance
      */
     public function getSubscriptions(array $parameters = [], Paginator $paginator = null): Result
     {
@@ -43,8 +43,8 @@ trait SubscriptionsTrait
      * @see  https://dev.twitch.tv/docs/api/reference/#get-broadcaster-subscriptions
      *
      * @param int $user User ID
-     * @param Paginator|null $paginator Paginator object
-     * @return Result         Result object
+     * @param \romanzipp\Twitch\Helpers\Paginator|null $paginator Paginator instance
+     * @return \romanzipp\Twitch\Result Result instance
      * @deprecated
      *
      */
@@ -60,8 +60,8 @@ trait SubscriptionsTrait
      * @see  https://dev.twitch.tv/docs/api/reference/#get-broadcaster-subscriptions
      *
      * @param int $user Broadcaster ID
-     * @param Paginator|null $paginator Paginator object
-     * @return Result         Result object
+     * @param \romanzipp\Twitch\Helpers\Paginator|null $paginator Paginator instance
+     * @return \romanzipp\Twitch\Result Result instance
      */
     public function getBroadcasterSubscriptions(int $user, Paginator $paginator = null): Result
     {

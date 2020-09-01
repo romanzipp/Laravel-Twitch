@@ -107,7 +107,7 @@ trait AuthenticationTrait
     /**
      * Get the cache driver instance used for storing the client credentials.
      *
-     * @return Repository
+     * @return \Illuminate\Contracts\Cache\Repository
      * @throws \Exception
      */
     protected function getClientCredentialsCacheRepository(): Repository

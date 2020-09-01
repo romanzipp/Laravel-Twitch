@@ -32,10 +32,10 @@ class Paginator
     }
 
     /**
-     * Create Paginator from Result object.
+     * Create Paginator from Result instance.
      *
-     * @param Result $result Result object
-     * @return self   Paginator object
+     * @param \romanzipp\Twitch\Result $result Result instance
+     * @return self   Paginator instance
      */
     public static function from(Result $result): self
     {

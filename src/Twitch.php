@@ -42,9 +42,9 @@ class Twitch
     protected $client;
 
     /**
-     * Paginator object.
+     * Paginator instance.
      *
-     * @var Paginator
+     * @var \romanzipp\Twitch\Helpers\Paginator
      */
     protected $paginator;
 
@@ -358,14 +358,15 @@ class Twitch
     }
 
     /**
-     * Build query & execute.
+     * Prepare & execute the query.
      *
      * @param string $method HTTP method
      * @param string $path Query path
      * @param array $parameters Query parameters
-     * @param Paginator $paginator Paginator object
+     * @param \romanzipp\Twitch\Helpers\Paginator|null $paginator Paginator instance
      * @param mixed|null $jsonBody JSON data
-     * @return Result     Result object
+     * @return \romanzipp\Twitch\Result Result instance
+     * @throws \romanzipp\Twitch\Exceptions\RequestRequiresAuthenticationException
      * @throws \romanzipp\Twitch\Exceptions\RequestRequiresClientIdException
      */
     public function query(string $method = 'GET', string $path = '', array $parameters = [], Paginator $paginator = null, $jsonBody = null): Result

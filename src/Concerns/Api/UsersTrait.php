@@ -17,7 +17,7 @@ trait UsersTrait
      *
      * @see https://dev.twitch.tv/docs/api/reference#get-users
      *
-     * @param array $parameters Array of parameters
+     * @param array $parameters
      * @return \romanzipp\Twitch\Result Result instance
      */
     public function getUsers(array $parameters = []): Result

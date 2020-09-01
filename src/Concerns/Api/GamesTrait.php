@@ -16,11 +16,24 @@ trait GamesTrait
     use PutTrait;
 
     /**
-     * Gets game information by given parameters
+     * Gets games sorted by number of current viewers on Twitch, most popular first.
+     * The response has a JSON payload with a data field containing an array of games information elements and a pagination field containing
+     * information required to query for more streams.
      *
-     * Parameters:
-     * string   id    Game ID. At most 100 id values can be specified.
-     * string   name  Game name. The name must be an exact match. For instance, "Pokemon" will not return a list of Pokemon games; instead, query the specific Pokemon game(s) in which you are interested. At most 100 name values can be specified.
+     * @see https://dev.twitch.tv/docs/api/reference#get-top-games
+     *
+     * @param array $parameters Array of parameters
+     * @param \romanzipp\Twitch\Helpers\Paginator|null $paginator Paginator instance
+     * @return \romanzipp\Twitch\Result Result instance
+     */
+    public function getTopGames(array $parameters = [], Paginator $paginator = null): Result
+    {
+        return $this->get('games/top', $parameters, $paginator);
+    }
+
+    /**
+     * Gets game information by game ID or name.
+     * The response has a JSON payload with a data field containing an array of games elements.
      *
      * @see https://dev.twitch.tv/docs/api/reference#get-games
      *
@@ -43,6 +56,8 @@ trait GamesTrait
      *
      * @param int $id Game ID
      * @return \romanzipp\Twitch\Result Result instance
+     *
+     * @todo remove
      */
     public function getGameById(int $id): Result
     {
@@ -59,6 +74,8 @@ trait GamesTrait
      * @param string $name Game name. The name must be an exact match. For instance, "Pokemon" will not return a list of Pokemon games; instead,
      *                     query the specific Pokemon game(s) in which you are interested
      * @return \romanzipp\Twitch\Result Result instance
+     *
+     * @todo remove
      */
     public function getGameByName(string $name): Result
     {
@@ -96,19 +113,5 @@ trait GamesTrait
         return $this->getGames([
             'name' => $names,
         ]);
-    }
-
-    /**
-     * Gets games sorted by number of current viewers on Twitch, most popular first
-     *
-     * @see https://dev.twitch.tv/docs/api/reference#get-top-games
-     *
-     * @param array $parameters Array of parameters
-     * @param \romanzipp\Twitch\Helpers\Paginator|null $paginator Paginator instance
-     * @return \romanzipp\Twitch\Result Result instance
-     */
-    public function getTopGames(array $parameters = [], Paginator $paginator = null): Result
-    {
-        return $this->get('games/top', $parameters, $paginator);
     }
 }

@@ -2,13 +2,14 @@
 
 namespace romanzipp\Twitch\Concerns\Api;
 
-use InvalidArgumentException;
 use romanzipp\Twitch\Concerns\Operations\AbstractOperationsTrait;
+use romanzipp\Twitch\Concerns\Operations\AbstractValidationTrait;
 use romanzipp\Twitch\Helpers\Paginator;
 use romanzipp\Twitch\Result;
 
 trait GamesTrait
 {
+    use AbstractValidationTrait;
     use AbstractOperationsTrait;
 
     /**
@@ -36,78 +37,10 @@ trait GamesTrait
      * @param array $parameters
      * @return \romanzipp\Twitch\Result Result instance
      */
-    public function getGames(array $parameters): Result
+    public function getGames(array $parameters = []): Result
     {
-        if ( ! array_key_exists('name', $parameters) && ! array_key_exists('id', $parameters)) {
-            throw new InvalidArgumentException('Required parameter missing: name or id');
-        }
+        $this->validateAnyRequired($parameters, ['id', 'name']);
 
         return $this->get('games', $parameters);
-    }
-
-    /**
-     * Gets game information by game ID
-     *
-     * @see https://dev.twitch.tv/docs/api/reference#get-games
-     *
-     * @param int $id Game ID
-     * @return \romanzipp\Twitch\Result Result instance
-     *
-     * @todo remove
-     */
-    public function getGameById(int $id): Result
-    {
-        return $this->getGames([
-            'id' => $id,
-        ]);
-    }
-
-    /**
-     * Gets game information by game name
-     *
-     * @see https://dev.twitch.tv/docs/api/reference#get-games
-     *
-     * @param string $name Game name. The name must be an exact match. For instance, "Pokemon" will not return a list of Pokemon games; instead,
-     *                     query the specific Pokemon game(s) in which you are interested
-     * @return \romanzipp\Twitch\Result Result instance
-     *
-     * @todo remove
-     */
-    public function getGameByName(string $name): Result
-    {
-        return $this->getGames([
-            'name' => $name,
-        ]);
-    }
-
-    /**
-     * Gets games information by game IDs
-     *
-     * @see https://dev.twitch.tv/docs/api/reference#get-games
-     *
-     * @param array $ids Game IDs. At most 100 id values can be specified
-     * @return \romanzipp\Twitch\Result Result instance
-     */
-    public function getGamesByIds(array $ids): Result
-    {
-        return $this->getGames([
-            'id' => $ids,
-        ]);
-    }
-
-    /**
-     * Gets games information by game names
-     *
-     * @see https://dev.twitch.tv/docs/api/reference#get-games
-     *
-     * @param array $names Game name. The name must be an exact match. For instance, "Pokemon" will not return a list of Pokemon games; instead,
-     *                     query the specific Pokemon game(s) in which you are interested. At most 100 name values can be specified
-     * @return \romanzipp\Twitch\Result Result instance
-     */
-    public function getGamesByNames(array $names): Result
-    {
-        return $this->getGames([
-            'name' => $names,
-        ]);
     }
 }

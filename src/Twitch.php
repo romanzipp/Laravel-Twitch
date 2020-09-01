@@ -368,6 +368,20 @@ class Twitch
     }
 
     /**
+     * @param string $path
+     * @param array $parameters
+     * @param \romanzipp\Twitch\Helpers\Paginator|null $paginator
+     * @param array|null $body
+     * @return \romanzipp\Twitch\Result
+     * @throws \romanzipp\Twitch\Exceptions\RequestRequiresAuthenticationException
+     * @throws \romanzipp\Twitch\Exceptions\RequestRequiresClientIdException
+     */
+    public function delete(string $path = '', array $parameters = [], Paginator $paginator = null, array $body = null): Result
+    {
+        return $this->query('DELETE', $path, $parameters, $paginator, $body);
+    }
+
+    /**
      * Prepare & execute the query.
      *
      * @param string $method HTTP method

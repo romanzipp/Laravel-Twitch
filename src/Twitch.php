@@ -21,6 +21,7 @@ class Twitch
     use Api\AnalyticsTrait;
     use Api\BitsTrait;
     use Api\ClipsTrait;
+    use Api\EntitlementsTrait;
     use Api\ExtensionsTrait;
     use Api\FollowsTrait;
     use Api\GamesTrait;

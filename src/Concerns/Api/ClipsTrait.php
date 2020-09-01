@@ -2,13 +2,14 @@
 
 namespace romanzipp\Twitch\Concerns\Api;
 
-use InvalidArgumentException;
 use romanzipp\Twitch\Concerns\Operations\GetTrait;
 use romanzipp\Twitch\Concerns\Operations\PostTrait;
+use romanzipp\Twitch\Concerns\Validation\ValidationTrait;
 use romanzipp\Twitch\Result;
 
 trait ClipsTrait
 {
+    use ValidationTrait;
     use GetTrait;
     use PostTrait;
 
@@ -31,9 +32,7 @@ trait ClipsTrait
      */
     public function createClip(array $parameters = []): Result
     {
-        if ( ! array_key_exists('broadcaster_id', $parameters)) {
-            throw new InvalidArgumentException('Required parameter missing: broadcaster_id');
-        }
+        $this->validateRequired($parameters, 'broadcaster_id');
 
         return $this->post('clips', $parameters);
     }
@@ -53,9 +52,7 @@ trait ClipsTrait
      */
     public function getClips(array $parameters = []): Result
     {
-        if ( ! isset($parameters['broadcaster_id']) && ! isset($parameters['game_id']) && ! isset($parameters['id'])) {
-            throw new InvalidArgumentException('Required parameter missing: broadcaster_id, game_id or id');
-        }
+        $this->validateAnyRequired($parameters, ['broadcaster_id', 'game_id', 'id']);
 
         return $this->get('clips', $parameters);
     }

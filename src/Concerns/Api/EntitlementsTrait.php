@@ -2,13 +2,14 @@
 
 namespace romanzipp\Twitch\Concerns\Api;
 
-use InvalidArgumentException;
 use romanzipp\Twitch\Concerns\Operations\GetTrait;
 use romanzipp\Twitch\Concerns\Operations\PostTrait;
+use romanzipp\Twitch\Concerns\Validation\ValidationTrait;
 use romanzipp\Twitch\Result;
 
 trait EntitlementsTrait
 {
+    use ValidationTrait;
     use GetTrait;
     use PostTrait;
 
@@ -17,18 +18,14 @@ trait EntitlementsTrait
      *
      * @see https://dev.twitch.tv/docs/api/reference#create-entitlement-grants-upload-url
      *
-     * @param string $manifest Unique identifier of the manifest file to be uploaded. Must be 1-64 characters.
-     * @param string $type Type of entitlement being granted. Only bulk_drops_grant is supported.
+     * @param array $parameters
      * @return \romanzipp\Twitch\Result Result instance
-     *
-     * @todo Update to take single parameters array as argument
      */
-    public function createEntitlementUrl(string $manifest, string $type = 'bulk_drops_grant'): Result
+    public function createEntitlementUrl(array $parameters = []): Result
     {
-        return $this->post('entitlements/upload', [
-            'manifest_id' => $manifest,
-            'type' => $type,
-        ]);
+        $this->validateAllRequired($parameters, ['manifest_id', 'type']);
+
+        return $this->post('entitlements/upload', $parameters);
     }
 
     /**
@@ -42,13 +39,7 @@ trait EntitlementsTrait
      */
     public function getEntitlementsCodeStatus(array $parameters = []): Result
     {
-        if ( ! array_key_exists('code', $parameters)) {
-            throw new InvalidArgumentException('Required parameter missing: code');
-        }
-
-        if ( ! array_key_exists('user_id', $parameters)) {
-            throw new InvalidArgumentException('Required parameter missing: user_id');
-        }
+        $this->validateAllRequired($parameters, ['code', 'user_id']);
 
         return $this->get('entitlements/codes', $parameters);
     }

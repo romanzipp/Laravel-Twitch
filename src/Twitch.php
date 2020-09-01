@@ -313,6 +313,7 @@ class Twitch
      * @param \romanzipp\Twitch\Helpers\Paginator|null $paginator
      * @return \romanzipp\Twitch\Result
      * @throws \romanzipp\Twitch\Exceptions\RequestRequiresClientIdException
+     * @throws \romanzipp\Twitch\Exceptions\RequestRequiresAuthenticationException
      */
     public function get(string $path = '', array $parameters = [], Paginator $paginator = null): Result
     {
@@ -325,6 +326,7 @@ class Twitch
      * @param \romanzipp\Twitch\Helpers\Paginator|null $paginator
      * @return \romanzipp\Twitch\Result
      * @throws \romanzipp\Twitch\Exceptions\RequestRequiresClientIdException
+     * @throws \romanzipp\Twitch\Exceptions\RequestRequiresAuthenticationException
      */
     public function post(string $path = '', array $parameters = [], Paginator $paginator = null): Result
     {
@@ -337,6 +339,7 @@ class Twitch
      * @param \romanzipp\Twitch\Helpers\Paginator|null $paginator
      * @return \romanzipp\Twitch\Result
      * @throws \romanzipp\Twitch\Exceptions\RequestRequiresClientIdException
+     * @throws \romanzipp\Twitch\Exceptions\RequestRequiresAuthenticationException
      */
     public function put(string $path = '', array $parameters = [], Paginator $paginator = null): Result
     {
@@ -351,6 +354,7 @@ class Twitch
      *
      * @return \romanzipp\Twitch\Result
      *
+     * @throws \romanzipp\Twitch\Exceptions\RequestRequiresClientIdException
      * @throws \romanzipp\Twitch\Exceptions\RequestRequiresAuthenticationException
      */
     public function json(string $method, string $path = '', array $parameters = [], array $body = null): Result
@@ -373,8 +377,9 @@ class Twitch
      * @param \romanzipp\Twitch\Helpers\Paginator|null $paginator Paginator instance
      * @param mixed|null $jsonBody JSON data
      * @return \romanzipp\Twitch\Result Result instance
-     * @throws \romanzipp\Twitch\Exceptions\RequestRequiresAuthenticationException
      * @throws \romanzipp\Twitch\Exceptions\RequestRequiresClientIdException
+     * @throws \romanzipp\Twitch\Exceptions\RequestRequiresAuthenticationException
+     * @noinspection PhpDocMissingThrowsInspection
      */
     public function query(string $method = 'GET', string $path = '', array $parameters = [], Paginator $paginator = null, $jsonBody = null): Result
     {
@@ -445,6 +450,7 @@ class Twitch
      * @param bool $json Body is JSON
      * @return array
      * @throws \romanzipp\Twitch\Exceptions\RequestRequiresClientIdException
+     * @noinspection PhpDocMissingThrowsInspection
      */
     private function buildHeaders(bool $json = false): array
     {

@@ -37,7 +37,6 @@ trait AuthenticationTrait
      *
      * @see https://dev.twitch.tv/docs/authentication/getting-tokens-oauth#oauth-client-credentials-flow
      * @return \romanzipp\Twitch\Objects\AccessToken|null
-     * @throws \Psr\SimpleCache\InvalidArgumentException
      */
     protected function getClientCredentials(): ?AccessToken
     {
@@ -66,8 +65,7 @@ trait AuthenticationTrait
      * Possibly get a cached and not-expired version of the Access Token.
      *
      * @return \romanzipp\Twitch\Objects\AccessToken|null
-     * @throws \Psr\SimpleCache\InvalidArgumentException
-     * @throws \Exception
+     * @noinspection PhpDocMissingThrowsInspection
      */
     protected function getCachedClientCredentialsToken(): ?AccessToken
     {
@@ -94,7 +92,7 @@ trait AuthenticationTrait
      * Store the client credentials in cache.
      *
      * @param \romanzipp\Twitch\Objects\AccessToken $token
-     * @throws \Psr\SimpleCache\InvalidArgumentException
+     * @noinspection PhpDocMissingThrowsInspection
      */
     protected function storeClientCredentialsToken(AccessToken $token): void
     {
@@ -108,7 +106,7 @@ trait AuthenticationTrait
      * Get the cache driver instance used for storing the client credentials.
      *
      * @return \Illuminate\Contracts\Cache\Repository
-     * @throws \Exception
+     * @noinspection PhpDocMissingThrowsInspection
      */
     protected function getClientCredentialsCacheRepository(): Repository
     {

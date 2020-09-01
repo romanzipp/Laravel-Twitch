@@ -128,6 +128,6 @@ trait ExtensionsTrait
         $processType('overlay');
         $processType('component');
 
-        return $this->json('PUT', 'users/extensions', (array) $data);
+        return $this->json('PUT', 'users/extensions', [], (array) $data);
     }
 }

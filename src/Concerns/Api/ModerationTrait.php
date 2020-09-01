@@ -32,7 +32,7 @@ trait ModerationTrait
     {
         $this->validateRequired($parameters, ['broadcaster_id']);
 
-        return $this->json('POST', 'moderation/enforcements/status', $parameters, $body);
+        return $this->post('moderation/enforcements/status', $parameters, null, $body);
     }
 
     /**

@@ -3,13 +3,11 @@
 namespace romanzipp\Twitch\Concerns\Api;
 
 use romanzipp\Twitch\Concerns\Operations\AbstractGetTrait;
-use romanzipp\Twitch\Concerns\Operations\AbstractJsonTrait;
 use romanzipp\Twitch\Result;
 
 trait ExtensionsTrait
 {
     use AbstractGetTrait;
-    use AbstractJsonTrait;
 
     /**
      * Get currently authed user's extensions with Bearer Token
@@ -128,6 +126,6 @@ trait ExtensionsTrait
         $processType('overlay');
         $processType('component');
 
-        return $this->json('PUT', 'users/extensions', [], (array) $data);
+        return $this->put('users/extensions', [], null, (array) $data);
     }
 }

@@ -231,18 +231,41 @@ public function getOAuthAuthorizeUrl(string $responseType = 'code', array $scope
 public function getOAuthToken(?string $code = NULL, string $grantType = 'authorization_code', array $scopes = [])
 ```
 
+### Ads
+
+```php
+public function startCommercial(array $parameters = [])
+```
+
+### Analytics
+
+```php
+public function getExtensionAnalytics(array $parameters = [])
+public function getGameAnalytics(array $parameters = [])
+```
+
 ### Bits
 
 ```php
+public function getCheermotes(array $parameters = [])
 public function getBitsLeaderboard(array $parameters = [])
+public function getExtensionTransactions(array $parameters = [])
 ```
 
 ### Clips
 
 ```php
-public function createClip(int $broadcaster)
-public function getClip(string $id)
-public function createEntitlementUrl(string $manifest, string $type = 'bulk_drops_grant')
+public function createClip(array $parameters = [])
+public function getClips(array $parameters = [])
+```
+
+### Entitlements
+
+```php
+public function createEntitlementUrl(array $parameters = [])
+public function getEntitlementsCodeStatus(array $parameters = [])
+public function getDropsEntitlements(array $parameters = [])
+public function redeemEntitlementsCode(array $parameters = [])
 ```
 
 ### Extensions
@@ -256,37 +279,18 @@ public function disableUserExtensionByName(?string $parameter = NULL)
 public function updateUserExtensions(?string $method = NULL, ?string $parameter = NULL, bool $disabled = false)
 ```
 
-### Follows
-
-```php
-public function getFollows(?int $from = NULL, ?int $to = NULL, ?Paginator $paginator = NULL)
-public function getFollowsFrom(int $from, ?Paginator $paginator = NULL)
-public function getFollowsTo(int $to, ?Paginator $paginator = NULL)
-```
-
 ### Games
 
 ```php
-public function getGames(array $parameters)
-public function getGameById(int $id)
-public function getGameByName(string $name)
-public function getGamesByIds(array $ids)
-public function getGamesByNames(array $names)
 public function getTopGames(array $parameters = [], ?Paginator $paginator = NULL)
+public function getGames(array $parameters = [])
 ```
 
-### Streams
+### Search
 
 ```php
-public function getStreams(array $parameters = [], ?Paginator $paginator = NULL)
-public function getStreamsByUserId(int $id, array $parameters = [], ?Paginator $paginator = NULL)
-public function getStreamsByUserName(string $name, array $parameters = [], ?Paginator $paginator = NULL)
-public function getStreamsByUserIds(array $ids, array $parameters = [], ?Paginator $paginator = NULL)
-public function getStreamsByUserNames(array $names, array $parameters = [], ?Paginator $paginator = NULL)
-public function getStreamsByCommunity(int $id, array $parameters = [], ?Paginator $paginator = NULL)
-public function getStreamsByCommunities(int $ids, array $parameters = [], ?Paginator $paginator = NULL)
-public function getStreamsByGame(int $id, array $parameters = [], ?Paginator $paginator = NULL)
-public function getStreamsByGames(int $ids, array $parameters = [], ?Paginator $paginator = NULL)
+public function searchCategories(array $parameters = [])
+public function searchChannels(array $parameters = [])
 ```
 
 ### StreamsMetadata
@@ -295,41 +299,56 @@ public function getStreamsByGames(int $ids, array $parameters = [], ?Paginator $
 public function getStreamsMetadata(array $parameters = [], ?Paginator $paginator = NULL)
 ```
 
+### Streams
+
+```php
+public function getStreamKey(array $parameters = [])
+public function getStreams(array $parameters = [], ?Paginator $paginator = NULL)
+public function createStreamMarker(array $parameters = [], array $body = [])
+public function getStreamMarkers(array $parameters = [], ?Paginator $paginator = NULL)
+public function getChannels(array $parameters = [])
+public function updateChannels(array $parameters = [], array $body = [])
+```
+
 ### Users
 
 ```php
-public function getAuthedUser() // DEPRECATED
+public function createUserFollows(array $parameters = [], array $body = [])
+public function deleteUserFollows(array $parameters = [])
 public function getUsers(array $parameters = [])
-public function getUserById(int $id, array $parameters = [])
-public function getUserByName(string $name, array $parameters = [])
-public function getUsersByIds(array $ids, array $parameters = [])
-public function getUsersByNames(array $names, array $parameters = [])
-public function updateUser(string $description)
+public function getUsersFollows(array $parameters = [], ?Paginator $paginator = NULL)
+public function updateUser(array $parameters = [])
+public function getUserExtensions(array $parameters = [])
+public function getUserActiveExtensions(array $parameters = [])
+public function updateUserExtension(array $parameters = [], array $body = [])
 ```
 
 ### Videos
 
 ```php
-public function getVideos(array $parameters, ?Paginator $paginator = NULL)
-public function getVideosById(int $id, array $parameters = [], ?Paginator $paginator = NULL)
-public function getVideosByUser(int $user, array $parameters = [], ?Paginator $paginator = NULL)
-public function getVideosByGame(int $game, array $parameters = [], ?Paginator $paginator = NULL)
+public function getVideos(array $parameters = [], ?Paginator $paginator = NULL)
 ```
 
 ### Subscriptions
 
 ```php
 public function getSubscriptions(array $parameters = [], ?Paginator $paginator = NULL)
-public function getUserSubscriptions(int $user, ?Paginator $paginator = NULL) // DEPRECATED
-public function getBroadcasterSubscriptions(int $user, ?Paginator $paginator = NULL)
+```
+
+### Tags
+
+```php
+public function getStreamTags(array $parameters = [])
+public function getAllStreamTags(array $parameters = [], ?Paginator $paginator = NULL)
+public function replaceStreamTags(array $parameters = [], array $body = [])
 ```
 
 ### Moderation
 
 ```php
-public function checkAutoModStatus(array $parameters = [])
-public function getBannedEvents(array $parameters = [], ?Paginator $paginator = NULL)
+public function checkAutoModStatus(array $parameters = [], array $body = [])
 public function getBannedUsers(array $parameters = [], ?Paginator $paginator = NULL)
+public function getBannedEvents(array $parameters = [], ?Paginator $paginator = NULL)
 public function getModerators(array $parameters = [], ?Paginator $paginator = NULL)
 public function getModeratorEvents(array $parameters = [], ?Paginator $paginator = NULL)
 ```
@@ -337,13 +356,10 @@ public function getModeratorEvents(array $parameters = [], ?Paginator $paginator
 ### Webhooks
 
 ```php
-public function subscribeWebhook(string $callback, string $topic, ?int $lease = NULL, ?string $secret = NULL)
-public function unsubscribeWebhook(string $callback, string $topic)
 public function getWebhookSubscriptions(array $parameters = [])
-public function webhookTopicStreamMonitor(int $user)
-public function webhookTopicUserFollows(int $from)
-public function webhookTopicUserGainsFollower(int $to)
-public function webhookTopicUserFollowsUser(int $from, int $to)
+public function subscribeWebhook(array $parameters = [], array $body = [])
+public function unsubscribeWebhook(array $parameters = [], array $body = [])
+public function buildWebhookTopic(string $path, array $parameters = [])
 ```
 
 [**OAuth Scopes Enums**](https://github.com/romanzipp/Laravel-Twitch/blob/master/src/Enums/Scope.php)

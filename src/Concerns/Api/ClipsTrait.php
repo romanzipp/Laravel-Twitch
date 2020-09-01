@@ -2,6 +2,7 @@
 
 namespace romanzipp\Twitch\Concerns\Api;
 
+use InvalidArgumentException;
 use romanzipp\Twitch\Concerns\Operations\GetTrait;
 use romanzipp\Twitch\Concerns\Operations\PostTrait;
 use romanzipp\Twitch\Result;
@@ -25,33 +26,37 @@ trait ClipsTrait
      *
      * @see https://dev.twitch.tv/docs/api/reference#create-clip
      *
-     * @param int $broadcaster ID of the stream from which the clip will be made.
+     * @param array $parameters
      * @return \romanzipp\Twitch\Result Result instance
-     *
-     * @todo Update to take single parameters array as argument
      */
-    public function createClip(int $broadcaster): Result
+    public function createClip(array $parameters = []): Result
     {
-        return $this->post('clips', [
-            'broadcaster_id' => $broadcaster,
-        ]);
+        if ( ! array_key_exists('broadcaster_id', $parameters)) {
+            throw new InvalidArgumentException('Parameter required missing: broadcaster_id');
+        }
+
+        return $this->post('clips', $parameters);
     }
 
     /**
-     * Gets information about a specified clip.
+     * Gets clip information by clip ID (one or more), broadcaster ID (one only), or game ID (one only).
      *
-     * @see https://dev.twitch.tv/docs/api/reference#get-clip
+     * Note that the clips service returns a maximum of 1000 clips,
      *
-     * @param string $id ID of the clip being queried. Limit 1.
+     * The response has a JSON payload with a data field containing an array of clip information elements and a pagination
+     * field containing information required to query for more streams.
+     *
+     * @see https://dev.twitch.tv/docs/api/reference#get-clips
+     *
+     * @param array $parameters
      * @return \romanzipp\Twitch\Result Result instance
-     *
-     * @todo Update to take single parameters array as argument
-     *
      */
-    public function getClip(string $id): Result
+    public function getClips(array $parameters = []): Result
     {
-        return $this->get('clips', [
-            'id' => $id,
-        ]);
+        if ( ! isset($parameters['broadcaster_id']) && ! isset($parameters['game_id']) && ! isset($parameters['id'])) {
+            throw new InvalidArgumentException('Parameter required missing: broadcaster_id, game_id or id');
+        }
+
+        return $this->get('clips', $parameters);
     }
 }

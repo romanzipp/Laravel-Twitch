@@ -17,7 +17,6 @@ trait AdsTrait
      *
      * @param array $parameters
      * @return \romanzipp\Twitch\Result Result instance
-     * @throws \romanzipp\Twitch\Exceptions\RequestRequiresClientIdException
      */
     public function startCommercial(array $parameters = []): Result
     {

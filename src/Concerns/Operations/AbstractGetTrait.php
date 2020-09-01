@@ -5,7 +5,7 @@ namespace romanzipp\Twitch\Concerns\Operations;
 use romanzipp\Twitch\Helpers\Paginator;
 use romanzipp\Twitch\Result;
 
-trait GetTrait
+trait AbstractGetTrait
 {
     /**
      * @param string $path

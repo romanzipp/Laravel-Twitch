@@ -2,14 +2,14 @@
 
 namespace romanzipp\Twitch\Concerns\Api;
 
-use romanzipp\Twitch\Concerns\Operations\GetTrait;
-use romanzipp\Twitch\Concerns\Operations\PutTrait;
+use romanzipp\Twitch\Concerns\Operations\AbstractGetTrait;
+use romanzipp\Twitch\Concerns\Operations\AbstractPutTrait;
 use romanzipp\Twitch\Result;
 
 trait UsersTrait
 {
-    use GetTrait;
-    use PutTrait;
+    use AbstractGetTrait;
+    use AbstractPutTrait;
 
     /**
      * Gets information about one or more specified Twitch users. Returns the currently authenticated

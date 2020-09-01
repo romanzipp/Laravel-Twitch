@@ -6,13 +6,16 @@ use InvalidArgumentException;
 
 trait ValidationTrait
 {
-    protected function validateRequired(array $parameters, string $key): void
+    protected function validateRequired(array $parameters, array $keys): void
     {
-        if (isset($parameters[$key])) {
-            return;
-        }
+        foreach ($keys as $key) {
 
-        throw new InvalidArgumentException("Required parameter `{$key}` is missing");
+            if (isset($parameters[$key])) {
+                continue;
+            }
+
+            throw new InvalidArgumentException("Required parameter `{$key}` is missing");
+        }
     }
 
     protected function validateAnyRequired(array $parameters, array $keys): void
@@ -26,17 +29,5 @@ trait ValidationTrait
         throw new InvalidArgumentException(
             sprintf('Required parameters `%s` is missing', implode(', ', $missingKeys))
         );
-    }
-
-    protected function validateAllRequired(array $parameters, array $keys): void
-    {
-        foreach ($keys as $key) {
-
-            if (isset($parameters[$key])) {
-                continue;
-            }
-
-            throw new InvalidArgumentException("Required parameter `{$key}` is missing");
-        }
     }
 }

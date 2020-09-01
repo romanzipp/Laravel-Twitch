@@ -2,13 +2,13 @@
 
 namespace romanzipp\Twitch\Concerns\Api;
 
-use romanzipp\Twitch\Concerns\Operations\GetTrait;
+use romanzipp\Twitch\Concerns\Operations\AbstractGetTrait;
 use romanzipp\Twitch\Helpers\Paginator;
 use romanzipp\Twitch\Result;
 
 trait StreamsTrait
 {
-    use GetTrait;
+    use AbstractGetTrait;
 
     /**
      * Gets information about active streams

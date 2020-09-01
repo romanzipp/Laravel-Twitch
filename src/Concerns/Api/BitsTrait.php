@@ -2,14 +2,15 @@
 
 namespace romanzipp\Twitch\Concerns\Api;
 
-use romanzipp\Twitch\Concerns\Operations\GetTrait;
+use romanzipp\Twitch\Concerns\Operations\AbstractGetTrait;
+use romanzipp\Twitch\Concerns\Operations\AbstractValidationTrait;
 use romanzipp\Twitch\Concerns\Validation\ValidationTrait;
 use romanzipp\Twitch\Result;
 
 trait BitsTrait
 {
-    use ValidationTrait;
-    use GetTrait;
+    use AbstractValidationTrait;
+    use AbstractGetTrait;
 
     /**
      * Retrieves the list of available Cheermotes, animated emotes to which viewers can assign Bits, to cheer in chat.
@@ -22,7 +23,7 @@ trait BitsTrait
      */
     public function getCheermotes(array $parameters = []): Result
     {
-        $this->validateRequired($parameters, 'broadcaster_id');
+        $this->validateRequired($parameters, ['broadcaster_id']);
 
         return $this->get('bits/cheermotes', $parameters);
     }
@@ -50,7 +51,7 @@ trait BitsTrait
      */
     public function getExtensionTransactions(array $parameters = []): Result
     {
-        $this->validateRequired($parameters, 'extension_id');
+        $this->validateRequired($parameters, ['extension_id']);
 
         return $this->get('extensions/transactions', $parameters);
     }

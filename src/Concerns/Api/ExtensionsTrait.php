@@ -2,14 +2,14 @@
 
 namespace romanzipp\Twitch\Concerns\Api;
 
-use romanzipp\Twitch\Concerns\Operations\GetTrait;
-use romanzipp\Twitch\Concerns\Operations\JsonTrait;
+use romanzipp\Twitch\Concerns\Operations\AbstractGetTrait;
+use romanzipp\Twitch\Concerns\Operations\AbstractJsonTrait;
 use romanzipp\Twitch\Result;
 
 trait ExtensionsTrait
 {
-    use GetTrait;
-    use JsonTrait;
+    use AbstractGetTrait;
+    use AbstractJsonTrait;
 
     /**
      * Get currently authed user's extensions with Bearer Token

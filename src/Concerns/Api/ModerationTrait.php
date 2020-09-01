@@ -2,16 +2,17 @@
 
 namespace romanzipp\Twitch\Concerns\Api;
 
-use InvalidArgumentException;
-use romanzipp\Twitch\Concerns\Operations\GetTrait;
-use romanzipp\Twitch\Concerns\Operations\PostTrait;
+use romanzipp\Twitch\Concerns\Operations\AbstractGetTrait;
+use romanzipp\Twitch\Concerns\Operations\AbstractPostTrait;
+use romanzipp\Twitch\Concerns\Validation\ValidationTrait;
 use romanzipp\Twitch\Helpers\Paginator;
 use romanzipp\Twitch\Result;
 
 trait ModerationTrait
 {
-    use GetTrait;
-    use PostTrait;
+    use ValidationTrait;
+    use AbstractGetTrait;
+    use AbstractPostTrait;
 
     /**
      * Determines whether a string message meets the channel’s AutoMod requirements.
@@ -24,29 +25,14 @@ trait ModerationTrait
      * @see https://dev.twitch.tv/docs/api/reference/#check-automod-status
      *
      * @param array $parameters
+     * @param array $body
      * @return \romanzipp\Twitch\Result
      */
-    public function checkAutoModStatus(array $parameters = []): Result
+    public function checkAutoModStatus(array $parameters = [], array $body = []): Result
     {
-        if ( ! array_key_exists('broadcaster_id', $parameters)) {
-            throw new InvalidArgumentException('Required parameter missing: broadcaster_id');
-        }
+        $this->validateRequired($parameters, 'broadcaster_id');
 
-        return $this->post('moderation/enforcements/status', $parameters);
-    }
-
-    /**
-     * Returns all user bans and un-bans in a channel.
-     *
-     * @see https://dev.twitch.tv/docs/api/reference/#get-banned-events
-     *
-     * @param array $parameters
-     * @param \romanzipp\Twitch\Helpers\Paginator|null $paginator
-     * @return \romanzipp\Twitch\Result
-     */
-    public function getBannedEvents(array $parameters = [], Paginator $paginator = null): Result
-    {
-        return $this->get('moderation/banned/events', $parameters, $paginator);
+        return $this->json('POST', 'moderation/enforcements/status', $parameters, $body);
     }
 
     /**
@@ -60,7 +46,25 @@ trait ModerationTrait
      */
     public function getBannedUsers(array $parameters = [], Paginator $paginator = null): Result
     {
-        return $this->get('moderation/banned/users', $parameters, $paginator);
+        $this->validateRequired($parameters, 'broadcaster_id');
+
+        return $this->get('moderation/banned', $parameters, $paginator);
+    }
+
+    /**
+     * Returns all user bans and un-bans in a channel.
+     *
+     * @see https://dev.twitch.tv/docs/api/reference/#get-banned-events
+     *
+     * @param array $parameters
+     * @param \romanzipp\Twitch\Helpers\Paginator|null $paginator
+     * @return \romanzipp\Twitch\Result
+     */
+    public function getBannedEvents(array $parameters = [], Paginator $paginator = null): Result
+    {
+        $this->validateRequired($parameters, 'broadcaster_id');
+
+        return $this->get('moderation/banned/events', $parameters, $paginator);
     }
 
     /**
@@ -74,6 +78,8 @@ trait ModerationTrait
      */
     public function getModerators(array $parameters = [], Paginator $paginator = null): Result
     {
+        $this->validateRequired($parameters, 'broadcaster_id');
+
         return $this->get('moderation/moderators', $parameters, $paginator);
     }
 
@@ -88,6 +94,8 @@ trait ModerationTrait
      */
     public function getModeratorEvents(array $parameters = [], Paginator $paginator = null): Result
     {
+        $this->validateRequired($parameters, 'broadcaster_id');
+
         return $this->get('moderation/moderators/events', $parameters, $paginator);
     }
 }

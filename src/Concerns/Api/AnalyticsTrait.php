@@ -2,12 +2,12 @@
 
 namespace romanzipp\Twitch\Concerns\Api;
 
-use romanzipp\Twitch\Concerns\Operations\GetTrait;
+use romanzipp\Twitch\Concerns\Operations\AbstractGetTrait;
 use romanzipp\Twitch\Result;
 
 trait AnalyticsTrait
 {
-    use GetTrait;
+    use AbstractGetTrait;
 
     /**
      * Gets a URL that extension developers can use to download analytics reports (CSV files) for their extensions.

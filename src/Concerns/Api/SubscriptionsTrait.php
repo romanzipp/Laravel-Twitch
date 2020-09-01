@@ -21,7 +21,7 @@ trait SubscriptionsTrait
      *
      * @see  https://dev.twitch.tv/docs/api/reference/#get-user-subscriptions
      *
-     * @param array $parameters Array of parameters
+     * @param array $parameters
      * @param \romanzipp\Twitch\Helpers\Paginator|null $paginator Paginator instance
      * @return \romanzipp\Twitch\Result Result instance
      */

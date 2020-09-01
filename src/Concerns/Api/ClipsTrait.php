@@ -32,7 +32,7 @@ trait ClipsTrait
     public function createClip(array $parameters = []): Result
     {
         if ( ! array_key_exists('broadcaster_id', $parameters)) {
-            throw new InvalidArgumentException('Parameter required missing: broadcaster_id');
+            throw new InvalidArgumentException('Required parameter missing: broadcaster_id');
         }
 
         return $this->post('clips', $parameters);
@@ -54,7 +54,7 @@ trait ClipsTrait
     public function getClips(array $parameters = []): Result
     {
         if ( ! isset($parameters['broadcaster_id']) && ! isset($parameters['game_id']) && ! isset($parameters['id'])) {
-            throw new InvalidArgumentException('Parameter required missing: broadcaster_id, game_id or id');
+            throw new InvalidArgumentException('Required parameter missing: broadcaster_id, game_id or id');
         }
 
         return $this->get('clips', $parameters);

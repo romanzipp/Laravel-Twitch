@@ -32,7 +32,7 @@ trait VideosTrait
     public function getVideos(array $parameters, Paginator $paginator = null): Result
     {
         if ( ! array_key_exists('id', $parameters) && ! array_key_exists('user_id', $parameters) && ! array_key_exists('game_id', $parameters)) {
-            throw new BadMethodCallException('Parameter required missing: id, user_id or game_id');
+            throw new BadMethodCallException('Required parameter missing: id, user_id or game_id');
         }
 
         return $this->get('videos', $parameters, $paginator);

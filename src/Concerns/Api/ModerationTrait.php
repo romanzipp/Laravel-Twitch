@@ -2,6 +2,7 @@
 
 namespace romanzipp\Twitch\Concerns\Api;
 
+use InvalidArgumentException;
 use romanzipp\Twitch\Concerns\Operations\GetTrait;
 use romanzipp\Twitch\Concerns\Operations\PostTrait;
 use romanzipp\Twitch\Helpers\Paginator;
@@ -15,10 +16,10 @@ trait ModerationTrait
     /**
      * Determines whether a string message meets the channel’s AutoMod requirements.
      *
-     * AutoMod is a moderation tool that blocks inappropriate or harassing chat with powerful moderator control. AutoMod detects
-     * misspellings and evasive language automatically. AutoMod uses machine learning and natural language processing algorithms to
-     * hold risky messages from chat so they can be reviewed by a channel moderator before appearing to other viewers in the chat.
-     * Moderators can approve or deny any message caught by AutoMod.
+     * AutoMod is a moderation tool that blocks inappropriate or harassing chat with powerful moderator control.
+     * AutoMod detects misspellings and evasive language automatically. AutoMod uses machine learning and natural language
+     * processing algorithms to hold risky messages from chat so they can be reviewed by a channel moderator before appearing
+     * to other viewers in the chat. Moderators can approve or deny any message caught by AutoMod.
      *
      * @see https://dev.twitch.tv/docs/api/reference/#check-automod-status
      *
@@ -27,6 +28,10 @@ trait ModerationTrait
      */
     public function checkAutoModStatus(array $parameters = []): Result
     {
+        if ( ! array_key_exists('broadcaster_id', $parameters)) {
+            throw new InvalidArgumentException('Required parameter missing: broadcaster_id');
+        }
+
         return $this->post('moderation/enforcements/status', $parameters);
     }
 

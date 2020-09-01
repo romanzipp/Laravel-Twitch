@@ -21,11 +21,11 @@ trait AdsTrait
     public function startCommercial(array $parameters = []): Result
     {
         if ( ! array_key_exists('broadcaster_id', $parameters)) {
-            throw new InvalidArgumentException('Parameter required missing: broadcaster_id');
+            throw new InvalidArgumentException('Required parameter missing: broadcaster_id');
         }
 
         if ( ! array_key_exists('length', $parameters)) {
-            throw new InvalidArgumentException('Parameter required missing: length');
+            throw new InvalidArgumentException('Required parameter missing: length');
         }
 
         return $this->post('channels/commercial', $parameters);

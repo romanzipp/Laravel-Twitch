@@ -28,7 +28,7 @@ class AccessToken implements Arrayable
         $this->expiresAt = $data['expires_at'] ?? time() + $this->expiresIn;
     }
 
-    public function toArray()
+    public function toArray(): array
     {
         return [
             'access_token' => $this->accessToken,

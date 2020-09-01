@@ -21,7 +21,7 @@ class GamesTest extends ApiTestCase
     public function testGetGameById()
     {
         $this->registerResult(
-            $result = $this->twitch()->getGameById(511224)
+            $result = $this->twitch()->getGames(['id' => 511224])
         );
 
         $this->assertTrue($result->success());
@@ -33,7 +33,7 @@ class GamesTest extends ApiTestCase
     public function testGetGameByName()
     {
         $this->registerResult(
-            $result = $this->twitch()->getGameByName('Apex Legends')
+            $result = $this->twitch()->getGames(['name' => 'Apex Legends'])
         );
 
         $this->assertTrue($result->success());
@@ -45,7 +45,7 @@ class GamesTest extends ApiTestCase
     public function testGetGamesByIds()
     {
         $this->registerResult(
-            $result = $this->twitch()->getGamesByIds([488552, 511224])
+            $result = $this->twitch()->getGames(['id' => [488552, 511224]])
         );
 
         $this->assertTrue($result->success());
@@ -63,7 +63,7 @@ class GamesTest extends ApiTestCase
     public function testGetGamesByNames()
     {
         $this->registerResult(
-            $result = $this->twitch()->getGamesByNames(['Overwatch', 'Apex Legends'])
+            $result = $this->twitch()->getGames(['name' => ['Overwatch', 'Apex Legends']])
         );
 
         $this->assertTrue($result->success());

@@ -9,7 +9,7 @@ class UsersTest extends ApiTestCase
     public function testGetUserByName()
     {
         $this->registerResult(
-            $result = $this->twitch()->getUserByName('twitch')
+            $result = $this->twitch()->getUsers(['login' => 'twitch'])
         );
 
         $this->assertTrue($result->success());
@@ -23,7 +23,7 @@ class UsersTest extends ApiTestCase
     public function testGetUserById()
     {
         $this->registerResult(
-            $result = $this->twitch()->getUserById(12826)
+            $result = $this->twitch()->getUsers(['id' => 12826])
         );
 
         $this->assertTrue($result->success());
@@ -37,7 +37,7 @@ class UsersTest extends ApiTestCase
     public function testGetUsersByIds()
     {
         $this->registerResult(
-            $result = $this->twitch()->getUsersByIds([12826, 131784680])
+            $result = $this->twitch()->getUsers(['id' => [12826, 131784680]])
         );
 
         $this->assertTrue($result->success());

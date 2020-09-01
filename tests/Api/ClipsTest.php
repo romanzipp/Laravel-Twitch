@@ -9,7 +9,7 @@ class ClipsTest extends ApiTestCase
     public function testCreateClipUnauthenticated()
     {
         $this->registerResult(
-            $result = $this->twitch()->createClip(29733529)
+            $result = $this->twitch()->createClip(['broadcaster_id' => 29733529])
         );
 
         $this->assertFalse($result->success());
@@ -19,7 +19,7 @@ class ClipsTest extends ApiTestCase
     public function testGetClip()
     {
         $this->registerResult(
-            $result = $this->twitch()->getClip('BashfulHelpfulSalamanderPrimeMe')
+            $result = $this->twitch()->getClips(['id' => 'BashfulHelpfulSalamanderPrimeMe'])
         );
 
         $this->assertTrue($result->success());

@@ -33,6 +33,7 @@ class Twitch
     use Api\UsersTrait;
     use Api\VideosTrait;
     use Api\SubscriptionsTrait;
+    use Api\TagsTrait;
     use Api\ModerationTrait;
     use Api\WebhooksTrait;
 

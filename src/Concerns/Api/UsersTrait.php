@@ -12,23 +12,8 @@ trait UsersTrait
     use PutTrait;
 
     /**
-     * Get currently authenticated user with Bearer Token
-     *
-     * @return \romanzipp\Twitch\Result Result instance
-     * @deprecated Please use the getUsers() method.
-     */
-    public function getAuthedUser(): Result
-    {
-        return $this->get('users', [], null);
-    }
-
-    /**
      * Gets information about one or more specified Twitch users. Returns the currently authenticated
      * user if no parameters are specified and an OAuth Token has been specified.
-     *
-     * Parameters:
-     * string   id     User ID. Multiple user IDs can be specified. Limit: 100.
-     * string   login  User login name. Multiple login names can be specified. Limit: 100.
      *
      * @see https://dev.twitch.tv/docs/api/reference#get-users
      *

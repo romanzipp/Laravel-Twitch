@@ -328,48 +328,28 @@ class Twitch
      * @param string $path
      * @param array $parameters
      * @param \romanzipp\Twitch\Helpers\Paginator|null $paginator
+     * @param array|null $body
      * @return \romanzipp\Twitch\Result
-     * @throws \romanzipp\Twitch\Exceptions\RequestRequiresClientIdException
      * @throws \romanzipp\Twitch\Exceptions\RequestRequiresAuthenticationException
+     * @throws \romanzipp\Twitch\Exceptions\RequestRequiresClientIdException
      */
-    public function post(string $path = '', array $parameters = [], Paginator $paginator = null): Result
+    public function post(string $path = '', array $parameters = [], Paginator $paginator = null, array $body = null): Result
     {
-        return $this->query('POST', $path, $parameters, $paginator);
+        return $this->query('POST', $path, $parameters, $paginator, $body);
     }
 
     /**
      * @param string $path
      * @param array $parameters
      * @param \romanzipp\Twitch\Helpers\Paginator|null $paginator
-     * @return \romanzipp\Twitch\Result
-     * @throws \romanzipp\Twitch\Exceptions\RequestRequiresClientIdException
-     * @throws \romanzipp\Twitch\Exceptions\RequestRequiresAuthenticationException
-     */
-    public function put(string $path = '', array $parameters = [], Paginator $paginator = null): Result
-    {
-        return $this->query('PUT', $path, $parameters, $paginator);
-    }
-
-    /**
-     * @param string $method
-     * @param string $path
-     * @param array $parameters
      * @param array|null $body
-     *
      * @return \romanzipp\Twitch\Result
-     *
-     * @throws \romanzipp\Twitch\Exceptions\RequestRequiresClientIdException
      * @throws \romanzipp\Twitch\Exceptions\RequestRequiresAuthenticationException
+     * @throws \romanzipp\Twitch\Exceptions\RequestRequiresClientIdException
      */
-    public function json(string $method, string $path = '', array $parameters = [], array $body = null): Result
+    public function put(string $path = '', array $parameters = [], Paginator $paginator = null, array $body = null): Result
     {
-        $jsonBody = null;
-
-        if ($body !== null) {
-            $jsonBody = json_encode(['data' => $body]);
-        }
-
-        return $this->query($method, $path, $parameters, null, $jsonBody);
+        return $this->query('PUT', $path, $parameters, $paginator, $body);
     }
 
     /**
@@ -379,13 +359,15 @@ class Twitch
      * @param string $path Query path
      * @param array $parameters Query parameters
      * @param \romanzipp\Twitch\Helpers\Paginator|null $paginator Paginator instance
-     * @param mixed|null $jsonBody JSON data
+     * @param array|null $body JSON body
+     *
      * @return \romanzipp\Twitch\Result Result instance
-     * @throws \romanzipp\Twitch\Exceptions\RequestRequiresClientIdException
+     *
      * @throws \romanzipp\Twitch\Exceptions\RequestRequiresAuthenticationException
+     * @throws \romanzipp\Twitch\Exceptions\RequestRequiresClientIdException
      * @noinspection PhpDocMissingThrowsInspection
      */
-    public function query(string $method = 'GET', string $path = '', array $parameters = [], Paginator $paginator = null, $jsonBody = null): Result
+    public function query(string $method = 'GET', string $path = '', array $parameters = [], Paginator $paginator = null, array $body = null): Result
     {
         if ($paginator !== null) {
             $parameters[$paginator->action] = $paginator->cursor();
@@ -402,12 +384,18 @@ class Twitch
             $this->setToken($token->accessToken);
         }
 
+        $jsonBody = null;
+
+        if ($body !== null) {
+            $jsonBody = json_encode($body);
+        }
+
         try {
             /** @var \GuzzleHttp\Psr7\Response $response */
             $response = $this->client->request($method, $path, [
-                'headers' => $this->buildHeaders($jsonBody ? true : false),
+                'headers' => $this->buildHeaders($jsonBody !== null),
                 'query' => $this->buildQuery($parameters),
-                'json' => $jsonBody ?: null,
+                'json' => $jsonBody,
             ]);
 
             $result = new Result($response, null);

@@ -2,16 +2,17 @@
 
 namespace romanzipp\Twitch\Concerns\Api;
 
-use romanzipp\Twitch\Concerns\Operations\GetTrait;
-use romanzipp\Twitch\Concerns\Operations\PostTrait;
+use romanzipp\Twitch\Concerns\Operations\AbstractGetTrait;
+use romanzipp\Twitch\Concerns\Operations\AbstractPostTrait;
+use romanzipp\Twitch\Concerns\Operations\AbstractValidationTrait;
 use romanzipp\Twitch\Concerns\Validation\ValidationTrait;
 use romanzipp\Twitch\Result;
 
 trait EntitlementsTrait
 {
-    use ValidationTrait;
-    use GetTrait;
-    use PostTrait;
+    use AbstractValidationTrait;
+    use AbstractGetTrait;
+    use AbstractPostTrait;
 
     /**
      * Create Entitlement Grants Upload URL
@@ -23,7 +24,7 @@ trait EntitlementsTrait
      */
     public function createEntitlementUrl(array $parameters = []): Result
     {
-        $this->validateAllRequired($parameters, ['manifest_id', 'type']);
+        $this->validateRequired($parameters, ['manifest_id', 'type']);
 
         return $this->post('entitlements/upload', $parameters);
     }
@@ -39,7 +40,7 @@ trait EntitlementsTrait
      */
     public function getEntitlementsCodeStatus(array $parameters = []): Result
     {
-        $this->validateAllRequired($parameters, ['code', 'user_id']);
+        $this->validateRequired($parameters, ['code', 'user_id']);
 
         return $this->get('entitlements/codes', $parameters);
     }

@@ -4,7 +4,7 @@ namespace romanzipp\Twitch\Concerns\Operations;
 
 use romanzipp\Twitch\Result;
 
-trait JsonTrait
+trait AbstractJsonTrait
 {
     /**
      * @param string $method

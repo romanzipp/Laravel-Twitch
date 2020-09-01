@@ -60,25 +60,25 @@ class ValidationTest extends TestCase
     {
         $this->expectException(InvalidArgumentException::class);
 
-        $this->validateAllRequired([], ['foo', 'bar']);
+        $this->validateRequired([], ['foo', 'bar']);
     }
 
     public function testAllRequiredOneMissing()
     {
         $this->expectException(InvalidArgumentException::class);
 
-        $this->validateAllRequired(['foo' => 'foo'], ['foo', 'bar']);
+        $this->validateRequired(['foo' => 'foo'], ['foo', 'bar']);
     }
 
     /** @doesNotPerformAssertions */
     public function testAllRequiredAllExisting()
     {
-        $this->validateAllRequired(['foo' => 'foo', 'bar' => 'bar'], ['foo', 'bar']);
+        $this->validateRequired(['foo' => 'foo', 'bar' => 'bar'], ['foo', 'bar']);
     }
 
     /** @doesNotPerformAssertions */
     public function testAllRequiredMoreExisting()
     {
-        $this->validateAllRequired(['foo' => 'foo', 'bar' => 'bar', 'foobar' => 'foobar'], ['foo', 'bar']);
+        $this->validateRequired(['foo' => 'foo', 'bar' => 'bar', 'foobar' => 'foobar'], ['foo', 'bar']);
     }
 }

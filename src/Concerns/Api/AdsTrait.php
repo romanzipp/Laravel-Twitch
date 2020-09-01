@@ -2,14 +2,15 @@
 
 namespace romanzipp\Twitch\Concerns\Api;
 
-use romanzipp\Twitch\Concerns\Operations\PostTrait;
+use romanzipp\Twitch\Concerns\Operations\AbstractPostTrait;
+use romanzipp\Twitch\Concerns\Operations\AbstractValidationTrait;
 use romanzipp\Twitch\Concerns\Validation\ValidationTrait;
 use romanzipp\Twitch\Result;
 
 trait AdsTrait
 {
-    use ValidationTrait;
-    use PostTrait;
+    use AbstractValidationTrait;
+    use AbstractPostTrait;
 
     /**
      * Starts a commercial on a specified channel.

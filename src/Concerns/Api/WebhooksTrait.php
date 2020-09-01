@@ -2,14 +2,14 @@
 
 namespace romanzipp\Twitch\Concerns\Api;
 
-use romanzipp\Twitch\Concerns\Operations\GetTrait;
-use romanzipp\Twitch\Concerns\Operations\PostTrait;
+use romanzipp\Twitch\Concerns\Operations\AbstractGetTrait;
+use romanzipp\Twitch\Concerns\Operations\AbstractPostTrait;
 use romanzipp\Twitch\Result;
 
 trait WebhooksTrait
 {
-    use GetTrait;
-    use PostTrait;
+    use AbstractGetTrait;
+    use AbstractPostTrait;
 
     /**
      * Subscribe to a webhook.

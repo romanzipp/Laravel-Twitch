@@ -2,16 +2,17 @@
 
 namespace romanzipp\Twitch\Concerns\Api;
 
-use romanzipp\Twitch\Concerns\Operations\GetTrait;
-use romanzipp\Twitch\Concerns\Operations\PostTrait;
+use romanzipp\Twitch\Concerns\Operations\AbstractGetTrait;
+use romanzipp\Twitch\Concerns\Operations\AbstractPostTrait;
+use romanzipp\Twitch\Concerns\Operations\AbstractValidationTrait;
 use romanzipp\Twitch\Concerns\Validation\ValidationTrait;
 use romanzipp\Twitch\Result;
 
 trait ClipsTrait
 {
-    use ValidationTrait;
-    use GetTrait;
-    use PostTrait;
+    use AbstractValidationTrait;
+    use AbstractGetTrait;
+    use AbstractPostTrait;
 
     /**
      * Creates a clip programmatically. This returns both an ID and an edit URL for the new clip.
@@ -32,7 +33,7 @@ trait ClipsTrait
      */
     public function createClip(array $parameters = []): Result
     {
-        $this->validateRequired($parameters, 'broadcaster_id');
+        $this->validateRequired($parameters, ['broadcaster_id']);
 
         return $this->post('clips', $parameters);
     }

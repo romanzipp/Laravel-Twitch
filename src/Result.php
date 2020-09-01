@@ -283,7 +283,7 @@ class Result
             return $this;
         }
 
-        $users = collect($this->twitch->getUsersByIds($userIds)->data);
+        $users = collect($this->twitch->getUsers(['id' => $userIds])->data);
 
         $dataWithUsers = collect($data)
             ->map(static function ($item) use ($users, $identifierAttribute, $insertTo) {

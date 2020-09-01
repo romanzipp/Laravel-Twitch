@@ -20,14 +20,17 @@ trait ValidationTrait
 
     protected function validateAnyRequired(array $parameters, array $keys): void
     {
-        $missingKeys = array_diff($keys, array_keys($parameters));
+        foreach ($keys as $key) {
 
-        if (empty($missingKeys)) {
+            if ( ! isset($parameters[$key])) {
+                continue;
+            }
+
             return;
         }
 
         throw new InvalidArgumentException(
-            sprintf('Required parameters `%s` is missing', implode(', ', $missingKeys))
+            sprintf('One or more fields `%s` must be specified', implode(', ', $keys))
         );
     }
 }

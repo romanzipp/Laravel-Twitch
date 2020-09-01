@@ -10,6 +10,32 @@ class ValidationTest extends TestCase
 {
     use ValidationTrait;
 
+    public function testAllRequiredAllMissing()
+    {
+        $this->expectException(InvalidArgumentException::class);
+
+        $this->validateRequired([], ['foo', 'bar']);
+    }
+
+    public function testAllRequiredOneMissing()
+    {
+        $this->expectException(InvalidArgumentException::class);
+
+        $this->validateRequired(['foo' => 'foo'], ['foo', 'bar']);
+    }
+
+    /** @doesNotPerformAssertions */
+    public function testAllRequiredAllExisting()
+    {
+        $this->validateRequired(['foo' => 'foo', 'bar' => 'bar'], ['foo', 'bar']);
+    }
+
+    /** @doesNotPerformAssertions */
+    public function testAllRequiredMoreExisting()
+    {
+        $this->validateRequired(['foo' => 'foo', 'bar' => 'bar', 'foobar' => 'foobar'], ['foo', 'bar']);
+    }
+
     public function testOneRequiredMssing()
     {
         $this->expectException(InvalidArgumentException::class);
@@ -29,6 +55,8 @@ class ValidationTest extends TestCase
     {
         $this->validateRequired(['foo' => 'bar'], ['foo']);
     }
+
+    // Any
 
     public function testAnyRequiredMissing()
     {
@@ -54,31 +82,5 @@ class ValidationTest extends TestCase
     public function testAnyRequiredMoreExisting()
     {
         $this->validateAnyRequired(['foo' => 'foo', 'bar' => 'bar', 'foobar' => 'foobar'], ['foo', 'bar']);
-    }
-
-    public function testAllRequiredAllMissing()
-    {
-        $this->expectException(InvalidArgumentException::class);
-
-        $this->validateRequired([], ['foo', 'bar']);
-    }
-
-    public function testAllRequiredOneMissing()
-    {
-        $this->expectException(InvalidArgumentException::class);
-
-        $this->validateRequired(['foo' => 'foo'], ['foo', 'bar']);
-    }
-
-    /** @doesNotPerformAssertions */
-    public function testAllRequiredAllExisting()
-    {
-        $this->validateRequired(['foo' => 'foo', 'bar' => 'bar'], ['foo', 'bar']);
-    }
-
-    /** @doesNotPerformAssertions */
-    public function testAllRequiredMoreExisting()
-    {
-        $this->validateRequired(['foo' => 'foo', 'bar' => 'bar', 'foobar' => 'foobar'], ['foo', 'bar']);
     }
 }

@@ -2,6 +2,7 @@
 
 namespace romanzipp\Twitch\Concerns\Api;
 
+use InvalidArgumentException;
 use romanzipp\Twitch\Concerns\Operations\GetTrait;
 use romanzipp\Twitch\Result;
 
@@ -39,25 +40,11 @@ trait BitsTrait
      */
     public function getCheermotes(array $parameters = []): Result
     {
+        if ( ! array_key_exists('broadcaster_id', $parameters)) {
+            throw new InvalidArgumentException('Parameter required missing: broadcaster_id');
+        }
+
         return $this->get('bits/cheermotes', $parameters);
-    }
-
-    /**
-     * Retrieves the list of available Cheermotes, animated emotes to which viewers can assign Bits, to cheer in chat.
-     * Cheermotes returned are available throughout Twitch, in all Bits-enabled channels.
-     *
-     * @see https://dev.twitch.tv/docs/api/reference#get-cheermotes
-     *
-     * @param string $broadcasterId
-     * @param array $parameters
-     * @return \romanzipp\Twitch\Result
-     * @throws \romanzipp\Twitch\Exceptions\RequestRequiresClientIdException
-     */
-    public function getCheermotesByBroadcasterId(string $broadcasterId, array $parameters = []): Result
-    {
-        $parameters['broadcaster_id'] = $broadcasterId;
-
-        return $this->getCheermotes($parameters);
     }
 
     /**
@@ -70,6 +57,10 @@ trait BitsTrait
      */
     public function getExtensionTransactions(array $parameters = []): Result
     {
+        if ( ! array_key_exists('extension_id', $parameters)) {
+            throw new InvalidArgumentException('Parameter required missing: extension_id');
+        }
+
         return $this->get('extensions/transactions', $parameters);
     }
 }

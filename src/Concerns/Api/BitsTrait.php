@@ -59,4 +59,17 @@ trait BitsTrait
 
         return $this->getCheermotes($parameters);
     }
+
+    /**
+     * Get Extension Transactions allows extension back end servers to fetch a list of transactions that have occurred for their extension across all of Twitch.
+     *
+     * @see https://dev.twitch.tv/docs/api/reference#get-extension-transactions
+     *
+     * @param array $parameters
+     * @return \romanzipp\Twitch\Result
+     */
+    public function getExtensionTransactions(array $parameters = []): Result
+    {
+        return $this->get('extensions/transactions', $parameters);
+    }
 }

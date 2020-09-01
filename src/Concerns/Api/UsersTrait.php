@@ -68,6 +68,8 @@ trait UsersTrait
      */
     public function getUsersFollows(array $parameters = [], Paginator $paginator = null): Result
     {
+        $this->validateAnyRequired($parameters, ['from_id', 'to_id']);
+
         return $this->get('users/follows', $parameters, $paginator);
     }
 

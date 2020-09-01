@@ -2,12 +2,13 @@
 
 namespace romanzipp\Twitch\Concerns\Api;
 
-use InvalidArgumentException;
 use romanzipp\Twitch\Concerns\Operations\GetTrait;
+use romanzipp\Twitch\Concerns\Validation\ValidationTrait;
 use romanzipp\Twitch\Result;
 
 trait BitsTrait
 {
+    use ValidationTrait;
     use GetTrait;
 
     /**
@@ -21,9 +22,7 @@ trait BitsTrait
      */
     public function getCheermotes(array $parameters = []): Result
     {
-        if ( ! array_key_exists('broadcaster_id', $parameters)) {
-            throw new InvalidArgumentException('Required parameter missing: broadcaster_id');
-        }
+        $this->validateRequired($parameters, 'broadcaster_id');
 
         return $this->get('bits/cheermotes', $parameters);
     }
@@ -51,9 +50,7 @@ trait BitsTrait
      */
     public function getExtensionTransactions(array $parameters = []): Result
     {
-        if ( ! array_key_exists('extension_id', $parameters)) {
-            throw new InvalidArgumentException('Required parameter missing: extension_id');
-        }
+        $this->validateRequired($parameters, 'extension_id');
 
         return $this->get('extensions/transactions', $parameters);
     }

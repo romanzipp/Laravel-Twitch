@@ -2,12 +2,13 @@
 
 namespace romanzipp\Twitch\Concerns\Api;
 
-use InvalidArgumentException;
 use romanzipp\Twitch\Concerns\Operations\PostTrait;
+use romanzipp\Twitch\Concerns\Validation\ValidationTrait;
 use romanzipp\Twitch\Result;
 
 trait AdsTrait
 {
+    use ValidationTrait;
     use PostTrait;
 
     /**
@@ -20,13 +21,7 @@ trait AdsTrait
      */
     public function startCommercial(array $parameters = []): Result
     {
-        if ( ! array_key_exists('broadcaster_id', $parameters)) {
-            throw new InvalidArgumentException('Required parameter missing: broadcaster_id');
-        }
-
-        if ( ! array_key_exists('length', $parameters)) {
-            throw new InvalidArgumentException('Required parameter missing: length');
-        }
+        $this->validateAnyRequired($parameters, ['broadcaster_id', 'length']);
 
         return $this->post('channels/commercial', $parameters);
     }

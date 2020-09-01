@@ -2,6 +2,7 @@
 
 namespace romanzipp\Twitch\Concerns\Api;
 
+use InvalidArgumentException;
 use romanzipp\Twitch\Concerns\Operations\PostTrait;
 use romanzipp\Twitch\Result;
 
@@ -14,15 +15,20 @@ trait AdsTrait
      *
      * @see https://dev.twitch.tv/docs/api/reference#start-commercial
      *
-     * @param string $broadcasterId ID of the channel requesting a commercial. Minimum: 1 Maximum: 1
-     * @param int $length Desired length of the commercial in seconds. Valid options are 30, 60, 90, 120, 150, 180.
+     * @param array $parameters
      * @return \romanzipp\Twitch\Result Result instance
+     * @throws \romanzipp\Twitch\Exceptions\RequestRequiresClientIdException
      */
-    public function startCommercial(string $broadcasterId, int $length): Result
+    public function startCommercial(array $parameters = []): Result
     {
-        return $this->post('channels/commercial', [
-            'broadcaster_id' => $broadcasterId,
-            'length' => $length,
-        ]);
+        if ( ! array_key_exists('broadcaster_id', $parameters)) {
+            throw new InvalidArgumentException('Parameter required missing: broadcaster_id');
+        }
+
+        if ( ! array_key_exists('length', $parameters)) {
+            throw new InvalidArgumentException('Parameter required missing: length');
+        }
+
+        return $this->post('channels/commercial', $parameters);
     }
 }

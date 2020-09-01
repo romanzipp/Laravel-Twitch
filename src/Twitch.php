@@ -25,7 +25,6 @@ class Twitch
     use Api\ClipsTrait;
     use Api\EntitlementsTrait;
     use Api\ExtensionsTrait;
-    use Api\FollowsTrait;
     use Api\GamesTrait;
     use Api\SearchTrait;
     use Api\StreamsMetadataTrait;

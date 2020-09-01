@@ -14,20 +14,20 @@ class ValidationTest extends TestCase
     {
         $this->expectException(InvalidArgumentException::class);
 
-        $this->validateRequired([], 'foo');
+        $this->validateRequired([], ['foo']);
     }
 
     public function testOneRequiredEmpty()
     {
         $this->expectException(InvalidArgumentException::class);
 
-        $this->validateRequired(['foo' => null], 'foo');
+        $this->validateRequired(['foo' => null], ['foo']);
     }
 
     /** @doesNotPerformAssertions */
     public function testOneRequired()
     {
-        $this->validateRequired(['foo' => 'bar'], 'foo');
+        $this->validateRequired(['foo' => 'bar'], ['foo']);
     }
 
     public function testAnyRequiredMissing()

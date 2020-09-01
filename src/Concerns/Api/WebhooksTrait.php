@@ -3,60 +3,18 @@
 namespace romanzipp\Twitch\Concerns\Api;
 
 use romanzipp\Twitch\Concerns\Operations\AbstractOperationsTrait;
+use romanzipp\Twitch\Concerns\Operations\AbstractValidationTrait;
 use romanzipp\Twitch\Result;
 
 trait WebhooksTrait
 {
+    use AbstractValidationTrait;
     use AbstractOperationsTrait;
 
     /**
-     * Subscribe to a webhook.
+     * Gets the Webhook subscriptions of a user identified by a Bearer token, in order of expiration.
      *
-     * @param string $callback
-     * @param string $topic
-     * @param int|null $lease
-     * @param string|null $secret
-     * @return \romanzipp\Twitch\Result
-     */
-    public function subscribeWebhook(string $callback, string $topic, int $lease = null, string $secret = null): Result
-    {
-        $parameters = [
-            'hub.callback' => $callback,
-            'hub.mode' => 'subscribe',
-            'hub.topic' => $topic,
-        ];
-
-        if ($lease !== null) {
-            $parameters['hub.lease_seconds'] = $lease;
-        }
-
-        if ($secret !== null) {
-            $parameters['hub.secret'] = $secret;
-        }
-
-        return $this->post('webhooks/hub', $parameters);
-    }
-
-    /**
-     * Unsubscribe from a webhook.
-     *
-     * @param string $callback
-     * @param string $topic
-     * @return \romanzipp\Twitch\Result
-     */
-    public function unsubscribeWebhook(string $callback, string $topic): Result
-    {
-        $parameters = [
-            'hub.callback' => $callback,
-            'hub.mode' => 'unsubscribe',
-            'hub.topic' => $topic,
-        ];
-
-        return $this->post('webhooks/hub', $parameters);
-    }
-
-    /**
-     * Get webhook subscriptions.
+     * @see https://dev.twitch.tv/docs/api/reference/#get-webhook-subscriptions
      *
      * @param array $parameters
      * @return \romanzipp\Twitch\Result
@@ -67,58 +25,65 @@ trait WebhooksTrait
     }
 
     /**
-     * Build the webhook "streams" URL.
+     * Subscribe to a webhook.
      *
-     * @param int $user
-     * @return string
+     * @see https://dev.twitch.tv/docs/api/webhooks-reference
+     *
+     * @param array $parameters
+     * @param array $body
+     * @return \romanzipp\Twitch\Result
      */
-    public function webhookTopicStreamMonitor(int $user): string
+    public function subscribeWebhook(array $parameters = [], array $body = []): Result
     {
-        return static::BASE_URI . 'streams?' . http_build_query([
-                'user_id' => $user,
-            ]);
+        $this->validateRequired($body, [
+            'hub.callback',
+            'hub.mode',
+            'hub.topic',
+            'hub.lease_seconds',
+        ]);
+
+        return $this->post('webhooks/hub', $parameters, null, $body);
     }
 
     /**
-     * Build the webhook "from follows" URL.
+     * Unsubscribe from a webhook.
      *
-     * @param int $from
-     * @return string
+     * @see https://dev.twitch.tv/docs/api/webhooks-reference
+     *
+     * @param array $parameters
+     * @param array $body
+     * @return \romanzipp\Twitch\Result
      */
-    public function webhookTopicUserFollows(int $from): string
+    public function unsubscribeWebhook(array $parameters = [], array $body = []): Result
     {
-        return static::BASE_URI . 'users/follows?' . http_build_query([
-                'first' => 1,
-                'from_id' => $from,
-            ]);
+        $this->validateRequired($body, [
+            'hub.callback',
+            'hub.mode',
+            'hub.topic',
+        ]);
+
+        return $this->post('webhooks/hub', $parameters, null, $body);
     }
 
     /**
-     * Build the webhook "to follows" URL.
+     * Build the webhook topic url.
      *
-     * @param int $to
+     * @see https://dev.twitch.tv/docs/api/webhooks-reference
+     *
+     * @param string $path
+     * @param array $parameters
      * @return string
      */
-    public function webhookTopicUserGainsFollower(int $to): string
+    public function buildWebhookTopic(string $path, array $parameters = []): string
     {
-        return static::BASE_URI . 'users/follows?' . http_build_query([
-                'first' => 1, 'to_id' => $to,
-            ]);
-    }
+        $url = static::BASE_URI . $path;
 
-    /**
-     * Build the webhook "from & to follows" URL.
-     *
-     * @param int $from
-     * @param int $to
-     * @return string
-     */
-    public function webhookTopicUserFollowsUser(int $from, int $to): string
-    {
-        return static::BASE_URI . 'users/follows?' . http_build_query([
-                'first' => 1,
-                'from_id' => $from,
-                'to_id' => $to,
-            ]);
+        if (empty($parameters)) {
+            return $url;
+        }
+
+        $url .= '?' . http_build_query($parameters);
+
+        return $url;
     }
 }

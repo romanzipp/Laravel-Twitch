@@ -3,17 +3,13 @@
 namespace romanzipp\Twitch\Concerns\Api;
 
 use InvalidArgumentException;
-use romanzipp\Twitch\Concerns\Operations\AbstractGetTrait;
-use romanzipp\Twitch\Concerns\Operations\AbstractPostTrait;
-use romanzipp\Twitch\Concerns\Operations\AbstractPutTrait;
+use romanzipp\Twitch\Concerns\Operations\AbstractOperationsTrait;
 use romanzipp\Twitch\Helpers\Paginator;
 use romanzipp\Twitch\Result;
 
 trait GamesTrait
 {
-    use AbstractGetTrait;
-    use AbstractPostTrait;
-    use AbstractPutTrait;
+    use AbstractOperationsTrait;
 
     /**
      * Gets games sorted by number of current viewers on Twitch, most popular first.

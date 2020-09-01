@@ -2,7 +2,7 @@
 
 namespace romanzipp\Twitch\Concerns\Api;
 
-use romanzipp\Twitch\Concerns\Operations\AbstractGetTrait;
+use romanzipp\Twitch\Concerns\Operations\AbstractOperationsTrait;
 use romanzipp\Twitch\Concerns\Operations\AbstractValidationTrait;
 use romanzipp\Twitch\Helpers\Paginator;
 use romanzipp\Twitch\Result;
@@ -10,7 +10,7 @@ use romanzipp\Twitch\Result;
 trait StreamsTrait
 {
     use AbstractValidationTrait;
-    use AbstractGetTrait;
+    use AbstractOperationsTrait;
 
     /**
      * Gets the channel stream key for a user.

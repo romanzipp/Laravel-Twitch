@@ -2,13 +2,13 @@
 
 namespace romanzipp\Twitch\Concerns\Api;
 
-use romanzipp\Twitch\Concerns\Operations\AbstractGetTrait;
+use romanzipp\Twitch\Concerns\Operations\AbstractOperationsTrait;
 use romanzipp\Twitch\Helpers\Paginator;
 use romanzipp\Twitch\Result;
 
 trait StreamsMetadataTrait
 {
-    use AbstractGetTrait;
+    use AbstractOperationsTrait;
 
     /**
      * Gets metadata information about active streams playing Overwatch or Hearthstone

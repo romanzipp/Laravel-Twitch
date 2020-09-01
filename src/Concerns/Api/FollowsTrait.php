@@ -3,13 +3,13 @@
 namespace romanzipp\Twitch\Concerns\Api;
 
 use InvalidArgumentException;
-use romanzipp\Twitch\Concerns\Operations\AbstractGetTrait;
+use romanzipp\Twitch\Concerns\Operations\AbstractOperationsTrait;
 use romanzipp\Twitch\Helpers\Paginator;
 use romanzipp\Twitch\Result;
 
 trait FollowsTrait
 {
-    use AbstractGetTrait;
+    use AbstractOperationsTrait;
 
     /**
      * Gets information on follow relationships between two Twitch users

@@ -2,17 +2,14 @@
 
 namespace romanzipp\Twitch\Concerns\Api;
 
-use romanzipp\Twitch\Concerns\Operations\AbstractGetTrait;
-use romanzipp\Twitch\Concerns\Operations\AbstractPostTrait;
+use romanzipp\Twitch\Concerns\Operations\AbstractOperationsTrait;
 use romanzipp\Twitch\Concerns\Operations\AbstractValidationTrait;
-use romanzipp\Twitch\Concerns\Validation\ValidationTrait;
 use romanzipp\Twitch\Result;
 
 trait ClipsTrait
 {
     use AbstractValidationTrait;
-    use AbstractGetTrait;
-    use AbstractPostTrait;
+    use AbstractOperationsTrait;
 
     /**
      * Creates a clip programmatically. This returns both an ID and an edit URL for the new clip.

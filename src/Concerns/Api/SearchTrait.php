@@ -2,14 +2,14 @@
 
 namespace romanzipp\Twitch\Concerns\Api;
 
-use romanzipp\Twitch\Concerns\Operations\AbstractGetTrait;
+use romanzipp\Twitch\Concerns\Operations\AbstractOperationsTrait;
 use romanzipp\Twitch\Concerns\Operations\AbstractValidationTrait;
 use romanzipp\Twitch\Result;
 
 trait SearchTrait
 {
     use AbstractValidationTrait;
-    use AbstractGetTrait;
+    use AbstractOperationsTrait;
 
     /**
      * Returns a list of games or categories that match the query via name either entirely or partially.

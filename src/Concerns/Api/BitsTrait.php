@@ -2,15 +2,14 @@
 
 namespace romanzipp\Twitch\Concerns\Api;
 
-use romanzipp\Twitch\Concerns\Operations\AbstractGetTrait;
+use romanzipp\Twitch\Concerns\Operations\AbstractOperationsTrait;
 use romanzipp\Twitch\Concerns\Operations\AbstractValidationTrait;
-use romanzipp\Twitch\Concerns\Validation\ValidationTrait;
 use romanzipp\Twitch\Result;
 
 trait BitsTrait
 {
     use AbstractValidationTrait;
-    use AbstractGetTrait;
+    use AbstractOperationsTrait;
 
     /**
      * Retrieves the list of available Cheermotes, animated emotes to which viewers can assign Bits, to cheer in chat.

@@ -44,4 +44,72 @@ trait StreamsTrait
     {
         return $this->get('streams', $parameters, $paginator);
     }
+
+    /**
+     * Creates a marker in the stream of a user specified by a user ID. A marker is an arbitrary point in a stream that the
+     * broadcaster wants to mark; e.g., to easily return to later. The marker is created at the current timestamp in the live
+     * broadcast when the request is processed. Markers can be created by the stream owner or editors. The user creating the
+     * marker is identified by a Bearer token.
+     *
+     * @see https://dev.twitch.tv/docs/api/reference/#create-stream-marker
+     *
+     * @param array $parameters
+     * @param array $body
+     * @return \romanzipp\Twitch\Result
+     */
+    public function createStreamMarker(array $parameters = [], array $body = []): Result
+    {
+        $this->validateRequired($body, ['user_id']);
+
+        return $this->post('streams', $parameters, null, $body);
+    }
+
+    /**
+     * Gets a list of markers for either a specified user’s most recent stream or a specified VOD/video (stream), ordered by
+     * recency. A marker is an arbitrary point in a stream that the broadcaster wants to mark; e.g., to easily return to later.
+     * The only markers returned are those created by the user identified by the Bearer token.
+     *
+     * @see https://dev.twitch.tv/docs/api/reference/#get-stream-markers
+     *
+     * @param array $parameters
+     * @param \romanzipp\Twitch\Helpers\Paginator|null $paginator
+     * @return \romanzipp\Twitch\Result
+     */
+    public function getStreamMarkers(array $parameters = [], Paginator $paginator = null): Result
+    {
+        $this->validateAnyRequired($parameters, ['user_id', 'video_id']);
+
+        return $this->get('streams/markers', $parameters, $paginator);
+    }
+
+    /**
+     * Gets channel information for users.
+     *
+     * @see https://dev.twitch.tv/docs/api/reference/#get-channel-information
+     *
+     * @param array $parameters
+     * @return \romanzipp\Twitch\Result
+     */
+    public function getChannels(array $parameters = []): Result
+    {
+        $this->validateAnyRequired($parameters, ['broadcaster_id']);
+
+        return $this->get('channels', $parameters);
+    }
+
+    /**
+     * Modifies channel information for users.
+     *
+     * @see https://dev.twitch.tv/docs/api/reference/#modify-channel-information
+     *
+     * @param array $parameters
+     * @param array $body
+     * @return \romanzipp\Twitch\Result
+     */
+    public function updateChannels(array $parameters = [], array $body = []): Result
+    {
+        $this->validateAnyRequired($parameters, ['broadcaster_id']);
+
+        return $this->patch('channels', $parameters, null, $body);
+    }
 }

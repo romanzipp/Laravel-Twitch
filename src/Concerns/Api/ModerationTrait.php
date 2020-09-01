@@ -4,13 +4,13 @@ namespace romanzipp\Twitch\Concerns\Api;
 
 use romanzipp\Twitch\Concerns\Operations\AbstractGetTrait;
 use romanzipp\Twitch\Concerns\Operations\AbstractPostTrait;
-use romanzipp\Twitch\Concerns\Validation\ValidationTrait;
+use romanzipp\Twitch\Concerns\Operations\AbstractValidationTrait;
 use romanzipp\Twitch\Helpers\Paginator;
 use romanzipp\Twitch\Result;
 
 trait ModerationTrait
 {
-    use ValidationTrait;
+    use AbstractValidationTrait;
     use AbstractGetTrait;
     use AbstractPostTrait;
 
@@ -30,7 +30,7 @@ trait ModerationTrait
      */
     public function checkAutoModStatus(array $parameters = [], array $body = []): Result
     {
-        $this->validateRequired($parameters, 'broadcaster_id');
+        $this->validateRequired($parameters, ['broadcaster_id']);
 
         return $this->json('POST', 'moderation/enforcements/status', $parameters, $body);
     }
@@ -46,7 +46,7 @@ trait ModerationTrait
      */
     public function getBannedUsers(array $parameters = [], Paginator $paginator = null): Result
     {
-        $this->validateRequired($parameters, 'broadcaster_id');
+        $this->validateRequired($parameters, ['broadcaster_id']);
 
         return $this->get('moderation/banned', $parameters, $paginator);
     }
@@ -62,7 +62,7 @@ trait ModerationTrait
      */
     public function getBannedEvents(array $parameters = [], Paginator $paginator = null): Result
     {
-        $this->validateRequired($parameters, 'broadcaster_id');
+        $this->validateRequired($parameters, ['broadcaster_id']);
 
         return $this->get('moderation/banned/events', $parameters, $paginator);
     }
@@ -78,7 +78,7 @@ trait ModerationTrait
      */
     public function getModerators(array $parameters = [], Paginator $paginator = null): Result
     {
-        $this->validateRequired($parameters, 'broadcaster_id');
+        $this->validateRequired($parameters, ['broadcaster_id']);
 
         return $this->get('moderation/moderators', $parameters, $paginator);
     }
@@ -94,7 +94,7 @@ trait ModerationTrait
      */
     public function getModeratorEvents(array $parameters = [], Paginator $paginator = null): Result
     {
-        $this->validateRequired($parameters, 'broadcaster_id');
+        $this->validateRequired($parameters, ['broadcaster_id']);
 
         return $this->get('moderation/moderators/events', $parameters, $paginator);
     }

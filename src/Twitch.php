@@ -346,17 +346,22 @@ class Twitch
     /**
      * @param string $method
      * @param string $path
+     * @param array $parameters
      * @param array|null $body
+     *
      * @return \romanzipp\Twitch\Result
-     * @throws \romanzipp\Twitch\Exceptions\RequestRequiresClientIdException
+     *
+     * @throws \romanzipp\Twitch\Exceptions\RequestRequiresAuthenticationException
      */
-    public function json(string $method, string $path = '', array $body = null): Result
+    public function json(string $method, string $path = '', array $parameters = [], array $body = null): Result
     {
-        if ($body) {
-            $body = json_encode(['data' => $body]);
+        $jsonBody = null;
+
+        if ($body !== null) {
+            $jsonBody = json_encode(['data' => $body]);
         }
 
-        return $this->query($method, $path, [], null, $body);
+        return $this->query($method, $path, $parameters, null, $jsonBody);
     }
 
     /**

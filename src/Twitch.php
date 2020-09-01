@@ -18,6 +18,7 @@ class Twitch
 
     use Api\OAuthTrait;
     use Api\AdsTrait;
+    use Api\AnalyticsTrait;
     use Api\BitsTrait;
     use Api\ClipsTrait;
     use Api\ExtensionsTrait;

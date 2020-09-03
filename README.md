@@ -66,7 +66,7 @@ $twitch = new romanzipp\Twitch\Twitch;
 $twitch->setClientId('abc123');
 
 // Get User by Username
-$result = $twitch->getUserByName('herrausragend');
+$result = $twitch->getUsers(['login' => 'herrausragend']);
 
 // Check, if the query was successful
 if ( ! $result->success()) {
@@ -101,7 +101,7 @@ $twitch = new romanzipp\Twitch\Twitch;
 $twitch->setClientId('abc123');
 $twitch->setToken('abcdef123456');
 
-$result = $twitch->getUserByName('herrausragend');
+$result = $twitch->getUsers(['login' => 'herrausragend']);
 ```
 
 ### OAuth Client Credentials Flow
@@ -110,8 +110,9 @@ Since May 01, 2020, every request requires an OAuth token which can be issued us
 
 ```php
 use romanzipp\Twitch\Enums\GrantType;
+use romanzipp\Twitch\Twitch;
 
-$twitch = new romanzipp\Twitch\Twitch;
+$twitch = new Twitch;
 
 $twitch->setClientId('abc123');
 $twitch->setClientSecret('def123');
@@ -152,7 +153,7 @@ $thirdResult = $twitch->getStreams(['language' => 'de'], $secondResult->back());
 ```php
 use romanzipp\Twitch\Facades\Twitch;
 
-Twitch::withClientId('abc123')->withToken('abcdef123456')->getAuthedUser();
+Twitch::withClientId('abc123')->withToken('abcdef123456')->getUsers();
 ```
 
 ### Pagination Loop Example
@@ -160,7 +161,9 @@ Twitch::withClientId('abc123')->withToken('abcdef123456')->getAuthedUser();
 This example fetches all Twitch Games and stores them into a database.
 
 ```php
-$twitch = new romanzipp\Twitch\Twitch;
+use romanzipp\Twitch\Twitch;
+
+$twitch = new Twitch;
 
 do {
     $nextCursor = null;
@@ -198,7 +201,11 @@ The new API does not include the user objects in endpoints like followers or bit
 You can just call the [insertUsers](https://github.com/romanzipp/Laravel-Twitch/blob/master/src/Result.php#L233) method to insert all user data identified by `from_id` into `from_user`
 
 ```php
-$result = $twitch->getFollowsTo(654321);
+use romanzipp\Twitch\Twitch;
+
+$twitch = new Twitch;
+
+$result = $twitch->getUsersFollows(['to_id' => 654321]);
 
 $result->insertUsers('from_id', 'from_user');
 ```
@@ -286,17 +293,17 @@ public function getTopGames(array $parameters = [], ?Paginator $paginator = NULL
 public function getGames(array $parameters = [])
 ```
 
+### HypeTrain
+
+```php
+public function getHypeTrainEvents(array $parameters = [])
+```
+
 ### Search
 
 ```php
 public function searchCategories(array $parameters = [])
 public function searchChannels(array $parameters = [])
-```
-
-### StreamsMetadata
-
-```php
-public function getStreamsMetadata(array $parameters = [], ?Paginator $paginator = NULL)
 ```
 
 ### Streams
@@ -366,7 +373,7 @@ public function buildWebhookTopic(string $path, array $parameters = [])
 
 ## Upgrading
 
-- [Upgrade from 2.0 to 3.0](https://github.com/romanzipp/Laravel-Twitch/releases/tag/3.0.0)
+- [**Upgrade from 2.0 to 3.0**](https://github.com/romanzipp/Laravel-Twitch/releases/tag/3.0.0)
 - [Upgrade from 1.0 to 2.0](https://github.com/romanzipp/Laravel-Twitch/releases/tag/2.0.0)
 
 ## Development

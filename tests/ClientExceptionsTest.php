@@ -31,14 +31,14 @@ class ClientExceptionsTest extends TestCase
     {
         $this->expectException(ClientException::class);
 
-        $this->getMockedService(new ClientException('Error', new Request('GET', '/')))->get('/');
+        $this->getMockedService(new ClientException('Error', new Request('GET', '/'), new Response(400)))->get('/');
     }
 
     public function testServerException()
     {
         $this->expectException(ServerException::class);
 
-        $this->getMockedService(new ServerException('Error', new Request('GET', '/')))->get('/');
+        $this->getMockedService(new ServerException('Error', new Request('GET', '/'), new Response(500)))->get('/');
     }
 
     public function testClientExceptionWithResponse()

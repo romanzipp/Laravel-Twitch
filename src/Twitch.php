@@ -419,7 +419,7 @@ class Twitch
         }
 
         try {
-            /** @var \GuzzleHttp\Psr7\Response $response */
+
             $response = $this->client->request($method, $path, [
                 'headers' => $this->buildHeaders($jsonBody !== null),
                 'query' => $this->buildQuery($parameters),

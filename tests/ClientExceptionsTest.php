@@ -24,33 +24,53 @@ class ClientExceptionsTest extends TestCase
     {
         $this->expectException(ConnectException::class);
 
-        $this->getMockedService(new ConnectException('Error', new Request('GET', '/')))->get('/');
+        $this
+            ->getMockedService(
+                new ConnectException('Error', new Request('GET', '/'))
+            )
+            ->get('/');
     }
 
     public function testClientException()
     {
         $this->expectException(ClientException::class);
 
-        $this->getMockedService(new ClientException('Error', new Request('GET', '/'), new Response(400)))->get('/');
+        $this
+            ->getMockedService(
+                new ClientException('Error', new Request('GET', '/'), new Response(400))
+            )
+            ->get('/');
     }
 
     public function testServerException()
     {
         $this->expectException(ServerException::class);
 
-        $this->getMockedService(new ServerException('Error', new Request('GET', '/'), new Response(500)))->get('/');
+        $this
+            ->getMockedService(
+                new ServerException('Error', new Request('GET', '/'), new Response(500))
+            )
+            ->get('/');
     }
 
     public function testClientExceptionWithResponse()
     {
-        $result = $this->getMockedService(new ClientException('Error', new Request('GET', '/'), new Response(400)))->get('/');
+        $result = $this
+            ->getMockedService(
+                new ClientException('Error', new Request('GET', '/'), new Response(400))
+            )
+            ->get('/');
 
         $this->assertInstanceOf(Result::class, $result);
     }
 
     public function testServerExceptionWithResponse()
     {
-        $result = $this->getMockedService(new ServerException('Error', new Request('GET', '/'), new Response(500)))->get('/');
+        $result = $this
+            ->getMockedService(
+                new ServerException('Error', new Request('GET', '/'), new Response(500))
+            )
+            ->get('/');
 
         $this->assertInstanceOf(Result::class, $result);
     }

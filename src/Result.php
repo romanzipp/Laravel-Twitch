@@ -3,7 +3,6 @@
 namespace romanzipp\Twitch;
 
 use Exception;
-use GuzzleHttp\Psr7\Response;
 use Psr\Http\Message\ResponseInterface;
 use romanzipp\Twitch\Helpers\Paginator;
 
@@ -68,7 +67,7 @@ class Result
     /**
      * Original Guzzle HTTP Response.
      *
-     * @var Response
+     * @var \Psr\Http\Message\ResponseInterface
      */
     public $response;
 
@@ -82,8 +81,8 @@ class Result
     /**
      * Constructor,
      *
-     * @param ResponseInterface $response HTTP response
-     * @param Exception|mixed $exception Exception, if present
+     * @param \Psr\Http\Message\ResponseInterface $response HTTP response
+     * @param \Exception|mixed $exception Exception, if present
      */
     public function __construct(ResponseInterface $response, Exception $exception = null)
     {
@@ -181,7 +180,7 @@ class Result
     /**
      * Set the Paginator to fetch the first set of results.
      *
-     * @return Paginator|null
+     * @return \romanzipp\Twitch\Helpers\Paginator|null
      * @deprecated
      */
     public function first(): ?Paginator
@@ -196,7 +195,7 @@ class Result
     /**
      * Set the Paginator to fetch the next set of results.
      *
-     * @return Paginator|null
+     * @return \romanzipp\Twitch\Helpers\Paginator|null
      */
     public function next(): ?Paginator
     {
@@ -210,7 +209,7 @@ class Result
     /**
      * Set the Paginator to fetch the last set of results.
      *
-     * @return Paginator|null
+     * @return \romanzipp\Twitch\Helpers\Paginator|null
      */
     public function back(): ?Paginator
     {
@@ -301,7 +300,7 @@ class Result
     /**
      * Map response payload to instance attributes.
      *
-     * @param ResponseInterface $response
+     * @param \Psr\Http\Message\ResponseInterface $response
      */
     protected function processPayload(ResponseInterface $response): void
     {

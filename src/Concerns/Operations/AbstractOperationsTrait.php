@@ -16,4 +16,10 @@ trait AbstractOperationsTrait
     abstract public function patch(string $path = '', array $parameters = [], Paginator $paginator = null, array $body = null): Result;
 
     abstract public function delete(string $path = '', array $parameters = [], Paginator $paginator = null, array $body = null): Result;
+
+    abstract public function getClientId(): string;
+
+    abstract public function getClientSecret(): string;
+
+    abstract public function getRedirectUri(): string;
 }

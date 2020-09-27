@@ -29,7 +29,7 @@ $markdown = collect(class_uses(Twitch::class))
             ->reject(function (ReflectionMethod $method) {
                 return $method->isConstructor();
             })
-            ->each(function (ReflectionMethod $method) use (&$methods, $title, $trait) {
+            ->each(function (ReflectionMethod $method) use (&$methods) {
 
                 $declaration = collect($method->getModifiers())->map(function (int $modifier) {
                     return $modifier == ReflectionMethod::IS_PUBLIC ? 'public ' : '';

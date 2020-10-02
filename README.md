@@ -32,23 +32,15 @@ You will need define a valid **Client ID** and **Client Secret** via your config
 composer require romanzipp/laravel-twitch
 ```
 
-**If you use Laravel 5.5+ you are already done, otherwise continue.**
-
-Add Service Provider to your `app.php` configuration file:
-
-```php
-romanzipp\Twitch\Providers\TwitchServiceProvider::class,
-```
-
 ## Configuration
 
-Copy configuration to config folder:
+Copy configuration to project:
 
 ```
-$ php artisan vendor:publish --provider="romanzipp\Twitch\Providers\TwitchServiceProvider"
+php artisan vendor:publish --provider="romanzipp\Twitch\Providers\TwitchServiceProvider"
 ```
 
-Add environmental variables to your `.env`
+Add environmental variables to your `.env`:
 
 ```
 TWITCH_HELIX_KEY=

@@ -19,6 +19,7 @@ trait HypeTrainTrait
      * @see https://dev.twitch.tv/docs/api/reference#get-hype-train-events
      *
      * @param array $parameters
+     *
      * @return \romanzipp\Twitch\Result
      */
     public function getHypeTrainEvents(array $parameters = []): Result

@@ -17,6 +17,7 @@ trait WebhooksTrait
      * @see https://dev.twitch.tv/docs/api/reference/#get-webhook-subscriptions
      *
      * @param array $parameters
+     *
      * @return \romanzipp\Twitch\Result
      */
     public function getWebhookSubscriptions(array $parameters = []): Result
@@ -31,6 +32,7 @@ trait WebhooksTrait
      *
      * @param array $parameters
      * @param array $body
+     *
      * @return \romanzipp\Twitch\Result
      */
     public function subscribeWebhook(array $parameters = [], array $body = []): Result
@@ -52,6 +54,7 @@ trait WebhooksTrait
      *
      * @param array $parameters
      * @param array $body
+     *
      * @return \romanzipp\Twitch\Result
      */
     public function unsubscribeWebhook(array $parameters = [], array $body = []): Result
@@ -72,6 +75,7 @@ trait WebhooksTrait
      *
      * @param string $path
      * @param array $parameters
+     *
      * @return string
      */
     public function buildWebhookTopic(string $path, array $parameters = []): string

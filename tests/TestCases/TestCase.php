@@ -38,7 +38,7 @@ abstract class TestCase extends BaseTestCase
 
     protected function getMockedService($mockedResponse): Twitch
     {
-        $twitch = new Twitch;
+        $twitch = new Twitch();
 
         $twitch->setClientId('foo');
 

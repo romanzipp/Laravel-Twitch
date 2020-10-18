@@ -10,21 +10,21 @@ class Paginator
     /**
      * Twitch response pagination cursor.
      *
-     * @var null|stdClass
+     * @var stdClass|null
      */
     private $pagination;
 
     /**
      * Next desired action (first, after, before).
      *
-     * @var null|string
+     * @var string|null
      */
     public $action = null;
 
     /**
      * Constructor.
      *
-     * @param null|stdClass $pagination Twitch response pagination cursor
+     * @param stdClass|null $pagination Twitch response pagination cursor
      */
     public function __construct(stdClass $pagination = null)
     {
@@ -35,7 +35,8 @@ class Paginator
      * Create Paginator from Result instance.
      *
      * @param \romanzipp\Twitch\Result $result Result instance
-     * @return self   Paginator instance
+     *
+     * @return self Paginator instance
      */
     public static function from(Result $result): self
     {
@@ -56,6 +57,7 @@ class Paginator
      * Set the Paginator to fetch the next set of results.
      *
      * @return self
+     *
      * @deprecated
      */
     public function first(): self

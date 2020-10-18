@@ -15,7 +15,7 @@ class ServiceGettersTest extends TestCase
     {
         $this->expectException(RequestRequiresClientIdException::class);
 
-        $twitch = new Twitch;
+        $twitch = new Twitch();
         $twitch->getClientId();
     }
 
@@ -23,7 +23,7 @@ class ServiceGettersTest extends TestCase
     {
         $this->expectException(RequestRequiresClientSecretException::class);
 
-        $twitch = new Twitch;
+        $twitch = new Twitch();
         $twitch->getClientSecret();
     }
 
@@ -31,7 +31,7 @@ class ServiceGettersTest extends TestCase
     {
         $this->expectException(RequestRequiresAuthenticationException::class);
 
-        $twitch = new Twitch;
+        $twitch = new Twitch();
         $twitch->getToken();
     }
 
@@ -39,7 +39,7 @@ class ServiceGettersTest extends TestCase
     {
         $this->expectException(RequestRequiresRedirectUriException::class);
 
-        $twitch = new Twitch;
+        $twitch = new Twitch();
         $twitch->getRedirectUri();
     }
 }

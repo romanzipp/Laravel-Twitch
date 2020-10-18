@@ -17,6 +17,7 @@ trait SearchTrait
      * @see https://dev.twitch.tv/docs/api/reference/#search-categories
      *
      * @param array $parameters
+     *
      * @return \romanzipp\Twitch\Result
      */
     public function searchCategories(array $parameters = []): Result
@@ -34,6 +35,7 @@ trait SearchTrait
      * @see https://dev.twitch.tv/docs/api/reference/#search-channels
      *
      * @param array $parameters
+     *
      * @return \romanzipp\Twitch\Result
      */
     public function searchChannels(array $parameters = []): Result

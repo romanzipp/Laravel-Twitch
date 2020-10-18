@@ -19,6 +19,7 @@ trait SubscriptionsTrait
      *
      * @param array $parameters
      * @param \romanzipp\Twitch\Helpers\Paginator|null $paginator Paginator instance
+     *
      * @return \romanzipp\Twitch\Result Result instance
      */
     public function getSubscriptions(array $parameters = [], Paginator $paginator = null): Result

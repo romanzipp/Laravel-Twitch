@@ -24,6 +24,7 @@ trait ModerationTrait
      *
      * @param array $parameters
      * @param array $body
+     *
      * @return \romanzipp\Twitch\Result
      */
     public function checkAutoModStatus(array $parameters = [], array $body = []): Result
@@ -40,6 +41,7 @@ trait ModerationTrait
      *
      * @param array $parameters
      * @param \romanzipp\Twitch\Helpers\Paginator|null $paginator
+     *
      * @return \romanzipp\Twitch\Result
      */
     public function getBannedUsers(array $parameters = [], Paginator $paginator = null): Result
@@ -56,6 +58,7 @@ trait ModerationTrait
      *
      * @param array $parameters
      * @param \romanzipp\Twitch\Helpers\Paginator|null $paginator
+     *
      * @return \romanzipp\Twitch\Result
      */
     public function getBannedEvents(array $parameters = [], Paginator $paginator = null): Result
@@ -72,6 +75,7 @@ trait ModerationTrait
      *
      * @param array $parameters
      * @param \romanzipp\Twitch\Helpers\Paginator|null $paginator
+     *
      * @return \romanzipp\Twitch\Result
      */
     public function getModerators(array $parameters = [], Paginator $paginator = null): Result
@@ -88,6 +92,7 @@ trait ModerationTrait
      *
      * @param array $parameters
      * @param \romanzipp\Twitch\Helpers\Paginator|null $paginator
+     *
      * @return \romanzipp\Twitch\Result
      */
     public function getModeratorEvents(array $parameters = [], Paginator $paginator = null): Result

@@ -13,7 +13,7 @@ class ServiceSettersTest extends TestCase
     {
         $id = Str::random();
 
-        $twitch = new Twitch;
+        $twitch = new Twitch();
         $twitch->setClientId($id);
 
         $this->assertEquals($id, $twitch->getClientId());
@@ -23,7 +23,7 @@ class ServiceSettersTest extends TestCase
     {
         $id = Str::random();
 
-        $twitch = new Twitch;
+        $twitch = new Twitch();
         $twitch->withClientId($id);
 
         $this->assertEquals($id, $twitch->getClientId());
@@ -42,7 +42,7 @@ class ServiceSettersTest extends TestCase
     {
         $secret = Str::random();
 
-        $twitch = new Twitch;
+        $twitch = new Twitch();
         $twitch->setClientSecret($secret);
 
         $this->assertEquals($secret, $twitch->getClientSecret());
@@ -52,7 +52,7 @@ class ServiceSettersTest extends TestCase
     {
         $secret = Str::random();
 
-        $twitch = new Twitch;
+        $twitch = new Twitch();
         $twitch->withClientSecret($secret);
 
         $this->assertEquals($secret, $twitch->getClientSecret());
@@ -71,7 +71,7 @@ class ServiceSettersTest extends TestCase
     {
         $token = Str::random();
 
-        $twitch = new Twitch;
+        $twitch = new Twitch();
         $twitch->setToken($token);
 
         $this->assertEquals($token, $twitch->getToken());
@@ -81,7 +81,7 @@ class ServiceSettersTest extends TestCase
     {
         $token = Str::random();
 
-        $twitch = new Twitch;
+        $twitch = new Twitch();
         $twitch->withToken($token);
 
         $this->assertEquals($token, $twitch->getToken());
@@ -100,7 +100,7 @@ class ServiceSettersTest extends TestCase
     {
         $uri = Str::random();
 
-        $twitch = new Twitch;
+        $twitch = new Twitch();
         $twitch->setRedirectUri($uri);
 
         $this->assertEquals($uri, $twitch->getRedirectUri());
@@ -110,7 +110,7 @@ class ServiceSettersTest extends TestCase
     {
         $uri = Str::random();
 
-        $twitch = new Twitch;
+        $twitch = new Twitch();
         $twitch->withRedirectUri($uri);
 
         $this->assertEquals($uri, $twitch->getRedirectUri());

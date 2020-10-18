@@ -21,6 +21,7 @@ trait GamesTrait
      *
      * @param array $parameters
      * @param \romanzipp\Twitch\Helpers\Paginator|null $paginator Paginator instance
+     *
      * @return \romanzipp\Twitch\Result Result instance
      */
     public function getTopGames(array $parameters = [], Paginator $paginator = null): Result
@@ -35,6 +36,7 @@ trait GamesTrait
      * @see https://dev.twitch.tv/docs/api/reference#get-games
      *
      * @param array $parameters
+     *
      * @return \romanzipp\Twitch\Result Result instance
      */
     public function getGames(array $parameters = []): Result

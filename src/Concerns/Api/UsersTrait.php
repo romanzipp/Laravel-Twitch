@@ -19,6 +19,7 @@ trait UsersTrait
      *
      * @param array $parameters
      * @param array $body
+     *
      * @return \romanzipp\Twitch\Result
      */
     public function createUserFollows(array $parameters = [], array $body = []): Result
@@ -32,6 +33,7 @@ trait UsersTrait
      * Deletes a specified user from the followers of a specified channel.
      *
      * @param array $parameters
+     *
      * @return \romanzipp\Twitch\Result
      */
     public function deleteUserFollows(array $parameters = []): Result
@@ -48,6 +50,7 @@ trait UsersTrait
      * @see https://dev.twitch.tv/docs/api/reference#get-users
      *
      * @param array $parameters
+     *
      * @return \romanzipp\Twitch\Result Result instance
      */
     public function getUsers(array $parameters = []): Result
@@ -58,12 +61,13 @@ trait UsersTrait
     /**
      * Gets information on follow relationships between two Twitch users. Information returned is sorted in order, most
      * recent follow first. This can return information like “who is qotrok following,” “who is following qotrok,” or
-     * “is user X following user Y.”
+     * “is user X following user Y.”.
      *
      * @see https://dev.twitch.tv/docs/api/reference/#get-users-follows
      *
      * @param array $parameters
      * @param \romanzipp\Twitch\Helpers\Paginator|null $paginator
+     *
      * @return \romanzipp\Twitch\Result
      */
     public function getUsersFollows(array $parameters = [], Paginator $paginator = null): Result
@@ -79,6 +83,7 @@ trait UsersTrait
      * @see https://dev.twitch.tv/docs/api/reference#update-user
      *
      * @param array $parameters
+     *
      * @return \romanzipp\Twitch\Result Result instance
      */
     public function updateUser(array $parameters = []): Result
@@ -94,6 +99,7 @@ trait UsersTrait
      * @see https://dev.twitch.tv/docs/api/reference/#get-user-extensions
      *
      * @param array $parameters
+     *
      * @return \romanzipp\Twitch\Result
      */
     public function getUserExtensions(array $parameters = []): Result
@@ -107,6 +113,7 @@ trait UsersTrait
      * @see https://dev.twitch.tv/docs/api/reference/#get-user-active-extensions
      *
      * @param array $parameters
+     *
      * @return \romanzipp\Twitch\Result
      */
     public function getUserActiveExtensions(array $parameters = []): Result
@@ -125,6 +132,7 @@ trait UsersTrait
      *
      * @param array $parameters
      * @param array $body
+     *
      * @return \romanzipp\Twitch\Result
      */
     public function updateUserExtension(array $parameters = [], array $body = []): Result

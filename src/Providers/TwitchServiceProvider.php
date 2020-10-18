@@ -31,7 +31,7 @@ class TwitchServiceProvider extends ServiceProvider
         );
 
         $this->app->singleton(Twitch::class, function () {
-            return new Twitch;
+            return new Twitch();
         });
     }
 

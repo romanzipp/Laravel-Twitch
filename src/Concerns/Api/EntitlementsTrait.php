@@ -12,11 +12,12 @@ trait EntitlementsTrait
     use AbstractOperationsTrait;
 
     /**
-     * Create Entitlement Grants Upload URL
+     * Create Entitlement Grants Upload URL.
      *
      * @see https://dev.twitch.tv/docs/api/reference#create-entitlement-grants-upload-url
      *
      * @param array $parameters
+     *
      * @return \romanzipp\Twitch\Result Result instance
      */
     public function createEntitlementUrl(array $parameters = []): Result
@@ -33,6 +34,7 @@ trait EntitlementsTrait
      * @see https://dev.twitch.tv/docs/api/reference#get-code-status
      *
      * @param array $parameters
+     *
      * @return \romanzipp\Twitch\Result
      */
     public function getEntitlementsCodeStatus(array $parameters = []): Result
@@ -48,6 +50,7 @@ trait EntitlementsTrait
      * @see https://dev.twitch.tv/docs/api/reference#get-drops-entitlements
      *
      * @param array $parameters
+     *
      * @return \romanzipp\Twitch\Result
      */
     public function getDropsEntitlements(array $parameters = []): Result
@@ -63,6 +66,7 @@ trait EntitlementsTrait
      * @see https://dev.twitch.tv/docs/api/reference#redeem-code
      *
      * @param array $parameters
+     *
      * @return \romanzipp\Twitch\Result
      */
     public function redeemEntitlementsCode(array $parameters = []): Result

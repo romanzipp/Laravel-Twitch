@@ -19,6 +19,7 @@ trait OAuthTrait
      * @param array $scopes
      * @param string|null $state
      * @param bool $forceVerify
+     *
      * @return string
      */
     public function getOAuthAuthorizeUrl(string $responseType = 'code', array $scopes = [], string $state = null, bool $forceVerify = false): string
@@ -30,11 +31,11 @@ trait OAuthTrait
             'redirect_uri' => $this->getRedirectUri(),
         ];
 
-        if ($state !== null) {
+        if (null !== $state) {
             $query['state'] = $state;
         }
 
-        if ($forceVerify === true) {
+        if (true === $forceVerify) {
             $query['force_verify'] = 'true';
         }
 
@@ -49,6 +50,7 @@ trait OAuthTrait
      * @param string|null $code
      * @param string $grantType
      * @param array $scopes
+     *
      * @return \romanzipp\Twitch\Result
      */
     public function getOAuthToken(?string $code = null, string $grantType = GrantType::AUTHORIZATION_CODE, array $scopes = []): Result
@@ -59,11 +61,11 @@ trait OAuthTrait
             'client_secret' => $this->getClientSecret(),
         ];
 
-        if ($grantType === GrantType::AUTHORIZATION_CODE) {
+        if (GrantType::AUTHORIZATION_CODE === $grantType) {
             $parameters['redirect_uri'] = $this->getRedirectUri();
         }
 
-        if ($code !== null) {
+        if (null !== $code) {
             $parameters['code'] = $code;
         }
 
@@ -78,6 +80,7 @@ trait OAuthTrait
      * Build OAuth scopes to string.
      *
      * @param array $scopes
+     *
      * @return string
      */
     protected function buildScopes(array $scopes): string

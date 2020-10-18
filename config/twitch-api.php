@@ -17,7 +17,6 @@ return [
     'redirect_url' => env('TWITCH_HELIX_REDIRECT_URI', ''),
 
     'oauth_client_credentials' => [
-
         /*
          * Since May 01, 2020, Twitch requires all API requests to contain a valid Access Token.
          * This can be achieved with the Client Credentials flow.

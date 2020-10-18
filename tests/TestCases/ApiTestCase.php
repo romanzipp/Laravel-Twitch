@@ -23,7 +23,7 @@ abstract class ApiTestCase extends TestCase
 
         $this->skipIfClientIdMissing();
 
-        if (self::$lastResult !== null && self::$lastResult->rateLimit() !== null && self::$lastResult->rateLimit('remaining') < 3) {
+        if (null !== self::$lastResult && null !== self::$lastResult->rateLimit() && self::$lastResult->rateLimit('remaining') < 3) {
             $this->markTestSkipped(
                 sprintf('Rate Limit exceeded (%d/%d)', self::$lastResult->rateLimit('remaining'), self::$lastResult->rateLimit('limit'))
             );

@@ -11,7 +11,7 @@ class Result
     /**
      * Query successful.
      *
-     * @var boolean
+     * @var bool
      */
     public $success = false;
 
@@ -39,14 +39,14 @@ class Result
     /**
      * Total amount of result data.
      *
-     * @var integer
+     * @var int
      */
     public $total = 0;
 
     /**
      * Status Code.
      *
-     * @var integer
+     * @var int
      */
     public $status = 0;
 
@@ -79,7 +79,7 @@ class Result
     public $twitch;
 
     /**
-     * Constructor,
+     * Constructor,.
      *
      * @param \Psr\Http\Message\ResponseInterface $response HTTP response
      * @param \Exception|mixed $exception Exception, if present
@@ -89,7 +89,7 @@ class Result
         $this->response = $response;
         $this->status = $response->getStatusCode();
 
-        $this->success = $exception === null;
+        $this->success = null === $exception;
         $this->exception = $exception;
 
         $this->processPayload($response);
@@ -134,11 +134,11 @@ class Result
      */
     public function error(): string
     {
-        if ($this->exception === null || ! $this->exception->hasResponse()) {
+        if (null === $this->exception || ! $this->exception->hasResponse()) {
             return 'Twitch API Unavailable';
         }
 
-        if ($this->message === null || ! is_string($this->message)) {
+        if (null === $this->message || ! is_string($this->message)) {
             return $this->exception->getMessage();
         }
 
@@ -181,11 +181,12 @@ class Result
      * Set the Paginator to fetch the first set of results.
      *
      * @return \romanzipp\Twitch\Helpers\Paginator|null
+     *
      * @deprecated
      */
     public function first(): ?Paginator
     {
-        if ($this->paginator === null) {
+        if (null === $this->paginator) {
             return null;
         }
 
@@ -199,7 +200,7 @@ class Result
      */
     public function next(): ?Paginator
     {
-        if ($this->paginator === null) {
+        if (null === $this->paginator) {
             return null;
         }
 
@@ -213,7 +214,7 @@ class Result
      */
     public function back(): ?Paginator
     {
-        if ($this->paginator === null) {
+        if (null === $this->paginator) {
             return null;
         }
 
@@ -227,21 +228,22 @@ class Result
      */
     public function hasMoreResults(): bool
     {
-        if ($this->count() === 0) {
+        if (0 === $this->count()) {
             return false;
         }
 
-        if ($this->paginator === null) {
+        if (null === $this->paginator) {
             return false;
         }
 
-        return $this->paginator->cursor() !== null;
+        return null !== $this->paginator->cursor();
     }
 
     /**
      * Get rate limit information.
      *
      * @param string|null $key Get an index value. Available: limit, remaining, reset
+     *
      * @return string|array|null
      */
     public function rateLimit(string $key = null)
@@ -256,7 +258,7 @@ class Result
             'reset' => (int) $this->response->getHeaderLine('Ratelimit-Reset'),
         ];
 
-        if ($key === null) {
+        if (null === $key) {
             return $rateLimit;
         }
 
@@ -268,6 +270,7 @@ class Result
      *
      * @param string $identifierAttribute Attribute to identify the users
      * @param string $insertTo Data index to insert user data
+     *
      * @return self
      */
     public function insertUsers(string $identifierAttribute = 'user_id', string $insertTo = 'user'): self
@@ -278,7 +281,7 @@ class Result
             return $item->{$identifierAttribute};
         })->toArray();
 
-        if (count($userIds) === 0) {
+        if (0 === count($userIds)) {
             return $this;
         }
 
@@ -286,7 +289,6 @@ class Result
 
         $dataWithUsers = collect($data)
             ->map(static function ($item) use ($users, $identifierAttribute, $insertTo) {
-
                 $item->$insertTo = $users->where('id', $item->{$identifierAttribute})->first();
 
                 return $item;
@@ -308,7 +310,7 @@ class Result
             $response->getBody()
         );
 
-        if ($payload === null) {
+        if (null === $payload) {
             return;
         }
 
@@ -318,6 +320,7 @@ class Result
 
         if ( ! property_exists($payload, 'data')) {
             $this->data = $payload;
+
             return;
         }
 

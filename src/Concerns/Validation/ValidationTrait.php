@@ -9,7 +9,6 @@ trait ValidationTrait
     protected function validateRequired(array $parameters, array $keys): void
     {
         foreach ($keys as $key) {
-
             if (isset($parameters[$key])) {
                 continue;
             }
@@ -21,7 +20,6 @@ trait ValidationTrait
     protected function validateAnyRequired(array $parameters, array $keys): void
     {
         foreach ($keys as $key) {
-
             if ( ! isset($parameters[$key])) {
                 continue;
             }
@@ -29,8 +27,6 @@ trait ValidationTrait
             return;
         }
 
-        throw new InvalidArgumentException(
-            sprintf('One or more fields `%s` must be specified', implode(', ', $keys))
-        );
+        throw new InvalidArgumentException(sprintf('One or more fields `%s` must be specified', implode(', ', $keys)));
     }
 }

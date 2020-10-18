@@ -18,6 +18,7 @@ trait StreamsTrait
      * @see https://dev.twitch.tv/docs/api/reference/#get-stream-key
      *
      * @param array $parameters
+     *
      * @return \romanzipp\Twitch\Result
      */
     public function getStreamKey(array $parameters = []): Result
@@ -38,6 +39,7 @@ trait StreamsTrait
      *
      * @param array $parameters
      * @param \romanzipp\Twitch\Helpers\Paginator|null $paginator Paginator instance
+     *
      * @return \romanzipp\Twitch\Result Result instance
      */
     public function getStreams(array $parameters = [], Paginator $paginator = null): Result
@@ -55,6 +57,7 @@ trait StreamsTrait
      *
      * @param array $parameters
      * @param array $body
+     *
      * @return \romanzipp\Twitch\Result
      */
     public function createStreamMarker(array $parameters = [], array $body = []): Result
@@ -73,6 +76,7 @@ trait StreamsTrait
      *
      * @param array $parameters
      * @param \romanzipp\Twitch\Helpers\Paginator|null $paginator
+     *
      * @return \romanzipp\Twitch\Result
      */
     public function getStreamMarkers(array $parameters = [], Paginator $paginator = null): Result
@@ -88,6 +92,7 @@ trait StreamsTrait
      * @see https://dev.twitch.tv/docs/api/reference/#get-channel-information
      *
      * @param array $parameters
+     *
      * @return \romanzipp\Twitch\Result
      */
     public function getChannels(array $parameters = []): Result
@@ -104,6 +109,7 @@ trait StreamsTrait
      *
      * @param array $parameters
      * @param array $body
+     *
      * @return \romanzipp\Twitch\Result
      */
     public function updateChannels(array $parameters = [], array $body = []): Result

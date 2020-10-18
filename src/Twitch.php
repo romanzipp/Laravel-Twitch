@@ -117,13 +117,14 @@ class Twitch
     /**
      * Get client id.
      *
-     * @return string
      * @throws \romanzipp\Twitch\Exceptions\RequestRequiresClientIdException
+     *
+     * @return string
      */
     public function getClientId(): string
     {
         if ( ! $this->clientId) {
-            throw new RequestRequiresClientIdException;
+            throw new RequestRequiresClientIdException();
         }
 
         return $this->clientId;
@@ -133,6 +134,7 @@ class Twitch
      * Set client id.
      *
      * @param string $clientId Twitch client id
+     *
      * @return void
      */
     public function setClientId(string $clientId): void
@@ -143,7 +145,8 @@ class Twitch
     /**
      * Fluid client id setter.
      *
-     * @param string $clientId Twitch client id.
+     * @param string $clientId twitch client id
+     *
      * @return self
      */
     public function withClientId(string $clientId): self
@@ -166,13 +169,14 @@ class Twitch
     /**
      * Get client secret.
      *
-     * @return string
      * @throws \romanzipp\Twitch\Exceptions\RequestRequiresClientSecretException
+     *
+     * @return string
      */
     public function getClientSecret(): string
     {
         if ( ! $this->clientSecret) {
-            throw new RequestRequiresClientSecretException;
+            throw new RequestRequiresClientSecretException();
         }
 
         return $this->clientSecret;
@@ -182,6 +186,7 @@ class Twitch
      * Set client secret.
      *
      * @param string $clientSecret Twitch client secret
+     *
      * @return void
      */
     public function setClientSecret(string $clientSecret): void
@@ -193,6 +198,7 @@ class Twitch
      * Fluid client secret setter.
      *
      * @param string $clientSecret Twitch client secret
+     *
      * @return self
      */
     public function withClientSecret(string $clientSecret): self
@@ -215,13 +221,14 @@ class Twitch
     /**
      * Get Redirect URI.
      *
-     * @return string
      * @throws \romanzipp\Twitch\Exceptions\RequestRequiresRedirectUriException
+     *
+     * @return string
      */
     public function getRedirectUri(): string
     {
         if ( ! $this->redirectUri) {
-            throw new RequestRequiresRedirectUriException;
+            throw new RequestRequiresRedirectUriException();
         }
 
         return $this->redirectUri;
@@ -231,6 +238,7 @@ class Twitch
      * Set Redirect URI.
      *
      * @param string $redirectUri
+     *
      * @return void
      */
     public function setRedirectUri(string $redirectUri): void
@@ -242,6 +250,7 @@ class Twitch
      * Fluid redirect url setter.
      *
      * @param string $redirectUri
+     *
      * @return self
      */
     public function withRedirectUri(string $redirectUri): self
@@ -264,14 +273,15 @@ class Twitch
     /**
      * Get OAuth token.
      *
-     * @return string        Twitch token
-     * @return string|null
      * @throws \romanzipp\Twitch\Exceptions\RequestRequiresAuthenticationException
+     *
+     * @return string Twitch token
+     * @return string|null
      */
     public function getToken(): ?string
     {
         if ( ! $this->token) {
-            throw new RequestRequiresAuthenticationException;
+            throw new RequestRequiresAuthenticationException();
         }
 
         return $this->token;
@@ -281,6 +291,7 @@ class Twitch
      * Set OAuth token.
      *
      * @param string $token Twitch OAuth token
+     *
      * @return void
      */
     public function setToken(string $token): void
@@ -292,6 +303,7 @@ class Twitch
      * Fluid OAuth token setter.
      *
      * @param string $token Twitch OAuth token
+     *
      * @return self
      */
     public function withToken(string $token): self
@@ -315,9 +327,11 @@ class Twitch
      * @param string $path
      * @param array $parameters
      * @param \romanzipp\Twitch\Helpers\Paginator|null $paginator
-     * @return \romanzipp\Twitch\Result
+     *
      * @throws \romanzipp\Twitch\Exceptions\RequestRequiresClientIdException
      * @throws \romanzipp\Twitch\Exceptions\RequestRequiresAuthenticationException
+     *
+     * @return \romanzipp\Twitch\Result
      */
     public function get(string $path = '', array $parameters = [], Paginator $paginator = null): Result
     {
@@ -329,9 +343,11 @@ class Twitch
      * @param array $parameters
      * @param \romanzipp\Twitch\Helpers\Paginator|null $paginator
      * @param array|null $body
-     * @return \romanzipp\Twitch\Result
+     *
      * @throws \romanzipp\Twitch\Exceptions\RequestRequiresAuthenticationException
      * @throws \romanzipp\Twitch\Exceptions\RequestRequiresClientIdException
+     *
+     * @return \romanzipp\Twitch\Result
      */
     public function post(string $path = '', array $parameters = [], Paginator $paginator = null, array $body = null): Result
     {
@@ -343,9 +359,11 @@ class Twitch
      * @param array $parameters
      * @param \romanzipp\Twitch\Helpers\Paginator|null $paginator
      * @param array|null $body
-     * @return \romanzipp\Twitch\Result
+     *
      * @throws \romanzipp\Twitch\Exceptions\RequestRequiresAuthenticationException
      * @throws \romanzipp\Twitch\Exceptions\RequestRequiresClientIdException
+     *
+     * @return \romanzipp\Twitch\Result
      */
     public function put(string $path = '', array $parameters = [], Paginator $paginator = null, array $body = null): Result
     {
@@ -357,9 +375,11 @@ class Twitch
      * @param array $parameters
      * @param \romanzipp\Twitch\Helpers\Paginator|null $paginator
      * @param array|null $body
-     * @return \romanzipp\Twitch\Result
+     *
      * @throws \romanzipp\Twitch\Exceptions\RequestRequiresAuthenticationException
      * @throws \romanzipp\Twitch\Exceptions\RequestRequiresClientIdException
+     *
+     * @return \romanzipp\Twitch\Result
      */
     public function patch(string $path = '', array $parameters = [], Paginator $paginator = null, array $body = null): Result
     {
@@ -371,9 +391,11 @@ class Twitch
      * @param array $parameters
      * @param \romanzipp\Twitch\Helpers\Paginator|null $paginator
      * @param array|null $body
-     * @return \romanzipp\Twitch\Result
+     *
      * @throws \romanzipp\Twitch\Exceptions\RequestRequiresAuthenticationException
      * @throws \romanzipp\Twitch\Exceptions\RequestRequiresClientIdException
+     *
+     * @return \romanzipp\Twitch\Result
      */
     public function delete(string $path = '', array $parameters = [], Paginator $paginator = null, array $body = null): Result
     {
@@ -389,23 +411,23 @@ class Twitch
      * @param \romanzipp\Twitch\Helpers\Paginator|null $paginator Paginator instance
      * @param array|null $body JSON body
      *
-     * @return \romanzipp\Twitch\Result Result instance
-     *
      * @throws \romanzipp\Twitch\Exceptions\RequestRequiresAuthenticationException
      * @throws \romanzipp\Twitch\Exceptions\RequestRequiresClientIdException
+     *
+     * @return \romanzipp\Twitch\Result Result instance
+     *
      * @noinspection PhpDocMissingThrowsInspection
      */
     public function query(string $method = 'GET', string $path = '', array $parameters = [], Paginator $paginator = null, array $body = null): Result
     {
-        if ($paginator !== null) {
+        if (null !== $paginator) {
             $parameters[$paginator->action] = $paginator->cursor();
         }
 
         if ( ! $this->isAuthenticationUri($path) && ! $this->hasToken() && $this->shouldFetchClientCredentials()) {
-
             $token = $this->getClientCredentials();
 
-            if ($token === null) {
+            if (null === $token) {
                 throw new RequestRequiresAuthenticationException('The request requires an OAuth access token');
             }
 
@@ -414,22 +436,19 @@ class Twitch
 
         $jsonBody = null;
 
-        if ($body !== null) {
+        if (null !== $body) {
             $jsonBody = json_encode($body);
         }
 
         try {
-
             $response = $this->client->request($method, $path, [
-                'headers' => $this->buildHeaders($jsonBody !== null),
+                'headers' => $this->buildHeaders(null !== $jsonBody),
                 'query' => $this->buildQuery($parameters),
                 'json' => $jsonBody,
             ]);
 
             $result = new Result($response, null);
-
         } catch (RequestException $exception) {
-
             if ( ! $response = $exception->getResponse()) {
                 throw $exception;
             }
@@ -446,6 +465,7 @@ class Twitch
      * Build query with support for multiple same first-dimension keys.
      *
      * @param array $query
+     *
      * @return string
      */
     public function buildQuery(array $query): string
@@ -453,7 +473,6 @@ class Twitch
         $parts = [];
 
         foreach ($query as $name => $value) {
-
             $value = (array) $value;
 
             array_walk_recursive($value, function ($value) use (&$parts, $name) {
@@ -468,8 +487,10 @@ class Twitch
      * Build headers for request.
      *
      * @param bool $json Body is JSON
-     * @return array
+     *
      * @throws \romanzipp\Twitch\Exceptions\RequestRequiresClientIdException
+     *
+     * @return array
      * @noinspection PhpDocMissingThrowsInspection
      */
     private function buildHeaders(bool $json = false): array

@@ -8,7 +8,6 @@ use romanzipp\Twitch\Twitch;
 
 $markdown = collect(class_uses(Twitch::class))
     ->map(function ($trait) {
-
         $title = str_replace('Trait', '', Arr::last(explode('\\', $trait)));
 
         if (in_array($title, ['Authentication', 'Validation'])) {
@@ -30,9 +29,8 @@ $markdown = collect(class_uses(Twitch::class))
                 return $method->isConstructor();
             })
             ->each(function (ReflectionMethod $method) use (&$methods) {
-
                 $declaration = collect($method->getModifiers())->map(function (int $modifier) {
-                    return $modifier == ReflectionMethod::IS_PUBLIC ? 'public ' : '';
+                    return ReflectionMethod::IS_PUBLIC == $modifier ? 'public ' : '';
                 })->join(' ');
 
                 $declaration .= 'function ';
@@ -40,7 +38,6 @@ $markdown = collect(class_uses(Twitch::class))
                 $declaration .= '(';
 
                 $declaration .= collect($method->getParameters())->map(function (ReflectionParameter $parameter) {
-
                     $parameterString = '';
 
                     if ($parameter->allowsNull()) {
@@ -64,7 +61,6 @@ $markdown = collect(class_uses(Twitch::class))
                     }
 
                     return $parameterString;
-
                 })->join(', ');
 
                 $declaration .= ')';
@@ -83,7 +79,6 @@ $markdown = collect(class_uses(Twitch::class))
         return ! empty($args);
     })
     ->map(function ($args) {
-
         [$title, $methods] = $args;
 
         $markdown = '### ' . $title;

@@ -17,6 +17,7 @@ trait AdsTrait
      * @see https://dev.twitch.tv/docs/api/reference#start-commercial
      *
      * @param array $parameters
+     *
      * @return \romanzipp\Twitch\Result Result instance
      */
     public function startCommercial(array $parameters = []): Result

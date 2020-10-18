@@ -18,6 +18,7 @@ trait BitsTrait
      * @see https://dev.twitch.tv/docs/api/reference#get-cheermotes
      *
      * @param array $parameters
+     *
      * @return \romanzipp\Twitch\Result
      */
     public function getCheermotes(array $parameters = []): Result
@@ -33,6 +34,7 @@ trait BitsTrait
      * @see https://dev.twitch.tv/docs/api/reference/#get-bits-leaderboard
      *
      * @param array $parameters
+     *
      * @return \romanzipp\Twitch\Result
      */
     public function getBitsLeaderboard(array $parameters = []): Result
@@ -46,6 +48,7 @@ trait BitsTrait
      * @see https://dev.twitch.tv/docs/api/reference#get-extension-transactions
      *
      * @param array $parameters
+     *
      * @return \romanzipp\Twitch\Result
      */
     public function getExtensionTransactions(array $parameters = []): Result

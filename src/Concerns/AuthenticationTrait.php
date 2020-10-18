@@ -13,6 +13,7 @@ trait AuthenticationTrait
      * Determine if an OAuth token should be fetched via the Client Credentials flow.
      *
      * @see https://dev.twitch.tv/docs/authentication/getting-tokens-oauth#oauth-client-credentials-flow
+     *
      * @return bool
      */
     protected function shouldFetchClientCredentials(): bool
@@ -36,6 +37,7 @@ trait AuthenticationTrait
      * Fetch and possibly cache the OAuth token.
      *
      * @see https://dev.twitch.tv/docs/authentication/getting-tokens-oauth#oauth-client-credentials-flow
+     *
      * @return \romanzipp\Twitch\Objects\AccessToken|null
      */
     protected function getClientCredentials(): ?AccessToken
@@ -123,7 +125,7 @@ trait AuthenticationTrait
 
     public function isAuthenticationUri(string $uri): bool
     {
-        return strpos($uri, self::OAUTH_BASE_URI) === 0;
+        return 0 === strpos($uri, self::OAUTH_BASE_URI);
     }
 
     abstract public function getOAuthToken(?string $code = null, string $grantType = GrantType::AUTHORIZATION_CODE, array $scopes = []): Result;

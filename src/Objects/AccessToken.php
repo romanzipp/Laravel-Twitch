@@ -42,7 +42,7 @@ class AccessToken implements Arrayable
 
     public function isExpired(): bool
     {
-        if ($this->expiresAt === null) {
+        if (null === $this->expiresAt) {
             return true;
         }
 

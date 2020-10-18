@@ -17,7 +17,7 @@ class ClientExceptionsTest extends TestCase
     {
         $this->expectException(TransferException::class);
 
-        $this->getMockedService(new TransferException)->get('/');
+        $this->getMockedService(new TransferException())->get('/');
     }
 
     public function testConnectException()

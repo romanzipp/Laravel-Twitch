@@ -15,7 +15,7 @@ class ServiceConfigTest extends TestCase
 
         config(['twitch-api.client_id' => $id]);
 
-        $twitch = new Twitch;
+        $twitch = new Twitch();
 
         $this->assertEquals($id, $twitch->getClientId());
     }
@@ -39,7 +39,7 @@ class ServiceConfigTest extends TestCase
 
         config(['twitch-api.client_secret' => $secret]);
 
-        $twitch = new Twitch;
+        $twitch = new Twitch();
 
         $this->assertEquals($secret, $twitch->getClientSecret());
     }

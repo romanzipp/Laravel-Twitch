@@ -19,6 +19,7 @@ trait VideosTrait
      *
      * @param array $parameters
      * @param \romanzipp\Twitch\Helpers\Paginator|null $paginator
+     *
      * @return \romanzipp\Twitch\Result Result instance
      */
     public function getVideos(array $parameters = [], Paginator $paginator = null): Result

@@ -21,6 +21,7 @@ class Twitch
     use Api\BitsTrait;
     use Api\ClipsTrait;
     use Api\EntitlementsTrait;
+    use Api\EventSubTrait;
     use Api\ExtensionsTrait;
     use Api\GamesTrait;
     use Api\HypeTrainTrait;

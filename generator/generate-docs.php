@@ -59,8 +59,10 @@ $markdown = collect(class_uses(Twitch::class))
                         $parameterString .= str_replace([
                             PHP_EOL,
                             'array ()',
+                            "array (\n)"
                         ], [
                             '',
+                            '[]',
                             '[]',
                         ], var_export($parameter->getDefaultValue(), true));
                     }

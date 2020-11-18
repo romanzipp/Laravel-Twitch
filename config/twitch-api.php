@@ -33,11 +33,6 @@ return [
         'cache' => true,
 
         /*
-         * The cache driver to use for storing Client Credentials.
-         */
-        'cache_driver' => null,
-
-        /*
         * The cache store to use for storing Client Credentials.
         */
         'cache_store' => null,

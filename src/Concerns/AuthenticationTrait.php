@@ -3,6 +3,7 @@
 namespace romanzipp\Twitch\Concerns;
 
 use Illuminate\Contracts\Cache\Repository;
+use Illuminate\Support\Facades\Cache;
 use romanzipp\Twitch\Enums\GrantType;
 use romanzipp\Twitch\Objects\AccessToken;
 use romanzipp\Twitch\Result;
@@ -110,15 +111,7 @@ trait AuthenticationTrait
      */
     protected function getClientCredentialsCacheRepository(): Repository
     {
-        $cache = cache();
-
-        if ($driver = config('twitch-api.oauth_client_credentials.cache_driver')) {
-            $cache->driver($driver);
-        }
-
-        return $cache->store(
-            config('twitch-api.oauth_client_credentials.cache_store')
-        );
+        return Cache::store(config('twitch-api.oauth_client_credentials.cache_store'));
     }
 
     public function isAuthenticationUri(string $uri): bool

@@ -41,4 +41,17 @@ return [
          */
         'cache_key' => 'twitch-api-client-credentials',
     ],
+
+    'eventsub' => [
+
+        /*
+         * Secret used to generate the signature
+         */
+        'secret' => null,
+
+        /*
+         * Maximum difference allowed between the header's timestamp and the current time
+         */
+        'tolerance' => 60,
+    ]
 ];

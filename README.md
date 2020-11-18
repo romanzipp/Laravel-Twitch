@@ -218,6 +218,70 @@ $result->insertUsers($twitch, 'from_id', 'from_user');
 ]
 ```
 
+### Defining WebSub Event Handlers
+
+```php
+<?php
+
+namespace App\Http\Controllers;
+
+use romanzipp\Twitch\Http\Controllers\EventSubController as BaseController;
+
+class EventSubController extends BaseController
+{
+    /**
+     * Handle a EventSub notification call.
+     *
+     * @param array $payload
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    protected function handleNotification(array $payload)
+    {
+        return $this->successMethod();
+    }
+
+    /**
+     * Handle a EventSub revocation call.
+     *
+     * @param array $payload
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    protected function handleRevocation(array $payload)
+    {
+        return $this->successMethod();
+    }
+}
+```
+
+```php
+use App\Http\Controllers\EventSubController;
+
+Route::post(
+    'twitch/eventsub/webhook',
+    [EventSubController::class, 'handleWebhook']
+);
+```
+
+### Subscribe EventSub Events
+
+```php
+$twitch = new romanzipp\Twitch\Twitch;
+
+
+$twitch->subscribeEventSub([
+    "type" => romanzipp\Twitch\Enums\EventSubType::STREAM_ONLINE,
+    "version" => "1",
+    "condition" => [
+        "broadcaster_user_id" => "1337"
+    ],
+    "transport" => [
+        "method" => "webhook",
+        "callback" => "https://example.com/webhooks/callback",
+        "secret" => "s3cRe7"
+    ]
+]);
+```
+
 ## Documentation
 
 **Twitch Helix API Documentation: https://dev.twitch.tv/docs/api/reference**
@@ -264,6 +328,14 @@ public function createEntitlementUrl(array $parameters = [])
 public function getEntitlementsCodeStatus(array $parameters = [])
 public function getDropsEntitlements(array $parameters = [])
 public function redeemEntitlementsCode(array $parameters = [])
+```
+
+### EventSub
+
+```php
+public function subscribeEventSub(array $parameters = [], array $body = [])
+public function unsubscribeEventSub(array $parameters = [])
+public function getEventSubs(array $parameters = [])
 ```
 
 ### Extensions

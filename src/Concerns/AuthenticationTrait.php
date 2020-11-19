@@ -111,7 +111,7 @@ trait AuthenticationTrait
      * @param \romanzipp\Twitch\Objects\AccessToken $token
      * @noinspection PhpDocMissingThrowsInspection
      */
-    protected function clearClientCredentialsToken(AccessToken $token): void
+    protected function clearClientCredentialsToken(): void
     {
         $this->getClientCredentialsCacheRepository()->forget(
             config('twitch-api.oauth_client_credentials.cache_key')

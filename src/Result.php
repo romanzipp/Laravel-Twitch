@@ -255,7 +255,10 @@ class Result
             return false;
         }
 
-        return 'Invalid OAuth token' === $this->error() && 401 === $this->status();
+        return 401 === $this->status() && in_array($this->error(), [
+            'Invalid OAuth token',
+            'OAuth token is missing',
+        ]);
     }
 
     /**

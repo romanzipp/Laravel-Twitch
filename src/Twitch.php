@@ -424,6 +424,9 @@ class Twitch
             $parameters[$paginator->action] = $paginator->cursor();
         }
 
+        /** @var \romanzipp\Twitch\Objects\AccessToken|null $token */
+        $token = null;
+
         if ( ! $this->isAuthenticationUri($path) && ! $this->hasToken() && $this->shouldFetchClientCredentials()) {
             $token = $this->getClientCredentials();
 
@@ -448,6 +451,10 @@ class Twitch
             }
 
             $result = new Result($response, $exception);
+
+            if ($this->shouldCacheClientCredentials() && $result->isOAuthError()) {
+                $this->clearClientCredentialsToken($token);
+            }
         }
 
         $result->twitch = $this;

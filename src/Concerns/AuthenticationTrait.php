@@ -106,6 +106,19 @@ trait AuthenticationTrait
     }
 
     /**
+     * Clear the client credentials from cache.
+     *
+     * @param \romanzipp\Twitch\Objects\AccessToken $token
+     * @noinspection PhpDocMissingThrowsInspection
+     */
+    protected function clearClientCredentialsToken(AccessToken $token): void
+    {
+        $this->getClientCredentialsCacheRepository()->forget(
+            config('twitch-api.oauth_client_credentials.cache_key')
+        );
+    }
+
+    /**
      * Get the cache driver instance used for storing the client credentials.
      *
      * @return \Illuminate\Contracts\Cache\Repository
@@ -113,7 +126,9 @@ trait AuthenticationTrait
      */
     protected function getClientCredentialsCacheRepository(): Repository
     {
-        return Cache::store(config('twitch-api.oauth_client_credentials.cache_store'));
+        return Cache::store(
+            config('twitch-api.oauth_client_credentials.cache_store')
+        );
     }
 
     public function isAuthenticationUri(string $uri): bool

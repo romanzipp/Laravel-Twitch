@@ -19,7 +19,7 @@ class ResultExceptionTest extends TestCase
         $result = new Result($response, new RequestException('Not Found', $request, $response));
 
         self::assertFalse($result->success());
-        self::assertEquals('Not Found', $result->error());
+        self::assertEquals('Not Found', $result->getErrorMessage());
     }
 
     public function testRequestExceptionMissingMessage()
@@ -33,7 +33,7 @@ class ResultExceptionTest extends TestCase
         $result = new Result($response, new RequestException('Not Found', $request, $response));
 
         self::assertFalse($result->success());
-        self::assertEquals('Not Found', $result->error());
+        self::assertEquals('Not Found', $result->getErrorMessage());
     }
 
     public function testRequestExceptionNullMessage()
@@ -48,7 +48,7 @@ class ResultExceptionTest extends TestCase
         $result = new Result($response, new RequestException('Not Found', $request, $response));
 
         self::assertFalse($result->success());
-        self::assertEquals('Not Found', $result->error());
+        self::assertEquals('Not Found', $result->getErrorMessage());
     }
 
     public function testRequestExceptionWithMessage()
@@ -63,7 +63,7 @@ class ResultExceptionTest extends TestCase
         $result = new Result($response, new RequestException('Not Found', $request, $response));
 
         self::assertFalse($result->success());
-        self::assertEquals('No Data', $result->error());
+        self::assertEquals('No Data', $result->getErrorMessage());
     }
 
     public function testRequestExceptionMalformedMessage()
@@ -78,6 +78,6 @@ class ResultExceptionTest extends TestCase
         $result = new Result($response, new RequestException('Not Found', $request, $response));
 
         self::assertFalse($result->success());
-        self::assertEquals('Not Found', $result->error());
+        self::assertEquals('Not Found', $result->getErrorMessage());
     }
 }

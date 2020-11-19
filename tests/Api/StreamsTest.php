@@ -22,6 +22,6 @@ class StreamsTest extends ApiTestCase
         self::assertTrue($nextResult->success());
         self::assertTrue($nextResult->hasMoreResults());
 
-        self::assertNotEquals($firstResult->paginator->cursor(), $nextResult->paginator->cursor());
+        self::assertNotEquals($firstResult->getPaginator()->cursor(), $nextResult->getPaginator()->cursor());
     }
 }

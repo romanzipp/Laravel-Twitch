@@ -40,7 +40,9 @@ class Paginator
      */
     public static function from(Result $result): self
     {
-        return new self($result->pagination);
+        return new self(
+            $result->getPagination()
+        );
     }
 
     /**

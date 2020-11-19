@@ -2,7 +2,7 @@
 
 namespace romanzipp\Twitch\Concerns\Operations;
 
-use romanzipp\Twitch\Helpers\Paginator;
+use romanzipp\Twitch\Objects\Paginator;
 use romanzipp\Twitch\Result;
 
 trait AbstractOperationsTrait

@@ -4,7 +4,7 @@ namespace romanzipp\Twitch\Concerns\Api;
 
 use romanzipp\Twitch\Concerns\Operations\AbstractOperationsTrait;
 use romanzipp\Twitch\Concerns\Operations\AbstractValidationTrait;
-use romanzipp\Twitch\Helpers\Paginator;
+use romanzipp\Twitch\Objects\Paginator;
 use romanzipp\Twitch\Result;
 
 trait UsersTrait
@@ -66,7 +66,7 @@ trait UsersTrait
      * @see https://dev.twitch.tv/docs/api/reference/#get-users-follows
      *
      * @param array $parameters
-     * @param \romanzipp\Twitch\Helpers\Paginator|null $paginator
+     * @param \romanzipp\Twitch\Objects\Paginator|null $paginator
      *
      * @return \romanzipp\Twitch\Result
      */

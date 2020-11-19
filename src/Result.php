@@ -4,7 +4,7 @@ namespace romanzipp\Twitch;
 
 use Exception;
 use Psr\Http\Message\ResponseInterface;
-use romanzipp\Twitch\Helpers\Paginator;
+use romanzipp\Twitch\Objects\Paginator;
 
 class Result
 {
@@ -173,7 +173,7 @@ class Result
     /**
      * Set the Paginator to fetch the next set of results.
      *
-     * @return \romanzipp\Twitch\Helpers\Paginator|null
+     * @return \romanzipp\Twitch\Objects\Paginator|null
      */
     public function next(): ?Paginator
     {
@@ -187,7 +187,7 @@ class Result
     /**
      * Set the Paginator to fetch the last set of results.
      *
-     * @return \romanzipp\Twitch\Helpers\Paginator|null
+     * @return \romanzipp\Twitch\Objects\Paginator|null
      */
     public function back(): ?Paginator
     {

@@ -8,7 +8,7 @@ use romanzipp\Twitch\Concerns\Api;
 use romanzipp\Twitch\Concerns\AuthenticationTrait;
 use romanzipp\Twitch\Concerns\Validation\ValidationTrait;
 use romanzipp\Twitch\Exceptions\RequestRequiresAuthenticationException;
-use romanzipp\Twitch\Helpers\Paginator;
+use romanzipp\Twitch\Objects\Paginator;
 
 class Twitch
 {
@@ -47,7 +47,7 @@ class Twitch
     /**
      * Paginator instance.
      *
-     * @var \romanzipp\Twitch\Helpers\Paginator
+     * @var \romanzipp\Twitch\Objects\Paginator
      */
     protected $paginator;
 
@@ -177,7 +177,7 @@ class Twitch
     /**
      * @param string $path
      * @param array $parameters
-     * @param \romanzipp\Twitch\Helpers\Paginator|null $paginator
+     * @param \romanzipp\Twitch\Objects\Paginator|null $paginator
      *
      * @return \romanzipp\Twitch\Result
      */
@@ -189,7 +189,7 @@ class Twitch
     /**
      * @param string $path
      * @param array $parameters
-     * @param \romanzipp\Twitch\Helpers\Paginator|null $paginator
+     * @param \romanzipp\Twitch\Objects\Paginator|null $paginator
      * @param array|null $body
      *
      * @return \romanzipp\Twitch\Result
@@ -202,7 +202,7 @@ class Twitch
     /**
      * @param string $path
      * @param array $parameters
-     * @param \romanzipp\Twitch\Helpers\Paginator|null $paginator
+     * @param \romanzipp\Twitch\Objects\Paginator|null $paginator
      * @param array|null $body
      *
      * @return \romanzipp\Twitch\Result
@@ -215,7 +215,7 @@ class Twitch
     /**
      * @param string $path
      * @param array $parameters
-     * @param \romanzipp\Twitch\Helpers\Paginator|null $paginator
+     * @param \romanzipp\Twitch\Objects\Paginator|null $paginator
      * @param array|null $body
      *
      * @return \romanzipp\Twitch\Result
@@ -228,7 +228,7 @@ class Twitch
     /**
      * @param string $path
      * @param array $parameters
-     * @param \romanzipp\Twitch\Helpers\Paginator|null $paginator
+     * @param \romanzipp\Twitch\Objects\Paginator|null $paginator
      * @param array|null $body
      *
      * @return \romanzipp\Twitch\Result
@@ -244,16 +244,13 @@ class Twitch
      * @param string $method HTTP method
      * @param string $path Query path
      * @param array $parameters Query parameters
-     * @param \romanzipp\Twitch\Helpers\Paginator|null $paginator Paginator instance
+     * @param \romanzipp\Twitch\Objects\Paginator|null $paginator Paginator instance
      * @param array|null $body JSON body
      *
      * @return \romanzipp\Twitch\Result Result instance
      */
     public function query(string $method = 'GET', string $path = '', array $parameters = [], Paginator $paginator = null, array $body = null): Result
     {
-        /** @var \romanzipp\Twitch\Objects\AccessToken|null $token */
-        $token = null;
-
         if ( ! $this->isAuthenticationUri($path) && null === $this->getToken() && $this->shouldFetchClientCredentials()) {
             $token = $this->getClientCredentials();
 

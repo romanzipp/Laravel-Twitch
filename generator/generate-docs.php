@@ -6,11 +6,16 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use romanzipp\Twitch\Twitch;
 
+const IGNORE_TRAITS = [
+    'ClientCredentials',
+    'Validation',
+];
+
 $markdown = collect(class_uses(Twitch::class))
     ->map(function ($trait) {
         $title = str_replace('Trait', '', Arr::last(explode('\\', $trait)));
 
-        if (in_array($title, ['Authentication', 'Validation'])) {
+        if (in_array($title, IGNORE_TRAITS, true)) {
             return null;
         }
 

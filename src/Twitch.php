@@ -280,21 +280,19 @@ class Twitch
                 'query' => $this->buildQuery($parameters),
                 'json' => $body,
             ]);
-
-            $result = new Result($response, null);
         } catch (RequestException $exception) {
-            if ( ! $response = $exception->getResponse()) {
+            $response = $exception->getResponse();
+
+            if (null === $response) {
                 throw $exception;
-            }
-
-            $result = new Result($response, $exception);
-
-            if ($this->shouldCacheClientCredentials() && $result->isOAuthError()) {
-                $this->clearClientCredentialsToken();
             }
         }
 
-        $result->twitch = $this;
+        $result = new Result($response, $exception ?? null);
+
+        if ($this->shouldCacheClientCredentials() && $result->isOAuthError()) {
+            $this->clearClientCredentialsToken();
+        }
 
         return $result;
     }

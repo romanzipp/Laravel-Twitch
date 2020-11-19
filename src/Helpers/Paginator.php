@@ -54,20 +54,6 @@ class Paginator
     }
 
     /**
-     * Set the Paginator to fetch the next set of results.
-     *
-     * @return self
-     *
-     * @deprecated
-     */
-    public function first(): self
-    {
-        $this->action = 'first';
-
-        return $this;
-    }
-
-    /**
      * Set the Paginator to fetch the first set of results.
      *
      * @return self

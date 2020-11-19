@@ -178,22 +178,6 @@ class Result
     }
 
     /**
-     * Set the Paginator to fetch the first set of results.
-     *
-     * @return \romanzipp\Twitch\Helpers\Paginator|null
-     *
-     * @deprecated
-     */
-    public function first(): ?Paginator
-    {
-        if (null === $this->paginator) {
-            return null;
-        }
-
-        return $this->paginator->first();
-    }
-
-    /**
      * Set the Paginator to fetch the next set of results.
      *
      * @return \romanzipp\Twitch\Helpers\Paginator|null

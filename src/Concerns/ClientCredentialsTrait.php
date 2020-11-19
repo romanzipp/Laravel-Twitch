@@ -8,7 +8,7 @@ use romanzipp\Twitch\Enums\GrantType;
 use romanzipp\Twitch\Objects\AccessToken;
 use romanzipp\Twitch\Result;
 
-trait AuthenticationTrait
+trait ClientCredentialsTrait
 {
     /**
      * Determine if an OAuth token should be fetched via the Client Credentials flow.
@@ -107,9 +107,6 @@ trait AuthenticationTrait
 
     /**
      * Clear the client credentials from cache.
-     *
-     * @param \romanzipp\Twitch\Objects\AccessToken $token
-     * @noinspection PhpDocMissingThrowsInspection
      */
     protected function clearClientCredentialsToken(): void
     {
@@ -122,7 +119,6 @@ trait AuthenticationTrait
      * Get the cache driver instance used for storing the client credentials.
      *
      * @return \Illuminate\Contracts\Cache\Repository
-     * @noinspection PhpDocMissingThrowsInspection
      */
     protected function getClientCredentialsCacheRepository(): Repository
     {

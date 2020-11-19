@@ -198,7 +198,7 @@ $twitch = new Twitch;
 
 $result = $twitch->getUsersFollows(['to_id' => 654321]);
 
-$result->insertUsers('from_id', 'from_user');
+$result->insertUsers($twitch, 'from_id', 'from_user');
 ```
 
 **New Result data:**

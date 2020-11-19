@@ -20,7 +20,7 @@ class ResultTest extends TestCase
 
         $result = new Result($response);
 
-        self::assertTrue($result->success());
+        self::assertTrue($result->success(), $result->error());
         self::assertEquals([(object) $data], $result->data());
         self::assertEquals((object) $data, $result->shift());
         self::assertEquals(1, $result->count());
@@ -36,7 +36,7 @@ class ResultTest extends TestCase
 
         $result = new Result($response);
 
-        self::assertTrue($result->success());
+        self::assertTrue($result->success(), $result->error());
         self::assertEquals([], $result->data());
         self::assertEquals(null, $result->shift());
         self::assertEquals(0, $result->count());
@@ -50,7 +50,7 @@ class ResultTest extends TestCase
 
         $result = new Result($response);
 
-        self::assertTrue($result->success());
+        self::assertTrue($result->success(), $result->error());
         self::assertEquals((object) ['foo' => 'bar'], $result->data());
         self::assertEquals(null, $result->shift());
         self::assertEquals(0, $result->count());
@@ -62,7 +62,7 @@ class ResultTest extends TestCase
 
         $result = new Result($response);
 
-        self::assertTrue($result->success());
+        self::assertTrue($result->success(), $result->error());
         self::assertEquals([], $result->data());
         self::assertEquals(null, $result->shift());
         self::assertEquals(0, $result->count());
@@ -84,7 +84,7 @@ class ResultTest extends TestCase
 
         $result = new Result($response);
 
-        self::assertTrue($result->success());
+        self::assertTrue($result->success(), $result->error());
         self::assertEquals(3, $result->count());
 
         self::assertEquals(array_map(function ($item) {
@@ -106,7 +106,7 @@ class ResultTest extends TestCase
 
         $result = new Result($response);
 
-        self::assertTrue($result->success());
+        self::assertTrue($result->success(), $result->error());
         self::assertEquals((object) $data, $result->data());
         self::assertEquals(null, $result->shift());
         self::assertEquals(0, $result->count());

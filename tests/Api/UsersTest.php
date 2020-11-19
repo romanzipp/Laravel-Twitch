@@ -12,7 +12,7 @@ class UsersTest extends ApiTestCase
             $result = $this->twitch()->getUsers(['login' => 'twitch'])
         );
 
-        self::assertTrue($result->success());
+        self::assertTrue($result->success(), $result->error());
         self::assertHasProperties([
             'id', 'login', 'display_name', 'type', 'broadcaster_type', 'description',
             'profile_image_url', 'offline_image_url', 'view_count',
@@ -26,7 +26,7 @@ class UsersTest extends ApiTestCase
             $result = $this->twitch()->getUsers(['id' => 12826])
         );
 
-        self::assertTrue($result->success());
+        self::assertTrue($result->success(), $result->error());
         self::assertHasProperties([
             'id', 'login', 'display_name', 'type', 'broadcaster_type', 'description',
             'profile_image_url', 'offline_image_url', 'view_count',
@@ -40,7 +40,7 @@ class UsersTest extends ApiTestCase
             $result = $this->twitch()->getUsers(['id' => [12826, 131784680]])
         );
 
-        self::assertTrue($result->success());
+        self::assertTrue($result->success(), $result->error());
         self::assertEquals(2, $result->count());
     }
 }

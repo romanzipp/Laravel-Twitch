@@ -20,7 +20,7 @@ class FollowsTest extends ApiTestCase
             $result = $this->twitch()->getUsersFollows(['from_id' => 12826])
         );
 
-        self::assertTrue($result->success());
+        self::assertTrue($result->success(), $result->error());
         self::assertNotEmpty($result->data());
         self::assertHasProperties(['from_id', 'from_name', 'to_id', 'to_name', 'followed_at'], $result->shift());
         self::assertEquals(12826, (int) $result->shift()->from_id);
@@ -32,7 +32,7 @@ class FollowsTest extends ApiTestCase
             $result = $this->twitch()->getUsersFollows(['to_id' => 12826])
         );
 
-        self::assertTrue($result->success());
+        self::assertTrue($result->success(), $result->error());
         self::assertNotEmpty($result->data());
         self::assertHasProperties(['from_id', 'from_name', 'to_id', 'to_name', 'followed_at'], $result->shift());
         self::assertEquals(12826, (int) $result->shift()->to_id);

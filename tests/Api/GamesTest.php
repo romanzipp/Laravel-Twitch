@@ -13,7 +13,7 @@ class GamesTest extends ApiTestCase
             $result = $this->twitch()->getTopGames()
         );
 
-        self::assertTrue($result->success());
+        self::assertTrue($result->success(), $result->error());
         self::assertNotEmpty($result->data());
         self::assertHasProperties(['id', 'name', 'box_art_url'], $result->shift());
     }
@@ -24,7 +24,7 @@ class GamesTest extends ApiTestCase
             $result = $this->twitch()->getGames(['id' => 511224])
         );
 
-        self::assertTrue($result->success());
+        self::assertTrue($result->success(), $result->error());
         self::assertNotEmpty($result->data());
         self::assertEquals(511224, (int) $result->shift()->id);
         self::assertEquals('Apex Legends', $result->shift()->name);
@@ -36,7 +36,7 @@ class GamesTest extends ApiTestCase
             $result = $this->twitch()->getGames(['name' => 'Apex Legends'])
         );
 
-        self::assertTrue($result->success());
+        self::assertTrue($result->success(), $result->error());
         self::assertNotEmpty($result->data());
         self::assertEquals(511224, (int) $result->shift()->id);
         self::assertEquals('Apex Legends', $result->shift()->name);
@@ -48,7 +48,7 @@ class GamesTest extends ApiTestCase
             $result = $this->twitch()->getGames(['id' => [488552, 511224]])
         );
 
-        self::assertTrue($result->success());
+        self::assertTrue($result->success(), $result->error());
         self::assertNotEmpty($result->data());
 
         $ids = array_map(function (stdClass $game) {
@@ -66,7 +66,7 @@ class GamesTest extends ApiTestCase
             $result = $this->twitch()->getGames(['name' => ['Overwatch', 'Apex Legends']])
         );
 
-        self::assertTrue($result->success());
+        self::assertTrue($result->success(), $result->error());
         self::assertNotEmpty($result->data());
 
         $ids = array_map(function (stdClass $game) {

@@ -22,7 +22,7 @@ class ClipsTest extends ApiTestCase
             $result = $this->twitch()->getClips(['id' => 'BashfulHelpfulSalamanderPrimeMe'])
         );
 
-        self::assertTrue($result->success());
+        self::assertTrue($result->success(), $result->error());
         self::assertHasProperties([
             'id', 'url', 'embed_url', 'broadcaster_id', 'broadcaster_name', 'creator_id', 'creator_name',
             'video_id', 'game_id', 'language', 'title', 'view_count', 'created_at', 'thumbnail_url',

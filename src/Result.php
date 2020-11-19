@@ -72,13 +72,6 @@ class Result
     public $response;
 
     /**
-     * Original Twitch instance.
-     *
-     * @var \romanzipp\Twitch\Twitch
-     */
-    public $twitch;
-
-    /**
      * Constructor,.
      *
      * @param \Psr\Http\Message\ResponseInterface $response HTTP response
@@ -264,12 +257,13 @@ class Result
     /**
      * Insert users in data response.
      *
+     * @param \romanzipp\Twitch\Twitch $twitch
      * @param string $identifierAttribute Attribute to identify the users
      * @param string $insertTo Data index to insert user data
      *
      * @return self
      */
-    public function insertUsers(string $identifierAttribute = 'user_id', string $insertTo = 'user'): self
+    public function insertUsers(Twitch $twitch, string $identifierAttribute = 'user_id', string $insertTo = 'user'): self
     {
         $data = $this->data;
 
@@ -281,7 +275,7 @@ class Result
             return $this;
         }
 
-        $users = collect($this->twitch->getUsers(['id' => $userIds])->data);
+        $users = collect($twitch->getUsers(['id' => $userIds])->data);
 
         $dataWithUsers = collect($data)
             ->map(static function ($item) use ($users, $identifierAttribute, $insertTo) {

@@ -167,7 +167,7 @@ do {
     // Query the API with an optional cursor to the next results page
     $result = $twitch->getTopGames(['first' => 100], $nextCursor);
 
-    foreach ($result->data as $item) {
+    foreach ($result->data() as $item) {
         // Process the games result data
     }
 

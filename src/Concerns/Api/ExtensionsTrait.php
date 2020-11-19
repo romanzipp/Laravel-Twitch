@@ -95,7 +95,7 @@ trait ExtensionsTrait
     {
         $extensionsResult = $this->getAuthedUserActiveExtensions();
 
-        $extensions = (array) $extensionsResult->data;
+        $extensions = (array) $extensionsResult->data();
 
         $data = (object) [
             'panel' => $extensions['panel'],

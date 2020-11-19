@@ -20,7 +20,7 @@ class VideosTest extends ApiTestCase
             $result = $this->twitch()->getVideos(['id' => 327720797])
         );
 
-        self::assertTrue($result->success(), $result->error());
+        self::assertTrue($result->success(), $result->getErrorMessage());
         self::assertNotEmpty($result->data());
         self::assertHasProperties([
             'id', 'user_id', 'user_name', 'title', 'description', 'created_at', 'published_at', 'url',
@@ -35,7 +35,7 @@ class VideosTest extends ApiTestCase
             $result = $this->twitch()->getVideos(['user_id' => 12826])
         );
 
-        self::assertTrue($result->success(), $result->error());
+        self::assertTrue($result->success(), $result->getErrorMessage());
         self::assertNotEmpty($result->data());
         self::assertHasProperties([
             'id', 'user_id', 'user_name', 'title', 'description', 'created_at', 'published_at', 'url',
@@ -50,7 +50,7 @@ class VideosTest extends ApiTestCase
             $result = $this->twitch()->getVideos(['game_id' => 511224])
         );
 
-        self::assertTrue($result->success(), $result->error());
+        self::assertTrue($result->success(), $result->getErrorMessage());
         self::assertNotEmpty($result->data());
         self::assertHasProperties([
             'id', 'user_id', 'user_name', 'title', 'description', 'created_at', 'published_at', 'url',

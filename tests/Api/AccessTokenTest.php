@@ -22,7 +22,7 @@ class AccessTokenTest extends ApiTestCase
             $result = $this->twitch()->getUsers(['login' => 'twitch'])
         );
 
-        self::assertTrue($result->success(), $result->error());
+        self::assertTrue($result->success(), $result->getErrorMessage());
 
         self::assertNotNull(
             $store->get(config('twitch-api.oauth_client_credentials.cache_key'))
@@ -46,7 +46,7 @@ class AccessTokenTest extends ApiTestCase
         );
 
         self::assertFalse($result->success());
-        self::assertEquals(401, $result->status());
+        self::assertEquals(401, $result->getStatus());
 
         self::assertNull(
             $store->get(config('twitch-api.oauth_client_credentials.cache_key'))

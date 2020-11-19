@@ -5,64 +5,58 @@ namespace romanzipp\Twitch;
 use Psr\Http\Client\RequestExceptionInterface;
 use Psr\Http\Message\ResponseInterface;
 use romanzipp\Twitch\Objects\Paginator;
+use stdClass;
 
 class Result
 {
-    /**
-     * Query successful.
-     *
-     * @var bool
-     */
-    public $success = false;
-
     /**
      * Guzzle exception, if present.
      *
      * @var \Psr\Http\Client\RequestExceptionInterface|null
      */
-    public $exception = null;
+    private $exception;
 
     /**
      * Query result data.
      *
      * @var array|\stdClass
      */
-    public $data = [];
+    private $data = [];
 
     /**
      * Message field, if present.
      *
      * @var string|null
      */
-    public $message = null;
+    private $message;
 
     /**
      * Total amount of result data.
      *
      * @var int
      */
-    public $total = 0;
+    private $total = 0;
 
     /**
      * Status Code.
      *
      * @var int
      */
-    public $status = 0;
+    private $status;
 
     /**
      * Twitch response pagination cursor.
      *
      * @var \stdClass|null
      */
-    public $pagination;
+    private $pagination;
 
     /**
      * Internal paginator.
      *
      * @var Paginator|null
      */
-    public $paginator;
+    private $paginator;
 
     /**
      * Original Guzzle HTTP Response.
@@ -71,18 +65,11 @@ class Result
      */
     public $response;
 
-    /**
-     * Constructor,.
-     *
-     * @param \Psr\Http\Message\ResponseInterface $response HTTP response
-     * @param \Exception|mixed $exception Exception, if present
-     */
     public function __construct(ResponseInterface $response, RequestExceptionInterface $exception = null)
     {
         $this->response = $response;
         $this->status = $response->getStatusCode();
 
-        $this->success = null === $exception;
         $this->exception = $exception;
 
         $this->processPayload($response);
@@ -90,34 +77,53 @@ class Result
         $this->paginator = Paginator::from($this);
     }
 
-    /**
-     * Returns whether the query was successful.
-     *
-     * @return bool Success state
-     */
     public function success(): bool
     {
-        return $this->success;
+        return null === $this->exception;
     }
 
-    /**
-     * Get the response data, also available as public attribute.
-     *
-     * @return mixed
-     */
     public function data()
     {
         return $this->data;
     }
 
-    /**
-     * Get the response status code.
-     *
-     * @return int
-     */
-    public function status(): int
+    public function getTotal(): int
+    {
+        return $this->total;
+    }
+
+    public function getPagination(): ?stdClass
+    {
+        return $this->pagination;
+    }
+
+    public function getPaginator(): ?Paginator
+    {
+        return $this->paginator;
+    }
+
+    public function getStatus(): int
     {
         return $this->status;
+    }
+
+    public function getException(): ?RequestExceptionInterface
+    {
+        return $this->exception;
+    }
+
+    /**
+     * Return the current count of items in dataset.
+     *
+     * @return int Count
+     */
+    public function count(): int
+    {
+        if ( ! is_array($this->data)) {
+            return 0;
+        }
+
+        return count((array) $this->data);
     }
 
     /**
@@ -125,7 +131,7 @@ class Result
      *
      * @return string Error message
      */
-    public function error(): string
+    public function getErrorMessage(): string
     {
         if (null === $this->exception || null === $this->exception->getResponse()) {
             return 'Twitch API Unavailable';
@@ -154,20 +160,6 @@ class Result
         }
 
         return null;
-    }
-
-    /**
-     * Return the current count of items in dataset.
-     *
-     * @return int Count
-     */
-    public function count(): int
-    {
-        if ( ! is_array($this->data)) {
-            return 0;
-        }
-
-        return count((array) $this->data);
     }
 
     /**
@@ -223,7 +215,7 @@ class Result
      *
      * @return string|array|null
      */
-    public function rateLimit(string $key = null)
+    public function getRateLimit(string $key = null)
     {
         if ( ! $this->response || ! $this->response->hasHeader('Ratelimit-Remaining')) {
             return null;
@@ -248,7 +240,7 @@ class Result
             return false;
         }
 
-        return 401 === $this->status() && in_array($this->error(), [
+        return 401 === $this->getStatus() && in_array($this->getErrorMessage(), [
             'Invalid OAuth token',
             'OAuth token is missing',
         ]);

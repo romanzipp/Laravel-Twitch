@@ -26,7 +26,7 @@ class OAuthTest extends ApiTestCase
             $result = $this->twitch()->getOAuthToken(null, GrantType::CLIENT_CREDENTIALS)
         );
 
-        self::assertEquals('bearer', $result->data->token_type);
-        self::assertIsString($result->data->access_token);
+        self::assertEquals('bearer', $result->data()->token_type);
+        self::assertIsString($result->data()->access_token);
     }
 }

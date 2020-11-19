@@ -21,7 +21,7 @@ class PaginationTest extends TestCase
 
         $result = new Result($response);
 
-        self::assertInstanceOf(Paginator::class, $result->paginator);
+        self::assertInstanceOf(Paginator::class, $result->getPaginator());
         self::assertInstanceOf(Paginator::class, $result->next());
         self::assertInstanceOf(Paginator::class, $result->back());
     }
@@ -38,7 +38,7 @@ class PaginationTest extends TestCase
 
         $result = new Result($response);
 
-        self::assertInstanceOf(Paginator::class, $result->paginator);
+        self::assertInstanceOf(Paginator::class, $result->getPaginator());
 
         self::assertEquals('after', $result->next()->action);
         self::assertEquals('before', $result->back()->action);
@@ -58,7 +58,7 @@ class PaginationTest extends TestCase
 
         $firstResult = $firstService->getStreams([]);
 
-        self::assertInstanceOf(Paginator::class, $firstResult->paginator);
+        self::assertInstanceOf(Paginator::class, $firstResult->getPaginator());
         self::assertTrue($firstResult->hasMoreResults());
 
         $service = $this->getMockedService(
@@ -73,7 +73,7 @@ class PaginationTest extends TestCase
 
         $secondResult = $service->getStreams([], $firstResult->next());
 
-        self::assertInstanceOf(Paginator::class, $secondResult->paginator);
+        self::assertInstanceOf(Paginator::class, $secondResult->getPaginator());
         self::assertTrue($secondResult->hasMoreResults());
     }
 
@@ -91,7 +91,7 @@ class PaginationTest extends TestCase
 
         $firstResult = $firstService->getStreams([]);
 
-        self::assertInstanceOf(Paginator::class, $firstResult->paginator);
+        self::assertInstanceOf(Paginator::class, $firstResult->getPaginator());
         self::assertTrue($firstResult->hasMoreResults());
 
         $service = $this->getMockedService(
@@ -104,7 +104,7 @@ class PaginationTest extends TestCase
 
         $secondResult = $service->getStreams([], $firstResult->next());
 
-        self::assertInstanceOf(Paginator::class, $secondResult->paginator);
+        self::assertInstanceOf(Paginator::class, $secondResult->getPaginator());
         self::assertFalse($secondResult->hasMoreResults());
     }
 
@@ -122,7 +122,7 @@ class PaginationTest extends TestCase
 
         $firstResult = $firstService->getStreams([]);
 
-        self::assertInstanceOf(Paginator::class, $firstResult->paginator);
+        self::assertInstanceOf(Paginator::class, $firstResult->getPaginator());
         self::assertTrue($firstResult->hasMoreResults());
 
         $service = $this->getMockedService(
@@ -135,7 +135,7 @@ class PaginationTest extends TestCase
 
         $secondResult = $service->getStreams([], $firstResult->next());
 
-        self::assertInstanceOf(Paginator::class, $secondResult->paginator);
+        self::assertInstanceOf(Paginator::class, $secondResult->getPaginator());
         self::assertFalse($secondResult->hasMoreResults());
     }
 
@@ -153,7 +153,7 @@ class PaginationTest extends TestCase
 
         $firstResult = $firstService->getStreams([]);
 
-        self::assertInstanceOf(Paginator::class, $firstResult->paginator);
+        self::assertInstanceOf(Paginator::class, $firstResult->getPaginator());
         self::assertTrue($firstResult->hasMoreResults());
 
         $service = $this->getMockedService(
@@ -165,7 +165,7 @@ class PaginationTest extends TestCase
 
         $secondResult = $service->getStreams([], $firstResult->next());
 
-        self::assertInstanceOf(Paginator::class, $secondResult->paginator);
+        self::assertInstanceOf(Paginator::class, $secondResult->getPaginator());
         self::assertFalse($secondResult->hasMoreResults());
     }
 }

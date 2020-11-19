@@ -13,6 +13,6 @@ class BitsTest extends ApiTestCase
         );
 
         self::assertFalse($result->success());
-        self::assertEquals(401, $result->status());
+        self::assertEquals(401, $result->getStatus());
     }
 }

@@ -12,7 +12,7 @@ class BitsTest extends ApiTestCase
             $result = $this->twitch()->getBitsLeaderboard()
         );
 
-        $this->assertFalse($result->success());
-        $this->assertEquals(401, $result->status());
+        self::assertFalse($result->success());
+        self::assertEquals(401, $result->status());
     }
 }

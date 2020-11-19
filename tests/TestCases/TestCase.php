@@ -51,15 +51,15 @@ abstract class TestCase extends BaseTestCase
         return $twitch;
     }
 
-    protected function assertHasProperty(string $property, stdClass $object): void
+    protected static function assertHasProperty(string $property, stdClass $object): void
     {
         static::assertThat(property_exists($object, $property), static::isTrue(), 'Asserting that an object has a property');
     }
 
-    protected function assertHasProperties(array $properties, stdClass $object): void
+    protected static function assertHasProperties(array $properties, stdClass $object): void
     {
         foreach ($properties as $property) {
-            $this->assertHasProperty($property, $object);
+            self::assertHasProperty($property, $object);
         }
     }
 }

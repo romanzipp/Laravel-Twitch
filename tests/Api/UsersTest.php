@@ -12,12 +12,12 @@ class UsersTest extends ApiTestCase
             $result = $this->twitch()->getUsers(['login' => 'twitch'])
         );
 
-        $this->assertTrue($result->success());
-        $this->assertHasProperties([
+        self::assertTrue($result->success());
+        self::assertHasProperties([
             'id', 'login', 'display_name', 'type', 'broadcaster_type', 'description',
             'profile_image_url', 'offline_image_url', 'view_count',
         ], $result->shift());
-        $this->assertEquals(12826, (int) $result->shift()->id);
+        self::assertEquals(12826, (int) $result->shift()->id);
     }
 
     public function testGetUserById()
@@ -26,12 +26,12 @@ class UsersTest extends ApiTestCase
             $result = $this->twitch()->getUsers(['id' => 12826])
         );
 
-        $this->assertTrue($result->success());
-        $this->assertHasProperties([
+        self::assertTrue($result->success());
+        self::assertHasProperties([
             'id', 'login', 'display_name', 'type', 'broadcaster_type', 'description',
             'profile_image_url', 'offline_image_url', 'view_count',
         ], $result->shift());
-        $this->assertEquals('twitch', $result->shift()->login);
+        self::assertEquals('twitch', $result->shift()->login);
     }
 
     public function testGetUsersByIds()
@@ -40,7 +40,7 @@ class UsersTest extends ApiTestCase
             $result = $this->twitch()->getUsers(['id' => [12826, 131784680]])
         );
 
-        $this->assertTrue($result->success());
-        $this->assertEquals(2, $result->count());
+        self::assertTrue($result->success());
+        self::assertEquals(2, $result->count());
     }
 }

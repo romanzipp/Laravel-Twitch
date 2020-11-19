@@ -17,7 +17,7 @@ class ServiceConfigTest extends TestCase
 
         $twitch = new Twitch();
 
-        $this->assertEquals($id, $twitch->getClientId());
+        self::assertEquals($id, $twitch->getClientId());
     }
 
     public function testClientIdConfigFacade()
@@ -26,11 +26,11 @@ class ServiceConfigTest extends TestCase
 
         config(['twitch-api.client_id' => $id]);
 
-        $this->assertEquals($id, TwitchFacade::getClientId());
+        self::assertEquals($id, TwitchFacade::getClientId());
 
         config(['twitch-api.client_id' => Str::random()]);
 
-        $this->assertEquals($id, TwitchFacade::getClientId());
+        self::assertEquals($id, TwitchFacade::getClientId());
     }
 
     public function testClientSecretConfig()
@@ -41,7 +41,7 @@ class ServiceConfigTest extends TestCase
 
         $twitch = new Twitch();
 
-        $this->assertEquals($secret, $twitch->getClientSecret());
+        self::assertEquals($secret, $twitch->getClientSecret());
     }
 
     public function testClientSecretConfigFacade()
@@ -50,10 +50,10 @@ class ServiceConfigTest extends TestCase
 
         config(['twitch-api.client_secret' => $secret]);
 
-        $this->assertEquals($secret, TwitchFacade::getClientSecret());
+        self::assertEquals($secret, TwitchFacade::getClientSecret());
 
         config(['twitch-api.client_secret' => Str::random()]);
 
-        $this->assertEquals($secret, TwitchFacade::getClientSecret());
+        self::assertEquals($secret, TwitchFacade::getClientSecret());
     }
 }

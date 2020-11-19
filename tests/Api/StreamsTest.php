@@ -12,16 +12,16 @@ class StreamsTest extends ApiTestCase
             $firstResult = $this->twitch()->getStreams([])
         );
 
-        $this->assertTrue($firstResult->success());
-        $this->assertTrue($firstResult->hasMoreResults());
+        self::assertTrue($firstResult->success());
+        self::assertTrue($firstResult->hasMoreResults());
 
         $this->registerResult(
             $nextResult = $this->twitch()->getStreams([], $firstResult->next())
         );
 
-        $this->assertTrue($nextResult->success());
-        $this->assertTrue($nextResult->hasMoreResults());
+        self::assertTrue($nextResult->success());
+        self::assertTrue($nextResult->hasMoreResults());
 
-        $this->assertNotEquals($firstResult->paginator->cursor(), $nextResult->paginator->cursor());
+        self::assertNotEquals($firstResult->paginator->cursor(), $nextResult->paginator->cursor());
     }
 }

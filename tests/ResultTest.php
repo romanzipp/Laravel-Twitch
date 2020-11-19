@@ -20,10 +20,10 @@ class ResultTest extends TestCase
 
         $result = new Result($response);
 
-        $this->assertTrue($result->success());
-        $this->assertEquals([(object) $data], $result->data());
-        $this->assertEquals((object) $data, $result->shift());
-        $this->assertEquals(1, $result->count());
+        self::assertTrue($result->success());
+        self::assertEquals([(object) $data], $result->data());
+        self::assertEquals((object) $data, $result->shift());
+        self::assertEquals(1, $result->count());
     }
 
     public function testEmptyResponseResult()
@@ -36,10 +36,10 @@ class ResultTest extends TestCase
 
         $result = new Result($response);
 
-        $this->assertTrue($result->success());
-        $this->assertEquals([], $result->data());
-        $this->assertEquals(null, $result->shift());
-        $this->assertEquals(0, $result->count());
+        self::assertTrue($result->success());
+        self::assertEquals([], $result->data());
+        self::assertEquals(null, $result->shift());
+        self::assertEquals(0, $result->count());
     }
 
     public function testUnexpectedResponseResult()
@@ -50,10 +50,10 @@ class ResultTest extends TestCase
 
         $result = new Result($response);
 
-        $this->assertTrue($result->success());
-        $this->assertEquals((object) ['foo' => 'bar'], $result->data());
-        $this->assertEquals(null, $result->shift());
-        $this->assertEquals(0, $result->count());
+        self::assertTrue($result->success());
+        self::assertEquals((object) ['foo' => 'bar'], $result->data());
+        self::assertEquals(null, $result->shift());
+        self::assertEquals(0, $result->count());
     }
 
     public function testNonJsonResponseResult()
@@ -62,10 +62,10 @@ class ResultTest extends TestCase
 
         $result = new Result($response);
 
-        $this->assertTrue($result->success());
-        $this->assertEquals([], $result->data());
-        $this->assertEquals(null, $result->shift());
-        $this->assertEquals(0, $result->count());
+        self::assertTrue($result->success());
+        self::assertEquals([], $result->data());
+        self::assertEquals(null, $result->shift());
+        self::assertEquals(0, $result->count());
     }
 
     public function testProcessDefaultPayload()
@@ -84,10 +84,10 @@ class ResultTest extends TestCase
 
         $result = new Result($response);
 
-        $this->assertTrue($result->success());
-        $this->assertEquals(3, $result->count());
+        self::assertTrue($result->success());
+        self::assertEquals(3, $result->count());
 
-        $this->assertEquals(array_map(function ($item) {
+        self::assertEquals(array_map(function ($item) {
             return (object) $item;
         }, $data), $result->data());
     }
@@ -106,9 +106,9 @@ class ResultTest extends TestCase
 
         $result = new Result($response);
 
-        $this->assertTrue($result->success());
-        $this->assertEquals((object) $data, $result->data());
-        $this->assertEquals(null, $result->shift());
-        $this->assertEquals(0, $result->count());
+        self::assertTrue($result->success());
+        self::assertEquals((object) $data, $result->data());
+        self::assertEquals(null, $result->shift());
+        self::assertEquals(0, $result->count());
     }
 }

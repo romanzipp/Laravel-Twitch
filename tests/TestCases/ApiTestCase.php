@@ -24,7 +24,7 @@ abstract class ApiTestCase extends TestCase
         $this->skipIfClientIdMissing();
 
         if (null !== self::$lastResult && null !== self::$lastResult->rateLimit() && self::$lastResult->rateLimit('remaining') < 3) {
-            $this->markTestSkipped(
+            self::markTestSkipped(
                 sprintf('Rate Limit exceeded (%d/%d)', self::$lastResult->rateLimit('remaining'), self::$lastResult->rateLimit('limit'))
             );
         }
@@ -47,7 +47,7 @@ abstract class ApiTestCase extends TestCase
 
     protected function registerResult(Result $result): Result
     {
-        $this->assertInstanceOf(Result::class, $result);
+        self::assertInstanceOf(Result::class, $result);
 
         self::$lastResult = $result;
 
@@ -60,7 +60,7 @@ abstract class ApiTestCase extends TestCase
             return;
         }
 
-        $this->markTestSkipped('No Client-Secret provided');
+        self::markTestSkipped('No Client-Secret provided');
     }
 
     protected function skipIfClientIdMissing(): void
@@ -69,6 +69,6 @@ abstract class ApiTestCase extends TestCase
             return;
         }
 
-        $this->markTestSkipped('No Client-ID provided');
+        self::markTestSkipped('No Client-ID provided');
     }
 }

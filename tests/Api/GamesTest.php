@@ -13,9 +13,9 @@ class GamesTest extends ApiTestCase
             $result = $this->twitch()->getTopGames()
         );
 
-        $this->assertTrue($result->success());
-        $this->assertNotEmpty($result->data());
-        $this->assertHasProperties(['id', 'name', 'box_art_url'], $result->shift());
+        self::assertTrue($result->success());
+        self::assertNotEmpty($result->data());
+        self::assertHasProperties(['id', 'name', 'box_art_url'], $result->shift());
     }
 
     public function testGetGameById()
@@ -24,10 +24,10 @@ class GamesTest extends ApiTestCase
             $result = $this->twitch()->getGames(['id' => 511224])
         );
 
-        $this->assertTrue($result->success());
-        $this->assertNotEmpty($result->data());
-        $this->assertEquals(511224, (int) $result->shift()->id);
-        $this->assertEquals('Apex Legends', $result->shift()->name);
+        self::assertTrue($result->success());
+        self::assertNotEmpty($result->data());
+        self::assertEquals(511224, (int) $result->shift()->id);
+        self::assertEquals('Apex Legends', $result->shift()->name);
     }
 
     public function testGetGameByName()
@@ -36,10 +36,10 @@ class GamesTest extends ApiTestCase
             $result = $this->twitch()->getGames(['name' => 'Apex Legends'])
         );
 
-        $this->assertTrue($result->success());
-        $this->assertNotEmpty($result->data());
-        $this->assertEquals(511224, (int) $result->shift()->id);
-        $this->assertEquals('Apex Legends', $result->shift()->name);
+        self::assertTrue($result->success());
+        self::assertNotEmpty($result->data());
+        self::assertEquals(511224, (int) $result->shift()->id);
+        self::assertEquals('Apex Legends', $result->shift()->name);
     }
 
     public function testGetGamesByIds()
@@ -48,8 +48,8 @@ class GamesTest extends ApiTestCase
             $result = $this->twitch()->getGames(['id' => [488552, 511224]])
         );
 
-        $this->assertTrue($result->success());
-        $this->assertNotEmpty($result->data());
+        self::assertTrue($result->success());
+        self::assertNotEmpty($result->data());
 
         $ids = array_map(function (stdClass $game) {
             return (int) $game->id;
@@ -57,7 +57,7 @@ class GamesTest extends ApiTestCase
 
         sort($ids);
 
-        $this->assertEquals([488552, 511224], $ids);
+        self::assertEquals([488552, 511224], $ids);
     }
 
     public function testGetGamesByNames()
@@ -66,8 +66,8 @@ class GamesTest extends ApiTestCase
             $result = $this->twitch()->getGames(['name' => ['Overwatch', 'Apex Legends']])
         );
 
-        $this->assertTrue($result->success());
-        $this->assertNotEmpty($result->data());
+        self::assertTrue($result->success());
+        self::assertNotEmpty($result->data());
 
         $ids = array_map(function (stdClass $game) {
             return (int) $game->id;
@@ -75,7 +75,7 @@ class GamesTest extends ApiTestCase
 
         sort($ids);
 
-        $this->assertEquals([488552, 511224], $ids);
+        self::assertEquals([488552, 511224], $ids);
     }
 
     public function testGetGamesWithPagination()
@@ -84,8 +84,8 @@ class GamesTest extends ApiTestCase
             $firstResult = $this->twitch()->getTopGames()
         );
 
-        $this->assertTrue($firstResult->success());
-        $this->assertNotEmpty($firstResult->data());
+        self::assertTrue($firstResult->success());
+        self::assertNotEmpty($firstResult->data());
 
         $first = $firstResult->data()[0];
 
@@ -93,22 +93,22 @@ class GamesTest extends ApiTestCase
             $secondResult = $this->twitch()->getTopGames([], $firstResult->next())
         );
 
-        $this->assertTrue($secondResult->success());
-        $this->assertNotEmpty($secondResult->data());
+        self::assertTrue($secondResult->success());
+        self::assertNotEmpty($secondResult->data());
 
         $second = $secondResult->data()[0];
 
-        $this->assertNotEquals($first->id, $second->id);
+        self::assertNotEquals($first->id, $second->id);
 
         $this->registerResult(
             $thirdResult = $this->twitch()->getTopGames([], $secondResult->back())
         );
 
-        $this->assertTrue($thirdResult->success());
-        $this->assertNotEmpty($thirdResult->data());
+        self::assertTrue($thirdResult->success());
+        self::assertNotEmpty($thirdResult->data());
 
         $third = $thirdResult->data()[0];
 
-        $this->assertEquals($first->id, $third->id);
+        self::assertEquals($first->id, $third->id);
     }
 }

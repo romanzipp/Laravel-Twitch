@@ -18,8 +18,8 @@ class ResultExceptionTest extends TestCase
 
         $result = new Result($response, new RequestException('Not Found', $request, $response));
 
-        $this->assertFalse($result->success());
-        $this->assertEquals('Not Found', $result->error());
+        self::assertFalse($result->success());
+        self::assertEquals('Not Found', $result->error());
     }
 
     public function testRequestExceptionMissingMessage()
@@ -32,8 +32,8 @@ class ResultExceptionTest extends TestCase
 
         $result = new Result($response, new RequestException('Not Found', $request, $response));
 
-        $this->assertFalse($result->success());
-        $this->assertEquals('Not Found', $result->error());
+        self::assertFalse($result->success());
+        self::assertEquals('Not Found', $result->error());
     }
 
     public function testRequestExceptionNullMessage()
@@ -47,8 +47,8 @@ class ResultExceptionTest extends TestCase
 
         $result = new Result($response, new RequestException('Not Found', $request, $response));
 
-        $this->assertFalse($result->success());
-        $this->assertEquals('Not Found', $result->error());
+        self::assertFalse($result->success());
+        self::assertEquals('Not Found', $result->error());
     }
 
     public function testRequestExceptionWithMessage()
@@ -62,8 +62,8 @@ class ResultExceptionTest extends TestCase
 
         $result = new Result($response, new RequestException('Not Found', $request, $response));
 
-        $this->assertFalse($result->success());
-        $this->assertEquals('No Data', $result->error());
+        self::assertFalse($result->success());
+        self::assertEquals('No Data', $result->error());
     }
 
     public function testRequestExceptionMalformedMessage()
@@ -77,7 +77,7 @@ class ResultExceptionTest extends TestCase
 
         $result = new Result($response, new RequestException('Not Found', $request, $response));
 
-        $this->assertFalse($result->success());
-        $this->assertEquals('Not Found', $result->error());
+        self::assertFalse($result->success());
+        self::assertEquals('Not Found', $result->error());
     }
 }

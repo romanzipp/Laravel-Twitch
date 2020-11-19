@@ -5,14 +5,14 @@ namespace romanzipp\Twitch;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
 use romanzipp\Twitch\Concerns\Api;
-use romanzipp\Twitch\Concerns\AuthenticationTrait;
+use romanzipp\Twitch\Concerns\ClientCredentialsTrait;
 use romanzipp\Twitch\Concerns\Validation\ValidationTrait;
 use romanzipp\Twitch\Exceptions\RequestRequiresAuthenticationException;
 use romanzipp\Twitch\Objects\Paginator;
 
 class Twitch
 {
-    use AuthenticationTrait;
+    use ClientCredentialsTrait;
     use ValidationTrait;
 
     use Api\OAuthTrait;

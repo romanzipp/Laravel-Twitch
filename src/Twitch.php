@@ -290,7 +290,7 @@ class Twitch
             $result = new Result($response, $exception);
 
             if ($this->shouldCacheClientCredentials() && $result->isOAuthError()) {
-                $this->clearClientCredentialsToken($token);
+                $this->clearClientCredentialsToken();
             }
         }
 

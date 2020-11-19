@@ -2,7 +2,7 @@
 
 namespace romanzipp\Twitch;
 
-use Exception;
+use Psr\Http\Client\RequestExceptionInterface;
 use Psr\Http\Message\ResponseInterface;
 use romanzipp\Twitch\Objects\Paginator;
 
@@ -18,7 +18,7 @@ class Result
     /**
      * Guzzle exception, if present.
      *
-     * @var mixed|null
+     * @var \Psr\Http\Client\RequestExceptionInterface|null
      */
     public $exception = null;
 
@@ -77,7 +77,7 @@ class Result
      * @param \Psr\Http\Message\ResponseInterface $response HTTP response
      * @param \Exception|mixed $exception Exception, if present
      */
-    public function __construct(ResponseInterface $response, Exception $exception = null)
+    public function __construct(ResponseInterface $response, RequestExceptionInterface $exception = null)
     {
         $this->response = $response;
         $this->status = $response->getStatusCode();
@@ -127,7 +127,7 @@ class Result
      */
     public function error(): string
     {
-        if (null === $this->exception || ! $this->exception->hasResponse()) {
+        if (null === $this->exception || null === $this->exception->getResponse()) {
             return 'Twitch API Unavailable';
         }
 

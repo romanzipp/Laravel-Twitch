@@ -2,15 +2,15 @@
 
 namespace romanzipp\Twitch\Tests\Api;
 
+use InvalidArgumentException;
 use romanzipp\Twitch\Enums\GrantType;
-use romanzipp\Twitch\Exceptions\RequestRequiresClientSecretException;
 use romanzipp\Twitch\Tests\TestCases\ApiTestCase;
 
 class OAuthTest extends ApiTestCase
 {
     public function testGetOAuthTokenWithoutSecret()
     {
-        $this->expectException(RequestRequiresClientSecretException::class);
+        $this->expectException(InvalidArgumentException::class);
 
         $twitch = $this->twitch();
         $twitch->setClientSecret('');

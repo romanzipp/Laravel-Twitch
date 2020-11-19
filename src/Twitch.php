@@ -101,35 +101,16 @@ class Twitch
         ]);
     }
 
-    /**
-     * Get client id.
-     *
-     * @return string
-     */
     public function getClientId(): ?string
     {
         return $this->clientId;
     }
 
-    /**
-     * Set client id.
-     *
-     * @param string $clientId Twitch client id
-     *
-     * @return void
-     */
     public function setClientId(string $clientId): void
     {
         $this->clientId = $clientId;
     }
 
-    /**
-     * Fluid client id setter.
-     *
-     * @param string $clientId twitch client id
-     *
-     * @return self
-     */
     public function withClientId(string $clientId): self
     {
         $this->setClientId($clientId);
@@ -137,35 +118,16 @@ class Twitch
         return $this;
     }
 
-    /**
-     * Get client secret.
-     *
-     * @return string
-     */
     public function getClientSecret(): ?string
     {
         return $this->clientSecret;
     }
 
-    /**
-     * Set client secret.
-     *
-     * @param string $clientSecret Twitch client secret
-     *
-     * @return void
-     */
     public function setClientSecret(string $clientSecret): void
     {
         $this->clientSecret = $clientSecret;
     }
 
-    /**
-     * Fluid client secret setter.
-     *
-     * @param string $clientSecret Twitch client secret
-     *
-     * @return self
-     */
     public function withClientSecret(string $clientSecret): self
     {
         $this->setClientSecret($clientSecret);
@@ -173,35 +135,16 @@ class Twitch
         return $this;
     }
 
-    /**
-     * Get Redirect URI.
-     *
-     * @return string
-     */
     public function getRedirectUri(): ?string
     {
         return $this->redirectUri;
     }
 
-    /**
-     * Set Redirect URI.
-     *
-     * @param string $redirectUri
-     *
-     * @return void
-     */
     public function setRedirectUri(string $redirectUri): void
     {
         $this->redirectUri = $redirectUri;
     }
 
-    /**
-     * Fluid redirect url setter.
-     *
-     * @param string $redirectUri
-     *
-     * @return self
-     */
     public function withRedirectUri(string $redirectUri): self
     {
         $this->setRedirectUri($redirectUri);
@@ -209,36 +152,16 @@ class Twitch
         return $this;
     }
 
-    /**
-     * Get OAuth token.
-     *
-     * @return string Twitch token
-     * @return string|null
-     */
     public function getToken(): ?string
     {
         return $this->token;
     }
 
-    /**
-     * Set OAuth token.
-     *
-     * @param string $token Twitch OAuth token
-     *
-     * @return void
-     */
     public function setToken(string $token): void
     {
         $this->token = $token;
     }
 
-    /**
-     * Fluid OAuth token setter.
-     *
-     * @param string $token Twitch OAuth token
-     *
-     * @return self
-     */
     public function withToken(string $token): self
     {
         $this->setToken($token);
@@ -246,11 +169,6 @@ class Twitch
         return $this;
     }
 
-    /**
-     * Set the guzzle client.
-     *
-     * @param \GuzzleHttp\Client $client
-     */
     public function setRequestClient(Client $client): void
     {
         $this->client = $client;
@@ -382,15 +300,15 @@ class Twitch
      *
      * @return string
      */
-    public function buildQuery(array $query): string
+    private function buildQuery(array $query): string
     {
         $parts = [];
 
         foreach ($query as $name => $value) {
             $value = (array) $value;
 
-            array_walk_recursive($value, function ($value) use (&$parts, $name) {
-                $parts[] = urlencode($name) . '=' . urlencode($value);
+            array_walk_recursive($value, static function ($value) use (&$parts, $name) {
+                $parts[] = sprintf('%s=%s', urlencode($name), urlencode($value));
             });
         }
 

@@ -20,8 +20,8 @@ trait AuthenticationTrait
     protected function shouldFetchClientCredentials(): bool
     {
         return config('twitch-api.oauth_client_credentials.auto_generate')
-            && $this->hasClientId()
-            && $this->hasClientSecret();
+            && null !== $this->getClientId()
+            && null !== $this->getClientSecret();
     }
 
     /**
@@ -138,7 +138,7 @@ trait AuthenticationTrait
 
     abstract public function getOAuthToken(?string $code = null, string $grantType = GrantType::AUTHORIZATION_CODE, array $scopes = []): Result;
 
-    abstract public function hasClientId(): bool;
+    abstract public function getClientId(): ?string;
 
-    abstract public function hasClientSecret(): bool;
+    abstract public function getClientSecret(): ?string;
 }

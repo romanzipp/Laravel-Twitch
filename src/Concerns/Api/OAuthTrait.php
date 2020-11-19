@@ -2,6 +2,7 @@
 
 namespace romanzipp\Twitch\Concerns\Api;
 
+use InvalidArgumentException;
 use romanzipp\Twitch\Concerns\Operations\AbstractOperationsTrait;
 use romanzipp\Twitch\Enums\GrantType;
 use romanzipp\Twitch\Result;
@@ -55,10 +56,18 @@ trait OAuthTrait
      */
     public function getOAuthToken(?string $code = null, string $grantType = GrantType::AUTHORIZATION_CODE, array $scopes = []): Result
     {
+        if ( ! $clientId = $this->getClientId()) {
+            throw new InvalidArgumentException('The OAuth request requires a client secret to be set');
+        }
+
+        if ( ! $clientSecret = $this->getClientSecret()) {
+            throw new InvalidArgumentException('The OAuth request requires a client secret to be set');
+        }
+
         $parameters = [
             'grant_type' => $grantType,
-            'client_id' => $this->getClientId(),
-            'client_secret' => $this->getClientSecret(),
+            'client_id' => $clientId,
+            'client_secret' => $clientSecret,
         ];
 
         if (GrantType::AUTHORIZATION_CODE === $grantType) {

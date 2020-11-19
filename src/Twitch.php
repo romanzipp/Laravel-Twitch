@@ -251,16 +251,6 @@ class Twitch
      */
     public function query(string $method = 'GET', string $path = '', array $parameters = [], Paginator $paginator = null, array $body = null): Result
     {
-        $headers = $this->buildHeaders();
-
-        if (null !== $body) {
-            $headers['Content-Type'] = 'application/json';
-        }
-
-        if (null !== $paginator) {
-            $parameters[$paginator->action] = $paginator->cursor();
-        }
-
         /** @var \romanzipp\Twitch\Objects\AccessToken|null $token */
         $token = null;
 
@@ -272,6 +262,16 @@ class Twitch
             }
 
             $this->setToken($token->accessToken);
+        }
+
+        if (null !== $paginator) {
+            $parameters[$paginator->action] = $paginator->cursor();
+        }
+
+        $headers = $this->buildHeaders();
+
+        if (null !== $body) {
+            $headers['Content-Type'] = 'application/json';
         }
 
         try {

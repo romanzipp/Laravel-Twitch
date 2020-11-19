@@ -434,17 +434,11 @@ class Twitch
             $this->setToken($token->accessToken);
         }
 
-        $jsonBody = null;
-
-        if (null !== $body) {
-            $jsonBody = json_encode($body);
-        }
-
         try {
             $response = $this->client->request($method, $path, [
-                'headers' => $this->buildHeaders(null !== $jsonBody),
+                'headers' => $this->buildHeaders(null !== $body),
                 'query' => $this->buildQuery($parameters),
-                'json' => $jsonBody,
+                'json' => $body,
             ]);
 
             $result = new Result($response, null);

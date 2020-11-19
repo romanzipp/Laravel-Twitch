@@ -249,6 +249,15 @@ class Result
         return $rateLimit[$key] ?? null;
     }
 
+    public function isOAuthError(): bool
+    {
+        if (null === $this->exception) {
+            return false;
+        }
+
+        return 'Invalid OAuth token' === $this->error() && 401 === $this->status();
+    }
+
     /**
      * Insert users in data response.
      *

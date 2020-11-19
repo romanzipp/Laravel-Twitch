@@ -251,6 +251,12 @@ class Twitch
      */
     public function query(string $method = 'GET', string $path = '', array $parameters = [], Paginator $paginator = null, array $body = null): Result
     {
+        $headers = $this->buildHeaders();
+
+        if (null !== $body) {
+            $headers['Content-Type'] = 'application/json';
+        }
+
         if (null !== $paginator) {
             $parameters[$paginator->action] = $paginator->cursor();
         }
@@ -270,7 +276,7 @@ class Twitch
 
         try {
             $response = $this->client->request($method, $path, [
-                'headers' => $this->buildHeaders(null !== $body),
+                'headers' => $headers,
                 'query' => $this->buildQuery($parameters),
                 'json' => $body,
             ]);
@@ -318,11 +324,9 @@ class Twitch
     /**
      * Build headers for request.
      *
-     * @param bool $json Body is JSON
-     *
      * @return array
      */
-    private function buildHeaders(bool $json = false): array
+    private function buildHeaders(): array
     {
         $headers = [
             'Client-ID' => $this->getClientId(),
@@ -330,10 +334,6 @@ class Twitch
 
         if (null !== $this->getToken()) {
             $headers['Authorization'] = "Bearer {$this->getToken()}";
-        }
-
-        if ($json) {
-            $headers['Content-Type'] = 'application/json';
         }
 
         return $headers;

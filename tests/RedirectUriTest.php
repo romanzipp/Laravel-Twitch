@@ -12,7 +12,7 @@ class RedirectUriTest extends TestCase
 {
     public function testValidUri()
     {
-        $this->assertEquals(
+        self::assertEquals(
             'https://id.twitch.tv/oauth2/authorize?response_type=code&client_id=abc&scope=' . rawurlencode('bits:read') . '&redirect_uri=' . rawurlencode('http://localhost'),
             TwitchFacade::withClientId('abc')->withRedirectUri('http://localhost')->getOAuthAuthorizeUrl('code', [Scope::BITS_READ])
         );

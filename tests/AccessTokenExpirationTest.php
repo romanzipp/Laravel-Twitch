@@ -9,12 +9,12 @@ class AccessTokenExpirationTest extends TestCase
 {
     public function testExpiration()
     {
-        $this->assertFalse($this->token(time() + 30)->isExpired());
-        $this->assertFalse($this->token(time() + time())->isExpired());
-        $this->assertFalse($this->token(time() + time() + 30)->isExpired());
-        $this->assertTrue($this->token(time() - 30)->isExpired());
-        $this->assertTrue($this->token(time() - time())->isExpired());
-        $this->assertTrue($this->token(time() - time() - 30)->isExpired());
+        self::assertFalse($this->token(time() + 30)->isExpired());
+        self::assertFalse($this->token(time() + time())->isExpired());
+        self::assertFalse($this->token(time() + time() + 30)->isExpired());
+        self::assertTrue($this->token(time() - 30)->isExpired());
+        self::assertTrue($this->token(time() - time())->isExpired());
+        self::assertTrue($this->token(time() - time() - 30)->isExpired());
     }
 
     private function token(int $expiresAt): AccessToken

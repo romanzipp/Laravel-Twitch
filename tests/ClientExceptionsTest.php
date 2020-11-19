@@ -39,7 +39,7 @@ class ClientExceptionsTest extends TestCase
             )
             ->get('/');
 
-        $this->assertInstanceOf(Result::class, $result);
+        self::assertInstanceOf(Result::class, $result);
     }
 
     public function testServerExceptionWithResponse()
@@ -50,6 +50,6 @@ class ClientExceptionsTest extends TestCase
             )
             ->get('/');
 
-        $this->assertInstanceOf(Result::class, $result);
+        self::assertInstanceOf(Result::class, $result);
     }
 }

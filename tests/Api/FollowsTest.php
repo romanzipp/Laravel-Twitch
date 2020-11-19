@@ -20,10 +20,10 @@ class FollowsTest extends ApiTestCase
             $result = $this->twitch()->getUsersFollows(['from_id' => 12826])
         );
 
-        $this->assertTrue($result->success());
-        $this->assertNotEmpty($result->data());
-        $this->assertHasProperties(['from_id', 'from_name', 'to_id', 'to_name', 'followed_at'], $result->shift());
-        $this->assertEquals(12826, (int) $result->shift()->from_id);
+        self::assertTrue($result->success());
+        self::assertNotEmpty($result->data());
+        self::assertHasProperties(['from_id', 'from_name', 'to_id', 'to_name', 'followed_at'], $result->shift());
+        self::assertEquals(12826, (int) $result->shift()->from_id);
     }
 
     public function testGetFollowsWithTo()
@@ -32,9 +32,9 @@ class FollowsTest extends ApiTestCase
             $result = $this->twitch()->getUsersFollows(['to_id' => 12826])
         );
 
-        $this->assertTrue($result->success());
-        $this->assertNotEmpty($result->data());
-        $this->assertHasProperties(['from_id', 'from_name', 'to_id', 'to_name', 'followed_at'], $result->shift());
-        $this->assertEquals(12826, (int) $result->shift()->to_id);
+        self::assertTrue($result->success());
+        self::assertNotEmpty($result->data());
+        self::assertHasProperties(['from_id', 'from_name', 'to_id', 'to_name', 'followed_at'], $result->shift());
+        self::assertEquals(12826, (int) $result->shift()->to_id);
     }
 }

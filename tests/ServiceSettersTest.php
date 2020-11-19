@@ -16,7 +16,7 @@ class ServiceSettersTest extends TestCase
         $twitch = new Twitch();
         $twitch->setClientId($id);
 
-        $this->assertEquals($id, $twitch->getClientId());
+        self::assertEquals($id, $twitch->getClientId());
     }
 
     public function testFluidClientIdSetter()
@@ -26,7 +26,7 @@ class ServiceSettersTest extends TestCase
         $twitch = new Twitch();
         $twitch->withClientId($id);
 
-        $this->assertEquals($id, $twitch->getClientId());
+        self::assertEquals($id, $twitch->getClientId());
     }
 
     public function testFluidClientIdSetterFacade()
@@ -35,7 +35,7 @@ class ServiceSettersTest extends TestCase
 
         $twitch = TwitchFacade::withClientId($id);
 
-        $this->assertEquals($id, $twitch->getClientId());
+        self::assertEquals($id, $twitch->getClientId());
     }
 
     public function testClientSecretSetter()
@@ -45,7 +45,7 @@ class ServiceSettersTest extends TestCase
         $twitch = new Twitch();
         $twitch->setClientSecret($secret);
 
-        $this->assertEquals($secret, $twitch->getClientSecret());
+        self::assertEquals($secret, $twitch->getClientSecret());
     }
 
     public function testFluidClientSecretSetter()
@@ -55,7 +55,7 @@ class ServiceSettersTest extends TestCase
         $twitch = new Twitch();
         $twitch->withClientSecret($secret);
 
-        $this->assertEquals($secret, $twitch->getClientSecret());
+        self::assertEquals($secret, $twitch->getClientSecret());
     }
 
     public function testFluidClientSecretSetterFacade()
@@ -64,7 +64,7 @@ class ServiceSettersTest extends TestCase
 
         $twitch = TwitchFacade::withClientSecret($secret);
 
-        $this->assertEquals($secret, $twitch->getClientSecret());
+        self::assertEquals($secret, $twitch->getClientSecret());
     }
 
     public function testTokenSetter()
@@ -74,7 +74,7 @@ class ServiceSettersTest extends TestCase
         $twitch = new Twitch();
         $twitch->setToken($token);
 
-        $this->assertEquals($token, $twitch->getToken());
+        self::assertEquals($token, $twitch->getToken());
     }
 
     public function testFluidTokenSetter()
@@ -84,7 +84,7 @@ class ServiceSettersTest extends TestCase
         $twitch = new Twitch();
         $twitch->withToken($token);
 
-        $this->assertEquals($token, $twitch->getToken());
+        self::assertEquals($token, $twitch->getToken());
     }
 
     public function testFluidTokenSetterFacade()
@@ -93,7 +93,7 @@ class ServiceSettersTest extends TestCase
 
         $twitch = TwitchFacade::withToken($token);
 
-        $this->assertEquals($token, $twitch->getToken());
+        self::assertEquals($token, $twitch->getToken());
     }
 
     public function testRedirectUriSetter()
@@ -103,7 +103,7 @@ class ServiceSettersTest extends TestCase
         $twitch = new Twitch();
         $twitch->setRedirectUri($uri);
 
-        $this->assertEquals($uri, $twitch->getRedirectUri());
+        self::assertEquals($uri, $twitch->getRedirectUri());
     }
 
     public function testFluidRedirectUriSetter()
@@ -113,7 +113,7 @@ class ServiceSettersTest extends TestCase
         $twitch = new Twitch();
         $twitch->withRedirectUri($uri);
 
-        $this->assertEquals($uri, $twitch->getRedirectUri());
+        self::assertEquals($uri, $twitch->getRedirectUri());
     }
 
     public function testFluidRedirectUriSetterFacade()
@@ -122,6 +122,6 @@ class ServiceSettersTest extends TestCase
 
         $twitch = TwitchFacade::withRedirectUri($uri);
 
-        $this->assertEquals($uri, $twitch->getRedirectUri());
+        self::assertEquals($uri, $twitch->getRedirectUri());
     }
 }

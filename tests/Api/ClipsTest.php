@@ -12,8 +12,8 @@ class ClipsTest extends ApiTestCase
             $result = $this->twitch()->createClip(['broadcaster_id' => 29733529])
         );
 
-        $this->assertFalse($result->success());
-        $this->assertEquals(401, $result->status());
+        self::assertFalse($result->success());
+        self::assertEquals(401, $result->status());
     }
 
     public function testGetClip()
@@ -22,12 +22,12 @@ class ClipsTest extends ApiTestCase
             $result = $this->twitch()->getClips(['id' => 'BashfulHelpfulSalamanderPrimeMe'])
         );
 
-        $this->assertTrue($result->success());
-        $this->assertHasProperties([
+        self::assertTrue($result->success());
+        self::assertHasProperties([
             'id', 'url', 'embed_url', 'broadcaster_id', 'broadcaster_name', 'creator_id', 'creator_name',
             'video_id', 'game_id', 'language', 'title', 'view_count', 'created_at', 'thumbnail_url',
         ], $result->shift());
-        $this->assertEquals('BashfulHelpfulSalamanderPrimeMe', $result->shift()->id);
-        $this->assertEquals('Xbox', $result->shift()->broadcaster_name);
+        self::assertEquals('BashfulHelpfulSalamanderPrimeMe', $result->shift()->id);
+        self::assertEquals('Xbox', $result->shift()->broadcaster_name);
     }
 }

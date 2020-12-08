@@ -12,16 +12,16 @@
     ],
     "require": {
         "php": "^7.3|8.0",
+        "ext-json": "*",
+        "guzzlehttp/guzzle": "^6.3|^7.0",
         "illuminate/support": "^5.5|^6.0|^7.0|^8.0",
         "illuminate/console": "^5.5|^6.0|^7.0|^8.0",
-        "illuminate/cache": "^5.5|^6.0|^7.0|^8.0",
-        "guzzlehttp/guzzle": "^6.3|^7.0",
-        "ext-json": "*"
+        "illuminate/cache": "^5.5|^6.0|^7.0|^8.0"
     },
     "require-dev": {
+        "friendsofphp/php-cs-fixer": "^2.16",
         "orchestra/testbench": "^3.8|^4.0|^5.0|^6.0",
-        "phpunit/phpunit": "^8.0|^9.0",
-        "friendsofphp/php-cs-fixer": "^2.16"
+        "phpunit/phpunit": "^8.0|^9.0"
     },
     "autoload": {
         "psr-4": {
@@ -46,5 +46,8 @@
                 "Twitch": "romanzipp\\Twitch\\Facades\\Twitch"
             }
         }
+    },
+    "config": {
+        "sort-packages": true
     }
 }

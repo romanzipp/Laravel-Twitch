@@ -247,6 +247,11 @@ class Twitch
      * @param \romanzipp\Twitch\Objects\Paginator|null $paginator Paginator instance
      * @param array|null $body JSON body
      *
+     * @throws \romanzipp\Twitch\Exceptions\RequestRequiresAuthenticationException
+     * @throws \romanzipp\Twitch\Exceptions\OAuthTokenRequestException
+     * @throws \GuzzleHttp\Exception\RequestException
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     *
      * @return \romanzipp\Twitch\Result Result instance
      */
     public function query(string $method = 'GET', string $path = '', array $parameters = [], Paginator $paginator = null, array $body = null): Result

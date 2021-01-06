@@ -112,6 +112,11 @@ class Result
         return $this->exception;
     }
 
+    public function getResponse(): ?ResponseInterface
+    {
+        return $this->response;
+    }
+
     /**
      * Return the current count of items in dataset.
      *

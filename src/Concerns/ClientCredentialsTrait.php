@@ -5,6 +5,7 @@ namespace romanzipp\Twitch\Concerns;
 use Illuminate\Contracts\Cache\Repository;
 use Illuminate\Support\Facades\Cache;
 use romanzipp\Twitch\Enums\GrantType;
+use romanzipp\Twitch\Exceptions\OAuthTokenRequestException;
 use romanzipp\Twitch\Objects\AccessToken;
 use romanzipp\Twitch\Result;
 
@@ -50,7 +51,13 @@ trait ClientCredentialsTrait
         $result = $this->getOAuthToken(null, GrantType::CLIENT_CREDENTIALS);
 
         if ( ! $result->success()) {
-            return null;
+            $exception = $result->getException();
+
+            if (null === $exception) {
+                return null;
+            }
+
+            throw new OAuthTokenRequestException('Could not fetch the OAuth credentials', $exception->getRequest(), $result->getResponse(), $exception);
         }
 
         $token = new AccessToken(

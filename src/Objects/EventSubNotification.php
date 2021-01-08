@@ -6,8 +6,18 @@ use Illuminate\Contracts\Support\Arrayable;
 
 class EventSubNotification implements Arrayable
 {
+    /**
+     * Subscription information.
+     *
+     * @var array
+     */
     public $subscription;
 
+    /**
+     *  Event data payload.
+     *
+     * @var array
+     */
     public $event;
 
     public function __construct(array $data)
@@ -24,7 +34,7 @@ class EventSubNotification implements Arrayable
         ];
     }
 
-    public static function fromPayload(array $payload)
+    public static function fromPayload(array $payload): self
     {
         return new self($payload);
     }

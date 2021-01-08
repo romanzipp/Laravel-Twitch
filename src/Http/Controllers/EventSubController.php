@@ -25,10 +25,16 @@ class EventSubController extends Controller
      * @param Request $request
      * @return Response
      */
-    public function handleWebhook(Request $request)
+    public function handleWebhook(Request $request): Response
     {
         $payload = json_decode($request->getContent(), true);
-        $method = 'handle' . Str::studly(str_replace('.', '_', $payload['type']));
+        $messageType = $request->header('twitch-eventsub-message-type');
+
+        if ($messageType === 'notification') {
+            $messageType = sprintf('%s.notification', $payload['subscription']['type']);
+        }
+
+        $method = 'handle' . Str::studly(str_replace('.', '_', $messageType));
 
         EventSubReceived::dispatch($payload);
 
@@ -49,7 +55,7 @@ class EventSubController extends Controller
      * @param array $payload
      * @return Response
      */
-    protected function handleCallbackVerification(array $payload)
+    protected function handleWebhookCallbackVerification(array $payload): Response
     {
         return new Response($payload['challenge'], 200);
     }
@@ -60,7 +66,7 @@ class EventSubController extends Controller
      * @param array $payload
      * @return Response
      */
-    protected function handleNotification(array $payload)
+    protected function handleNotification(array $payload): Response
     {
         return $this->successMethod();
     }
@@ -71,7 +77,7 @@ class EventSubController extends Controller
      * @param array $payload
      * @return Response
      */
-    protected function handleRevocation(array $payload)
+    protected function handleRevocation(array $payload): Response
     {
         return $this->successMethod();
     }
@@ -82,7 +88,7 @@ class EventSubController extends Controller
      * @param array $parameters
      * @return Response
      */
-    protected function successMethod($parameters = [])
+    protected function successMethod($parameters = []): Response
     {
         return new Response('Webhook Handled', 200);
     }
@@ -93,7 +99,7 @@ class EventSubController extends Controller
      * @param array $parameters
      * @return Response
      */
-    protected function missingMethod($parameters = [])
+    protected function missingMethod($parameters = []): Response
     {
         return new Response;
     }

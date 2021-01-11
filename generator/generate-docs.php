@@ -36,7 +36,7 @@ $markdown = collect(class_uses(Twitch::class))
             ->each(function (ReflectionMethod $method) use (&$methods) {
                 $declaration = collect($method->getModifiers())->map(function (int $modifier) {
                     return ReflectionMethod::IS_PUBLIC == $modifier ? 'public ' : '';
-                })->join(' ');
+                })->implode(' ');
 
                 $declaration .= 'function ';
                 $declaration .= $method->getName();
@@ -68,7 +68,7 @@ $markdown = collect(class_uses(Twitch::class))
                     }
 
                     return $parameterString;
-                })->join(', ');
+                })->implode(', ');
 
                 $declaration .= ')';
 
@@ -101,7 +101,7 @@ $markdown = collect(class_uses(Twitch::class))
         $markdown .= '```';
 
         return $markdown;
-    })->join(PHP_EOL . PHP_EOL);
+    })->implode(PHP_EOL . PHP_EOL);
 
 $content = file_get_contents(__DIR__ . '/../README.stub.md');
 

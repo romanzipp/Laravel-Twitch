@@ -218,7 +218,7 @@ $result->insertUsers($twitch, 'from_id', 'from_user');
 ]
 ```
 
-### Defining WebSub Event Handlers
+### Defining EventSub Handlers
 
 ```php
 <?php
@@ -229,23 +229,11 @@ use romanzipp\Twitch\Http\Controllers\EventSubController as BaseController;
 
 class EventSubController extends BaseController
 {
-    /**
-     * Handle a EventSub notification call.
-     *
-     * @param array $payload
-     * @return \Symfony\Component\HttpFoundation\Response
-     */
     protected function handleNotification(array $payload)
     {
         return $this->successMethod();
     }
 
-    /**
-     * Handle a EventSub revocation call.
-     *
-     * @param array $payload
-     * @return \Symfony\Component\HttpFoundation\Response
-     */
     protected function handleRevocation(array $payload)
     {
         return $this->successMethod();
@@ -265,18 +253,22 @@ Route::post(
 ### Subscribe EventSub Events
 
 ```php
-$twitch = new romanzipp\Twitch\Twitch;
+use romanzipp\Twitch\Enums\EventSubType;
+use romanzipp\Twitch\Twitch;
+
+$twitch = new Twitch;
+
 
 $twitch->subscribeEventSub([
-    "type" => "channel.update",
-    "version" => "1",
-    "condition" => [
-        "broadcaster_user_id" => "1337"
+    'type' => EventSubType::STREAM_ONLINE,
+    'version' => '1',
+    'condition' => [
+        'broadcaster_user_id' => '1337',
     ],
-    "transport" => [
-        "method" => "webhook",
-        "callback" => "https://example.com/webhooks/callback",
-        "secret" => "s3cRe7"
+    'transport' => [
+        'method' => 'webhook',
+        'callback' => 'https://example.com/webhooks/callback',
+        'secret' => 's3cRe7',
     ]
 ]);
 ```

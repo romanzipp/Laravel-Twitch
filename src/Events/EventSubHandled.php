@@ -7,7 +7,8 @@ use Illuminate\Queue\SerializesModels;
 
 class EventSubHandled
 {
-    use Dispatchable, SerializesModels;
+    use Dispatchable;
+    use SerializesModels;
 
     /**
      * The webhook payload.
@@ -20,6 +21,7 @@ class EventSubHandled
      * Create a new event instance.
      *
      * @param array $payload
+     *
      * @return void
      */
     public function __construct(array $payload)

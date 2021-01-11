@@ -21,7 +21,7 @@ class EventSubTest extends ApiTestCase
         foreach ($result->data() as $data) {
             $this->registerResult(
                 $result = $this->twitch()->unsubscribeEventSub([
-                    'id' => $data->id
+                    'id' => $data->id,
                 ])
             );
 
@@ -38,16 +38,16 @@ class EventSubTest extends ApiTestCase
     {
         $this->registerResult(
             $result = $this->twitch()->subscribeEventSub([], [
-                "type" => EventSubType::STREAM_ONLINE,
-                "version" => "1",
-                "condition" => [
-                    "broadcaster_user_id" => "1337"
+                'type' => EventSubType::STREAM_ONLINE,
+                'version' => '1',
+                'condition' => [
+                    'broadcaster_user_id' => '1337',
                 ],
-                "transport" => [
-                    "method" => "webhook",
-                    "callback" => "https://example.com/webhooks/callback",
-                    "secret" => "must-be-at-least-10-characters"
-                ]
+                'transport' => [
+                    'method' => 'webhook',
+                    'callback' => 'https://example.com/webhooks/callback',
+                    'secret' => 'must-be-at-least-10-characters',
+                ],
             ])
         );
 
@@ -96,7 +96,7 @@ class EventSubTest extends ApiTestCase
         foreach ($result->data() as $data) {
             $this->registerResult(
                 $result = $this->twitch()->unsubscribeEventSub([
-                    'id' => $data->id
+                    'id' => $data->id,
                 ])
             );
 

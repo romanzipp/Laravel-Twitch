@@ -23,6 +23,7 @@ class EventSubController extends Controller
      * Handle a Twitch webhook call.
      *
      * @param Request $request
+     *
      * @return Response
      */
     public function handleWebhook(Request $request): Response
@@ -30,7 +31,7 @@ class EventSubController extends Controller
         $payload = json_decode($request->getContent(), true);
         $messageType = $request->header('twitch-eventsub-message-type');
 
-        if ($messageType === 'notification') {
+        if ('notification' === $messageType) {
             $messageType = sprintf('%s.notification', $payload['subscription']['type']);
         }
 
@@ -53,6 +54,7 @@ class EventSubController extends Controller
      * Handle a EventSub callback verification call.
      *
      * @param array $payload
+     *
      * @return Response
      */
     protected function handleWebhookCallbackVerification(array $payload): Response
@@ -64,6 +66,7 @@ class EventSubController extends Controller
      * Handle a EventSub notification call.
      *
      * @param array $payload
+     *
      * @return Response
      */
     protected function handleNotification(array $payload): Response
@@ -75,6 +78,7 @@ class EventSubController extends Controller
      * Handle a EventSub revocation call.
      *
      * @param array $payload
+     *
      * @return Response
      */
     protected function handleRevocation(array $payload): Response
@@ -86,6 +90,7 @@ class EventSubController extends Controller
      * Handle successful calls on the controller.
      *
      * @param array $parameters
+     *
      * @return Response
      */
     protected function successMethod($parameters = []): Response
@@ -97,10 +102,11 @@ class EventSubController extends Controller
      * Handle calls to missing methods on the controller.
      *
      * @param array $parameters
+     *
      * @return Response
      */
     protected function missingMethod($parameters = []): Response
     {
-        return new Response;
+        return new Response();
     }
 }

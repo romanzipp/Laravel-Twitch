@@ -64,7 +64,6 @@ class VerifyEventSubSignatureTest extends TestCase
 
         (new VerifyEventSubSignature())
             ->handle($this->request, static function (Request $request) {
-                //
             });
     }
 
@@ -78,7 +77,6 @@ class VerifyEventSubSignatureTest extends TestCase
 
         (new VerifyEventSubSignature())
             ->handle($this->request, static function ($request) {
-                //
             });
     }
 
@@ -92,7 +90,6 @@ class VerifyEventSubSignatureTest extends TestCase
 
         (new VerifyEventSubSignature())
             ->handle($this->request, static function ($request) {
-                //
             });
     }
 

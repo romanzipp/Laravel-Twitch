@@ -10,6 +10,8 @@ class EventSubTest extends ApiTestCase
 {
     public function testSubscribeEventSub()
     {
+        self::markTestSkipped('Investigate: Github actions will run the tests in a parallel matrix causing collisions');
+
         $this->unsubscribe();
 
         $this->registerResult(
@@ -27,6 +29,8 @@ class EventSubTest extends ApiTestCase
 
     public function testGetWebhooks()
     {
+        self::markTestSkipped('Investigate: Github actions will run the tests in a parallel matrix causing collisions');
+
         $this->unsubscribe();
         $this->subscribe();
 

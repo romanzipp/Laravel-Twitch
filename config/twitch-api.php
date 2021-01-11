@@ -44,12 +44,12 @@ return [
 
     'eventsub' => [
         /*
-         * Secret used to generate the signature
+         * Secret used to generate the signature.
          */
-        'secret' => null,
+        'secret' => env('TWITCH_HELIX_EVENTSUB_SECRET'),
 
         /*
-         * Maximum difference allowed between the header's timestamp and the current time
+         * Maximum difference allowed between the header's timestamp and the current time.
          */
         'tolerance' => 60,
     ],

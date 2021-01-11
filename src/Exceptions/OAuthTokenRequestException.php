@@ -6,5 +6,4 @@ use GuzzleHttp\Exception\RequestException;
 
 class OAuthTokenRequestException extends RequestException
 {
-
 }

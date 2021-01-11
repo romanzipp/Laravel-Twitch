@@ -14,7 +14,6 @@ class Twitch
 {
     use ClientCredentialsTrait;
     use ValidationTrait;
-
     use Api\OAuthTrait;
     use Api\AdsTrait;
     use Api\AnalyticsTrait;

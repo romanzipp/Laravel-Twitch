@@ -43,7 +43,6 @@ return [
     ],
 
     'eventsub' => [
-
         /*
          * Secret used to generate the signature
          */
@@ -53,5 +52,5 @@ return [
          * Maximum difference allowed between the header's timestamp and the current time
          */
         'tolerance' => 60,
-    ]
+    ],
 ];

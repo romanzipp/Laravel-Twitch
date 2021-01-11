@@ -8,14 +8,15 @@ use romanzipp\Twitch\Result;
 
 trait EventSubTrait
 {
-    use AbstractValidationTrait;
     use AbstractOperationsTrait;
+    use AbstractValidationTrait;
 
     /**
-     * Create a EventSub subscription
+     * Create a EventSub subscription.
      *
      * @param array $parameters
      * @param array $body
+     *
      * @return Result
      */
     public function subscribeEventSub(array $parameters = [], array $body = []): Result
@@ -36,9 +37,10 @@ trait EventSubTrait
     }
 
     /**
-     * Delete a EventSub subscription
+     * Delete a EventSub subscription.
      *
      * @param array $parameters
+     *
      * @return Result
      */
     public function unsubscribeEventSub(array $parameters = []): Result
@@ -47,9 +49,10 @@ trait EventSubTrait
     }
 
     /**
-     * List your EventSub subscriptions
+     * List your EventSub subscriptions.
      *
      * @param array $parameters
+     *
      * @return Result
      */
     public function getEventSubs(array $parameters = []): Result

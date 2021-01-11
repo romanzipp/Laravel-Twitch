@@ -26,12 +26,12 @@ class EventSubControllerTest extends TestCase
 
         Event::assertDispatched(EventSubReceived::class, function (EventSubReceived $event) use ($request) {
             return $request->getContent() === json_encode($event->payload)
-                && $event->payload['event']['user_id'] === '1337';
+                && '1337' === $event->payload['event']['user_id'];
         });
 
         Event::assertDispatched(EventSubHandled::class, function (EventSubHandled $event) use ($request) {
             return $request->getContent() === json_encode($event->payload)
-                && $event->payload['event']['user_id'] === '1337';
+                && '1337' === $event->payload['event']['user_id'];
         });
 
         self::assertEquals('Webhook Handled', $response->getContent());
@@ -50,7 +50,7 @@ class EventSubControllerTest extends TestCase
 
         Event::assertDispatched(EventSubReceived::class, function (EventSubReceived $event) use ($request) {
             return $request->getContent() === json_encode($event->payload)
-                && $event->payload['event']['user_id'] === '1337';
+                && '1337' === $event->payload['event']['user_id'];
         });
 
         Event::assertNotDispatched(EventSubHandled::class);
@@ -61,9 +61,15 @@ class EventSubControllerTest extends TestCase
     private function request(string $event): Request
     {
         $request = Request::create(
-            '/', 'POST', [], [], [], [], json_encode([
+            '/',
+            'POST',
+            [],
+            [],
+            [],
+            [],
+            json_encode([
                 'subscription' => ['type' => $event],
-                'event' => ['user_id' => '1337']
+                'event' => ['user_id' => '1337'],
             ])
         );
 

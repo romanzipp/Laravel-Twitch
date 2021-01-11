@@ -16,9 +16,10 @@ class VerifyEventSubSignature
      *
      * @param Request $request
      * @param Closure $next
-     * @return Response
      *
      * @throws AccessDeniedHttpException
+     *
+     * @return Response
      */
     public function handle(Request $request, Closure $next): Response
     {

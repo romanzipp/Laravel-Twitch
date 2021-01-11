@@ -3,104 +3,81 @@
 namespace romanzipp\Twitch\Tests\Api;
 
 use romanzipp\Twitch\Enums\EventSubType;
+use romanzipp\Twitch\Result;
 use romanzipp\Twitch\Tests\TestCases\ApiTestCase;
 
 class EventSubTest extends ApiTestCase
 {
-    /**
-     * First test: Cleanup existing EventSubs, to prevent false positives.
-     */
-    public function testUnsubscribeAllEventSubs(): void
+    public function testSubscribeEventSub()
     {
+        $this->unsubscribe();
+
+        $this->registerResult(
+            $result = $this->subscribe()
+        );
+
+        self::assertTrue($result->success(), $result->getErrorMessage());
+        self::assertNotEmpty($result->data());
+        self::assertHasProperties([
+            'id', 'status', 'type', 'version', 'condition', 'created_at', 'transport',
+        ], $result->shift());
+
+        $this->unsubscribe(true);
+    }
+
+    public function testGetWebhooks()
+    {
+        $this->unsubscribe();
+        $this->subscribe();
+
         $this->registerResult(
             $result = $this->twitch()->getEventSubs([])
         );
 
         self::assertTrue($result->success(), $result->getErrorMessage());
+        self::assertNotEmpty($result->data());
+        self::assertHasProperties([
+            'id', 'status', 'type', 'version', 'condition', 'created_at', 'transport',
+        ], $result->shift());
 
-        foreach ($result->data() as $data) {
-            $this->registerResult(
-                $result = $this->twitch()->unsubscribeEventSub([
-                    'id' => $data->id,
-                ])
-            );
+        $this->unsubscribe(true);
+    }
 
-            self::assertTrue($result->success(), $result->getErrorMessage());
+    private function subscribe(): Result
+    {
+        return $this->twitch()->subscribeEventSub([], [
+            'type' => EventSubType::STREAM_ONLINE,
+            'version' => '1',
+            'condition' => [
+                'broadcaster_user_id' => '1337',
+            ],
+            'transport' => [
+                'method' => 'webhook',
+                'callback' => 'https://example.com/webhooks/callback',
+                'secret' => 'must-be-at-least-10-characters',
+            ],
+        ]);
+    }
+
+    private function unsubscribe(bool $expectUnsubscribed = false): void
+    {
+        $result = $this->twitch()->getEventSubs([]);
+
+        self::assertTrue($result->success(), $result->getErrorMessage());
+
+        if ($expectUnsubscribed) {
+            self::assertNotEmpty($result->data());
+            self::assertHasProperties([
+                'id',
+            ], $result->shift());
         }
-    }
-
-    /**
-     * Second test: Subscribe a EventSub.
-     *
-     * @depends testUnsubscribeAllEventSubs
-     */
-    public function testSubscribeEventSub(): void
-    {
-        $this->registerResult(
-            $result = $this->twitch()->subscribeEventSub([], [
-                'type' => EventSubType::STREAM_ONLINE,
-                'version' => '1',
-                'condition' => [
-                    'broadcaster_user_id' => '1337',
-                ],
-                'transport' => [
-                    'method' => 'webhook',
-                    'callback' => 'https://example.com/webhooks/callback',
-                    'secret' => 'must-be-at-least-10-characters',
-                ],
-            ])
-        );
-
-        self::assertTrue($result->success(), $result->getErrorMessage());
-        self::assertNotEmpty($result->data());
-        self::assertHasProperties([
-            'id', 'status', 'type', 'version', 'condition', 'created_at', 'transport',
-        ], $result->shift());
-    }
-
-    /**
-     * Third test: Get EventSubs to check they actual payload.
-     *
-     * @depends testSubscribeEventSub
-     */
-    public function testGetWebhooks(): void
-    {
-        $this->registerResult(
-            $result = $this->twitch()->getEventSubs([])
-        );
-
-        self::assertTrue($result->success(), $result->getErrorMessage());
-        self::assertNotEmpty($result->data());
-        self::assertHasProperties([
-            'id', 'status', 'type', 'version', 'condition', 'created_at', 'transport',
-        ], $result->shift());
-    }
-
-    /**
-     * Forth test: Cleanup all our test mess. This will also tests unsubscribe if the first test has no results.
-     *
-     * @depends testSubscribeEventSub
-     */
-    public function testUnsubscribeEventSub(): void
-    {
-        $this->registerResult(
-            $result = $this->twitch()->getEventSubs([])
-        );
-
-        self::assertTrue($result->success(), $result->getErrorMessage());
-        self::assertNotEmpty($result->data());
-        self::assertHasProperties([
-            'id',
-        ], $result->shift());
 
         foreach ($result->data() as $data) {
-            $this->registerResult(
-                $result = $this->twitch()->unsubscribeEventSub([
-                    'id' => $data->id,
-                ])
-            );
+            $unsubResult = $this->twitch()->unsubscribeEventSub([
+                'id' => $data->id,
+            ]);
 
-            self::assertTrue($result->success(), $result->getErrorMessage());
+            self::assertTrue($unsubResult->success(), $unsubResult->getErrorMessage());
         }
     }
 }

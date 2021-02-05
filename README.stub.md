@@ -47,6 +47,12 @@ TWITCH_HELIX_SECRET=
 TWITCH_HELIX_REDIRECT_URI=http://localhost
 ```
 
+If you want to use the EventSub with the Webhook transport, then you are required to define a secret. This secret is a string between 10 and 100 characters.
+
+```
+TWITCH_HELIX_EVENTSUB_SECRET=
+```
+
 ## Examples
 
 ### Basic
@@ -220,26 +226,46 @@ $result->insertUsers($twitch, 'from_id', 'from_user');
 
 ### Defining EventSub Handlers
 
+By default, the EventSub webhook controller will automatically handle all EventSub notification and revocation calls;
+however, if you have additional webhook events you would like to handle, you may do so by extending the EventSub webhook
+controller.
+
+To ensure your application can handle EventSub webhooks, be sure to configure the webhook callback url in the transport
+payload.
+
+Your controller's method names should correspond to Laravel Twitch's controller conventions. Specifically, methods
+should be prefixed with `handle`, suffixed with `Notification` and the "camel case" name of the EventSub Type you wish
+to handle. For example, if you wish to handle the `channel.follow` type, you should add a
+`handleChannelFollowNotification` method to the controller:
+
 ```php
 <?php
 
 namespace App\Http\Controllers;
 
 use romanzipp\Twitch\Http\Controllers\EventSubController as BaseController;
+use Symfony\Component\HttpFoundation\Response;
 
 class EventSubController extends BaseController
 {
-    protected function handleNotification(array $payload)
+    public function handleChannelFollowNotification(array $payload): Response
     {
-        return $this->successMethod();
+        return $this->successMethod(); // handle the channel follow notification...
+    }
+    
+    protected function handleNotification(array $payload): Response
+    {
+        return $this->successMethod(); // handle all other incoming notifications...
     }
 
-    protected function handleRevocation(array $payload)
+    protected function handleRevocation(array $payload): Response
     {
-        return $this->successMethod();
+        return $this->successMethod(); // handle the subscription revocation...
     }
 }
 ```
+
+Next, define a route to your EventSub webhook controller within your application's `routes/api.php` file.
 
 ```php
 use App\Http\Controllers\EventSubController;
@@ -250,7 +276,9 @@ Route::post(
 );
 ```
 
-### Subscribe EventSub Events
+### Create EventSub Subscription
+
+> **Important**: When creating a subscription, you must specify a secret for purposes of verification, described above in “Configuration”. This secret is automatically attached to the webhook transport if it is not explicitly defined.
 
 ```php
 use romanzipp\Twitch\Enums\EventSubType;
@@ -259,7 +287,7 @@ use romanzipp\Twitch\Twitch;
 $twitch = new Twitch;
 
 
-$twitch->subscribeEventSub([
+$twitch->subscribeEventSub([], [
     'type' => EventSubType::STREAM_ONLINE,
     'version' => '1',
     'condition' => [
@@ -267,9 +295,34 @@ $twitch->subscribeEventSub([
     ],
     'transport' => [
         'method' => 'webhook',
-        'callback' => 'https://example.com/webhooks/callback',
-        'secret' => 's3cRe7',
+        'callback' => 'https://example.com/api/twitch/eventsub/webhook',
     ]
+]);
+```
+
+### List EventSub Subscription
+
+```php
+use romanzipp\Twitch\Twitch;
+
+$twitch = new Twitch;
+
+$result = $twitch->getEventSubs(['status' => 'notification_failures_exceeded']);
+
+foreach ($result->data() as $item) {
+    // process the subscription
+}
+```
+
+### Delete EventSub Subscription
+
+```php
+use romanzipp\Twitch\Twitch;
+
+$twitch = new Twitch;
+
+$twitch->unsubscribeEventSub([
+    'id' => '932b34ad-821a-490f-af43-b327187d0f5c'
 ]);
 ```
 

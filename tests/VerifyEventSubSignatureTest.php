@@ -95,7 +95,11 @@ class VerifyEventSubSignatureTest extends TestCase
 
     private function withTimestamp($timestamp): void
     {
-        $this->timestamp = $timestamp;
+        if (is_string($timestamp)) {
+            $this->timestamp = $timestamp;
+        } else {
+            $this->timestamp = date('Y-m-d\TH:i:s.u\Z', $timestamp);
+        }
     }
 
     private function withSignedSignature($secret): self

@@ -11,14 +11,19 @@ class EventSubType
     // Triggers whenever a user updates their account.
     public const USER_UPDATE = 'user.update';
 
-    // Triggers whenever a user follows another user.
-    public const USER_FOLLOW = 'user.follow';
+    /**
+     * @deprecated Please use the CHANNEL_FOLLOW constant
+     */
+    public const USER_FOLLOW = 'channel.follow';
 
     // Triggers whenever a broadcaster starts their stream.
     public const STREAM_ONLINE = 'stream.online';
 
     // Triggers whenever a broadcaster stops their stream.
     public const STREAM_OFFLINE = 'stream.offline';
+
+    // Triggers whenever a user follows to a broadcaster's channel.
+    public const CHANNEL_FOLLOW = 'channel.follow';
 
     // Triggers whenever a broadcaster updates their channel.
     public const CHANNEL_UPDATE = 'channel.update';

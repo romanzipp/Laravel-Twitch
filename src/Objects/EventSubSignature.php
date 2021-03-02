@@ -40,9 +40,10 @@ class EventSubSignature
         }
 
         $messageId = $headers->get('twitch-eventsub-message-id');
-        $expectedSignature = hash_hmac('sha256', $messageId . $rawTimestamp . $payload, $secret);
+        [$algo, $givenSignature] = explode('=', $headers->get('twitch-eventsub-message-signature'));
+        $expectedSignature = hash_hmac($algo, $messageId . $rawTimestamp . $payload, $secret);
 
-        if ($headers->get('twitch-eventsub-message-signature') !== $expectedSignature) {
+        if ($givenSignature !== $expectedSignature) {
             throw new SignatureVerificationException();
         }
     }

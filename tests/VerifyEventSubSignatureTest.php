@@ -105,7 +105,7 @@ class VerifyEventSubSignatureTest extends TestCase
     private function withSignedSignature($secret): self
     {
         return $this->withSignature(
-            $this->sign($this->request->getContent(), $secret)
+            sprintf('sha256=%s', $this->sign($this->request->getContent(), $secret))
         );
     }
 

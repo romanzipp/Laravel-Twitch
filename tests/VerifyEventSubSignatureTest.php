@@ -56,7 +56,7 @@ class VerifyEventSubSignatureTest extends TestCase
 
     public function testAppAbortsWhenTimestampIsOutsideTolerance(): void
     {
-        $this->withTimestamp(time() - 301);
+        $this->withTimestamp('2021-03-01T20:07:58.288209337Z');
         $this->withSignedSignature('secret');
 
         $this->expectException(AccessDeniedHttpException::class);
@@ -118,7 +118,7 @@ class VerifyEventSubSignatureTest extends TestCase
         return $this;
     }
 
-    private function sign($payload, $secret)
+    private function sign($payload, $secret): string
     {
         return hash_hmac('sha256', $this->messageId . $this->timestamp . $payload, $secret);
     }

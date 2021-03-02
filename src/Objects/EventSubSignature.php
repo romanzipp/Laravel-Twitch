@@ -11,7 +11,7 @@ class EventSubSignature
     /**
      * Represents the timestamp format of twitch's eventsub api.
      */
-    const TIMESTAMP_PATTERN = '/^(\d+)-(0[1-9]|1[012])-(0[1-9]|[12]\d|3[01])T([01]\d|2[0-3]):([0-5]\d):([0-5]\d|60)(\.\d+)?(([Zz])|([+|\-]([01]\d|2[0-3])))$/';
+    const TIMESTAMP_PATTERN = '/^(?<pre>[\d\-:.T]+)\.(?<nano>\d{6,9})Z$/';
 
     /**
      * Verifies the signature header sent by Twitch. Throws an SignatureVerificationException
@@ -53,13 +53,13 @@ class EventSubSignature
             return null;
         }
 
-        if ( ! preg_match(self::TIMESTAMP_PATTERN, $rawTimestamp, $m)) {
+        if ( ! preg_match(self::TIMESTAMP_PATTERN, $rawTimestamp, $matches)) {
             return null;
         }
 
         $dateTime = DateTime::createFromFormat(
             'Y-m-d\TH:i:s.u\Z',
-            "$m[1]-$m[2]-$m[3]T$m[4]:$m[5]:$m[6]" . substr($m[7], 0, 6) . 'Z'
+            sprintf('%s.%dZ', $matches['pre'], substr($matches['nano'], 0, 6))
         );
 
         return $dateTime->getTimestamp();

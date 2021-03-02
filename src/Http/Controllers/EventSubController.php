@@ -3,12 +3,12 @@
 namespace romanzipp\Twitch\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Str;
 use romanzipp\Twitch\Events\EventSubHandled;
 use romanzipp\Twitch\Events\EventSubReceived;
 use romanzipp\Twitch\Http\Middleware\VerifyEventSubSignature;
-use Symfony\Component\HttpFoundation\Response;
 
 class EventSubController extends Controller
 {

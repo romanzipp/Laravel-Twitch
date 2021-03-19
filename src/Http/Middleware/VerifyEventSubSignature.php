@@ -21,7 +21,7 @@ class VerifyEventSubSignature
      *
      * @return Response
      */
-    public function handle(Request $request, Closure $next): Response
+    public function handle($request, Closure $next)
     {
         try {
             EventSubSignature::verifyHeader(

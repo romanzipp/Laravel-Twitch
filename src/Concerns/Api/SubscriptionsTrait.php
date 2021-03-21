@@ -28,4 +28,20 @@ trait SubscriptionsTrait
 
         return $this->get('subscriptions', $parameters, $paginator);
     }
+
+    /**
+     * Checks if a specific user (user_id) is subscribed to a specific channel (broadcaster_id).
+     *
+     * @see https://dev.twitch.tv/docs/api/reference#check-user-subscription
+     *
+     * @param array $parameters
+     *
+     * @return \romanzipp\Twitch\Result Result instance
+     */
+    public function getUserSubscription(array $parameters = []): Result
+    {
+        $this->validateAnyRequired($parameters, ['broadcaster_id', 'user_id']);
+
+        return $this->get('subscriptions/user', $parameters);
+    }
 }

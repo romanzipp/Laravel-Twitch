@@ -4,6 +4,7 @@ namespace romanzipp\Twitch\Concerns\Api;
 
 use romanzipp\Twitch\Concerns\Operations\AbstractOperationsTrait;
 use romanzipp\Twitch\Concerns\Operations\AbstractValidationTrait;
+use romanzipp\Twitch\Objects\Paginator;
 use romanzipp\Twitch\Result;
 
 trait EventSubTrait
@@ -52,11 +53,11 @@ trait EventSubTrait
      * List your EventSub subscriptions.
      *
      * @param array $parameters
-     *
+     * @param Paginator|null $paginator
      * @return Result
      */
-    public function getEventSubs(array $parameters = []): Result
+    public function getEventSubs(array $parameters = [], Paginator $paginator = null): Result
     {
-        return $this->get('eventsub/subscriptions', $parameters);
+        return $this->get('eventsub/subscriptions', $parameters, $paginator);
     }
 }

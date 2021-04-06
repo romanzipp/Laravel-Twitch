@@ -252,7 +252,7 @@ class EventSubController extends BaseController
     {
         return $this->successMethod(); // handle the channel follow notification...
     }
-    
+
     protected function handleNotification(array $payload): Response
     {
         return $this->successMethod(); // handle all other incoming notifications...
@@ -297,6 +297,32 @@ $twitch->subscribeEventSub([], [
         'method' => 'webhook',
         'callback' => 'https://example.com/api/twitch/eventsub/webhook',
     ]
+]);
+```
+
+### List EventSub Subscription
+
+```php
+use romanzipp\Twitch\Twitch;
+
+$twitch = new Twitch;
+
+$result = $twitch->getEventSubs(['status' => 'notification_failures_exceeded']);
+
+foreach ($result->data() as $item) {
+    // process the subscription
+}
+```
+
+### Delete EventSub Subscription
+
+```php
+use romanzipp\Twitch\Twitch;
+
+$twitch = new Twitch;
+
+$twitch->unsubscribeEventSub([
+    'id' => '932b34ad-821a-490f-af43-b327187d0f5c'
 ]);
 ```
 
@@ -379,7 +405,7 @@ public function redeemEntitlementsCode(array $parameters = [])
 ```php
 public function subscribeEventSub(array $parameters = [], array $body = [])
 public function unsubscribeEventSub(array $parameters = [])
-public function getEventSubs(array $parameters = [])
+public function getEventSubs(array $parameters = [], ?Paginator $paginator = NULL)
 ```
 
 ### Extensions

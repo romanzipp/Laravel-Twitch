@@ -54,6 +54,7 @@ trait EventSubTrait
      *
      * @param array $parameters
      * @param Paginator|null $paginator
+     *
      * @return Result
      */
     public function getEventSubs(array $parameters = [], Paginator $paginator = null): Result

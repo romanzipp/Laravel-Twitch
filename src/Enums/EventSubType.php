@@ -48,6 +48,12 @@ class EventSubType
 
     // Triggers whenever a viewer is unbanned from a broadcaster's channel.
     public const CHANNEL_UNBAN = 'channel.unban';
+    
+    // Triggers whenever a moderator is added to a broadcaster's channel
+    public const CHANNEL_MODERATOR_ADD = 'channel.moderator.add';
+    
+    // Triggers whenever a moderator is removed from a broadcaster's channel
+    public const CHANNEL_MODERATOR_REMOVE = 'channel.moderator.remove';
 
     // Triggers whenever a custom channel points reward has been created for a broadcaster's channel.
     public const CHANNEL_CHANNEL_POINTS_CUSTOM_REWARDS_ADD = 'channel.channel_points_custom_reward.add';

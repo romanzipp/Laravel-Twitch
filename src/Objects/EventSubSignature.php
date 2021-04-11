@@ -9,11 +9,6 @@ use Symfony\Component\HttpFoundation\HeaderBag;
 class EventSubSignature
 {
     /**
-     * Represents the timestamp format of twitch's eventsub api.
-     */
-    const TIMESTAMP_PATTERN = '/^(?<pre>[\d\-:.T]+)\.(?<nano>\d{6,9})Z$/';
-
-    /**
      * Verifies the signature header sent by Twitch. Throws an SignatureVerificationException
      * exception if the verification fails for any reason.
      *
@@ -54,15 +49,11 @@ class EventSubSignature
             return null;
         }
 
-        if ( ! preg_match(self::TIMESTAMP_PATTERN, $rawTimestamp, $matches)) {
-            return null;
+        if (preg_match('/\.[0-9]{9}Z$/', $rawTimestamp)) {
+            $rawTimestamp = substr_replace($rawTimestamp, '', -2, 1);
         }
 
-        $dateTime = DateTime::createFromFormat(
-            'Y-m-d\TH:i:s.u\Z',
-            sprintf('%s.%dZ', $matches['pre'], substr($matches['nano'], 0, 6))
-        );
-
-        return $dateTime->getTimestamp();
+        $timestamp = strtotime($rawTimestamp);
+        return $timestamp ?: null;
     }
 }

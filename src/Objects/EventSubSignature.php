@@ -49,8 +49,9 @@ class EventSubSignature
             return null;
         }
 
-        if (preg_match('/\.[0-9]{9}Z$/', $rawTimestamp)) {
-            $rawTimestamp = substr_replace($rawTimestamp, '', -2, 1);
+        if (preg_match('/\.([\d]{9,})Z$/', $rawTimestamp, $match)) {
+            $length = strlen($match[1]) - 8;
+            $rawTimestamp = substr_replace($rawTimestamp, '', ($length * -1) - 1, $length);
         }
 
         $timestamp = strtotime($rawTimestamp);

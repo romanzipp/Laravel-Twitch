@@ -42,7 +42,7 @@ class EventSubSignature
         }
     }
 
-    private static function getTimestamp(?string $rawTimestamp): ?int
+    public static function getTimestamp(?string $rawTimestamp): ?int
     {
         if ( ! $rawTimestamp) {
             return null;
@@ -53,8 +53,6 @@ class EventSubSignature
             $rawTimestamp = substr_replace($rawTimestamp, '', ($length * -1) - 1, $length);
         }
 
-        $timestamp = strtotime($rawTimestamp);
-
-        return $timestamp ?: null;
+        return strtotime($rawTimestamp) ?: null;
     }
 }

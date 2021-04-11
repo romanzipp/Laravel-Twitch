@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Str;
 use romanzipp\Twitch\Http\Middleware\VerifyEventSubSignature;
+use romanzipp\Twitch\Objects\EventSubSignature;
 use romanzipp\Twitch\Tests\TestCases\TestCase;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
@@ -91,6 +92,21 @@ class VerifyEventSubSignatureTest extends TestCase
         (new VerifyEventSubSignature())
             ->handle($this->request, static function ($request) {
             });
+    }
+
+    public function testWrongFractalsInDateGetSanitized(): void
+    {
+        self::assertSame(1614629278, EventSubSignature::getTimestamp('2021-03-01T20:07:58.111111111111Z'));
+        self::assertSame(1614629278, EventSubSignature::getTimestamp('2021-03-01T20:07:58.1111111111Z'));
+        self::assertSame(1614629278, EventSubSignature::getTimestamp('2021-03-01T20:07:58.111111111Z'));
+        self::assertSame(1614629278, EventSubSignature::getTimestamp('2021-03-01T20:07:58.11111111Z'));
+        self::assertSame(1614629278, EventSubSignature::getTimestamp('2021-03-01T20:07:58.1111111Z'));
+        self::assertSame(1614629278, EventSubSignature::getTimestamp('2021-03-01T20:07:58.111111Z'));
+        self::assertSame(1614629278, EventSubSignature::getTimestamp('2021-03-01T20:07:58.11111Z'));
+        self::assertSame(1614629278, EventSubSignature::getTimestamp('2021-03-01T20:07:58.1111Z'));
+        self::assertSame(1614629278, EventSubSignature::getTimestamp('2021-03-01T20:07:58.111Z'));
+        self::assertSame(1614629278, EventSubSignature::getTimestamp('2021-03-01T20:07:58.11Z'));
+        self::assertSame(1614629278, EventSubSignature::getTimestamp('2021-03-01T20:07:58.1Z'));
     }
 
     private function withTimestamp($timestamp): void

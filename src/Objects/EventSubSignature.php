@@ -2,7 +2,6 @@
 
 namespace romanzipp\Twitch\Objects;
 
-use DateTime;
 use romanzipp\Twitch\Exceptions\SignatureVerificationException;
 use Symfony\Component\HttpFoundation\HeaderBag;
 
@@ -55,6 +54,7 @@ class EventSubSignature
         }
 
         $timestamp = strtotime($rawTimestamp);
+
         return $timestamp ?: null;
     }
 }

@@ -57,6 +57,6 @@ class EventSubSignature
             $rawTimestamp = substr_replace($rawTimestamp, '', ($length * -1) - 1, $length);
         }
 
-        return strtotime($rawTimestamp, Carbon::now('UTC')) ?: null;
+        return Carbon::parse($rawTimestamp, 'UTC')->getTimestamp() ?: null;
     }
 }

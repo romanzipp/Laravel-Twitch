@@ -49,7 +49,7 @@ return [
         'secret' => env('TWITCH_HELIX_EVENTSUB_SECRET'),
 
         /*
-         * Maximum difference allowed between the header's timestamp and the current time.
+         * Maximum difference (in seconds) allowed between the header's timestamp and the current time.
          */
         'tolerance' => 600,
     ],

@@ -2,6 +2,7 @@
 
 namespace romanzipp\Twitch\Objects;
 
+use Carbon\Carbon;
 use romanzipp\Twitch\Exceptions\SignatureVerificationException;
 use Symfony\Component\HttpFoundation\HeaderBag;
 
@@ -30,7 +31,7 @@ class EventSubSignature
             throw new SignatureVerificationException('Unable to extract timestamp and signatures from header');
         }
 
-        if ($tolerance > 0 && (time() - $timestamp) > $tolerance) {
+        if ($tolerance > 0 && (Carbon::now('UTC')->getTimestamp() - $timestamp) > $tolerance) {
             throw new SignatureVerificationException('Timestamp outside the tolerance zone');
         }
 
@@ -56,6 +57,6 @@ class EventSubSignature
             $rawTimestamp = substr_replace($rawTimestamp, '', ($length * -1) - 1, $length);
         }
 
-        return strtotime($rawTimestamp) ?: null;
+        return strtotime($rawTimestamp, Carbon::now('UTC')) ?: null;
     }
 }

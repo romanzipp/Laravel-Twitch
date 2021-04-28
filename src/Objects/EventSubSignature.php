@@ -3,7 +3,7 @@
 namespace romanzipp\Twitch\Objects;
 
 use Carbon\Carbon;
-use Carbon\Exceptions\InvalidFormatException;
+use Exception;
 use romanzipp\Twitch\Exceptions\SignatureVerificationException;
 use Symfony\Component\HttpFoundation\HeaderBag;
 
@@ -28,8 +28,8 @@ class EventSubSignature
             $timestamp = self::getTimestamp(
                 $rawTimestamp = $headers->get('twitch-eventsub-message-timestamp')
             );
-        } catch (InvalidFormatException $exception) {
-            throw new SignatureVerificationException('Unable to parse timestamp from header');
+        } catch (Exception $exception) {
+            throw new SignatureVerificationException('Unable to parse timestamp from header', 0, $exception);
         }
 
         if ( ! is_numeric($timestamp)) {

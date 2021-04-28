@@ -20,10 +20,11 @@ class EventSubSignature
      *
      * @return void
      */
-    public static function verifyHeader(string $payload, HeaderBag $headers, string $secret, int $tolerance = 60): void
+    public static function verifyHeader(string $payload, HeaderBag $headers, string $secret, int $tolerance = 600): void
     {
-        $rawTimestamp = $headers->get('twitch-eventsub-message-timestamp');
-        $timestamp = self::getTimestamp($rawTimestamp);
+        $timestamp = self::getTimestamp(
+            $rawTimestamp = $headers->get('twitch-eventsub-message-timestamp')
+        );
 
         if ( ! is_numeric($timestamp)) {
             throw new SignatureVerificationException('Unable to extract timestamp and signatures from header');
@@ -34,7 +35,9 @@ class EventSubSignature
         }
 
         $messageId = $headers->get('twitch-eventsub-message-id');
+
         [$algo, $givenSignature] = explode('=', $headers->get('twitch-eventsub-message-signature'));
+
         $expectedSignature = hash_hmac($algo, $messageId . $rawTimestamp . $payload, $secret);
 
         if ($givenSignature !== $expectedSignature) {

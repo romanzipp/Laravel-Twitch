@@ -74,7 +74,7 @@ class VerifyEventSubSignatureTest extends TestCase
         $this->withSignedSignature('secret');
 
         $this->expectException(AccessDeniedHttpException::class);
-        $this->expectExceptionMessage('Unable to extract timestamp and signatures from header');
+        $this->expectExceptionMessage('Unable to parse timestamp from header');
 
         (new VerifyEventSubSignature())
             ->handle($this->request, static function ($request) {

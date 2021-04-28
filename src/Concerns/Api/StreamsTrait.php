@@ -48,6 +48,25 @@ trait StreamsTrait
     }
 
     /**
+     * Gets information about active streams belonging to channels that the authenticated user follows.
+     * Streams are returned sorted by number of current viewers, in descending order. Across multiple pages of results, there may be
+     * duplicate or missing streams, as viewers join and leave streams.
+     *
+     * @see https://dev.twitch.tv/docs/api/reference/#get-followed-streams
+     *
+     * @param array $parameters
+     * @param \romanzipp\Twitch\Objects\Paginator|null $paginator Paginator instance
+     *
+     * @return \romanzipp\Twitch\Result Result instance
+     */
+    public function getFollowedStreams(array $parameters = [], Paginator $paginator = null): Result
+    {
+        $this->validateRequired($parameters, ['user_id']);
+
+        return $this->get('streams/followed', $parameters, $paginator);
+    }
+
+    /**
      * Creates a marker in the stream of a user specified by a user ID. A marker is an arbitrary point in a stream that the
      * broadcaster wants to mark; e.g., to easily return to later. The marker is created at the current timestamp in the live
      * broadcast when the request is processed. Markers can be created by the stream owner or editors. The user creating the

@@ -9,6 +9,7 @@ use Illuminate\Support\Str;
 use romanzipp\Twitch\Events\EventSubHandled;
 use romanzipp\Twitch\Events\EventSubReceived;
 use romanzipp\Twitch\Http\Middleware\VerifyEventSubSignature;
+use romanzipp\Twitch\Objects\EventSubSignature;
 
 class EventSubController extends Controller
 {
@@ -31,6 +32,9 @@ class EventSubController extends Controller
         $payload = json_decode($request->getContent(), true);
 
         $messageType = $request->header('twitch-eventsub-message-type');
+        $messageId = $request->header('twitch-eventsub-message-id');
+        $retries = $request->header('twitch-eventsub-message-retry');
+        $timestamp = EventSubSignature::getTimestamp($request->header('twitch-eventsub-message-timestamp'));
 
         if ('notification' === $messageType) {
             $messageType = sprintf('%s.notification', $payload['subscription']['type']);
@@ -38,12 +42,12 @@ class EventSubController extends Controller
 
         $method = 'handle' . Str::studly(str_replace('.', '_', $messageType));
 
-        EventSubReceived::dispatch($payload);
+        EventSubReceived::dispatch($payload, $messageId, $retries, $timestamp);
 
         if (method_exists($this, $method)) {
             $response = $this->{$method}($payload);
 
-            EventSubHandled::dispatch($payload);
+            EventSubHandled::dispatch($payload, $messageId, $retries, $timestamp);
 
             return $response;
         }

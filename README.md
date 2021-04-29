@@ -455,6 +455,7 @@ public function searchChannels(array $parameters = [])
 ```php
 public function getStreamKey(array $parameters = [])
 public function getStreams(array $parameters = [], ?Paginator $paginator = NULL)
+public function getFollowedStreams(array $parameters = [], ?Paginator $paginator = NULL)
 public function createStreamMarker(array $parameters = [], array $body = [])
 public function getStreamMarkers(array $parameters = [], ?Paginator $paginator = NULL)
 public function getChannels(array $parameters = [])

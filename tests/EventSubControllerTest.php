@@ -78,7 +78,7 @@ class EventSubControllerTest extends TestCase
         $request->headers->set('twitch-eventsub-message-type', 'notification');
         $request->headers->set('twitch-eventsub-message-id', Uuid::uuid4());
         $request->headers->set('twitch-eventsub-message-retry', 0);
-        $request->headers->set('twitch-eventsub-message-timestamp', Carbon::now()->toJSON());
+        $request->headers->set('twitch-eventsub-message-timestamp', Carbon::now()->utc()->toIso8601ZuluString());
 
         return $request;
     }

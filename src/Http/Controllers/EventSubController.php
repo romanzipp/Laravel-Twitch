@@ -2,6 +2,7 @@
 
 namespace romanzipp\Twitch\Http\Controllers;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
@@ -33,8 +34,9 @@ class EventSubController extends Controller
 
         $messageType = $request->header('twitch-eventsub-message-type');
         $messageId = $request->header('twitch-eventsub-message-id');
-        $retries = $request->header('twitch-eventsub-message-retry');
-        $timestamp = EventSubSignature::getTimestamp($request->header('twitch-eventsub-message-timestamp'));
+        $retries = (int) $request->header('twitch-eventsub-message-retry');
+        $timestamp = Carbon::createFromTimestampUTC(
+                        EventSubSignature::getTimestamp($request->header('twitch-eventsub-message-timestamp')));
 
         if ('notification' === $messageType) {
             $messageType = sprintf('%s.notification', $payload['subscription']['type']);

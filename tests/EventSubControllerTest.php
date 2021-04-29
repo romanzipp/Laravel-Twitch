@@ -2,9 +2,11 @@
 
 namespace romanzipp\Twitch\Tests;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Event;
+use Ramsey\Uuid\Uuid;
 use romanzipp\Twitch\Enums\EventSubType;
 use romanzipp\Twitch\Events\EventSubHandled;
 use romanzipp\Twitch\Events\EventSubReceived;
@@ -74,6 +76,9 @@ class EventSubControllerTest extends TestCase
         );
 
         $request->headers->set('twitch-eventsub-message-type', 'notification');
+        $request->headers->set('twitch-eventsub-message-id', Uuid::uuid4());
+        $request->headers->set('twitch-eventsub-message-retry', 0);
+        $request->headers->set('twitch-eventsub-message-timestamp', Carbon::now()->toJSON());
 
         return $request;
     }

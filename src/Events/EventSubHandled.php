@@ -2,7 +2,7 @@
 
 namespace romanzipp\Twitch\Events;
 
-use Carbon\CarbonInterface;
+use Carbon\Carbon;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
@@ -19,23 +19,23 @@ class EventSubHandled
     public $payload;
 
     /**
-     * The ID for the event provided by Twitch
+     * The ID for the event provided by Twitch.
      *
      * @var string
      */
     public $id;
 
     /**
-     * The number of retries to receive this event
+     * The number of retries to receive this event.
      *
      * @var int
      */
     public $retries;
 
     /**
-     * The timestamp of when the event was sent the first time
+     * The timestamp of when the event was sent the first time.
      *
-     * @var CarbonInterface
+     * @var Carbon
      */
     public $timestamp;
 
@@ -45,9 +45,9 @@ class EventSubHandled
      * @param array $payload
      * @param string $id
      * @param int $retries
-     * @param CarbonInterface $timestamp
+     * @param Carbon $timestamp
      */
-    public function __construct(array $payload, string $id, int $retries, CarbonInterface $timestamp)
+    public function __construct(array $payload, string $id, int $retries, Carbon $timestamp)
     {
         $this->payload = $payload;
         $this->id = $id;

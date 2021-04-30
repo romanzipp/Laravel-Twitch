@@ -64,7 +64,7 @@ trait StreamsTrait
     {
         $this->validateRequired($body, ['user_id']);
 
-        return $this->post('streams', $parameters, null, $body);
+        return $this->post('streams/markers', $parameters, null, $body);
     }
 
     /**

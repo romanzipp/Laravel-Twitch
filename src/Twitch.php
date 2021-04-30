@@ -25,6 +25,8 @@ class Twitch
     use Api\ExtensionsTrait;
     use Api\GamesTrait;
     use Api\HypeTrainTrait;
+    use Api\PollsTrait;
+    use Api\PredictionsTrait;
     use Api\SearchTrait;
     use Api\StreamsTrait;
     use Api\UsersTrait;

@@ -78,4 +78,25 @@ class EventSubType
 
     // Triggers whenever a hype train ends on a broadcaster's channel.
     public const CHANNEL_HYPE_TRAIN_END = 'channel.hype_train.end';
+
+    // Triggers whenever a poll started on a specified channel.
+    public const CHANNEL_POLL_BEGIN = 'channel.poll.begin';
+
+    // Triggers whenever a user respond to a poll on a specified channel.
+    public const CHANNEL_POLL_PROGRESS = 'channel.poll.progress';
+
+    // Triggers whenever a poll ended on a specified channel.
+    public const CHANNEL_POLL_END = 'channel.poll.end';
+
+    // Triggers whenever a Channel Points Prediction started on a specified channel.
+    public const CHANNEL_PREDICTION_BEGIN = 'channel.prediction.begin';
+
+    // Triggers whenever a user participated in a Channel Points Prediction on a specified channel.
+    public const CHANNEL_PREDICTION_PROGRESS = 'channel.prediction.progress';
+
+    // Triggers whenever a Channel Points Prediction was locked on a specified channel.
+    public const CHANNEL_PREDICTION_LOCK = 'channel.prediction.lock';
+
+    // Triggers whenever a Channel Points Prediction ended on a specified channel.
+    public const CHANNEL_PREDICTION_END = 'channel.prediction.end';
 }

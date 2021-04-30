@@ -28,6 +28,12 @@ class Scope
     // Manage a channel’s Extension configuration, including activating Extensions.
     public const CHANNEL_MANAGE_EXTENSIONS = 'channel:manage:extensions';
 
+    // Manage a Poll for a specific channel.
+    public const CHANNEL_MANAGE_POLLS = 'channel:manage:polls';
+
+    // Manage a Channel Points Prediction for a specific channel.
+    public const CHANNEL_MANAGE_PREDICTIONS = 'channel:manage:predictions';
+
     // Manage Channel Points custom rewards and their redemptions on a channel.
     public const CHANNEL_MANAGE_REDEMPTIONS = 'channel:manage:redemptions';
 
@@ -39,6 +45,12 @@ class Scope
 
     // View Hype Train information for a channel.
     public const CHANNEL_READ_HYPE_TRAIN = 'channel:read:hype_train';
+
+    // View information about all Polls or specific Polls for a channel.
+    public const CHANNEL_READ_POLLS = 'channel:read:polls';
+
+    // View information about all Channel Points Predictions or specific Channel Points Predictions for a channel.
+    public const CHANNEL_READ_PREDICTIONS = 'channel:read:predictions';
 
     // View Channel Points custom rewards and their redemptions on a channel.
     public const CHANNEL_READ_REDEMPTIONS = 'channel:read:redemptions';

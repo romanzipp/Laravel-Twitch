@@ -36,6 +36,16 @@ abstract class TestCase extends BaseTestCase
         return getenv('CLIENT_ID');
     }
 
+    protected function getToken()
+    {
+        return getenv('ACCESS_TOKEN');
+    }
+
+    protected function getBroadcasterId()
+    {
+        return getenv('BROADCASTER_ID');
+    }
+
     protected function getMockedService($mockedResponse): Twitch
     {
         $twitch = new Twitch();

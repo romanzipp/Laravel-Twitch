@@ -71,4 +71,22 @@ abstract class ApiTestCase extends TestCase
 
         self::markTestSkipped('No Client-ID provided');
     }
+
+    protected function skipIfTokenMissing()
+    {
+        if ($this->getToken()) {
+            return;
+        }
+
+        self::markTestSkipped('No Access-Token provided');
+    }
+
+    protected function skipIfBroadcasterIdMissing()
+    {
+        if ($this->getBroadcasterId()) {
+            return;
+        }
+
+        self::markTestSkipped('No Broadcaster-ID provided');
+    }
 }

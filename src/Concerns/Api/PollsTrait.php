@@ -25,11 +25,10 @@ trait PollsTrait
             'broadcaster_id',
             'title',
             'choices',
-            'choice.title',
             'duration',
         ]);
 
-        return $this->post('predictions', $parameters, null, $body);
+        return $this->post('polls', $parameters, null, $body);
     }
 
     public function updatePoll(array $parameters = [], array $body = []): Result
@@ -40,6 +39,6 @@ trait PollsTrait
             'status',
         ]);
 
-        return $this->patch('predictions', $parameters, null, $body);
+        return $this->patch('polls', $parameters, null, $body);
     }
 }

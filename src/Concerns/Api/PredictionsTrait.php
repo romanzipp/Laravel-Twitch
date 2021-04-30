@@ -25,7 +25,6 @@ trait PredictionsTrait
             'broadcaster_id',
             'title',
             'outcomes',
-            'outcome.title',
             'prediction_window',
         ]);
 

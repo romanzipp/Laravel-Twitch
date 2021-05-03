@@ -283,7 +283,8 @@ $twitch->subscribeEventSub([
 
 ## Upgrading
 
-- [**Upgrade from 2.0 to 3.0**](https://github.com/romanzipp/Laravel-Twitch/releases/tag/3.0.0)
+- [**Upgrade from 3.0 to 4.0**](https://github.com/romanzipp/Laravel-Twitch/releases/tag/4.0.0)
+- [Upgrade from 2.0 to 3.0](https://github.com/romanzipp/Laravel-Twitch/releases/tag/3.0.0)
 - [Upgrade from 1.0 to 2.0](https://github.com/romanzipp/Laravel-Twitch/releases/tag/2.0.0)
 
 ## Development

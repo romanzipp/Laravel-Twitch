@@ -37,7 +37,7 @@ trait PollsTrait
      * @param array $body
      * @return Result
      */
-    public function createPolls(array $parameters = [], array $body = []): Result
+    public function createPoll(array $parameters = [], array $body = []): Result
     {
         $this->validateRequired($body, [
             'broadcaster_id',
@@ -58,7 +58,7 @@ trait PollsTrait
      * @param array $body
      * @return Result
      */
-    public function updatePoll(array $parameters = [], array $body = []): Result
+    public function endPoll(array $parameters = [], array $body = []): Result
     {
         $this->validateRequired($body, [
             'broadcaster_id',

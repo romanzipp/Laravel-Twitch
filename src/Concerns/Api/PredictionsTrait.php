@@ -37,7 +37,7 @@ trait PredictionsTrait
      * @param array $body
      * @return Result
      */
-    public function createPredictions(array $parameters = [], array $body = []): Result
+    public function createPrediction(array $parameters = [], array $body = []): Result
     {
         $this->validateRequired($body, [
             'broadcaster_id',
@@ -60,7 +60,7 @@ trait PredictionsTrait
      * @param array $body
      * @return Result
      */
-    public function updatePrediction(array $parameters = [], array $body = []): Result
+    public function endPrediction(array $parameters = [], array $body = []): Result
     {
         $this->validateRequired($body, [
             'broadcaster_id',

@@ -27,7 +27,7 @@ class PollsTest extends ApiTestCase
         $this->skipIfBroadcasterIdMissing();
 
         $this->registerResult(
-            $result = $this->twitch()->withToken($this->getToken())->createPolls([], [
+            $result = $this->twitch()->withToken($this->getToken())->createPoll([], [
                 'broadcaster_id' => $this->getBroadcasterId(),
                 'title' => 'Hello World!',
                 'choices' => [
@@ -62,7 +62,7 @@ class PollsTest extends ApiTestCase
         }
 
         $this->registerResult(
-            $result = $this->twitch()->updatePoll([], [
+            $result = $this->twitch()->endPoll([], [
                 'broadcaster_id' => '106415581',
                 'id' => $poll->id,
                 'status' => PollStatus::TERMINATED,

@@ -27,7 +27,7 @@ class PredictionsTest extends ApiTestCase
         $this->skipIfBroadcasterIdMissing();
 
         $this->registerResult(
-            $result = $this->twitch()->withToken($this->getToken())->createPredictions([], [
+            $result = $this->twitch()->withToken($this->getToken())->createPrediction([], [
                 'broadcaster_id' => $this->getBroadcasterId(),
                 'title' => 'Hello World!',
                 'outcomes' => [
@@ -62,7 +62,7 @@ class PredictionsTest extends ApiTestCase
         }
 
         $this->registerResult(
-            $result = $this->twitch()->updatePrediction([], [
+            $result = $this->twitch()->endPrediction([], [
                 'broadcaster_id' => '106415581',
                 'id' => $prediction->id,
                 'status' => PredictionStatus::CANCELED,

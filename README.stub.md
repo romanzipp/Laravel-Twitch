@@ -326,32 +326,6 @@ $twitch->unsubscribeEventSub([
 ]);
 ```
 
-### List EventSub Subscription
-
-```php
-use romanzipp\Twitch\Twitch;
-
-$twitch = new Twitch;
-
-$result = $twitch->getEventSubs(['status' => 'notification_failures_exceeded']);
-
-foreach ($result->data() as $item) {
-    // process the subscription
-}
-```
-
-### Delete EventSub Subscription
-
-```php
-use romanzipp\Twitch\Twitch;
-
-$twitch = new Twitch;
-
-$twitch->unsubscribeEventSub([
-    'id' => '932b34ad-821a-490f-af43-b327187d0f5c'
-]);
-```
-
 ## Documentation
 
 **Twitch Helix API Documentation: https://dev.twitch.tv/docs/api/reference**

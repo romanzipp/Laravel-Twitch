@@ -40,9 +40,6 @@ class EventSubType
     // Triggers whenever a broadcaster raids on a broadcaster's channel.
     public const CHANNEL_RAID = 'channel.raid';
 
-    // Triggers whenever a broadcaster hosts on a broadcaster's channel.
-    public const CHANNEL_HOST = 'channel.host';
-
     // Triggers whenever a viewer is banned from a broadcaster's channel.
     public const CHANNEL_BAN = 'channel.ban';
 

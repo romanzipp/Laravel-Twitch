@@ -19,6 +19,7 @@ trait PredictionsTrait
      *
      * @param array $parameters
      * @param Paginator|null $paginator
+     *
      * @return Result
      */
     public function getPredictions(array $parameters = [], Paginator $paginator = null): Result
@@ -35,6 +36,7 @@ trait PredictionsTrait
      *
      * @param array $parameters
      * @param array $body
+     *
      * @return Result
      */
     public function createPrediction(array $parameters = [], array $body = []): Result
@@ -52,12 +54,13 @@ trait PredictionsTrait
     /**
      * Lock, resolve, or cancel a Channel Points Prediction.
      * Active Predictions can be updated to be “locked,” “resolved,” or “canceled.”
-     * Locked Predictions can be updated to be “resolved” or “canceled.”
+     * Locked Predictions can be updated to be “resolved” or “canceled.”.
      *
      * @see https://dev.twitch.tv/docs/api/reference#end-prediction
      *
      * @param array $parameters
      * @param array $body
+     *
      * @return Result
      */
     public function endPrediction(array $parameters = [], array $body = []): Result

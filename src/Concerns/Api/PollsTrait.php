@@ -19,6 +19,7 @@ trait PollsTrait
      *
      * @param array $parameters
      * @param Paginator|null $paginator
+     *
      * @return Result
      */
     public function getPolls(array $parameters = [], Paginator $paginator = null): Result
@@ -35,6 +36,7 @@ trait PollsTrait
      *
      * @param array $parameters
      * @param array $body
+     *
      * @return Result
      */
     public function createPoll(array $parameters = [], array $body = []): Result
@@ -56,6 +58,7 @@ trait PollsTrait
      *
      * @param array $parameters
      * @param array $body
+     *
      * @return Result
      */
     public function endPoll(array $parameters = [], array $body = []): Result

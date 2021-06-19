@@ -121,4 +121,13 @@ class EventSubType
 
     // Triggers whenever a Bits transaction occurred for a specified Twitch Extension.
     public const EXTENSION_BITS_TRANSACTION_CREATE = 'extension.bits_transaction.create';
+
+    // Triggers whenever a Channel Goal started on a specific channel.
+    public const CHANNEL_GOAL_BEGIN = 'channel.goal.begin';
+
+    // Triggers whenever a user participated in a Channel Goal on a specific channel.
+    public const CHANNEL_GOAL_PROGRESS = 'channel.goal.progress';
+
+    // Triggers whenever a Channel Goal ended on a specific channel.
+    public const CHANNEL_GOAL_END = 'channel.goal.end';
 }

@@ -31,8 +31,19 @@ class EventSubType
     // Triggers whenever a viewer subscribes to a broadcaster's channel.
     public const CHANNEL_SUBSCRIBE = 'channel.subscribe';
 
-    // Triggers whenever a viewer unsubscribes from a broadcaster's channel.
-    public const CHANNEL_UNSUBSCRIBE = 'channel.unsubscribe';
+    /**
+     * @deprecated Please use the CHANNEL_SUBSCRIPTION_END constant
+     */
+    public const CHANNEL_UNSUBSCRIBE = 'channel.subscription.end';
+
+    // Triggers whenever a subscription to the specified channel ends.
+    public const CHANNEL_SUBSCRIPTION_END = 'channel.subscription.end';
+
+    // Triggers whenever a viewer gives a gift subscription to one or more users in the specified channel.
+    public const CHANNEL_SUBSCRIPTION_GIFT = 'channel.subscription.gift';
+
+    // Triggers whenever a viewer gives  a user sends a resubscription chat message in a specific channel.
+    public const CHANNEL_SUBSCRIPTION_MESSAGE = 'channel.subscription.message';
 
     // Triggers whenever a viewer cheers on a broadcaster's channel.
     public const CHANNEL_CHEER = 'channel.cheer';
@@ -99,4 +110,7 @@ class EventSubType
 
     // Triggers whenever a Channel Points Prediction ended on a specified channel.
     public const CHANNEL_PREDICTION_END = 'channel.prediction.end';
+
+    // Triggers whenever a Bits transaction occurred for a specified Twitch Extension.
+    public const EXTENSION_BITS_TRANSACTION_CREATE = 'extension.bits_transaction.create';
 }

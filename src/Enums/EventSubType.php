@@ -7,6 +7,9 @@ class EventSubType
     // Triggers whenever a user has revoked authorization for your client id. Use this webhook
     // to meet government requirements for handling user data, such as GDPR, LGPD, or CCPA.
     public const USER_AUTHORIZATION_REVOKE = 'user.authorization.revoke';
+    
+    // Triggers whenever a user’s authorization has been granted to your client id.
+    public const USER_AUTHORIZATION_GRANT = 'user.authorization.grant';
 
     // Triggers whenever a user updates their account.
     public const USER_UPDATE = 'user.update';
@@ -110,6 +113,9 @@ class EventSubType
 
     // Triggers whenever a Channel Points Prediction ended on a specified channel.
     public const CHANNEL_PREDICTION_END = 'channel.prediction.end';
+    
+    // Triggers whenever an entitlement for a Drop is granted to a user.
+    public const DROP_ENTITLEMENT_GRANT = 'drop.entitlement.grant';
 
     // Triggers whenever a Bits transaction occurred for a specified Twitch Extension.
     public const EXTENSION_BITS_TRANSACTION_CREATE = 'extension.bits_transaction.create';

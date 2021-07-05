@@ -36,8 +36,9 @@
         }
     },
     "scripts": {
-        "test": "vendor/bin/phpunit",
-        "docs": "php generator/generate-docs.php"
+        "fix": "vendor/bin/php-cs-fixer fix",
+        "docs": "php generator/generate-docs.php",
+        "test": "vendor/bin/phpunit"
     },
     "extra": {
         "laravel": {

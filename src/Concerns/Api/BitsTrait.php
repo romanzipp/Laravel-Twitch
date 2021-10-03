@@ -17,7 +17,7 @@ trait BitsTrait
      *
      * @see https://dev.twitch.tv/docs/api/reference#get-cheermotes
      *
-     * @param array $parameters
+     * @param array<string, mixed> $parameters
      *
      * @return \romanzipp\Twitch\Result
      */
@@ -33,7 +33,7 @@ trait BitsTrait
      *
      * @see https://dev.twitch.tv/docs/api/reference/#get-bits-leaderboard
      *
-     * @param array $parameters
+     * @param array<string, mixed> $parameters
      *
      * @return \romanzipp\Twitch\Result
      */
@@ -47,7 +47,7 @@ trait BitsTrait
      *
      * @see https://dev.twitch.tv/docs/api/reference#get-extension-transactions
      *
-     * @param array $parameters
+     * @param array<string, mixed> $parameters
      *
      * @return \romanzipp\Twitch\Result
      */

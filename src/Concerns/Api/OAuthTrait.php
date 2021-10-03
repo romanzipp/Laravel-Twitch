@@ -17,7 +17,7 @@ trait OAuthTrait
      * @see  https://dev.twitch.tv/docs/authentication/getting-tokens-oauth/
      *
      * @param string $responseType code / token
-     * @param array $scopes
+     * @param string[] $scopes
      * @param string|null $state
      * @param bool $forceVerify
      *
@@ -50,7 +50,7 @@ trait OAuthTrait
      *
      * @param string|null $code
      * @param string $grantType
-     * @param array $scopes
+     * @param string[] $scopes
      *
      * @return \romanzipp\Twitch\Result
      */
@@ -88,7 +88,7 @@ trait OAuthTrait
     /**
      * Build OAuth scopes to string.
      *
-     * @param array $scopes
+     * @param string[] $scopes
      *
      * @return string
      */

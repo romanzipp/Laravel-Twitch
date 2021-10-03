@@ -19,7 +19,7 @@ trait GamesTrait
      *
      * @see https://dev.twitch.tv/docs/api/reference#get-top-games
      *
-     * @param array $parameters
+     * @param array<string, mixed> $parameters
      * @param \romanzipp\Twitch\Objects\Paginator|null $paginator Paginator instance
      *
      * @return \romanzipp\Twitch\Result Result instance
@@ -35,7 +35,7 @@ trait GamesTrait
      *
      * @see https://dev.twitch.tv/docs/api/reference#get-games
      *
-     * @param array $parameters
+     * @param array<string, mixed> $parameters
      *
      * @return \romanzipp\Twitch\Result Result instance
      */

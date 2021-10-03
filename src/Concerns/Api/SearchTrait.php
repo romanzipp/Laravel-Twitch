@@ -16,7 +16,7 @@ trait SearchTrait
      *
      * @see https://dev.twitch.tv/docs/api/reference/#search-categories
      *
-     * @param array $parameters
+     * @param array<string, mixed> $parameters
      *
      * @return \romanzipp\Twitch\Result
      */
@@ -34,7 +34,7 @@ trait SearchTrait
      *
      * @see https://dev.twitch.tv/docs/api/reference/#search-channels
      *
-     * @param array $parameters
+     * @param array<string, mixed> $parameters
      *
      * @return \romanzipp\Twitch\Result
      */

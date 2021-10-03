@@ -14,7 +14,7 @@ class EventSubReceived
     /**
      * The webhook payload.
      *
-     * @var array
+     * @var array<string, mixed>
      */
     public $payload;
 
@@ -42,7 +42,7 @@ class EventSubReceived
     /**
      * Create a new event instance.
      *
-     * @param array $payload
+     * @param array<string, mixed> $payload
      * @param string $id
      * @param int $retries
      * @param Carbon $timestamp

@@ -15,8 +15,8 @@ trait EventSubTrait
     /**
      * Create a EventSub subscription.
      *
-     * @param array $parameters
-     * @param array $body
+     * @param array<string, mixed> $parameters
+     * @param array<string, mixed> $body
      *
      * @return Result
      */
@@ -40,7 +40,7 @@ trait EventSubTrait
     /**
      * Delete a EventSub subscription.
      *
-     * @param array $parameters
+     * @param array<string, mixed> $parameters
      *
      * @return Result
      */
@@ -52,7 +52,7 @@ trait EventSubTrait
     /**
      * List your EventSub subscriptions.
      *
-     * @param array $parameters
+     * @param array<string, mixed> $parameters
      * @param Paginator|null $paginator
      *
      * @return Result

@@ -60,7 +60,7 @@ class EventSubController extends Controller
     /**
      * Handle a EventSub callback verification call.
      *
-     * @param array $payload
+     * @param array<string, mixed> $payload
      *
      * @return Response
      */
@@ -72,7 +72,7 @@ class EventSubController extends Controller
     /**
      * Handle a EventSub notification call.
      *
-     * @param array $payload
+     * @param array<string, mixed> $payload
      *
      * @return Response
      */
@@ -84,7 +84,7 @@ class EventSubController extends Controller
     /**
      * Handle a EventSub revocation call.
      *
-     * @param array $payload
+     * @param array<string, mixed> $payload
      *
      * @return Response
      */
@@ -96,11 +96,11 @@ class EventSubController extends Controller
     /**
      * Handle successful calls on the controller.
      *
-     * @param array $parameters
+     * @param array<string, mixed> $parameters
      *
      * @return Response
      */
-    protected function successMethod($parameters = []): Response
+    protected function successMethod(array $parameters = []): Response
     {
         return new Response('Webhook Handled', 200);
     }
@@ -108,7 +108,7 @@ class EventSubController extends Controller
     /**
      * Handle calls to missing methods on the controller.
      *
-     * @param array $parameters
+     * @param array<string, mixed> $parameters
      *
      * @return Response
      */

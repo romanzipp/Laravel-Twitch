@@ -25,7 +25,7 @@ trait ClipsTrait
      *
      * @see https://dev.twitch.tv/docs/api/reference#create-clip
      *
-     * @param array $parameters
+     * @param array<string, mixed> $parameters
      *
      * @return \romanzipp\Twitch\Result Result instance
      */
@@ -46,7 +46,7 @@ trait ClipsTrait
      *
      * @see https://dev.twitch.tv/docs/api/reference#get-clips
      *
-     * @param array $parameters
+     * @param array<string, mixed> $parameters
      *
      * @return \romanzipp\Twitch\Result Result instance
      */

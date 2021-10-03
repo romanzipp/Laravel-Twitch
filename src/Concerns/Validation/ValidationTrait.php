@@ -6,6 +6,10 @@ use InvalidArgumentException;
 
 trait ValidationTrait
 {
+    /**
+     * @param array<string, mixed> $parameters
+     * @param string[] $keys
+     */
     protected function validateRequired(array $parameters, array $keys): void
     {
         foreach ($keys as $key) {
@@ -17,6 +21,10 @@ trait ValidationTrait
         }
     }
 
+    /**
+     * @param array<string, mixed> $parameters
+     * @param string[] $keys
+     */
     protected function validateAnyRequired(array $parameters, array $keys): void
     {
         foreach ($keys as $key) {

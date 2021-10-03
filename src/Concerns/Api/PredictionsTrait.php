@@ -17,7 +17,7 @@ trait PredictionsTrait
      *
      * @see https://dev.twitch.tv/docs/api/reference#get-predictions
      *
-     * @param array $parameters
+     * @param array<string, mixed> $parameters
      * @param Paginator|null $paginator
      *
      * @return Result
@@ -34,8 +34,8 @@ trait PredictionsTrait
      *
      * @see https://dev.twitch.tv/docs/api/reference#create-prediction
      *
-     * @param array $parameters
-     * @param array $body
+     * @param array<string, mixed> $parameters
+     * @param array<string, mixed> $body
      *
      * @return Result
      */
@@ -58,8 +58,8 @@ trait PredictionsTrait
      *
      * @see https://dev.twitch.tv/docs/api/reference#end-prediction
      *
-     * @param array $parameters
-     * @param array $body
+     * @param array<string, mixed> $parameters
+     * @param array<string, mixed> $body
      *
      * @return Result
      */

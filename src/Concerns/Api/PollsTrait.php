@@ -17,7 +17,7 @@ trait PollsTrait
      *
      * @see https://dev.twitch.tv/docs/api/reference#get-polls
      *
-     * @param array $parameters
+     * @param array<string, mixed> $parameters
      * @param Paginator|null $paginator
      *
      * @return Result
@@ -34,8 +34,8 @@ trait PollsTrait
      *
      * @see https://dev.twitch.tv/docs/api/reference#create-poll
      *
-     * @param array $parameters
-     * @param array $body
+     * @param array<string, mixed> $parameters
+     * @param array<string, mixed> $body
      *
      * @return Result
      */
@@ -56,8 +56,8 @@ trait PollsTrait
      *
      * @see https://dev.twitch.tv/docs/api/reference#end-poll
      *
-     * @param array $parameters
-     * @param array $body
+     * @param array<string, mixed> $parameters
+     * @param array<string, mixed> $body
      *
      * @return Result
      */

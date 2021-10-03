@@ -16,7 +16,7 @@ trait AdsTrait
      *
      * @see https://dev.twitch.tv/docs/api/reference#start-commercial
      *
-     * @param array $parameters
+     * @param array<string, mixed> $parameters
      *
      * @return \romanzipp\Twitch\Result Result instance
      */

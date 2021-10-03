@@ -6,18 +6,39 @@ use Illuminate\Contracts\Support\Arrayable;
 
 class AccessToken implements Arrayable
 {
+    /**
+     * @var string
+     */
     public $accessToken;
 
+    /**
+     * @var string
+     */
     public $refreshToken;
 
+    /**
+     * @var int
+     */
     public $expiresIn;
 
+    /**
+     * @var string
+     */
     public $scope;
 
+    /**
+     * @var string
+     */
     public $tokenType;
 
+    /**
+     * @var int
+     */
     public $expiresAt;
 
+    /**
+     * @param array<string, mixed> $data
+     */
     public function __construct(array $data)
     {
         $this->accessToken = $data['access_token'];
@@ -28,6 +49,9 @@ class AccessToken implements Arrayable
         $this->expiresAt = $data['expires_at'] ?? time() + $this->expiresIn;
     }
 
+    /**
+     * @return array<string, mixed>
+     */
     public function toArray(): array
     {
         return [

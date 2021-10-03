@@ -16,7 +16,7 @@ trait EntitlementsTrait
      *
      * @see https://dev.twitch.tv/docs/api/reference#create-entitlement-grants-upload-url
      *
-     * @param array $parameters
+     * @param array<string, mixed> $parameters
      *
      * @return \romanzipp\Twitch\Result Result instance
      */
@@ -33,7 +33,7 @@ trait EntitlementsTrait
      *
      * @see https://dev.twitch.tv/docs/api/reference#get-code-status
      *
-     * @param array $parameters
+     * @param array<string, mixed> $parameters
      *
      * @return \romanzipp\Twitch\Result
      */
@@ -49,7 +49,7 @@ trait EntitlementsTrait
      *
      * @see https://dev.twitch.tv/docs/api/reference#get-drops-entitlements
      *
-     * @param array $parameters
+     * @param array<string, mixed> $parameters
      *
      * @return \romanzipp\Twitch\Result
      */
@@ -65,7 +65,7 @@ trait EntitlementsTrait
      *
      * @see https://dev.twitch.tv/docs/api/reference#redeem-code
      *
-     * @param array $parameters
+     * @param array<string, mixed> $parameters
      *
      * @return \romanzipp\Twitch\Result
      */

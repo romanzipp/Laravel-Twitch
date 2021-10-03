@@ -17,7 +17,7 @@ trait VideosTrait
      *
      * @see https://dev.twitch.tv/docs/api/reference#get-videos
      *
-     * @param array $parameters
+     * @param array<string, mixed> $parameters
      * @param \romanzipp\Twitch\Objects\Paginator|null $paginator
      *
      * @return \romanzipp\Twitch\Result Result instance

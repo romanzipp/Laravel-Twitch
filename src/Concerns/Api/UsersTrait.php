@@ -17,8 +17,8 @@ trait UsersTrait
      *
      * @see https://dev.twitch.tv/docs/api/reference/#create-user-follows
      *
-     * @param array $parameters
-     * @param array $body
+     * @param array<string, mixed> $parameters
+     * @param array<string, mixed> $body
      *
      * @return \romanzipp\Twitch\Result
      */
@@ -32,7 +32,7 @@ trait UsersTrait
     /**
      * Deletes a specified user from the followers of a specified channel.
      *
-     * @param array $parameters
+     * @param array<string, mixed> $parameters
      *
      * @return \romanzipp\Twitch\Result
      */
@@ -49,7 +49,7 @@ trait UsersTrait
      *
      * @see https://dev.twitch.tv/docs/api/reference#get-users
      *
-     * @param array $parameters
+     * @param array<string, mixed> $parameters
      *
      * @return \romanzipp\Twitch\Result Result instance
      */
@@ -65,7 +65,7 @@ trait UsersTrait
      *
      * @see https://dev.twitch.tv/docs/api/reference/#get-users-follows
      *
-     * @param array $parameters
+     * @param array<string, mixed> $parameters
      * @param \romanzipp\Twitch\Objects\Paginator|null $paginator
      *
      * @return \romanzipp\Twitch\Result
@@ -82,7 +82,7 @@ trait UsersTrait
      *
      * @see https://dev.twitch.tv/docs/api/reference#update-user
      *
-     * @param array $parameters
+     * @param array<string, mixed> $parameters
      *
      * @return \romanzipp\Twitch\Result Result instance
      */
@@ -98,7 +98,7 @@ trait UsersTrait
      *
      * @see https://dev.twitch.tv/docs/api/reference/#get-user-extensions
      *
-     * @param array $parameters
+     * @param array<string, mixed> $parameters
      *
      * @return \romanzipp\Twitch\Result
      */
@@ -112,7 +112,7 @@ trait UsersTrait
      *
      * @see https://dev.twitch.tv/docs/api/reference/#get-user-active-extensions
      *
-     * @param array $parameters
+     * @param array<string, mixed> $parameters
      *
      * @return \romanzipp\Twitch\Result
      */
@@ -130,8 +130,8 @@ trait UsersTrait
      *
      * @see https://dev.twitch.tv/docs/api/reference/#update-user-extensions
      *
-     * @param array $parameters
-     * @param array $body
+     * @param array<string, mixed> $parameters
+     * @param array<string, mixed> $body
      *
      * @return \romanzipp\Twitch\Result
      */

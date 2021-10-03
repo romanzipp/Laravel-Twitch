@@ -19,7 +19,7 @@ class Result
     /**
      * Query result data.
      *
-     * @var array|\stdClass
+     * @var array<string, mixed>|\stdClass
      */
     private $data = [];
 
@@ -82,6 +82,9 @@ class Result
         return null === $this->exception;
     }
 
+    /**
+     * @return array<string, mixed>|\stdClass
+     */
     public function data()
     {
         return $this->data;
@@ -138,6 +141,7 @@ class Result
      */
     public function getErrorMessage(): string
     {
+        /** @phpstan-ignore-next-line */
         if (null === $this->exception || null === $this->exception->getResponse()) {
             return 'Twitch API Unavailable';
         }
@@ -218,11 +222,11 @@ class Result
      *
      * @param string|null $key Get an index value. Available: limit, remaining, reset
      *
-     * @return string|array|null
+     * @return int|array<string, int>|null
      */
     public function getRateLimit(string $key = null)
     {
-        if ( ! $this->response || ! $this->response->hasHeader('Ratelimit-Remaining')) {
+        if ( ! isset($this->response) || ! $this->response->hasHeader('Ratelimit-Remaining')) {
             return null;
         }
 

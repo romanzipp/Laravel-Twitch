@@ -18,7 +18,7 @@ trait AnalyticsTrait
      *
      * @see https://dev.twitch.tv/docs/api/reference#get-extension-analytics
      *
-     * @param array $parameters
+     * @param array<string, mixed> $parameters
      *
      * @return \romanzipp\Twitch\Result
      */
@@ -38,7 +38,7 @@ trait AnalyticsTrait
      *
      * @see https://dev.twitch.tv/docs/api/reference#get-game-analytics
      *
-     * @param array $parameters
+     * @param array<string, mixed> $parameters
      *
      * @return \romanzipp\Twitch\Result
      */

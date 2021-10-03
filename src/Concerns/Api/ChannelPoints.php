@@ -17,8 +17,8 @@ trait ChannelPoints
      *
      * @see https://dev.twitch.tv/docs/api/reference#create-custom-rewards
      *
-     * @param array $parameters
-     * @param array $body
+     * @param array<string, mixed> $parameters
+     * @param array<string, mixed> $body
      *
      * @return \romanzipp\Twitch\Result
      */
@@ -37,7 +37,7 @@ trait ChannelPoints
      *
      * @see https://dev.twitch.tv/docs/api/reference#delete-custom-reward
      *
-     * @param array $parameters
+     * @param array<string, mixed> $parameters
      *
      * @return \romanzipp\Twitch\Result
      */
@@ -53,7 +53,7 @@ trait ChannelPoints
      *
      * @see https://dev.twitch.tv/docs/api/reference#get-custom-reward
      *
-     * @param array $parameters
+     * @param array<string, mixed> $parameters
      *
      * @return \romanzipp\Twitch\Result
      */
@@ -70,7 +70,7 @@ trait ChannelPoints
      *
      * @see https://dev.twitch.tv/docs/api/reference#get-custom-reward-redemption
      *
-     * @param array $parameters
+     * @param array<string, mixed> $parameters
      * @param \romanzipp\Twitch\Objects\Paginator|null $paginator
      *
      * @return \romanzipp\Twitch\Result
@@ -88,7 +88,7 @@ trait ChannelPoints
      *
      * @see https://dev.twitch.tv/docs/api/reference#update-custom-reward
      *
-     * @param array $parameters
+     * @param array<string, mixed> $parameters
      *
      * @return \romanzipp\Twitch\Result
      */
@@ -105,8 +105,8 @@ trait ChannelPoints
      *
      * @see https://dev.twitch.tv/docs/api/reference#update-redemption-status
      *
-     * @param array $parameters
-     * @param array $body
+     * @param array<string, mixed> $parameters
+     * @param array<string, mixed> $body
      *
      * @return \romanzipp\Twitch\Result
      */

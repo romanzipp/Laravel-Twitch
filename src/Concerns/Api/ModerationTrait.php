@@ -22,8 +22,8 @@ trait ModerationTrait
      *
      * @see https://dev.twitch.tv/docs/api/reference/#check-automod-status
      *
-     * @param array $parameters
-     * @param array $body
+     * @param array<string, mixed> $parameters
+     * @param array<string, mixed> $body
      *
      * @return \romanzipp\Twitch\Result
      */
@@ -39,7 +39,7 @@ trait ModerationTrait
      *
      * @see https://dev.twitch.tv/docs/api/reference/#get-banned-users
      *
-     * @param array $parameters
+     * @param array<string, mixed> $parameters
      * @param \romanzipp\Twitch\Objects\Paginator|null $paginator
      *
      * @return \romanzipp\Twitch\Result
@@ -56,7 +56,7 @@ trait ModerationTrait
      *
      * @see https://dev.twitch.tv/docs/api/reference/#get-banned-events
      *
-     * @param array $parameters
+     * @param array<string, mixed> $parameters
      * @param \romanzipp\Twitch\Objects\Paginator|null $paginator
      *
      * @return \romanzipp\Twitch\Result
@@ -73,7 +73,7 @@ trait ModerationTrait
      *
      * @see https://dev.twitch.tv/docs/api/reference/#get-moderators
      *
-     * @param array $parameters
+     * @param array<string, mixed> $parameters
      * @param \romanzipp\Twitch\Objects\Paginator|null $paginator
      *
      * @return \romanzipp\Twitch\Result
@@ -90,7 +90,7 @@ trait ModerationTrait
      *
      * @see https://dev.twitch.tv/docs/api/reference/#get-moderator-events
      *
-     * @param array $parameters
+     * @param array<string, mixed> $parameters
      * @param \romanzipp\Twitch\Objects\Paginator|null $paginator
      *
      * @return \romanzipp\Twitch\Result

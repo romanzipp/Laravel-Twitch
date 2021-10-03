@@ -16,7 +16,7 @@ trait WebhooksTrait
      *
      * @see https://dev.twitch.tv/docs/api/reference/#get-webhook-subscriptions
      *
-     * @param array $parameters
+     * @param array<string, mixed> $parameters
      *
      * @return \romanzipp\Twitch\Result
      */
@@ -30,8 +30,8 @@ trait WebhooksTrait
      *
      * @see https://dev.twitch.tv/docs/api/webhooks-reference
      *
-     * @param array $parameters
-     * @param array $body
+     * @param array<string, mixed> $parameters
+     * @param array<string, mixed> $body
      *
      * @return \romanzipp\Twitch\Result
      */
@@ -52,8 +52,8 @@ trait WebhooksTrait
      *
      * @see https://dev.twitch.tv/docs/api/webhooks-reference
      *
-     * @param array $parameters
-     * @param array $body
+     * @param array<string, mixed> $parameters
+     * @param array<string, mixed> $body
      *
      * @return \romanzipp\Twitch\Result
      */
@@ -74,7 +74,7 @@ trait WebhooksTrait
      * @see https://dev.twitch.tv/docs/api/webhooks-reference
      *
      * @param string $path
-     * @param array $parameters
+     * @param array<string, mixed> $parameters
      *
      * @return string
      */

@@ -9,23 +9,29 @@ class EventSubNotification implements Arrayable
     /**
      * Subscription information.
      *
-     * @var array
+     * @var mixed
      */
     public $subscription;
 
     /**
      *  Event data payload.
      *
-     * @var array
+     * @var mixed
      */
     public $event;
 
+    /**
+     * @param array<string, mixed> $data
+     */
     public function __construct(array $data)
     {
         $this->subscription = $data['subscription'];
         $this->event = $data['event'];
     }
 
+    /**
+     * @return array<string, mixed>
+     */
     public function toArray(): array
     {
         return [
@@ -34,6 +40,9 @@ class EventSubNotification implements Arrayable
         ];
     }
 
+    /**
+     * @param array<string, mixed> $payload
+     */
     public static function fromPayload(array $payload): self
     {
         return new self($payload);

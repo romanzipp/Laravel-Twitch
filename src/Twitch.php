@@ -179,7 +179,7 @@ class Twitch
 
     /**
      * @param string $path
-     * @param array $parameters
+     * @param array<string, mixed> $parameters
      * @param \romanzipp\Twitch\Objects\Paginator|null $paginator
      *
      * @return \romanzipp\Twitch\Result
@@ -191,9 +191,9 @@ class Twitch
 
     /**
      * @param string $path
-     * @param array $parameters
+     * @param array<string, mixed> $parameters
      * @param \romanzipp\Twitch\Objects\Paginator|null $paginator
-     * @param array|null $body
+     * @param array<string, mixed>|null $body
      *
      * @return \romanzipp\Twitch\Result
      */
@@ -204,9 +204,9 @@ class Twitch
 
     /**
      * @param string $path
-     * @param array $parameters
+     * @param array<string, mixed> $parameters
      * @param \romanzipp\Twitch\Objects\Paginator|null $paginator
-     * @param array|null $body
+     * @param array<string, mixed>|null $body
      *
      * @return \romanzipp\Twitch\Result
      */
@@ -217,9 +217,9 @@ class Twitch
 
     /**
      * @param string $path
-     * @param array $parameters
+     * @param array<string, mixed> $parameters
      * @param \romanzipp\Twitch\Objects\Paginator|null $paginator
-     * @param array|null $body
+     * @param array<string, mixed>|null $body
      *
      * @return \romanzipp\Twitch\Result
      */
@@ -230,9 +230,9 @@ class Twitch
 
     /**
      * @param string $path
-     * @param array $parameters
+     * @param array<string, mixed> $parameters
      * @param \romanzipp\Twitch\Objects\Paginator|null $paginator
-     * @param array|null $body
+     * @param array<string, mixed>|null $body
      *
      * @return \romanzipp\Twitch\Result
      */
@@ -246,9 +246,9 @@ class Twitch
      *
      * @param string $method HTTP method
      * @param string $path Query path
-     * @param array $parameters Query parameters
+     * @param array<string, mixed> $parameters Query parameters
      * @param \romanzipp\Twitch\Objects\Paginator|null $paginator Paginator instance
-     * @param array|null $body JSON body
+     * @param array<string, mixed>|null $body JSON body
      *
      * @throws \romanzipp\Twitch\Exceptions\RequestRequiresAuthenticationException
      * @throws \romanzipp\Twitch\Exceptions\OAuthTokenRequestException
@@ -305,7 +305,7 @@ class Twitch
     /**
      * Build query with support for multiple same first-dimension keys.
      *
-     * @param array $query
+     * @param array<string, mixed> $query
      *
      * @return string
      */
@@ -327,7 +327,7 @@ class Twitch
     /**
      * Build headers for request.
      *
-     * @return array
+     * @return array<string, string>
      */
     private function buildHeaders(): array
     {

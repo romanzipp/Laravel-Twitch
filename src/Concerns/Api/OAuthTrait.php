@@ -75,7 +75,13 @@ trait OAuthTrait
         }
 
         if (null !== $code) {
-            $parameters['code'] = $code;
+            switch ($grantType) {
+                case GrantType::REFRESH_TOKEN:
+                    $parameters['refresh_token'] = $code;
+                    break;
+                default:
+                    $parameters['code'] = $code;
+            }
         }
 
         if ( ! empty($scopes)) {

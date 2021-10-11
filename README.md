@@ -369,6 +369,16 @@ public function updateCustomReward(array $parameters = [])
 public function updateRedemptionStatus(array $parameters = [], array $body = [])
 ```
 
+### Chat
+
+```php
+public function getChannelChatEmotes(array $parameters = [])
+public function getGlobalChatEmotes()
+public function getChatEmoteSets(array $parameters = [])
+public function getChannelChatBadges(array $parameters = [])
+public function getGlobalChatBadges()
+```
+
 ### Clips
 
 ```php

@@ -427,6 +427,22 @@ public function getGames(array $parameters = [])
 public function getHypeTrainEvents(array $parameters = [])
 ```
 
+### Polls
+
+```php
+public function getPolls(array $parameters = [], ?Paginator $paginator = NULL)
+public function createPoll(array $parameters = [], array $body = [])
+public function endPoll(array $parameters = [], array $body = [])
+```
+
+### Predictions
+
+```php
+public function getPredictions(array $parameters = [], ?Paginator $paginator = NULL)
+public function createPrediction(array $parameters = [], array $body = [])
+public function endPrediction(array $parameters = [], array $body = [])
+```
+
 ### Search
 
 ```php

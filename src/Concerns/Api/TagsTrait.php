@@ -44,7 +44,7 @@ trait TagsTrait
      */
     public function getAllStreamTags(array $parameters = [], Paginator $paginator = null): Result
     {
-        return $this->get('streams/tags', $parameters, $paginator);
+        return $this->get('tags/streams', $parameters, $paginator);
     }
 
     /**

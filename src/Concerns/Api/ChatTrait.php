@@ -58,7 +58,7 @@ trait ChatTrait
     {
         $this->validateRequired($parameters, ['emote_set_id']);
 
-        return $this->get('chat/emotes/set');
+        return $this->get('chat/emotes/set', $parameters);
     }
 
     /**
@@ -74,7 +74,7 @@ trait ChatTrait
     {
         $this->validateRequired($parameters, ['broadcaster_id']);
 
-        return $this->get('chat/badges');
+        return $this->get('chat/badges', $parameters);
     }
 
     /**

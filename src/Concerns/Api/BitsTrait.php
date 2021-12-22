@@ -23,8 +23,6 @@ trait BitsTrait
      */
     public function getCheermotes(array $parameters = []): Result
     {
-        $this->validateRequired($parameters, ['broadcaster_id']);
-
         return $this->get('bits/cheermotes', $parameters);
     }
 

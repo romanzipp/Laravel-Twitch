@@ -4,6 +4,7 @@ namespace romanzipp\Twitch\Concerns\Api;
 
 use romanzipp\Twitch\Concerns\Operations\AbstractOperationsTrait;
 use romanzipp\Twitch\Concerns\Operations\AbstractValidationTrait;
+use romanzipp\Twitch\Objects\Paginator;
 use romanzipp\Twitch\Result;
 
 trait ClipsTrait
@@ -47,13 +48,14 @@ trait ClipsTrait
      * @see https://dev.twitch.tv/docs/api/reference#get-clips
      *
      * @param array<string, mixed> $parameters
+     * @param \romanzipp\Twitch\Objects\Paginator|null $paginator
      *
      * @return \romanzipp\Twitch\Result Result instance
      */
-    public function getClips(array $parameters = []): Result
+    public function getClips(array $parameters = [], Paginator $paginator = null): Result
     {
         $this->validateAnyRequired($parameters, ['broadcaster_id', 'game_id', 'id']);
 
-        return $this->get('clips', $parameters);
+        return $this->get('clips', $parameters, $paginator);
     }
 }

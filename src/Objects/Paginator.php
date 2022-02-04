@@ -52,7 +52,11 @@ class Paginator
      */
     public function cursor(): ?string
     {
-        return $this->pagination->cursor ?? null;
+        if ( ! $pagination = $this->pagination) {
+            return null;
+        }
+
+        return $pagination->cursor ?? null;
     }
 
     /**

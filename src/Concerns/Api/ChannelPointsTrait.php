@@ -7,7 +7,7 @@ use romanzipp\Twitch\Concerns\Operations\AbstractValidationTrait;
 use romanzipp\Twitch\Objects\Paginator;
 use romanzipp\Twitch\Result;
 
-trait ChannelPoints
+trait ChannelPointsTrait
 {
     use AbstractValidationTrait;
     use AbstractOperationsTrait;

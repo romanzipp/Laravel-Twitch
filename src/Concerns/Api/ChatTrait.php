@@ -88,4 +88,37 @@ trait ChatTrait
     {
         return $this->get('chat/badges/global');
     }
+
+    /**
+     * Gets the broadcaster’s chat settings.
+     *
+     * @see https://dev.twitch.tv/docs/api/reference#get-chat-settings
+     *
+     * @param array<string, mixed> $parameters
+     *
+     * @return \romanzipp\Twitch\Result
+     */
+    public function getChatSettings(array $parameters = []): Result
+    {
+        $this->validateRequired($parameters, ['broadcaster_id']);
+
+        return $this->get('chat/settings', $parameters);
+    }
+
+    /**
+     * https://dev.twitch.tv/docs/api/reference#update-chat-settings.
+     *
+     * @see Updates the broadcaster’s chat settings.
+     *
+     * @param array<string, mixed> $parameters
+     * @param array<string, mixed> $body
+     *
+     * @return \romanzipp\Twitch\Result
+     */
+    public function updateChatSettings(array $parameters, array $body = []): Result
+    {
+        $this->validateRequired($parameters, ['broadcaster_id', 'moderator_id']);
+
+        return $this->patch('chat/settings', $parameters, null, $body);
+    }
 }

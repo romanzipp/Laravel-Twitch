@@ -75,4 +75,19 @@ trait EntitlementsTrait
     {
         return $this->post('entitlements/code', $parameters);
     }
+
+    /**
+     * Updates the fulfillment status on a set of Drops entitlements, specified by their entitlement IDs.
+     *
+     * @see https://dev.twitch.tv/docs/api/reference#update-drops-entitlements
+     *
+     * @param array<string, mixed> $parameters
+     * @param array<string, mixed> $body
+     *
+     * @return \romanzipp\Twitch\Result
+     */
+    public function updateDropsEntitlements(array $parameters = [], array $body = []): Result
+    {
+        return $this->patch('entitlements/drops', $parameters, null, $body);
+    }
 }

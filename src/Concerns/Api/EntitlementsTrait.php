@@ -19,6 +19,8 @@ trait EntitlementsTrait
      * @param array<string, mixed> $parameters
      *
      * @return \romanzipp\Twitch\Result Result instance
+     *
+     * @deprecated since 2021‑02‑26 "Removed the “Create Entitlement Grants Upload URL” Twitch API endpoint associated with a previous version of Twitch Drops."
      */
     public function createEntitlementUrl(array $parameters = []): Result
     {

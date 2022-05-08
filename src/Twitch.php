@@ -18,7 +18,7 @@ class Twitch
     use Api\AdsTrait;
     use Api\AnalyticsTrait;
     use Api\BitsTrait;
-    use Api\ChannelTrait;
+    use Api\ChannelsTrait;
     use Api\ChannelPointsTrait;
     use Api\ChatTrait;
     use Api\ClipsTrait;
@@ -26,6 +26,7 @@ class Twitch
     use Api\EventSubTrait;
     use Api\ExtensionsTrait;
     use Api\GamesTrait;
+    use Api\GoalsTrait;
     use Api\HypeTrainTrait;
     use Api\PollsTrait;
     use Api\PredictionsTrait;

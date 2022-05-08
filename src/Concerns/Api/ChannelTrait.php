@@ -6,7 +6,7 @@ use romanzipp\Twitch\Concerns\Operations\AbstractOperationsTrait;
 use romanzipp\Twitch\Concerns\Operations\AbstractValidationTrait;
 use romanzipp\Twitch\Result;
 
-trait ChannelsTrait
+trait ChannelTrait
 {
     use AbstractValidationTrait;
     use AbstractOperationsTrait;

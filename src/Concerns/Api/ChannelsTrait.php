@@ -6,7 +6,7 @@ use romanzipp\Twitch\Concerns\Operations\AbstractOperationsTrait;
 use romanzipp\Twitch\Concerns\Operations\AbstractValidationTrait;
 use romanzipp\Twitch\Result;
 
-trait ChannelTrait
+trait ChannelsTrait
 {
     use AbstractValidationTrait;
     use AbstractOperationsTrait;
@@ -42,5 +42,21 @@ trait ChannelTrait
         $this->validateAnyRequired($parameters, ['broadcaster_id']);
 
         return $this->patch('channels', $parameters, null, $body);
+    }
+
+    /**
+     * Gets a list of users who have editor permissions for a specific channel.
+     *
+     * @see https://dev.twitch.tv/docs/api/reference#get-channel-editors
+     *
+     * @param array<string, mixed> $parameters
+     *
+     * @return \romanzipp\Twitch\Result
+     */
+    public function getChannelEditors(array $parameters = []): Result
+    {
+        $this->validateAnyRequired($parameters, ['broadcaster_id']);
+
+        return $this->patch('channels/editors', $parameters);
     }
 }

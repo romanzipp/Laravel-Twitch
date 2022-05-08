@@ -46,12 +46,14 @@ class VideosTest extends ApiTestCase
 
     public function testGetVideosByGame()
     {
+        self::markTestSkipped('Returns empty data ¯\_(ツ)_/¯');
+
         $this->registerResult(
             $result = $this->twitch()->getVideos(['game_id' => 21779])
         );
 
         self::assertTrue($result->success(), $result->getErrorMessage());
-        self::assertIsArray($result->data());
+        self::assertNotEmpty($result->data());
         self::assertHasProperties([
             'id', 'user_id', 'user_name', 'title', 'description', 'created_at', 'published_at', 'url',
             'thumbnail_url', 'viewable', 'view_count', 'language', 'type', 'duration',

@@ -60,6 +60,9 @@ trait ModerationTrait
      * @param \romanzipp\Twitch\Objects\Paginator|null $paginator
      *
      * @return \romanzipp\Twitch\Result
+     *
+     * @deprecated since 2022‑03‑18 "Removed documentation for “Get Banned Events” and “Get Moderator Events” Twitch API endpoints."
+     * @see https://discuss.dev.twitch.tv/t/deprecation-of-twitch-api-event-endpoints-that-supported-websub-based-webhooks/35137
      */
     public function getBannedEvents(array $parameters = [], Paginator $paginator = null): Result
     {
@@ -94,6 +97,9 @@ trait ModerationTrait
      * @param \romanzipp\Twitch\Objects\Paginator|null $paginator
      *
      * @return \romanzipp\Twitch\Result
+     *
+     * @deprecated since 2022‑03‑18 "Removed documentation for “Get Banned Events” and “Get Moderator Events” Twitch API endpoints."
+     * @see https://discuss.dev.twitch.tv/t/deprecation-of-twitch-api-event-endpoints-that-supported-websub-based-webhooks/35137
      */
     public function getModeratorEvents(array $parameters = [], Paginator $paginator = null): Result
     {

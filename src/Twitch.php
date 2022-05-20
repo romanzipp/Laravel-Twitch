@@ -38,6 +38,7 @@ class Twitch
     use Api\TagsTrait;
     use Api\ModerationTrait;
     use Api\WebhooksTrait;
+    use Api\ScheduleTrait;
 
     public const BASE_URI = 'https://api.twitch.tv/helix/';
 

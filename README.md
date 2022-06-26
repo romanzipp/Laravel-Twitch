@@ -509,10 +509,10 @@ public function getModeratorEvents(array $parameters = [], ?Paginator $paginator
 ### Webhooks
 
 ```php
-public function getWebhookSubscriptions(array $parameters = [])
-public function subscribeWebhook(array $parameters = [], array $body = [])
-public function unsubscribeWebhook(array $parameters = [], array $body = [])
-public function buildWebhookTopic(string $path, array $parameters = [])
+public function getWebhookSubscriptions(array $parameters = []) // DEPRECATED
+public function subscribeWebhook(array $parameters = [], array $body = []) // DEPRECATED
+public function unsubscribeWebhook(array $parameters = [], array $body = []) // DEPRECATED
+public function buildWebhookTopic(string $path, array $parameters = []) // DEPRECATED
 ```
 
 [**OAuth Scopes Enums**](https://github.com/romanzipp/Laravel-Twitch/blob/master/src/Enums/Scope.php)

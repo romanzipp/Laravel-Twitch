@@ -14,6 +14,7 @@ trait WebhooksTrait
     /**
      * Gets the Webhook subscriptions of a user identified by a Bearer token, in order of expiration.
      *
+     * @deprecated since 2021-12 https://discuss.dev.twitch.tv/t/deprecation-of-twitch-api-event-endpoints-that-supported-websub-based-webhooks/35137
      * @see https://dev.twitch.tv/docs/api/reference/#get-webhook-subscriptions
      *
      * @param array<string, mixed> $parameters
@@ -28,6 +29,7 @@ trait WebhooksTrait
     /**
      * Subscribe to a webhook.
      *
+     * @deprecated since 2021-12 https://discuss.dev.twitch.tv/t/deprecation-of-twitch-api-event-endpoints-that-supported-websub-based-webhooks/35137
      * @see https://dev.twitch.tv/docs/api/webhooks-reference
      *
      * @param array<string, mixed> $parameters
@@ -50,6 +52,7 @@ trait WebhooksTrait
     /**
      * Unsubscribe from a webhook.
      *
+     * @deprecated since 2021-12 https://discuss.dev.twitch.tv/t/deprecation-of-twitch-api-event-endpoints-that-supported-websub-based-webhooks/35137
      * @see https://dev.twitch.tv/docs/api/webhooks-reference
      *
      * @param array<string, mixed> $parameters
@@ -71,6 +74,7 @@ trait WebhooksTrait
     /**
      * Build the webhook topic url.
      *
+     * @deprecated since 2021-12 https://discuss.dev.twitch.tv/t/deprecation-of-twitch-api-event-endpoints-that-supported-websub-based-webhooks/35137
      * @see https://dev.twitch.tv/docs/api/webhooks-reference
      *
      * @param string $path

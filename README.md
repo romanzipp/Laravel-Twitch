@@ -383,7 +383,7 @@ public function getGlobalChatBadges()
 
 ```php
 public function createClip(array $parameters = [])
-public function getClips(array $parameters = [])
+public function getClips(array $parameters = [], ?Paginator $paginator = NULL)
 ```
 
 ### Entitlements

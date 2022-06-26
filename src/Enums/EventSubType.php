@@ -55,7 +55,7 @@ class EventSubType
     public const CHANNEL_RAID = 'channel.raid';
 
     /**
-     * @deprecated since I don't know it suddenly disappeared from the docs.
+     * @deprecated since I don't know it suddenly disappeared from the docs
      */
     public const CHANNEL_HOST = 'channel.host';
 

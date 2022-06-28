@@ -326,6 +326,67 @@ $twitch->unsubscribeEventSub([
 ]);
 ```
 
+### Twitch Extension Guard
+
+#### 1. Register TwitchExtensionGuard
+
+Edit `app/Providers/AuthServiceProvider.php`:
+
+```php
+use romanzipp\Twitch\Auth\TwitchExtensionGuard;
+
+public function boot()  
+{  
+	...
+	
+	TwitchExtensionGuard::register(config('twitch-api.ext_secret'), new TwitchUserProvider);  
+}
+```
+
+#### 2. Configure TwitchExtensionGuard
+
+```php
+namespace App\Utils;
+
+use App\User;
+use romanzipp\Twitch\Auth\UserProvider;
+use Illuminate\Contracts\Auth\Authenticatable;
+  
+class TwitchUserProvider extends UserProvider  
+{  
+	public function retrieveById($identifier): ?Authenticatable  
+	{
+		/** @var User $user */  
+		$user = User::query()->whereKey($identifier)->first();  
+
+		return $user;  
+	}  
+
+	public function createFromTwitchToken($decoded): ?Authenticatable  
+	{
+		return User::createFromTwitchToken($decoded);  
+	}  
+}
+```
+
+#### 3. Configure Guard
+
+```php
+<?php
+
+return [
+    ...
+    'guards' => [
+        ...
+        'twitch' => [
+            'driver' => 'twitch',
+            'provider' => 'users', // this is wrong, will be fixed soon
+        ],
+    ],
+    ...
+];
+```
+
 ## Documentation
 
 **Twitch Helix API Documentation: https://dev.twitch.tv/docs/api/reference**

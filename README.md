@@ -365,7 +365,7 @@ public function createCustomRewards(array $parameters = [], array $body = [])
 public function deleteCustomReward(array $parameters = [])
 public function getCustomReward(array $parameters = [])
 public function getCustomRewardRedemption(array $parameters = [], ?Paginator $paginator = NULL)
-public function updateCustomReward(array $parameters = [])
+public function updateCustomReward(array $parameters = [], array $body = [])
 public function updateRedemptionStatus(array $parameters = [], array $body = [])
 ```
 

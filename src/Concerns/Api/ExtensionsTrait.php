@@ -42,9 +42,9 @@ trait ExtensionsTrait
      * Disable all Extensions of the currently authed user's active extensions with Bearer Token
      * Note: Bearer OAuth Token and the state "user:edit:broadcast" are both required.
      *
-     * @return Result Result instance
-     *
      * @see "https://dev.twitch.tv/docs/api/reference/#update-user-extensions"
+     *
+     * @return Result Result instance
      */
     public function disableAllExtensions(): Result
     {

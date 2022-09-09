@@ -39,6 +39,10 @@ class Twitch
     use Api\ModerationTrait;
     use Api\WebhooksTrait;
     use Api\ScheduleTrait;
+    use Api\TeamsTrait;
+    use Api\MusicTrait;
+    use Api\WhispersTrait;
+    use Api\RaidsTrait;
 
     public const BASE_URI = 'https://api.twitch.tv/helix/';
 

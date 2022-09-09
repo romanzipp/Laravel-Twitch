@@ -106,9 +106,9 @@ trait ChatTrait
     }
 
     /**
-     * https://dev.twitch.tv/docs/api/reference#update-chat-settings.
+     * Updates the broadcaster’s chat settings.
      *
-     * @see Updates the broadcaster’s chat settings.
+     * @see https://dev.twitch.tv/docs/api/reference#update-chat-settings
      *
      * @param array<string, mixed> $parameters
      * @param array<string, mixed> $body
@@ -120,5 +120,55 @@ trait ChatTrait
         $this->validateRequired($parameters, ['broadcaster_id', 'moderator_id']);
 
         return $this->patch('chat/settings', $parameters, null, $body);
+    }
+
+    /**
+     * Sends an announcement to the broadcaster’s chat room.
+     *
+     * @see https://dev.twitch.tv/docs/api/reference#send-chat-announcement
+     *
+     * @param array<string, mixed> $parameters
+     * @param array<string, mixed> $body
+     *
+     * @return Result
+     */
+    public function sendChatAnnouncement(array $parameters = [], array $body = []): Result
+    {
+        $this->validateRequired($parameters, ['broadcaster_id', 'moderator_id']);
+        $this->validateRequired($body, ['message']);
+
+        return $this->post('chat/announcements');
+    }
+
+    /**
+     * Gets the color used for the user’s name in chat.
+     *
+     * @see https://dev.twitch.tv/docs/api/reference#get-user-chat-color
+     *
+     * @param array<string, mixed> $parameters
+     *
+     * @return Result
+     */
+    public function getUserChatColor(array $parameters = []): Result
+    {
+        $this->validateRequired($parameters, ['user_id']);
+
+        return $this->get('chat/color');
+    }
+
+    /**
+     * Updates the color used for the user’s name in chat.
+     *
+     * @see https://dev.twitch.tv/docs/api/reference#get-user-chat-color
+     *
+     * @param array<string, mixed> $parameters
+     *
+     * @return Result
+     */
+    public function updateUserChatColor(array $parameters = []): Result
+    {
+        $this->validateRequired($parameters, ['user_id', 'color']);
+
+        return $this->put('chat/color');
     }
 }

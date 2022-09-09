@@ -377,6 +377,9 @@ public function getGlobalChatEmotes()
 public function getChatEmoteSets(array $parameters = [])
 public function getChannelChatBadges(array $parameters = [])
 public function getGlobalChatBadges()
+public function sendChatAnnouncement(array $parameters = [], array $body = [])
+public function getUserChatColor(array $parameters = [])
+public function updateUserChatColor(array $parameters = [])
 ```
 
 ### Clips
@@ -412,6 +415,18 @@ public function disableAllExtensions()
 public function disableUserExtensionById(?string $parameter = NULL)
 public function disableUserExtensionByName(?string $parameter = NULL)
 public function updateUserExtensions(?string $method = NULL, ?string $parameter = NULL, bool $disabled = false)
+public function getExtensionConfigurationSegment(array $parameters = [])
+public function setExtensionConfigurationSegment(array $body = [])
+public function setExtensionRequiredConfiguration(array $parameters = [], array $body = [])
+public function sendExtensionPubSubMessage(array $body = [])
+public function getExtensionLiveChannels(array $parameters = [], ?Paginator $paginator = null)
+public function getExtensionSecrets(array $parameters = [])
+public function createExtensionSecret(array $parameters = [])
+public function sendExtensionChatMessage(array $parameters = [], array $body = [])
+public function getExtensions(array $parameters = [])
+public function getReleasedExtensions(array $parameters = [])
+public function getExtensionBitsProducts(array $parameters = [])
+public function updateExtensionBitsProduct(array $body = [])
 ```
 
 ### Games
@@ -473,12 +488,24 @@ public function updateUser(array $parameters = [])
 public function getUserExtensions(array $parameters = [])
 public function getUserActiveExtensions(array $parameters = [])
 public function updateUserExtension(array $parameters = [], array $body = [])
+public function getUserBlockList(array $parameters = [], ?Paginator $paginator = NULL)
+public function blockUser(array $parameters = [])
+public function unblockUser(array $parameters = [])
 ```
 
 ### Videos
 
 ```php
 public function getVideos(array $parameters = [], ?Paginator $paginator = NULL)
+public function deleteVideos(array $parameters = [])
+```
+
+### Music
+
+```php
+public function getSoundtrackCurrentTrack(array $parameters = [])
+public function getSoundtrackPlaylist(array $parameters = [], ?Paginator $paginator = NULL)
+public function getSoundtrackPlaylists(array $parameters = [])
 ```
 
 ### Subscriptions
@@ -504,6 +531,37 @@ public function getBannedUsers(array $parameters = [], ?Paginator $paginator = N
 public function getBannedEvents(array $parameters = [], ?Paginator $paginator = NULL)
 public function getModerators(array $parameters = [], ?Paginator $paginator = NULL)
 public function getModeratorEvents(array $parameters = [], ?Paginator $paginator = NULL)
+```
+
+### Raids
+
+```php
+public function startRaid(array $parameters = [])
+public function cancelRaid(array $parameters = [])
+```
+
+### Teams
+
+```php
+public function getChannelTeams(array $parameters = [])
+public function getTeams(array $parameters = [])
+```
+
+### Schedule
+
+```php
+public function getChannelStreamSchedule(array $parameters = [], Paginator $paginator = NULL)
+public function getChanneliCalendar(array $parameters = [])
+public function updateChannelStreamSchedule(array $parameters = [])
+public function createChannelStreamScheduleSegment(array $parameters = [], array $body = [])
+public function updateChannelStreamScheduleSegment(array $parameters = [], array $body = [])
+public function deleteChannelStreamScheduleSegment(array $parameters = [], array $body = [])
+```
+
+### Whispers
+
+```php
+public function sendWhisper(array $parameters = [], array $body = [])
 ```
 
 ### Webhooks

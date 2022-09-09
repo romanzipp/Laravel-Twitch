@@ -531,6 +531,12 @@ public function getBannedUsers(array $parameters = [], ?Paginator $paginator = N
 public function getBannedEvents(array $parameters = [], ?Paginator $paginator = NULL)
 public function getModerators(array $parameters = [], ?Paginator $paginator = NULL)
 public function getModeratorEvents(array $parameters = [], ?Paginator $paginator = NULL)
+public function deleteChatMessages(array $parameters = [])
+public function addChannelModerator(array $parameters = [])
+public function removeChannelModerator(array $parameters = [])
+public function getVIPs(array $parameters = [], ?Paginator $paginator = NULL)
+public function addChannelVIP(array $parameters = [])
+public function removeChannelVIP(array $parameters = [])
 ```
 
 ### Raids
@@ -550,7 +556,7 @@ public function getTeams(array $parameters = [])
 ### Schedule
 
 ```php
-public function getChannelStreamSchedule(array $parameters = [], Paginator $paginator = NULL)
+public function getChannelStreamSchedule(array $parameters = [], ?Paginator $paginator = NULL)
 public function getChanneliCalendar(array $parameters = [])
 public function updateChannelStreamSchedule(array $parameters = [])
 public function createChannelStreamScheduleSegment(array $parameters = [], array $body = [])

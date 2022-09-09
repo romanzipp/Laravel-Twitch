@@ -239,4 +239,109 @@ trait ModerationTrait
 
         return $this->delete('moderation/blocked_terms', $parameters);
     }
+
+    /**
+     * Removes a single chat message or all chat messages from the broadcaster’s chat room.
+     *
+     * @see https://dev.twitch.tv/docs/api/reference#delete-chat-messages
+     *
+     * @param array<string, mixed> $parameters
+     *
+     * @return Result
+     */
+    public function deleteChatMessages(array $parameters = []): Result
+    {
+        $this->validateRequired($parameters, ['broadcaster_id', 'moderator_id']);
+
+        return $this->delete('moderation/chat', $parameters);
+    }
+
+    /**
+     * Adds a moderator to the broadcaster’s chat room.
+     *
+     * Rate Limits: The channel may add a maximum of 10 moderators within a 10 seconds period.
+     *
+     * @see https://dev.twitch.tv/docs/api/reference#add-channel-moderator
+     *
+     * @param array<string, mixed> $parameters
+     *
+     * @return Result
+     */
+    public function addChannelModerator(array $parameters = []): Result
+    {
+        $this->validateRequired($parameters, ['broadcaster_id', 'user_id']);
+
+        return $this->get('moderation/moderators', $parameters);
+    }
+
+    /**
+     * Removes a moderator from the broadcaster’s chat room.
+     *
+     * Rate Limits: The channel may remove a maximum of 10 moderators within a 10 seconds period.
+     *
+     * @see https://dev.twitch.tv/docs/api/reference#remove-channel-moderator
+     *
+     * @param array $parameters
+     *
+     * @return Result
+     */
+    public function removeChannelModerator(array $parameters = []): Result
+    {
+        $this->validateRequired($parameters, ['broadcaster_id', 'user_id']);
+
+        return $this->delete('moderation/moderators', $parameters);
+    }
+
+    /**
+     * Gets a list of the channel’s VIPs.
+     *
+     * @see https://dev.twitch.tv/docs/api/reference#get-vips
+     *
+     * @param array<string, mixed> $parameters
+     * @param Paginator|null $paginator
+     *
+     * @return Result
+     */
+    public function getVIPs(array $parameters = [], Paginator $paginator = null): Result
+    {
+        $this->validateRequired($parameters, ['broadcaster_id']);
+
+        return $this->get('channels/vips', $parameters, $paginator);
+    }
+
+    /**
+     * Adds a VIP to the broadcaster’s chat room.
+     *
+     * Rate Limits: The channel may add a maximum of 10 VIPs within a 10 seconds period.
+     *
+     * @see https://dev.twitch.tv/docs/api/reference#add-channel-vip
+     *
+     * @param array<string, mixed> $parameters
+     *
+     * @return Result
+     */
+    public function addChannelVIP(array $parameters = []): Result
+    {
+        $this->validateRequired($parameters, ['user_id', 'broadcaster_id']);
+
+        return $this->post('channels/vips', $parameters);
+    }
+
+    /**
+     * Removes a VIP from the broadcaster’s chat room.
+     *
+     * Rate Limits: The channel may add a maximum of 10 VIPs within a 10 seconds period.
+     *
+     * @see https://dev.twitch.tv/docs/api/reference#remove-channel-vip
+     *
+     * @param array<string, mixed> $parameters
+     *
+     * @return Result
+     */
+    public function removeChannelVIP(array $parameters = []): Result
+    {
+        $this->validateRequired($parameters, ['user_id', 'broadcaster_id']);
+
+        return $this->delete('channels/vips', $parameters);
+    }
 }

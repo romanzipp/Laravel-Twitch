@@ -20,7 +20,7 @@ trait UsersTrait
      * @param array<string, mixed> $parameters
      * @param array<string, mixed> $body
      *
-     * @return \romanzipp\Twitch\Result
+     * @return Result
      */
     public function createUserFollows(array $parameters = [], array $body = []): Result
     {
@@ -34,7 +34,7 @@ trait UsersTrait
      *
      * @param array<string, mixed> $parameters
      *
-     * @return \romanzipp\Twitch\Result
+     * @return Result
      */
     public function deleteUserFollows(array $parameters = []): Result
     {
@@ -51,7 +51,7 @@ trait UsersTrait
      *
      * @param array<string, mixed> $parameters
      *
-     * @return \romanzipp\Twitch\Result Result instance
+     * @return Result Result instance
      */
     public function getUsers(array $parameters = []): Result
     {
@@ -66,9 +66,9 @@ trait UsersTrait
      * @see https://dev.twitch.tv/docs/api/reference/#get-users-follows
      *
      * @param array<string, mixed> $parameters
-     * @param \romanzipp\Twitch\Objects\Paginator|null $paginator
+     * @param Paginator|null $paginator
      *
-     * @return \romanzipp\Twitch\Result
+     * @return Result
      */
     public function getUsersFollows(array $parameters = [], Paginator $paginator = null): Result
     {
@@ -84,7 +84,7 @@ trait UsersTrait
      *
      * @param array<string, mixed> $parameters
      *
-     * @return \romanzipp\Twitch\Result Result instance
+     * @return Result Result instance
      */
     public function updateUser(array $parameters = []): Result
     {
@@ -100,7 +100,7 @@ trait UsersTrait
      *
      * @param array<string, mixed> $parameters
      *
-     * @return \romanzipp\Twitch\Result
+     * @return Result
      */
     public function getUserExtensions(array $parameters = []): Result
     {
@@ -114,7 +114,7 @@ trait UsersTrait
      *
      * @param array<string, mixed> $parameters
      *
-     * @return \romanzipp\Twitch\Result
+     * @return Result
      */
     public function getUserActiveExtensions(array $parameters = []): Result
     {
@@ -133,10 +133,60 @@ trait UsersTrait
      * @param array<string, mixed> $parameters
      * @param array<string, mixed> $body
      *
-     * @return \romanzipp\Twitch\Result
+     * @return Result
      */
     public function updateUserExtension(array $parameters = [], array $body = []): Result
     {
         return $this->put('users/extensions', $parameters, null, $body);
+    }
+
+    /**
+     * Gets a specified user’s block list.
+     * The list is sorted by when the block occurred in descending order (i.e. most recent block first).
+     *
+     * @see https://dev.twitch.tv/docs/api/reference/#get-user-block-list
+     *
+     * @param array<string, mixed> $parameters
+     * @param Paginator|null $paginator
+     *
+     * @return Result
+     */
+    public function getUserBlockList(array $parameters = [], Paginator $paginator = null): Result
+    {
+        $this->validateRequired($parameters, ['broadcaster_id']);
+
+        return $this->get('users/blocks', $parameters, $paginator);
+    }
+
+    /**
+     * Blocks the specified user on behalf of the authenticated user.
+     *
+     * @see https://dev.twitch.tv/docs/api/reference/#block-user
+     *
+     * @param array<string, mixed> $parameters
+     *
+     * @return Result
+     */
+    public function blockUser(array $parameters = []): Result
+    {
+        $this->validateRequired($parameters, ['target_user_id']);
+
+        return $this->put('users/blocks', $parameters);
+    }
+
+    /**
+     * Unblocks the specified user on behalf of the authenticated user.
+     *
+     * @see https://dev.twitch.tv/docs/api/reference/#unblock-user
+     *
+     * @param array<string, mixed> $parameters
+     *
+     * @return Result
+     */
+    public function unblockUser(array $parameters = []): Result
+    {
+        $this->validateRequired($parameters, ['target_user_id']);
+
+        return $this->delete('users/blocks', $parameters);
     }
 }

@@ -24,7 +24,7 @@ trait TeamsTrait
     {
         $this->validateRequired($parameters, ['broadcaster_id']);
 
-        return $this->get('teams/channel');
+        return $this->get('teams/channel', $parameters);
     }
 
     /**
@@ -40,6 +40,6 @@ trait TeamsTrait
     {
         $this->validateAnyRequired($parameters, ['id', 'name']);
 
-        return $this->get('teams');
+        return $this->get('teams', $parameters);
     }
 }

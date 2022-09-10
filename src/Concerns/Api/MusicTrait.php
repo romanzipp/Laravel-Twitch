@@ -25,7 +25,7 @@ trait MusicTrait
     {
         $this->validateRequired($parameters, ['broadcaster_id']);
 
-        return $this->get('soundtrack/current_track');
+        return $this->get('soundtrack/current_track', $parameters);
     }
 
     /**
@@ -42,7 +42,7 @@ trait MusicTrait
     {
         $this->validateRequired($parameters, ['id']);
 
-        return $this->get('soundtrack/playlist');
+        return $this->get('soundtrack/playlist', $parameters);
     }
 
     /**
@@ -56,6 +56,6 @@ trait MusicTrait
      */
     public function getSoundtrackPlaylists(array $parameters = []): Result
     {
-        return $this->get('soundtrack/playlists');
+        return $this->get('soundtrack/playlists', $parameters);
     }
 }

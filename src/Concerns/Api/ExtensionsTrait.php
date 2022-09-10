@@ -198,7 +198,7 @@ trait ExtensionsTrait
     public function setExtensionRequiredConfiguration(array $parameters = [], array $body = []): Result
     {
         $this->validateRequired($parameters, ['broadcaster_id']);
-        $this->validateRequired($parameters, ['extension_id', 'extension_version', 'required_configuration']);
+        $this->validateRequired($body, ['extension_id', 'extension_version', 'required_configuration']);
 
         return $this->put('extensions/required_configuration', $parameters, null, $body);
     }
@@ -355,10 +355,10 @@ trait ExtensionsTrait
      *
      * @return Result
      */
-    public function updateExtensionBitsProduct(array $body = []): Result
+    public function updateExtensionBitsProduct(array $parameters = [], array $body = []): Result
     {
         $this->validateRequired($body, ['sku', 'cost', 'display_name']);
 
-        return $this->put('bits/extensions', [], null, $body);
+        return $this->put('bits/extensions', $parameters, null, $body);
     }
 }

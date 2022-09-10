@@ -46,6 +46,6 @@ trait VideosTrait
     {
         $this->validateRequired($parameters, ['id']);
 
-        return $this->delete('videos');
+        return $this->delete('videos', $parameters);
     }
 }

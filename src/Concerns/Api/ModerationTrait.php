@@ -271,7 +271,7 @@ trait ModerationTrait
     {
         $this->validateRequired($parameters, ['broadcaster_id', 'user_id']);
 
-        return $this->get('moderation/moderators', $parameters);
+        return $this->post('moderation/moderators', $parameters);
     }
 
     /**

@@ -137,7 +137,7 @@ trait ChatTrait
         $this->validateRequired($parameters, ['broadcaster_id', 'moderator_id']);
         $this->validateRequired($body, ['message']);
 
-        return $this->post('chat/announcements');
+        return $this->post('chat/announcements', $parameters, null, $body);
     }
 
     /**
@@ -153,13 +153,13 @@ trait ChatTrait
     {
         $this->validateRequired($parameters, ['user_id']);
 
-        return $this->get('chat/color');
+        return $this->get('chat/color', $parameters);
     }
 
     /**
      * Updates the color used for the user’s name in chat.
      *
-     * @see https://dev.twitch.tv/docs/api/reference#get-user-chat-color
+     * @see https://dev.twitch.tv/docs/api/reference#update-user-chat-color
      *
      * @param array<string, mixed> $parameters
      *
@@ -169,6 +169,6 @@ trait ChatTrait
     {
         $this->validateRequired($parameters, ['user_id', 'color']);
 
-        return $this->put('chat/color');
+        return $this->put('chat/color', $parameters);
     }
 }

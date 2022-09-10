@@ -426,7 +426,7 @@ public function sendExtensionChatMessage(array $parameters = [], array $body = [
 public function getExtensions(array $parameters = [])
 public function getReleasedExtensions(array $parameters = [])
 public function getExtensionBitsProducts(array $parameters = [])
-public function updateExtensionBitsProduct(array $body = [])
+public function updateExtensionBitsProduct(array $parameters = [], array $body = [])
 ```
 
 ### Games

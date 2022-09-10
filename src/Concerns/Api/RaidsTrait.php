@@ -55,6 +55,6 @@ trait RaidsTrait
     {
         $this->validateRequired($parameters, ['broadcaster_id']);
 
-        return $this->delete('raids');
+        return $this->delete('raids', $parameters);
     }
 }

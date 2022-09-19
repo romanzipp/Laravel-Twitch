@@ -57,6 +57,20 @@ trait EntitlementsTrait
     {
         return $this->get('entitlements/drops', $parameters);
     }
+    
+    /**
+     * Updates the fulfillment status on a set of Drops entitlements, specified by their entitlement IDs.
+     *
+     * @see https://dev.twitch.tv/docs/api/reference#update-drops-entitlements
+     *
+     * @param array<string, mixed> $parameters
+     *
+     * @return \romanzipp\Twitch\Result
+     */
+    public function updateDropsEntitlements(array $parameters = []): Result
+    {
+        return $this->patch('entitlements/drops', $parameters);
+    }
 
     /**
      * Redeems one or more provided codes to the authenticated Twitch user. This API requires that the caller is an authenticated Twitch user.

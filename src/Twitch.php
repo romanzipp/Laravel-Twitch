@@ -14,12 +14,11 @@ class Twitch
 {
     use ClientCredentialsTrait;
     use ValidationTrait;
-    use Api\OAuthTrait;
     use Api\AdsTrait;
     use Api\AnalyticsTrait;
     use Api\BitsTrait;
-    use Api\ChannelsTrait;
     use Api\ChannelPointsTrait;
+    use Api\ChannelsTrait;
     use Api\ChatTrait;
     use Api\ClipsTrait;
     use Api\EntitlementsTrait;
@@ -28,21 +27,22 @@ class Twitch
     use Api\GamesTrait;
     use Api\GoalsTrait;
     use Api\HypeTrainTrait;
+    use Api\ModerationTrait;
+    use Api\MusicTrait;
+    use Api\OAuthTrait;
     use Api\PollsTrait;
     use Api\PredictionsTrait;
+    use Api\RaidsTrait;
+    use Api\ScheduleTrait;
     use Api\SearchTrait;
     use Api\StreamsTrait;
-    use Api\UsersTrait;
-    use Api\VideosTrait;
     use Api\SubscriptionsTrait;
     use Api\TagsTrait;
-    use Api\ModerationTrait;
-    use Api\WebhooksTrait;
-    use Api\ScheduleTrait;
     use Api\TeamsTrait;
-    use Api\MusicTrait;
+    use Api\UsersTrait;
+    use Api\VideosTrait;
+    use Api\WebhooksTrait;
     use Api\WhispersTrait;
-    use Api\RaidsTrait;
 
     public const BASE_URI = 'https://api.twitch.tv/helix/';
 

@@ -89,14 +89,15 @@ trait ChannelPointsTrait
      * @see https://dev.twitch.tv/docs/api/reference#update-custom-reward
      *
      * @param array<string, mixed> $parameters
+     * @param array<string, mixed> $body
      *
      * @return \romanzipp\Twitch\Result
      */
-    public function updateCustomReward(array $parameters = []): Result
+    public function updateCustomReward(array $parameters = [], array $body = []): Result
     {
         $this->validateRequired($parameters, ['broadcaster_id', 'id']);
 
-        return $this->patch('channel_points/custom_rewards', $parameters);
+        return $this->patch('channel_points/custom_rewards', $parameters, null, $body);
     }
 
     /**

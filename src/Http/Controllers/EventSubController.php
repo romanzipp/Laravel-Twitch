@@ -36,7 +36,7 @@ class EventSubController extends Controller
         $messageId = $request->header('twitch-eventsub-message-id');
         $retries = (int) $request->header('twitch-eventsub-message-retry');
         $timestamp = Carbon::createFromTimestampUTC(
-                        EventSubSignature::getTimestamp($request->header('twitch-eventsub-message-timestamp')));
+            EventSubSignature::getTimestamp($request->header('twitch-eventsub-message-timestamp')));
 
         if ('notification' === $messageType) {
             $messageType = sprintf('%s.notification', $payload['subscription']['type']);

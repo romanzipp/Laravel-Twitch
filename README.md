@@ -330,13 +330,6 @@ $twitch->unsubscribeEventSub([
 
 **Twitch Helix API Documentation: https://dev.twitch.tv/docs/api/reference**
 
-### OAuth
-
-```php
-public function getOAuthAuthorizeUrl(string $responseType = 'code', array $scopes = [], ?string $state = NULL, bool $forceVerify = false)
-public function getOAuthToken(?string $code = NULL, string $grantType = 'authorization_code', array $scopes = [])
-```
-
 ### Ads
 
 ```php
@@ -365,8 +358,22 @@ public function createCustomRewards(array $parameters = [], array $body = [])
 public function deleteCustomReward(array $parameters = [])
 public function getCustomReward(array $parameters = [])
 public function getCustomRewardRedemption(array $parameters = [], ?Paginator $paginator = NULL)
-public function updateCustomReward(array $parameters = [])
+public function updateCustomReward(array $parameters = [], array $body = [])
 public function updateRedemptionStatus(array $parameters = [], array $body = [])
+```
+
+### Channels
+
+```php
+public function getChannels(array $parameters = [])
+public function updateChannels(array $parameters = [], array $body = [])
+public function getChannelEditors(array $parameters = [])
+```
+
+### Charity
+
+```php
+public function getCharityCampaign(array $parameters = [])
 ```
 
 ### Chat
@@ -377,6 +384,8 @@ public function getGlobalChatEmotes()
 public function getChatEmoteSets(array $parameters = [])
 public function getChannelChatBadges(array $parameters = [])
 public function getGlobalChatBadges()
+public function getChatSettings(array $parameters = [])
+public function updateChatSettings(array $parameters, array $body = [])
 public function sendChatAnnouncement(array $parameters = [], array $body = [])
 public function getUserChatColor(array $parameters = [])
 public function updateUserChatColor(array $parameters = [])
@@ -392,10 +401,11 @@ public function getClips(array $parameters = [], ?Paginator $paginator = NULL)
 ### Entitlements
 
 ```php
-public function createEntitlementUrl(array $parameters = [])
+public function createEntitlementUrl(array $parameters = []) // DEPRECATED
 public function getEntitlementsCodeStatus(array $parameters = [])
 public function getDropsEntitlements(array $parameters = [])
 public function redeemEntitlementsCode(array $parameters = [])
+public function updateDropsEntitlements(array $parameters = [], array $body = [])
 ```
 
 ### EventSub
@@ -419,7 +429,7 @@ public function getExtensionConfigurationSegment(array $parameters = [])
 public function setExtensionConfigurationSegment(array $body = [])
 public function setExtensionRequiredConfiguration(array $parameters = [], array $body = [])
 public function sendExtensionPubSubMessage(array $body = [])
-public function getExtensionLiveChannels(array $parameters = [], ?Paginator $paginator = null)
+public function getExtensionLiveChannels(array $parameters = [], ?Paginator $paginator = NULL)
 public function getExtensionSecrets(array $parameters = [])
 public function createExtensionSecret(array $parameters = [])
 public function sendExtensionChatMessage(array $parameters = [], array $body = [])
@@ -436,10 +446,55 @@ public function getTopGames(array $parameters = [], ?Paginator $paginator = NULL
 public function getGames(array $parameters = [])
 ```
 
+### Goals
+
+```php
+public function getCreatorGoals(array $parameters = [])
+```
+
 ### HypeTrain
 
 ```php
 public function getHypeTrainEvents(array $parameters = [])
+```
+
+### Moderation
+
+```php
+public function checkAutoModStatus(array $parameters = [], array $body = [])
+public function getBannedUsers(array $parameters = [], ?Paginator $paginator = NULL)
+public function getBannedEvents(array $parameters = [], ?Paginator $paginator = NULL) // DEPRECATED
+public function getModerators(array $parameters = [], ?Paginator $paginator = NULL)
+public function getModeratorEvents(array $parameters = [], ?Paginator $paginator = NULL) // DEPRECATED
+public function manageHeldAutoModMessages(array $parameters = [], array $body = [])
+public function getAutoModSettings(array $parameters = [])
+public function updateAutoModSettings(array $parameters = [], array $body = [])
+public function banUser(array $parameters = [], array $body = [])
+public function unbanUser(array $parameters = [])
+public function getBlockedTerms(array $parameters = [], ?Paginator $paginator = NULL)
+public function addBlockedTerm(array $parameters = [], array $body = [])
+public function removeBlockedTerm(array $parameters = [])
+public function deleteChatMessages(array $parameters = [])
+public function addChannelModerator(array $parameters = [])
+public function removeChannelModerator(array $parameters = [])
+public function getVIPs(array $parameters = [], ?Paginator $paginator = NULL)
+public function addChannelVIP(array $parameters = [])
+public function removeChannelVIP(array $parameters = [])
+```
+
+### Music
+
+```php
+public function getSoundtrackCurrentTrack(array $parameters = [])
+public function getSoundtrackPlaylist(array $parameters = [], ?Paginator $paginator = NULL)
+public function getSoundtrackPlaylists(array $parameters = [])
+```
+
+### OAuth
+
+```php
+public function getOAuthAuthorizeUrl(string $responseType = 'code', array $scopes = [], ?string $state = NULL, bool $forceVerify = false)
+public function getOAuthToken(?string $code = NULL, string $grantType = 'authorization_code', array $scopes = [])
 ```
 
 ### Polls
@@ -458,6 +513,24 @@ public function createPrediction(array $parameters = [], array $body = [])
 public function endPrediction(array $parameters = [], array $body = [])
 ```
 
+### Raids
+
+```php
+public function startRaid(array $parameters = [])
+public function cancelRaid(array $parameters = [])
+```
+
+### Schedule
+
+```php
+public function getChannelStreamSchedule(array $parameters = [], ?Paginator $paginator = NULL)
+public function getChanneliCalendar(array $parameters = [])
+public function updateChannelStreamSchedule(array $parameters = [])
+public function createChannelStreamScheduleSegment(array $parameters = [], array $body = [])
+public function updateChannelStreamScheduleSegment(array $parameters = [], array $body = [])
+public function deleteChannelStreamScheduleSegment(array $parameters = [], array $body = [])
+```
+
 ### Search
 
 ```php
@@ -473,8 +546,28 @@ public function getStreams(array $parameters = [], ?Paginator $paginator = NULL)
 public function getFollowedStreams(array $parameters = [], ?Paginator $paginator = NULL)
 public function createStreamMarker(array $parameters = [], array $body = [])
 public function getStreamMarkers(array $parameters = [], ?Paginator $paginator = NULL)
-public function getChannels(array $parameters = [])
-public function updateChannels(array $parameters = [], array $body = [])
+```
+
+### Subscriptions
+
+```php
+public function getSubscriptions(array $parameters = [], ?Paginator $paginator = NULL)
+public function getUserSubscription(array $parameters = [])
+```
+
+### Tags
+
+```php
+public function getStreamTags(array $parameters = [])
+public function getAllStreamTags(array $parameters = [], ?Paginator $paginator = NULL)
+public function replaceStreamTags(array $parameters = [], array $body = [])
+```
+
+### Teams
+
+```php
+public function getChannelTeams(array $parameters = [])
+public function getTeams(array $parameters = [])
 ```
 
 ### Users
@@ -500,76 +593,6 @@ public function getVideos(array $parameters = [], ?Paginator $paginator = NULL)
 public function deleteVideos(array $parameters = [])
 ```
 
-### Music
-
-```php
-public function getSoundtrackCurrentTrack(array $parameters = [])
-public function getSoundtrackPlaylist(array $parameters = [], ?Paginator $paginator = NULL)
-public function getSoundtrackPlaylists(array $parameters = [])
-```
-
-### Subscriptions
-
-```php
-public function getSubscriptions(array $parameters = [], ?Paginator $paginator = NULL)
-public function getUserSubscription(array $parameters = [])
-```
-
-### Tags
-
-```php
-public function getStreamTags(array $parameters = [])
-public function getAllStreamTags(array $parameters = [], ?Paginator $paginator = NULL)
-public function replaceStreamTags(array $parameters = [], array $body = [])
-```
-
-### Moderation
-
-```php
-public function checkAutoModStatus(array $parameters = [], array $body = [])
-public function getBannedUsers(array $parameters = [], ?Paginator $paginator = NULL)
-public function getBannedEvents(array $parameters = [], ?Paginator $paginator = NULL)
-public function getModerators(array $parameters = [], ?Paginator $paginator = NULL)
-public function getModeratorEvents(array $parameters = [], ?Paginator $paginator = NULL)
-public function deleteChatMessages(array $parameters = [])
-public function addChannelModerator(array $parameters = [])
-public function removeChannelModerator(array $parameters = [])
-public function getVIPs(array $parameters = [], ?Paginator $paginator = NULL)
-public function addChannelVIP(array $parameters = [])
-public function removeChannelVIP(array $parameters = [])
-```
-
-### Raids
-
-```php
-public function startRaid(array $parameters = [])
-public function cancelRaid(array $parameters = [])
-```
-
-### Teams
-
-```php
-public function getChannelTeams(array $parameters = [])
-public function getTeams(array $parameters = [])
-```
-
-### Schedule
-
-```php
-public function getChannelStreamSchedule(array $parameters = [], ?Paginator $paginator = NULL)
-public function getChanneliCalendar(array $parameters = [])
-public function updateChannelStreamSchedule(array $parameters = [])
-public function createChannelStreamScheduleSegment(array $parameters = [], array $body = [])
-public function updateChannelStreamScheduleSegment(array $parameters = [], array $body = [])
-public function deleteChannelStreamScheduleSegment(array $parameters = [], array $body = [])
-```
-
-### Whispers
-
-```php
-public function sendWhisper(array $parameters = [], array $body = [])
-```
-
 ### Webhooks
 
 ```php
@@ -577,6 +600,12 @@ public function getWebhookSubscriptions(array $parameters = []) // DEPRECATED
 public function subscribeWebhook(array $parameters = [], array $body = []) // DEPRECATED
 public function unsubscribeWebhook(array $parameters = [], array $body = []) // DEPRECATED
 public function buildWebhookTopic(string $path, array $parameters = []) // DEPRECATED
+```
+
+### Whispers
+
+```php
+public function sendWhisper(array $parameters = [], array $body = [])
 ```
 
 [**OAuth Scopes Enums**](https://github.com/romanzipp/Laravel-Twitch/blob/master/src/Enums/Scope.php)

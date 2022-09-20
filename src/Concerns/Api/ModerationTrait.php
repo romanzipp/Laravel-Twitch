@@ -281,7 +281,7 @@ trait ModerationTrait
      *
      * @see https://dev.twitch.tv/docs/api/reference#remove-channel-moderator
      *
-     * @param array $parameters
+     * @param array<string, mixed> $parameters
      *
      * @return Result
      */

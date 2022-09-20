@@ -351,6 +351,7 @@ trait ExtensionsTrait
      *
      * @see https://dev.twitch.tv/docs/api/reference#update-extension-bits-product
      *
+     * @param array<string, mixed> $parameters
      * @param array<string, mixed> $body
      *
      * @return Result

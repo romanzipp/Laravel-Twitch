@@ -19,6 +19,7 @@ class Twitch
     use Api\BitsTrait;
     use Api\ChannelPointsTrait;
     use Api\ChannelsTrait;
+    use Api\CharityTrait;
     use Api\ChatTrait;
     use Api\ClipsTrait;
     use Api\EntitlementsTrait;

@@ -57,7 +57,7 @@ trait OAuthTrait
     public function getOAuthToken(?string $code = null, string $grantType = GrantType::AUTHORIZATION_CODE, array $scopes = []): Result
     {
         if ( ! $clientId = $this->getClientId()) {
-            throw new InvalidArgumentException('The OAuth request requires a client secret to be set');
+            throw new InvalidArgumentException('The OAuth request requires a client id to be set');
         }
 
         if ( ! $clientSecret = $this->getClientSecret()) {

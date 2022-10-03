@@ -19,6 +19,8 @@ trait EntitlementsTrait
      * @param array<string, mixed> $parameters
      *
      * @return \romanzipp\Twitch\Result Result instance
+     *
+     * @deprecated since 2021‑02‑26 "Removed the “Create Entitlement Grants Upload URL” Twitch API endpoint associated with a previous version of Twitch Drops."
      */
     public function createEntitlementUrl(array $parameters = []): Result
     {
@@ -72,5 +74,20 @@ trait EntitlementsTrait
     public function redeemEntitlementsCode(array $parameters = []): Result
     {
         return $this->post('entitlements/code', $parameters);
+    }
+
+    /**
+     * Updates the fulfillment status on a set of Drops entitlements, specified by their entitlement IDs.
+     *
+     * @see https://dev.twitch.tv/docs/api/reference#update-drops-entitlements
+     *
+     * @param array<string, mixed> $parameters
+     * @param array<string, mixed> $body
+     *
+     * @return \romanzipp\Twitch\Result
+     */
+    public function updateDropsEntitlements(array $parameters = [], array $body = []): Result
+    {
+        return $this->patch('entitlements/drops', $parameters, null, $body);
     }
 }

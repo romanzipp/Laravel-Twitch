@@ -7,7 +7,6 @@ use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
 use Firebase\JWT\SignatureInvalidException;
 use Illuminate\Auth\RequestGuard;
-use Illuminate\Contracts\Auth\UserProvider as IlluminateUserProvider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
@@ -19,7 +18,7 @@ class TwitchExtensionGuard
 
     public static bool $WITH_CACHE = false;
 
-    protected IlluminateUserProvider $userProvider;
+    protected TwitchUserProvider $twitchUserProvider;
 
     /**
      * The secrets of the twitch extension guard.
@@ -31,11 +30,11 @@ class TwitchExtensionGuard
     /**
      * Create a new authentication guard.
      *
-     * @param IlluminateUserProvider $userProvider
+     * @param TwitchUserProvider $twitchUserProvider
      */
-    public function __construct(IlluminateUserProvider $userProvider)
+    public function __construct(TwitchUserProvider $twitchUserProvider)
     {
-        $this->userProvider = $userProvider;
+        $this->twitchUserProvider = $twitchUserProvider;
     }
 
     /**
@@ -97,7 +96,7 @@ class TwitchExtensionGuard
             }
         }
 
-        throw new SignatureInvalidException('Twitch extension sSignature verification failed.');
+        throw new SignatureInvalidException('Twitch extension signature verification failed.');
     }
 
     /**
@@ -110,7 +109,7 @@ class TwitchExtensionGuard
         self::addExtSecret($secret);
         Auth::extend($driver, function ($app, $name, array $config) {
             return new RequestGuard(function ($request) use ($config) {
-                return (new self(Auth::createUserProvider($config['provider'])))->user($request);
+                return (new self(app(TwitchUserProvider::class)))->user($request);
             }, app('request'));
         });
     }
@@ -122,11 +121,8 @@ class TwitchExtensionGuard
      */
     private function resolveUser($decoded)
     {
-        $user = $this->userProvider->retrieveById($decoded->user_id);
-
-        if ($this->userProvider instanceof UserProvider) {
-            $user = $user ?? $this->userProvider->createFromTwitchToken($decoded);
-        }
+        $user = $this->twitchUserProvider->retrieveById($decoded->user_id);
+        $user = $user ?? $this->twitchUserProvider->createFromTwitchToken($decoded);
 
         if (null === $user) {
             return null;

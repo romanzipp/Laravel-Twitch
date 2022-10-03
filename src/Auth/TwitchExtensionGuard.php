@@ -4,6 +4,7 @@ namespace romanzipp\Twitch\Auth;
 
 use Exception;
 use Firebase\JWT\JWT;
+use Firebase\JWT\Key;
 use Firebase\JWT\SignatureInvalidException;
 use Illuminate\Auth\RequestGuard;
 use Illuminate\Http\Request;
@@ -22,9 +23,9 @@ class TwitchExtensionGuard
     /**
      * The secrets of the twitch extension guard.
      *
-     * @var array
+     * @var array<Key>
      */
-    private static array $extSecrets = [];
+    private static array $extSecretKeys = [];
 
     /**
      * Create a new authentication guard.
@@ -41,9 +42,9 @@ class TwitchExtensionGuard
      *
      * @param string $secret
      */
-    public static function addExtSecret(string $secret)
+    public static function addExtSecret(string $secret): void
     {
-        static::$extSecrets[] = $secret;
+        static::$extSecretKeys[] = new Key(base64_decode($secret), 'HS256');
     }
 
     /**
@@ -80,16 +81,16 @@ class TwitchExtensionGuard
         }
     }
 
-    private function getCacheKey($token): string
+    private function getCacheKey(string $token): string
     {
         return sprintf(self::$CACHE_KEY, sha1($token));
     }
 
     private function decodeAuthorizationToken(string $token): stdClass
     {
-        foreach (self::$extSecrets as $extSecret) {
+        foreach (self::$extSecretKeys as $extSecretKey) {
             try {
-                return JWT::decode($token, base64_decode($extSecret), ['HS256']);
+                return JWT::decode($token, $extSecretKey);
             } catch (SignatureInvalidException $exception) {
                 // do nothing
             }
@@ -107,7 +108,7 @@ class TwitchExtensionGuard
      * @param UserProvider $twitchUserProvider
      * @param string $driver
      */
-    public static function register(string $secret, UserProvider $twitchUserProvider, string $driver = 'twitch'): void
+    public static function register(string $secret, UserProvider $twitchUserProvider, string $driver = 'laravel-twitch'): void
     {
         self::addExtSecret($secret);
         Auth::extend($driver, function ($app, $name, array $config) use ($twitchUserProvider) {
@@ -134,8 +135,6 @@ class TwitchExtensionGuard
         if (method_exists($user, 'withTwitchToken')) {
             $user = $user->withTwitchToken($decoded);
         }
-
-        $user->cached_at = now();
 
         return $user;
     }

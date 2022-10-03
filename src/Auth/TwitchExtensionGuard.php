@@ -7,6 +7,7 @@ use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
 use Firebase\JWT\SignatureInvalidException;
 use Illuminate\Auth\RequestGuard;
+use Illuminate\Contracts\Auth\UserProvider as IlluminateUserProvider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
@@ -18,7 +19,7 @@ class TwitchExtensionGuard
 
     public static bool $WITH_CACHE = false;
 
-    protected UserProvider $userProvider;
+    protected IlluminateUserProvider $userProvider;
 
     /**
      * The secrets of the twitch extension guard.
@@ -30,9 +31,9 @@ class TwitchExtensionGuard
     /**
      * Create a new authentication guard.
      *
-     * @param UserProvider $userProvider
+     * @param IlluminateUserProvider $userProvider
      */
-    public function __construct(UserProvider $userProvider)
+    public function __construct(IlluminateUserProvider $userProvider)
     {
         $this->userProvider = $userProvider;
     }
@@ -103,17 +104,13 @@ class TwitchExtensionGuard
      * Registers the twitch extension guard as new auth guard.
      *
      * Add this to your AuthServiceProvider::boot() method.
-     *
-     * @param string $secret
-     * @param UserProvider $twitchUserProvider
-     * @param string $driver
      */
-    public static function register(string $secret, UserProvider $twitchUserProvider, string $driver = 'laravel-twitch'): void
+    public static function register(string $secret, string $driver = 'laravel-twitch'): void
     {
         self::addExtSecret($secret);
-        Auth::extend($driver, function ($app, $name, array $config) use ($twitchUserProvider) {
-            return new RequestGuard(function ($request) use ($twitchUserProvider) {
-                return (new self($twitchUserProvider))->user($request);
+        Auth::extend($driver, function ($app, $name, array $config) {
+            return new RequestGuard(function ($request) use ($config) {
+                return (new self(Auth::createUserProvider($config['provider'])))->user($request);
             }, app('request'));
         });
     }
@@ -126,7 +123,10 @@ class TwitchExtensionGuard
     private function resolveUser($decoded)
     {
         $user = $this->userProvider->retrieveById($decoded->user_id);
-        $user = $user ?? $this->userProvider->createFromTwitchToken($decoded);
+
+        if ($this->userProvider instanceof UserProvider) {
+            $user = $user ?? $this->userProvider->createFromTwitchToken($decoded);
+        }
 
         if (null === $user) {
             return null;

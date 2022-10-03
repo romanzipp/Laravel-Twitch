@@ -333,20 +333,24 @@ $twitch->unsubscribeEventSub([
 Edit `app/Providers/AuthServiceProvider.php`:
 
 ```php
+use App\Auth\TwitchUserProvider;
 use romanzipp\Twitch\Auth\TwitchExtensionGuard;
 
 public function boot()  
 {  
 	...
 	
-	TwitchExtensionGuard::register(config('twitch-api.ext_secret'), new TwitchUserProvider);  
+	TwitchUserProvider::register();
+	TwitchExtensionGuard::register(config('twitch-api.ext_secret'));  
 }
 ```
 
 #### 2. Configure TwitchExtensionGuard
 
+Create `app/Auth/TwitchUserProvider.php`:
+
 ```php
-namespace App\Utils;
+namespace App\Auth;
 
 use App\User;
 use romanzipp\Twitch\Auth\UserProvider;
@@ -362,6 +366,7 @@ class TwitchUserProvider extends UserProvider
 		return $user;  
 	}  
 
+    // This method is optional, if you don't want automatic user creation on request.
 	public function createFromTwitchToken($decoded): ?Authenticatable  
 	{
 		return User::createFromTwitchToken($decoded);  
@@ -371,6 +376,8 @@ class TwitchUserProvider extends UserProvider
 
 #### 3. Configure Guard
 
+Edit `config/auth.php`:
+
 ```php
 <?php
 
@@ -378,11 +385,17 @@ return [
     ...
     'guards' => [
         ...
-        'twitch' => [
-            'driver' => 'twitch',
-            'provider' => 'users', // this is wrong, will be fixed soon
+        'twitch-extension' => [
+            'driver' => 'laravel-twitch',
+            'provider' => 'laravel-twitch',
         ],
     ],
+    'providers' => [
+        ...
+        'laravel-twitch' => [
+            'driver' => 'laravel-twitch',
+        ],
+    ]
     ...
 ];
 ```

@@ -328,24 +328,7 @@ $twitch->unsubscribeEventSub([
 
 ### Twitch Extension Guard
 
-#### 1. Register TwitchExtensionGuard
-
-Edit `app/Providers/AuthServiceProvider.php`:
-
-```php
-use App\Auth\TwitchUserProvider;
-use romanzipp\Twitch\Auth\TwitchExtensionGuard;
-
-public function boot()  
-{  
-	...
-	
-	TwitchUserProvider::register();
-	TwitchExtensionGuard::register(config('twitch-api.ext_secret'));  
-}
-```
-
-#### 2. Configure TwitchExtensionGuard
+#### 1. Create TwitchUserProvider
 
 Create `app/Auth/TwitchUserProvider.php`:
 
@@ -353,10 +336,10 @@ Create `app/Auth/TwitchUserProvider.php`:
 namespace App\Auth;
 
 use App\User;
-use romanzipp\Twitch\Auth\UserProvider;
+use romanzipp\Twitch\Auth\TwitchUserProvider;
 use Illuminate\Contracts\Auth\Authenticatable;
   
-class TwitchUserProvider extends UserProvider  
+class TwitchUserProvider extends TwitchUserProvider  
 {  
 	public function retrieveById($identifier): ?Authenticatable  
 	{
@@ -374,7 +357,25 @@ class TwitchUserProvider extends UserProvider
 }
 ```
 
-#### 3. Configure Guard
+#### 2. Register TwitchUserProvider & TwitchExtensionGuard
+
+Edit `app/Providers/AuthServiceProvider.php`:
+
+```php
+use App\Auth\TwitchUserProvider;
+use romanzipp\Twitch\Auth\TwitchExtensionGuard;
+use romanzipp\Twitch\Auth\TwitchUserProvider;
+
+public function boot()  
+{  
+	...
+	
+	$this->app->bind(TwitchUserProvider::class, Auth\TwitchUserProvider::class);
+	TwitchExtensionGuard::register(config('twitch-api.ext_secret'));  
+}
+```
+
+#### 3. Make guard available in Laravel
 
 Edit `config/auth.php`:
 
@@ -390,12 +391,6 @@ return [
             'provider' => 'laravel-twitch',
         ],
     ],
-    'providers' => [
-        ...
-        'laravel-twitch' => [
-            'driver' => 'laravel-twitch',
-        ],
-    ]
     ...
 ];
 ```

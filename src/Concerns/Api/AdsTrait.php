@@ -22,7 +22,7 @@ trait AdsTrait
      */
     public function startCommercial(array $parameters = []): Result
     {
-        $this->validateAnyRequired($parameters, ['broadcaster_id', 'length']);
+        $this->validateRequired($parameters, ['broadcaster_id', 'length']);
 
         return $this->post('channels/commercial', $parameters);
     }

@@ -75,6 +75,7 @@ trait ClientCredentialsTrait
      * Possibly get a cached and not-expired version of the Access Token.
      *
      * @return \romanzipp\Twitch\Objects\AccessToken|null
+     *
      * @noinspection PhpDocMissingThrowsInspection
      */
     protected function getCachedClientCredentialsToken(): ?AccessToken
@@ -102,6 +103,7 @@ trait ClientCredentialsTrait
      * Store the client credentials in cache.
      *
      * @param \romanzipp\Twitch\Objects\AccessToken $token
+     *
      * @noinspection PhpDocMissingThrowsInspection
      */
     protected function storeClientCredentialsToken(AccessToken $token): void

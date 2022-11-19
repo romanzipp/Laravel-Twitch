@@ -389,6 +389,7 @@ public function updateChatSettings(array $parameters, array $body = [])
 public function sendChatAnnouncement(array $parameters = [], array $body = [])
 public function getUserChatColor(array $parameters = [])
 public function updateUserChatColor(array $parameters = [])
+public function getChatters(array $parameters = [], ?Paginator $paginator = NULL)
 ```
 
 ### Clips

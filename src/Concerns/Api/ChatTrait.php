@@ -4,6 +4,7 @@ namespace romanzipp\Twitch\Concerns\Api;
 
 use romanzipp\Twitch\Concerns\Operations\AbstractOperationsTrait;
 use romanzipp\Twitch\Concerns\Operations\AbstractValidationTrait;
+use romanzipp\Twitch\Objects\Paginator;
 use romanzipp\Twitch\Result;
 
 trait ChatTrait
@@ -170,5 +171,27 @@ trait ChatTrait
         $this->validateRequired($parameters, ['user_id', 'color']);
 
         return $this->put('chat/color', $parameters);
+    }
+
+    /**
+     * Gets the list of users that are connected to the broadcaster’s chat session.
+     *
+     * NOTE: There is a delay between when users join and leave a chat and when the list is updated accordingly.
+     *
+     * To determine whether a user is a moderator or VIP, use the Get Moderators and Get VIPs endpoints.
+     * You can check the roles of up to 100 users.
+     *
+     * @see https://dev.twitch.tv/docs/api/reference#get-chatters
+     *
+     * @param array<string, mixed> $parameters
+     * @param Paginator|null $paginator
+     *
+     * @return Result
+     */
+    public function getChatters(array $parameters = [], Paginator $paginator = null): Result
+    {
+        $this->validateRequired($parameters, ['broadcaster_id', 'moderator_id']);
+
+        return $this->get('chat/chatters', $parameters, $paginator);
     }
 }

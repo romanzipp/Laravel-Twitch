@@ -3,7 +3,6 @@
 namespace romanzipp\Twitch\Tests\Api;
 
 use romanzipp\Twitch\Tests\TestCases\ApiTestCase;
-use stdClass;
 
 class GamesTest extends ApiTestCase
 {
@@ -51,7 +50,7 @@ class GamesTest extends ApiTestCase
         self::assertTrue($result->success(), $result->getErrorMessage());
         self::assertNotEmpty($result->data());
 
-        $ids = array_map(function (stdClass $game) {
+        $ids = array_map(function (\stdClass $game) {
             return (int) $game->id;
         }, $result->data());
 
@@ -69,7 +68,7 @@ class GamesTest extends ApiTestCase
         self::assertTrue($result->success(), $result->getErrorMessage());
         self::assertNotEmpty($result->data());
 
-        $ids = array_map(function (stdClass $game) {
+        $ids = array_map(function (\stdClass $game) {
             return (int) $game->id;
         }, $result->data());
 

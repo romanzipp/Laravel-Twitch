@@ -5,7 +5,6 @@ namespace romanzipp\Twitch;
 use Psr\Http\Client\RequestExceptionInterface;
 use Psr\Http\Message\ResponseInterface;
 use romanzipp\Twitch\Objects\Paginator;
-use stdClass;
 
 class Result
 {
@@ -95,7 +94,7 @@ class Result
         return $this->total;
     }
 
-    public function getPagination(): ?stdClass
+    public function getPagination(): ?\stdClass
     {
         return $this->pagination;
     }

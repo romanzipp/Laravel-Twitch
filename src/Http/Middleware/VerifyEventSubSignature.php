@@ -2,7 +2,6 @@
 
 namespace romanzipp\Twitch\Http\Middleware;
 
-use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use romanzipp\Twitch\Exceptions\SignatureVerificationException;
@@ -15,13 +14,13 @@ class VerifyEventSubSignature
      * Handle the incoming request.
      *
      * @param Request $request
-     * @param Closure $next
+     * @param \Closure $next
      *
      * @throws AccessDeniedHttpException
      *
      * @return Response
      */
-    public function handle($request, Closure $next)
+    public function handle($request, \Closure $next)
     {
         try {
             EventSubSignature::verifyHeader(

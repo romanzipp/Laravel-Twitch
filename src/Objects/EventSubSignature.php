@@ -28,7 +28,7 @@ class EventSubSignature
             $timestamp = self::getTimestamp(
                 $rawTimestamp = $headers->get('twitch-eventsub-message-timestamp')
             );
-        } catch (Exception $exception) {
+        } catch (\Exception $exception) {
             throw new SignatureVerificationException('Unable to parse timestamp from header', 0, $exception);
         }
 

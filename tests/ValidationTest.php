@@ -2,7 +2,6 @@
 
 namespace romanzipp\Twitch\Tests;
 
-use InvalidArgumentException;
 use romanzipp\Twitch\Concerns\Validation\ValidationTrait;
 use romanzipp\Twitch\Tests\TestCases\TestCase;
 
@@ -12,14 +11,14 @@ class ValidationTest extends TestCase
 
     public function testAllRequiredAllMissing()
     {
-        $this->expectException(InvalidArgumentException::class);
+        $this->expectException(\InvalidArgumentException::class);
 
         $this->validateRequired([], ['foo', 'bar']);
     }
 
     public function testAllRequiredOneMissing()
     {
-        $this->expectException(InvalidArgumentException::class);
+        $this->expectException(\InvalidArgumentException::class);
 
         $this->validateRequired(['foo' => 'foo'], ['foo', 'bar']);
     }
@@ -38,14 +37,14 @@ class ValidationTest extends TestCase
 
     public function testOneRequiredMssing()
     {
-        $this->expectException(InvalidArgumentException::class);
+        $this->expectException(\InvalidArgumentException::class);
 
         $this->validateRequired([], ['foo']);
     }
 
     public function testOneRequiredEmpty()
     {
-        $this->expectException(InvalidArgumentException::class);
+        $this->expectException(\InvalidArgumentException::class);
 
         $this->validateRequired(['foo' => null], ['foo']);
     }
@@ -60,14 +59,14 @@ class ValidationTest extends TestCase
 
     public function testAnyRequiredMissing()
     {
-        $this->expectException(InvalidArgumentException::class);
+        $this->expectException(\InvalidArgumentException::class);
 
         $this->validateAnyRequired(['foobar' => 'foo'], ['foo', 'bar']);
     }
 
     public function testAnyRequiredEmpty()
     {
-        $this->expectException(InvalidArgumentException::class);
+        $this->expectException(\InvalidArgumentException::class);
 
         $this->validateAnyRequired(['foo' => null], ['foo', 'bar']);
     }

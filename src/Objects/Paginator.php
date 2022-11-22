@@ -3,14 +3,13 @@
 namespace romanzipp\Twitch\Objects;
 
 use romanzipp\Twitch\Result;
-use stdClass;
 
 class Paginator
 {
     /**
      * Twitch response pagination cursor.
      *
-     * @var stdClass|null
+     * @var \stdClass|null
      */
     private $pagination;
 
@@ -24,9 +23,9 @@ class Paginator
     /**
      * Constructor.
      *
-     * @param stdClass|null $pagination Twitch response pagination cursor
+     * @param \stdClass|null $pagination Twitch response pagination cursor
      */
-    public function __construct(stdClass $pagination = null)
+    public function __construct(\stdClass $pagination = null)
     {
         $this->pagination = $pagination;
     }

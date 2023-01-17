@@ -72,4 +72,17 @@ class AccessToken implements Arrayable
 
         return time() > $this->expiresAt;
     }
+
+    public function fromJsonOrString(string $jsonOrString): self
+    {
+        if (!str_contains($jsonOrString, '{')) {
+            return new self([
+                'access_token' => $jsonOrString,
+                'expires_in' => 86400,
+                'token_type' => 'client_credentials',
+            ]);
+        }
+
+        return new self(json_decode($jsonOrString, true));
+    }
 }

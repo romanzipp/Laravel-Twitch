@@ -3,6 +3,7 @@
 namespace romanzipp\Twitch\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use romanzipp\Twitch\Contracts\ClientCredentialsRepository;
 use romanzipp\Twitch\Twitch;
 
 class TwitchServiceProvider extends ServiceProvider
@@ -28,6 +29,11 @@ class TwitchServiceProvider extends ServiceProvider
     {
         $this->mergeConfigFrom(
             dirname(__DIR__) . '/../config/twitch-api.php', 'twitch-api'
+        );
+
+        $this->app->singleton(
+            ClientCredentialsRepository::class,
+            config('twitch-api.oauth_client_credentials.provider')
         );
 
         $this->app->singleton(Twitch::class, function () {

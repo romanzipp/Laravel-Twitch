@@ -326,6 +326,88 @@ $twitch->unsubscribeEventSub([
 ]);
 ```
 
+### Credentials Repository
+
+> **Intermediate**: This section is for advanced users only. If you are not sure what this is about, you can skip this section.
+> If you plan to share your twitch credentials between multiple applications (with different caches), you should use a secret manager
+> like [Google Secret Manager](https://cloud.google.com/secret-manager) or [AWS Secrets Manager](https://aws.amazon.com/secrets-manager/).
+
+Currently, there are three different ways to obtain an access token:
+
+- Client Credentials Flow (`TwitchClientCredentialsRepository`)
+- Google Secret Manager (`GoogleClientCredentialsRepository`)
+- AWS Secrets Manager (`AwsClientCredentialsRepository`)
+
+#### Client Credentials Flow
+
+The Client Credentials Flow is the most common way to obtain an access token. It is used by the `TwitchClientCredentialsRepository` class.
+
+No additional configuration is required.
+
+#### Google Secret Manager
+
+The Google Secret Manager is a secret manager provided by Google Cloud. It is used by the `GoogleClientCredentialsRepository` class.
+
+To use the Google Secret Manager, you must install the `google/cloud-secret-manager` package.
+
+```bash
+composer require google/cloud-secret-manager
+```
+
+Next, you must set the following environment variables (adjust the values to your needs):
+    
+```dotenv
+TWITCH_HELIX_SECRET_MANAGER_PROJECT_ID=your-project-id
+TWITCH_HELIX_SECRET_MANAGER_SECRET_ID=your-secret-id
+TWITCH_HELIX_SECRET_MANAGER_SECRET_VERSION=latest
+```
+
+Usually Google will use ADC (Application Default Credentials) to authenticate. If you want to use a service account, you can set the following environment variables:
+
+```dotenv
+GOOGLE_APPLICATION_CREDENTIALS=/path/to/your/service-account.json
+```
+
+Otherwise, ADC will check a known file system location that is user-specific for a JSON file created by the gcloud command-line tool.
+
+On Windows, `%APPDATA%/gcloud/application_default_credentials.json`.
+On other systems, `$HOME/.config/gcloud/application_default_credentials.json`.
+
+However, you can also re-bind the `SecretManagerServiceClient` class in your application's service container.
+
+#### AWS Secrets Manager
+
+The AWS Secrets Manager is a secret manager provided by Amazon Web Services. It is used by the `AwsClientCredentialsRepository` class.
+
+To use the AWS Secrets Manager, you must install the `aws/aws-sdk-php` package.
+
+```bash
+composer require aws/aws-sdk-php
+```
+
+Next, you must set the following environment variables (adjust the values to your needs):
+    
+```dotenv
+TWITCH_HELIX_SECRET_MANAGER_SECRET_ID=your-secret-id
+```
+
+When using the AWS Secrets Manager, you must bind the `Aws\SecretsManager\SecretsManagerClient` to the container:
+
+```php
+use Aws\SecretsManager\SecretsManagerClient;
+
+public function register()
+{
+    $this->app->bind(SecretsManagerClient::class, function () {
+        return new SecretsManagerClient([
+            'profile' => 'default',
+            'version' => '2017-10-17',
+            'region' => '<<{{MyRegionName}}>>',
+        ]);
+    });
+}
+```
+
 ## Documentation
 
 **Twitch Helix API Documentation: https://dev.twitch.tv/docs/api/reference**

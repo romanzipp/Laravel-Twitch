@@ -43,7 +43,7 @@ trait ScheduleTrait
     {
         $this->validateRequired($parameters, ['broadcaster_id']);
 
-        return $this->get('schedule', $parameters);
+        return $this->get('schedule/icalendar', $parameters);
     }
 
     /**

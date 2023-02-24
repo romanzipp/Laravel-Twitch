@@ -368,6 +368,8 @@ public function updateRedemptionStatus(array $parameters = [], array $body = [])
 public function getChannels(array $parameters = [])
 public function updateChannels(array $parameters = [], array $body = [])
 public function getChannelEditors(array $parameters = [])
+public function getChannelFollowers(array $parameters = [], Paginator $paginator = null)
+public function getChannelsFollowed(array $parameters = [], Paginator $paginator = null)
 ```
 
 ### Charity
@@ -390,6 +392,7 @@ public function sendChatAnnouncement(array $parameters = [], array $body = [])
 public function getUserChatColor(array $parameters = [])
 public function updateUserChatColor(array $parameters = [])
 public function getChatters(array $parameters = [], ?Paginator $paginator = NULL)
+public function sendShoutout(array $parameters = [])
 ```
 
 ### Clips
@@ -481,6 +484,8 @@ public function removeChannelModerator(array $parameters = [])
 public function getVIPs(array $parameters = [], ?Paginator $paginator = NULL)
 public function addChannelVIP(array $parameters = [])
 public function removeChannelVIP(array $parameters = [])
+public function getShieldModeStatus(array $parameters = [])
+public function updateShieldModeStatus(array $parameters = [], array $body = [])
 ```
 
 ### Music

@@ -63,6 +63,8 @@ trait UsersTrait
      * recent follow first. This can return information like “who is qotrok following,” “who is following qotrok,” or
      * “is user X following user Y.”.
      *
+     * @deprecated This endpoint is deprecated and will be decommissioned on August 3, 2023.
+     * Access to this endpoint is limited to client IDs that have called the endpoint on or before February 17, 2023.
      * @see https://dev.twitch.tv/docs/api/reference/#get-users-follows
      *
      * @param array<string, mixed> $parameters

@@ -194,4 +194,29 @@ trait ChatTrait
 
         return $this->get('chat/chatters', $parameters, $paginator);
     }
+
+    /**
+     * Sends a Shoutout to the specified broadcaster.Typically, you send Shoutouts when you or one of your moderators notice another broadcaster in your chat,
+     * the other broadcaster is coming up in conversation, or after they raid your broadcast.
+     *
+     * Twitch’s Shoutout feature is a great way for you to show support for other broadcasters and help them grow.
+     * Viewers who do not follow the other broadcaster will see a pop-up Follow button in your chat that they can click to follow the other broadcaster.
+     *
+     * Rate Limits The broadcaster may send a Shoutout once every 2 minutes. They may send the same broadcaster a Shoutout once every 60 minutes.
+     *
+     * To receive notifications when a Shoutout is sent or received, subscribe to the channel.shoutout.create and channel.shoutout.receive subscription types.
+     * The channel.shoutout.create event includes cooldown periods that indicate when the broadcaster may send another Shoutout without exceeding the endpoint’s rate limit.
+     *
+     * @see https://dev.twitch.tv/docs/api/reference/#send-a-shoutout
+     *
+     * @param array<string, mixed> $parameters
+     *
+     * @return Result
+     */
+    public function sendShoutout(array $parameters = []): Result
+    {
+        $this->validateRequired($parameters, ['from_broadcaster_id', 'to_broadcaster_id', 'moderator_id']);
+
+        return $this->post('chat/shoutouts', $parameters);
+    }
 }

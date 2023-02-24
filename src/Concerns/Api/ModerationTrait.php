@@ -344,4 +344,45 @@ trait ModerationTrait
 
         return $this->delete('channels/vips', $parameters);
     }
+
+    /**
+     * Gets the broadcaster’s Shield Mode activation status.
+     *
+     * To receive notification when the broadcaster activates and deactivates Shield Mode,
+     * subscribe to the channel.shield_mode.begin and channel.shield_mode.end subscription types.
+     *
+     * @see https://dev.twitch.tv/docs/api/reference/#get-shield-mode-status
+     *
+     * @param array<string, mixed> $parameters
+     *
+     * @return Result
+     */
+    public function getShieldModeStatus(array $parameters = []): Result
+    {
+        $this->validateRequired($parameters, ['broadcaster_id', 'moderator_id']);
+
+        return $this->get('moderation/shield_mode', $parameters);
+    }
+
+    /**
+     * Activates or deactivates the broadcaster’s Shield Mode.
+     *
+     * Twitch’s Shield Mode feature is like a panic button that broadcasters can push to protect themselves from chat abuse coming from one or more accounts.
+     * When activated, Shield Mode applies the overrides that the broadcaster configured in the Twitch UX.
+     * If the broadcaster hasn't configured Shield Mode, it applies default overrides.
+     *
+     * @see https://dev.twitch.tv/docs/api/reference/#update-shield-mode-status
+     *
+     * @param array<string, mixed> $parameters
+     * @param array<string, mixed> $body
+     *
+     * @return Result
+     */
+    public function updateShieldModeStatus(array $parameters = [], array $body = []): Result
+    {
+        $this->validateRequired($parameters, ['broadcaster_id', 'moderator_id']);
+        $this->validateRequired($body, ['is_active']);
+
+        return $this->put('moderation/shield_mode', $parameters, null, $body);
+    }
 }

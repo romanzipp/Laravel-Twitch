@@ -8,7 +8,6 @@ use Orchestra\Testbench\TestCase as BaseTestCase;
 use romanzipp\Twitch\Facades\Twitch as TwitchFacade;
 use romanzipp\Twitch\Providers\TwitchServiceProvider;
 use romanzipp\Twitch\Twitch;
-use stdClass;
 
 abstract class TestCase extends BaseTestCase
 {
@@ -61,12 +60,12 @@ abstract class TestCase extends BaseTestCase
         return $twitch;
     }
 
-    protected static function assertHasProperty(string $property, stdClass $object): void
+    protected static function assertHasProperty(string $property, \stdClass $object): void
     {
         static::assertThat(property_exists($object, $property), static::isTrue(), 'Asserting that an object has a property');
     }
 
-    protected static function assertHasProperties(array $properties, stdClass $object): void
+    protected static function assertHasProperties(array $properties, \stdClass $object): void
     {
         foreach ($properties as $property) {
             self::assertHasProperty($property, $object);

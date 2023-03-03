@@ -2,8 +2,6 @@
 
 namespace romanzipp\Twitch\Concerns\Validation;
 
-use InvalidArgumentException;
-
 trait ValidationTrait
 {
     /**
@@ -17,7 +15,7 @@ trait ValidationTrait
                 continue;
             }
 
-            throw new InvalidArgumentException("Required parameter `{$key}` is missing");
+            throw new \InvalidArgumentException("Required parameter `{$key}` is missing");
         }
     }
 
@@ -35,6 +33,6 @@ trait ValidationTrait
             return;
         }
 
-        throw new InvalidArgumentException(sprintf('One or more fields `%s` must be specified', implode(', ', $keys)));
+        throw new \InvalidArgumentException(sprintf('One or more fields `%s` must be specified', implode(', ', $keys)));
     }
 }

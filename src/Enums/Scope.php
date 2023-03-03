@@ -174,4 +174,7 @@ class Scope
 
     // Turn on Viewer Heartbeat Service ability to record user data.
     public const V5_VIEWING_ACTIVITY_READ = 'viewing_activity_read';
+
+    // Read a channel’s goals.
+    public const CHANNEL_READ_GOALS = 'channel:read:goals';
 }

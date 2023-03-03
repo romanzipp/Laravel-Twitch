@@ -2,14 +2,13 @@
 
 namespace romanzipp\Twitch\Tests\Api;
 
-use InvalidArgumentException;
 use romanzipp\Twitch\Tests\TestCases\ApiTestCase;
 
 class VideosTest extends ApiTestCase
 {
     public function testGetVideosMissingParameters()
     {
-        $this->expectException(InvalidArgumentException::class);
+        $this->expectException(\InvalidArgumentException::class);
 
         $this->twitch()->getVideos([]);
     }

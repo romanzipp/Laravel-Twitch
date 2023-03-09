@@ -91,6 +91,19 @@ trait OAuthTrait
     }
 
     /**
+     * Any third-party app that calls the Twitch APIs and maintains an OAuth session must call the /validate endpoint to verify that the access token is still valid.
+     * This includes web apps, mobile apps, desktop apps, extensions, and chatbots. Your app must validate the OAuth token when it starts and on an hourly basis thereafter.
+     *
+     * @see https://dev.twitch.tv/docs/authentication/validate-tokens/
+     *
+     * @return \romanzipp\Twitch\Result
+     */
+    public function validateOAuthToken(): Result
+    {
+        return $this->post(self::OAUTH_BASE_URI . 'validate');
+    }
+
+    /**
      * Build OAuth scopes to string.
      *
      * @param string[] $scopes

@@ -1,5 +1,7 @@
 <?php
 
+use romanzipp\Twitch\Repositories\TwitchClientCredentialsRepository;
+
 return [
     /*
      * The Client ID to use for requests.
@@ -17,6 +19,17 @@ return [
     'redirect_url' => env('TWITCH_HELIX_REDIRECT_URI'),
 
     'oauth_client_credentials' => [
+
+        /*
+         * You can choose between the following oauth client credentials cache stores:
+         *  - TwitchClientCredentialsRepository
+         *  - GoogleClientCredentialsRepository
+         *  - AwsClientCredentialsRepository
+         *
+         * We recommend using RedisClientCredentialsRepository for most use cases.
+         */
+        'provider' => TwitchClientCredentialsRepository::class,
+
         /*
          * Since May 01, 2020, Twitch requires all API requests to contain a valid Access Token.
          * This can be achieved with the Client Credentials flow.
@@ -40,6 +53,28 @@ return [
          * The cache key to use for storing information.
          */
         'cache_key' => 'twitch-api-client-credentials',
+
+        /*
+         * Configurations for the different credential providers.
+         */
+        'secret_manager' => [
+
+            /*
+             * Google secret manager configuration.
+             */
+            'google' => [
+                'project_id' => env('TWITCH_HELIX_SECRET_MANAGER_PROJECT_ID'),
+                'secret_id' => env('TWITCH_HELIX_SECRET_MANAGER_SECRET_ID', 'twitch_access_token'),
+                'secret_version' => env('TWITCH_HELIX_SECRET_MANAGER_SECRET_VERSION', 'latest'),
+            ],
+
+            /*
+             * Amazon secret manager configuration.
+             */
+            'aws' => [
+                'secret_id' => env('TWITCH_HELIX_SECRET_MANAGER_SECRET_ID', 'twitch_access_token'),
+            ],
+        ],
     ],
 
     'eventsub' => [

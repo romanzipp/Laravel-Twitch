@@ -7,6 +7,7 @@ use GuzzleHttp\Exception\RequestException;
 use romanzipp\Twitch\Concerns\Api;
 use romanzipp\Twitch\Concerns\ClientCredentialsTrait;
 use romanzipp\Twitch\Concerns\Validation\ValidationTrait;
+use romanzipp\Twitch\Contracts\ClientCredentialsRepository;
 use romanzipp\Twitch\Exceptions\RequestRequiresAuthenticationException;
 use romanzipp\Twitch\Objects\Paginator;
 
@@ -92,6 +93,11 @@ class Twitch
     protected $redirectUri = null;
 
     /**
+     * @var ClientCredentialsRepository
+     */
+    private $clientCredentials;
+
+    /**
      * Constructor.
      */
     public function __construct()
@@ -107,6 +113,8 @@ class Twitch
         if ($redirectUri = config('twitch-api.redirect_url')) {
             $this->setRedirectUri($redirectUri);
         }
+
+        $this->clientCredentials = app(ClientCredentialsRepository::class);
 
         $this->client = new Client([
             'base_uri' => self::BASE_URI,
@@ -261,6 +269,7 @@ class Twitch
      *
      * @throws \romanzipp\Twitch\Exceptions\RequestRequiresAuthenticationException
      * @throws \romanzipp\Twitch\Exceptions\OAuthTokenRequestException
+     * @throws \romanzipp\Twitch\Exceptions\OAuthTokenRequestException
      * @throws \GuzzleHttp\Exception\RequestException
      * @throws \GuzzleHttp\Exception\GuzzleException
      *
@@ -268,8 +277,13 @@ class Twitch
      */
     public function query(string $method = 'GET', string $path = '', array $parameters = [], Paginator $paginator = null, array $body = null): Result
     {
-        if ( ! $this->isAuthenticationUri($path) && null === $this->getToken() && $this->shouldFetchClientCredentials()) {
-            $token = $this->getClientCredentials();
+        if ( ! $this->isAuthenticationUri($path)
+            && null === $this->getToken()
+            && null !== $this->getClientId()
+            && null !== $this->getClientSecret()
+            && $this->clientCredentials->shouldFetchClientCredentials()
+        ) {
+            $token = $this->clientCredentials->getClientCredentials($this);
 
             if (null === $token) {
                 throw new RequestRequiresAuthenticationException('The request requires an OAuth access token');
@@ -304,8 +318,8 @@ class Twitch
 
         $result = new Result($response, $exception ?? null);
 
-        if ($this->shouldCacheClientCredentials() && $result->isOAuthError()) {
-            $this->clearClientCredentialsToken();
+        if ($this->clientCredentials->shouldCacheClientCredentials() && $result->isOAuthError()) {
+            $this->clientCredentials->clearClientCredentialsToken();
         }
 
         return $result;

@@ -145,7 +145,7 @@ class Result
             return 'Twitch API Unavailable';
         }
 
-        if (null === $this->message || ! is_string($this->message)) {
+        if ( ! is_string($this->message)) {
             return $this->exception->getMessage();
         }
 

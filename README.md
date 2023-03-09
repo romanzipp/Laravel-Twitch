@@ -501,6 +501,7 @@ public function getSoundtrackPlaylists(array $parameters = [])
 ```php
 public function getOAuthAuthorizeUrl(string $responseType = 'code', array $scopes = [], ?string $state = NULL, bool $forceVerify = false)
 public function getOAuthToken(?string $code = NULL, string $grantType = 'authorization_code', array $scopes = [])
+public function validateOAuthToken()
 ```
 
 ### Polls

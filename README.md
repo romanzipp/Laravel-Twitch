@@ -3,7 +3,7 @@
 [![Latest Stable Version](https://img.shields.io/packagist/v/romanzipp/laravel-twitch.svg?style=flat-square)](https://packagist.org/packages/romanzipp/laravel-twitch)
 [![Total Downloads](https://img.shields.io/packagist/dt/romanzipp/laravel-twitch.svg?style=flat-square)](https://packagist.org/packages/romanzipp/laravel-twitch)
 [![License](https://img.shields.io/packagist/l/romanzipp/laravel-twitch.svg?style=flat-square)](https://packagist.org/packages/romanzipp/laravel-twitch)
-[![GitHub Build Status](https://img.shields.io/github/workflow/status/romanzipp/Laravel-Twitch/Tests?style=flat-square)](https://github.com/romanzipp/Laravel-Twitch/actions)
+[![GitHub Build Status](https://img.shields.io/github/actions/workflow/status/romanzipp/Laravel-Twitch/tests.yml?branch=master&label=tests&style=flat-square)](https://github.com/romanzipp/Laravel-Twitch/actions)
 
 PHP Twitch Helix API Wrapper for Laravel 5+
 
@@ -368,8 +368,8 @@ public function updateRedemptionStatus(array $parameters = [], array $body = [])
 public function getChannels(array $parameters = [])
 public function updateChannels(array $parameters = [], array $body = [])
 public function getChannelEditors(array $parameters = [])
-public function getChannelFollowers(array $parameters = [], Paginator $paginator = null)
-public function getChannelsFollowed(array $parameters = [], Paginator $paginator = null)
+public function getChannelFollowers(array $parameters = [], ?Paginator $paginator = NULL)
+public function getChannelsFollowed(array $parameters = [], ?Paginator $paginator = NULL)
 ```
 
 ### Charity
@@ -582,7 +582,7 @@ public function getTeams(array $parameters = [])
 public function createUserFollows(array $parameters = [], array $body = [])
 public function deleteUserFollows(array $parameters = [])
 public function getUsers(array $parameters = [])
-public function getUsersFollows(array $parameters = [], ?Paginator $paginator = NULL)
+public function getUsersFollows(array $parameters = [], ?Paginator $paginator = NULL) // DEPRECATED
 public function updateUser(array $parameters = [])
 public function getUserExtensions(array $parameters = [])
 public function getUserActiveExtensions(array $parameters = [])

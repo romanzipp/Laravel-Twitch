@@ -2,7 +2,6 @@
 
 namespace romanzipp\Twitch\Auth;
 
-use Exception;
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
 use Firebase\JWT\SignatureInvalidException;
@@ -10,7 +9,6 @@ use Illuminate\Auth\RequestGuard;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
-use stdClass;
 
 class TwitchExtensionGuard
 {
@@ -76,7 +74,7 @@ class TwitchExtensionGuard
             }
 
             return cache()->remember($this->getCacheKey($token), now()->addMinutes(5), $fn);
-        } catch (Exception $exception) {
+        } catch (\Exception $exception) {
             return null;
         }
     }
@@ -86,7 +84,7 @@ class TwitchExtensionGuard
         return sprintf(self::$CACHE_KEY, sha1($token));
     }
 
-    private function decodeAuthorizationToken(string $token): stdClass
+    private function decodeAuthorizationToken(string $token): \stdClass
     {
         foreach (self::$extSecretKeys as $extSecretKey) {
             try {
@@ -108,7 +106,7 @@ class TwitchExtensionGuard
     {
         self::addExtSecret($secret);
         Auth::extend($driver, function ($app, $name, array $config) {
-            return new RequestGuard(function ($request) use ($config) {
+            return new RequestGuard(function ($request) {
                 return (new self(app(TwitchUserProvider::class)))->user($request);
             }, app('request'));
         });

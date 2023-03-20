@@ -2,18 +2,16 @@
 
 namespace romanzipp\Twitch\Auth;
 
-use stdClass;
-
 trait HasTwitchToken
 {
-    protected ?stdClass $twitchToken;
+    protected ?\stdClass $twitchToken;
 
-    public function getTwitchToken(): ?stdClass
+    public function getTwitchToken(): ?\stdClass
     {
         return $this->twitchToken;
     }
 
-    public function withTwitchToken(?stdClass $decoded): self
+    public function withTwitchToken(?\stdClass $decoded): self
     {
         $this->twitchToken = $decoded;
 

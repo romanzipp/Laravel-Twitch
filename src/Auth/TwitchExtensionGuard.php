@@ -42,7 +42,7 @@ class TwitchExtensionGuard
      */
     public static function addExtSecret(string $secret): void
     {
-        static::$extSecretKeys[] = new Key(base64_decode($secret), 'HS256');
+        self::$extSecretKeys[] = new Key(base64_decode($secret), 'HS256');
     }
 
     /**
@@ -113,7 +113,7 @@ class TwitchExtensionGuard
     }
 
     /**
-     * @param $decoded
+     * @param mixed $decoded
      *
      * @return mixed|null
      */

@@ -326,6 +326,75 @@ $twitch->unsubscribeEventSub([
 ]);
 ```
 
+### Twitch Extension Guard
+
+#### 1. Create TwitchUserProvider
+
+Create `app/Auth/TwitchUserProvider.php`:
+
+```php
+namespace App\Auth;
+
+use App\User;
+use romanzipp\Twitch\Auth\TwitchUserProvider;
+use Illuminate\Contracts\Auth\Authenticatable;
+  
+class TwitchUserProvider extends TwitchUserProvider  
+{  
+	public function retrieveById($identifier): ?Authenticatable  
+	{
+		/** @var User $user */  
+		$user = User::query()->whereKey($identifier)->first();  
+
+		return $user;  
+	}  
+
+    // This method is optional, if you don't want automatic user creation on request.
+	public function createFromTwitchToken($decoded): ?Authenticatable  
+	{
+		return User::createFromTwitchToken($decoded);  
+	}  
+}
+```
+
+#### 2. Register TwitchUserProvider & TwitchExtensionGuard
+
+Edit `app/Providers/AuthServiceProvider.php`:
+
+```php
+use App\Auth\TwitchUserProvider;
+use romanzipp\Twitch\Auth\TwitchExtensionGuard;
+use romanzipp\Twitch\Auth\TwitchUserProvider;
+
+public function boot()  
+{  
+	...
+	
+	$this->app->bind(TwitchUserProvider::class, Auth\TwitchUserProvider::class);
+	TwitchExtensionGuard::register(config('twitch-api.ext_secret'));  
+}
+```
+
+#### 3. Make guard available in Laravel
+
+Edit `config/auth.php`:
+
+```php
+<?php
+
+return [
+    ...
+    'guards' => [
+        ...
+        'twitch-extension' => [
+            'driver' => 'laravel-twitch',
+            'provider' => 'laravel-twitch',
+        ],
+    ],
+    ...
+];
+```
+
 ## Documentation
 
 **Twitch Helix API Documentation: https://dev.twitch.tv/docs/api/reference**

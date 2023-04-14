@@ -100,7 +100,7 @@ trait OAuthTrait
      */
     public function validateOAuthToken(): Result
     {
-        return $this->post(self::OAUTH_BASE_URI . 'validate');
+        return $this->get(self::OAUTH_BASE_URI . 'validate');
     }
 
     /**

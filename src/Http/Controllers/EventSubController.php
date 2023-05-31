@@ -66,7 +66,9 @@ class EventSubController extends Controller
      */
     protected function handleWebhookCallbackVerification(array $payload): Response
     {
-        return new Response($payload['challenge'], 200);
+        return new Response($payload['challenge'], 200, [
+            'Content-Type' => 'text/plain',
+        ]);
     }
 
     /**

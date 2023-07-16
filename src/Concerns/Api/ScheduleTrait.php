@@ -76,7 +76,9 @@ trait ScheduleTrait
     {
         $this->validateRequired($parameters, ['broadcaster_id']);
 
-        return $this->post('schedule/segment', $parameters);
+        $this->validateRequired($body, ['start_time', 'timezone', 'duration']);
+
+        return $this->post('schedule/segment', $parameters, null, $body);
     }
 
     /**

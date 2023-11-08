@@ -10,7 +10,7 @@ abstract class ApiTestCase extends TestCase
     /**
      * @var Result|null
      */
-    protected static $lastResult = null;
+    protected static $lastResult;
 
     /**
      * @var Twitch

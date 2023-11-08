@@ -68,28 +68,28 @@ class Twitch
      *
      * @var string|null
      */
-    protected $token = null;
+    protected $token;
 
     /**
      * Twitch Client ID.
      *
      * @var string|null
      */
-    protected $clientId = null;
+    protected $clientId;
 
     /**
      * Twitch Client Secret.
      *
      * @var string|null
      */
-    protected $clientSecret = null;
+    protected $clientSecret;
 
     /**
      * Twitch OAuth Redirect URI.
      *
      * @var string|null
      */
-    protected $redirectUri = null;
+    protected $redirectUri;
 
     /**
      * Constructor.

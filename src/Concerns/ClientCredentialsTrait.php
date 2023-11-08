@@ -141,7 +141,7 @@ trait ClientCredentialsTrait
         return 0 === strpos($uri, self::OAUTH_BASE_URI);
     }
 
-    abstract public function getOAuthToken(?string $code = null, string $grantType = GrantType::AUTHORIZATION_CODE, array $scopes = []): Result;
+    abstract public function getOAuthToken(string $code = null, string $grantType = GrantType::AUTHORIZATION_CODE, array $scopes = []): Result;
 
     abstract public function getClientId(): ?string;
 

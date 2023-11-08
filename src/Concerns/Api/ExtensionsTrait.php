@@ -236,7 +236,7 @@ trait ExtensionsTrait
      *
      * @return Result
      */
-    public function getExtensionLiveChannels(array $parameters = [], ?Paginator $paginator = null): Result
+    public function getExtensionLiveChannels(array $parameters = [], Paginator $paginator = null): Result
     {
         $this->validateRequired($parameters, ['extension_id']);
 

@@ -38,7 +38,7 @@ trait MusicTrait
      *
      * @return Result
      */
-    public function getSoundtrackPlaylist(array $parameters = [], ?Paginator $paginator = null): Result
+    public function getSoundtrackPlaylist(array $parameters = [], Paginator $paginator = null): Result
     {
         $this->validateRequired($parameters, ['id']);
 

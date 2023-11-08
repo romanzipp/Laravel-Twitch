@@ -18,7 +18,7 @@ class Paginator
      *
      * @var string|null
      */
-    public $action = null;
+    public $action;
 
     /**
      * Constructor.

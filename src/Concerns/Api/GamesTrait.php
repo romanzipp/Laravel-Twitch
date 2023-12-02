@@ -41,7 +41,7 @@ trait GamesTrait
      */
     public function getGames(array $parameters = []): Result
     {
-        $this->validateAnyRequired($parameters, ['id', 'name']);
+        $this->validateAnyRequired($parameters, ['id', 'name', 'igdb_id']);
 
         return $this->get('games', $parameters);
     }

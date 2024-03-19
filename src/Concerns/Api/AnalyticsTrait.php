@@ -20,7 +20,7 @@ trait AnalyticsTrait
      *
      * @param array<string, mixed> $parameters
      *
-     * @return \romanzipp\Twitch\Result
+     * @return Result
      */
     public function getExtensionAnalytics(array $parameters = []): Result
     {
@@ -40,7 +40,7 @@ trait AnalyticsTrait
      *
      * @param array<string, mixed> $parameters
      *
-     * @return \romanzipp\Twitch\Result
+     * @return Result
      */
     public function getGameAnalytics(array $parameters = []): Result
     {

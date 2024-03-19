@@ -19,7 +19,7 @@ trait GoalsTrait
      *
      * @param array<string, mixed> $parameters
      *
-     * @return \romanzipp\Twitch\Result
+     * @return Result
      */
     public function getCreatorGoals(array $parameters = []): Result
     {

@@ -25,7 +25,7 @@ trait ModerationTrait
      * @param array<string, mixed> $parameters
      * @param array<string, mixed> $body
      *
-     * @return \romanzipp\Twitch\Result
+     * @return Result
      */
     public function checkAutoModStatus(array $parameters = [], array $body = []): Result
     {
@@ -40,11 +40,11 @@ trait ModerationTrait
      * @see https://dev.twitch.tv/docs/api/reference/#get-banned-users
      *
      * @param array<string, mixed> $parameters
-     * @param \romanzipp\Twitch\Objects\Paginator|null $paginator
+     * @param Paginator|null $paginator
      *
-     * @return \romanzipp\Twitch\Result
+     * @return Result
      */
-    public function getBannedUsers(array $parameters = [], Paginator $paginator = null): Result
+    public function getBannedUsers(array $parameters = [], ?Paginator $paginator = null): Result
     {
         $this->validateRequired($parameters, ['broadcaster_id']);
 
@@ -57,14 +57,14 @@ trait ModerationTrait
      * @see https://dev.twitch.tv/docs/api/reference/#get-banned-events
      *
      * @param array<string, mixed> $parameters
-     * @param \romanzipp\Twitch\Objects\Paginator|null $paginator
+     * @param Paginator|null $paginator
      *
-     * @return \romanzipp\Twitch\Result
+     * @return Result
      *
      * @deprecated since 2022‑03‑18 "Removed documentation for “Get Banned Events” and “Get Moderator Events” Twitch API endpoints."
      * @see https://discuss.dev.twitch.tv/t/deprecation-of-twitch-api-event-endpoints-that-supported-websub-based-webhooks/35137
      */
-    public function getBannedEvents(array $parameters = [], Paginator $paginator = null): Result
+    public function getBannedEvents(array $parameters = [], ?Paginator $paginator = null): Result
     {
         $this->validateRequired($parameters, ['broadcaster_id']);
 
@@ -77,11 +77,11 @@ trait ModerationTrait
      * @see https://dev.twitch.tv/docs/api/reference/#get-moderators
      *
      * @param array<string, mixed> $parameters
-     * @param \romanzipp\Twitch\Objects\Paginator|null $paginator
+     * @param Paginator|null $paginator
      *
-     * @return \romanzipp\Twitch\Result
+     * @return Result
      */
-    public function getModerators(array $parameters = [], Paginator $paginator = null): Result
+    public function getModerators(array $parameters = [], ?Paginator $paginator = null): Result
     {
         $this->validateRequired($parameters, ['broadcaster_id']);
 
@@ -94,14 +94,14 @@ trait ModerationTrait
      * @see https://dev.twitch.tv/docs/api/reference/#get-moderator-events
      *
      * @param array<string, mixed> $parameters
-     * @param \romanzipp\Twitch\Objects\Paginator|null $paginator
+     * @param Paginator|null $paginator
      *
-     * @return \romanzipp\Twitch\Result
+     * @return Result
      *
      * @deprecated since 2022‑03‑18 "Removed documentation for “Get Banned Events” and “Get Moderator Events” Twitch API endpoints."
      * @see https://discuss.dev.twitch.tv/t/deprecation-of-twitch-api-event-endpoints-that-supported-websub-based-webhooks/35137
      */
-    public function getModeratorEvents(array $parameters = [], Paginator $paginator = null): Result
+    public function getModeratorEvents(array $parameters = [], ?Paginator $paginator = null): Result
     {
         $this->validateRequired($parameters, ['broadcaster_id']);
 
@@ -117,7 +117,7 @@ trait ModerationTrait
      * @param array<string, mixed> $parameters
      * @param array<string, mixed> $body
      *
-     * @return \romanzipp\Twitch\Result
+     * @return Result
      */
     public function manageHeldAutoModMessages(array $parameters = [], array $body = []): Result
     {
@@ -131,7 +131,7 @@ trait ModerationTrait
      *
      * @param array<string, mixed> $parameters
      *
-     * @return \romanzipp\Twitch\Result
+     * @return Result
      */
     public function getAutoModSettings(array $parameters = []): Result
     {
@@ -148,7 +148,7 @@ trait ModerationTrait
      * @param array<string, mixed> $parameters
      * @param array<string, mixed> $body
      *
-     * @return \romanzipp\Twitch\Result
+     * @return Result
      */
     public function updateAutoModSettings(array $parameters = [], array $body = []): Result
     {
@@ -165,7 +165,7 @@ trait ModerationTrait
      * @param array<string, mixed> $parameters
      * @param array<string, mixed> $body
      *
-     * @return \romanzipp\Twitch\Result
+     * @return Result
      */
     public function banUser(array $parameters = [], array $body = []): Result
     {
@@ -181,7 +181,7 @@ trait ModerationTrait
      *
      * @param array<string, mixed> $parameters
      *
-     * @return \romanzipp\Twitch\Result
+     * @return Result
      */
     public function unbanUser(array $parameters = []): Result
     {
@@ -196,11 +196,11 @@ trait ModerationTrait
      * @see https://dev.twitch.tv/docs/api/reference#get-blocked-terms
      *
      * @param array<string, mixed> $parameters
-     * @param \romanzipp\Twitch\Objects\Paginator|null $paginator
+     * @param Paginator|null $paginator
      *
-     * @return \romanzipp\Twitch\Result
+     * @return Result
      */
-    public function getBlockedTerms(array $parameters = [], Paginator $paginator = null): Result
+    public function getBlockedTerms(array $parameters = [], ?Paginator $paginator = null): Result
     {
         $this->validateRequired($parameters, ['broadcaster_id', 'moderator_id']);
 
@@ -215,7 +215,7 @@ trait ModerationTrait
      * @param array<string, mixed> $parameters
      * @param array<string, mixed> $body
      *
-     * @return \romanzipp\Twitch\Result
+     * @return Result
      */
     public function addBlockedTerm(array $parameters = [], array $body = []): Result
     {
@@ -231,7 +231,7 @@ trait ModerationTrait
      *
      * @param array<string, mixed> $parameters
      *
-     * @return \romanzipp\Twitch\Result
+     * @return Result
      */
     public function removeBlockedTerm(array $parameters = []): Result
     {
@@ -302,7 +302,7 @@ trait ModerationTrait
      *
      * @return Result
      */
-    public function getVIPs(array $parameters = [], Paginator $paginator = null): Result
+    public function getVIPs(array $parameters = [], ?Paginator $paginator = null): Result
     {
         $this->validateRequired($parameters, ['broadcaster_id']);
 

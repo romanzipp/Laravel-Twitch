@@ -11,7 +11,7 @@ class Result
     /**
      * Guzzle exception, if present.
      *
-     * @var \Psr\Http\Client\RequestExceptionInterface|null
+     * @var RequestExceptionInterface|null
      */
     private $exception;
 
@@ -60,11 +60,11 @@ class Result
     /**
      * Original Guzzle HTTP Response.
      *
-     * @var \Psr\Http\Message\ResponseInterface
+     * @var ResponseInterface
      */
     public $response;
 
-    public function __construct(ResponseInterface $response, RequestExceptionInterface $exception = null)
+    public function __construct(ResponseInterface $response, ?RequestExceptionInterface $exception = null)
     {
         $this->response = $response;
         $this->status = $response->getStatusCode();
@@ -173,7 +173,7 @@ class Result
     /**
      * Set the Paginator to fetch the next set of results.
      *
-     * @return \romanzipp\Twitch\Objects\Paginator|null
+     * @return Paginator|null
      */
     public function next(): ?Paginator
     {
@@ -187,7 +187,7 @@ class Result
     /**
      * Set the Paginator to fetch the last set of results.
      *
-     * @return \romanzipp\Twitch\Objects\Paginator|null
+     * @return Paginator|null
      */
     public function back(): ?Paginator
     {
@@ -223,7 +223,7 @@ class Result
      *
      * @return int|array<string, int>|null
      */
-    public function getRateLimit(string $key = null)
+    public function getRateLimit(?string $key = null)
     {
         if ( ! $this->response->hasHeader('Ratelimit-Remaining')) {
             return null;
@@ -257,7 +257,7 @@ class Result
     /**
      * Insert users in data response.
      *
-     * @param \romanzipp\Twitch\Twitch $twitch
+     * @param Twitch $twitch
      * @param string $identifierAttribute Attribute to identify the users
      * @param string $insertTo Data index to insert user data
      *
@@ -292,7 +292,7 @@ class Result
     /**
      * Map response payload to instance attributes.
      *
-     * @param \Psr\Http\Message\ResponseInterface $response
+     * @param ResponseInterface $response
      */
     protected function processPayload(ResponseInterface $response): void
     {

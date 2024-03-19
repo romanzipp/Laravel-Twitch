@@ -19,7 +19,7 @@ trait StreamsTrait
      *
      * @param array<string, mixed> $parameters
      *
-     * @return \romanzipp\Twitch\Result
+     * @return Result
      */
     public function getStreamKey(array $parameters = []): Result
     {
@@ -38,11 +38,11 @@ trait StreamsTrait
      * @see https://dev.twitch.tv/docs/api/reference#get-streams
      *
      * @param array<string, mixed> $parameters
-     * @param \romanzipp\Twitch\Objects\Paginator|null $paginator Paginator instance
+     * @param Paginator|null $paginator Paginator instance
      *
-     * @return \romanzipp\Twitch\Result Result instance
+     * @return Result Result instance
      */
-    public function getStreams(array $parameters = [], Paginator $paginator = null): Result
+    public function getStreams(array $parameters = [], ?Paginator $paginator = null): Result
     {
         return $this->get('streams', $parameters, $paginator);
     }
@@ -55,11 +55,11 @@ trait StreamsTrait
      * @see https://dev.twitch.tv/docs/api/reference/#get-followed-streams
      *
      * @param array<string, mixed> $parameters
-     * @param \romanzipp\Twitch\Objects\Paginator|null $paginator Paginator instance
+     * @param Paginator|null $paginator Paginator instance
      *
-     * @return \romanzipp\Twitch\Result Result instance
+     * @return Result Result instance
      */
-    public function getFollowedStreams(array $parameters = [], Paginator $paginator = null): Result
+    public function getFollowedStreams(array $parameters = [], ?Paginator $paginator = null): Result
     {
         $this->validateRequired($parameters, ['user_id']);
 
@@ -77,7 +77,7 @@ trait StreamsTrait
      * @param array<string, mixed> $parameters
      * @param array<string, mixed> $body
      *
-     * @return \romanzipp\Twitch\Result
+     * @return Result
      */
     public function createStreamMarker(array $parameters = [], array $body = []): Result
     {
@@ -94,11 +94,11 @@ trait StreamsTrait
      * @see https://dev.twitch.tv/docs/api/reference/#get-stream-markers
      *
      * @param array<string, mixed> $parameters
-     * @param \romanzipp\Twitch\Objects\Paginator|null $paginator
+     * @param Paginator|null $paginator
      *
-     * @return \romanzipp\Twitch\Result
+     * @return Result
      */
-    public function getStreamMarkers(array $parameters = [], Paginator $paginator = null): Result
+    public function getStreamMarkers(array $parameters = [], ?Paginator $paginator = null): Result
     {
         $this->validateAnyRequired($parameters, ['user_id', 'video_id']);
 

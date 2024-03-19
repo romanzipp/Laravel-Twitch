@@ -22,7 +22,7 @@ trait ChatTrait
      *
      * @param array<string, mixed> $parameters
      *
-     * @return \romanzipp\Twitch\Result Result instance
+     * @return Result Result instance
      */
     public function getChannelChatEmotes(array $parameters = []): Result
     {
@@ -36,7 +36,7 @@ trait ChatTrait
      *
      * @see https://dev.twitch.tv/docs/api/reference#get-global-emotes
      *
-     * @return \romanzipp\Twitch\Result Result instance
+     * @return Result Result instance
      */
     public function getGlobalChatEmotes(): Result
     {
@@ -53,7 +53,7 @@ trait ChatTrait
      *
      * @param array<string, mixed> $parameters
      *
-     * @return \romanzipp\Twitch\Result Result instance
+     * @return Result Result instance
      */
     public function getChatEmoteSets(array $parameters = []): Result
     {
@@ -69,7 +69,7 @@ trait ChatTrait
      *
      * @param array<string, mixed> $parameters
      *
-     * @return \romanzipp\Twitch\Result Result instance
+     * @return Result Result instance
      */
     public function getChannelChatBadges(array $parameters = []): Result
     {
@@ -83,7 +83,7 @@ trait ChatTrait
      *
      * @see https://dev.twitch.tv/docs/api/reference#get-global-chat-badges
      *
-     * @return \romanzipp\Twitch\Result Result instance
+     * @return Result Result instance
      */
     public function getGlobalChatBadges(): Result
     {
@@ -97,7 +97,7 @@ trait ChatTrait
      *
      * @param array<string, mixed> $parameters
      *
-     * @return \romanzipp\Twitch\Result
+     * @return Result
      */
     public function getChatSettings(array $parameters = []): Result
     {
@@ -114,7 +114,7 @@ trait ChatTrait
      * @param array<string, mixed> $parameters
      * @param array<string, mixed> $body
      *
-     * @return \romanzipp\Twitch\Result
+     * @return Result
      */
     public function updateChatSettings(array $parameters, array $body = []): Result
     {
@@ -188,7 +188,7 @@ trait ChatTrait
      *
      * @return Result
      */
-    public function getChatters(array $parameters = [], Paginator $paginator = null): Result
+    public function getChatters(array $parameters = [], ?Paginator $paginator = null): Result
     {
         $this->validateRequired($parameters, ['broadcaster_id', 'moderator_id']);
 

@@ -40,7 +40,7 @@ trait ClientCredentialsTrait
      *
      * @see https://dev.twitch.tv/docs/authentication/getting-tokens-oauth#oauth-client-credentials-flow
      *
-     * @return \romanzipp\Twitch\Objects\AccessToken|null
+     * @return AccessToken|null
      */
     protected function getClientCredentials(): ?AccessToken
     {
@@ -74,7 +74,7 @@ trait ClientCredentialsTrait
     /**
      * Possibly get a cached and not-expired version of the Access Token.
      *
-     * @return \romanzipp\Twitch\Objects\AccessToken|null
+     * @return AccessToken|null
      *
      * @noinspection PhpDocMissingThrowsInspection
      */
@@ -102,7 +102,7 @@ trait ClientCredentialsTrait
     /**
      * Store the client credentials in cache.
      *
-     * @param \romanzipp\Twitch\Objects\AccessToken $token
+     * @param AccessToken $token
      *
      * @noinspection PhpDocMissingThrowsInspection
      */
@@ -127,7 +127,7 @@ trait ClientCredentialsTrait
     /**
      * Get the cache driver instance used for storing the client credentials.
      *
-     * @return \Illuminate\Contracts\Cache\Repository
+     * @return Repository
      */
     protected function getClientCredentialsCacheRepository(): Repository
     {
@@ -141,7 +141,7 @@ trait ClientCredentialsTrait
         return 0 === strpos($uri, self::OAUTH_BASE_URI);
     }
 
-    abstract public function getOAuthToken(string $code = null, string $grantType = GrantType::AUTHORIZATION_CODE, array $scopes = []): Result;
+    abstract public function getOAuthToken(?string $code = null, string $grantType = GrantType::AUTHORIZATION_CODE, array $scopes = []): Result;
 
     abstract public function getClientId(): ?string;
 

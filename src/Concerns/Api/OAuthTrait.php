@@ -22,7 +22,7 @@ trait OAuthTrait
      *
      * @return string
      */
-    public function getOAuthAuthorizeUrl(string $responseType = 'code', array $scopes = [], string $state = null, bool $forceVerify = false): string
+    public function getOAuthAuthorizeUrl(string $responseType = 'code', array $scopes = [], ?string $state = null, bool $forceVerify = false): string
     {
         $query = [
             'response_type' => $responseType,
@@ -51,9 +51,9 @@ trait OAuthTrait
      * @param string $grantType
      * @param string[] $scopes
      *
-     * @return \romanzipp\Twitch\Result
+     * @return Result
      */
-    public function getOAuthToken(string $code = null, string $grantType = GrantType::AUTHORIZATION_CODE, array $scopes = []): Result
+    public function getOAuthToken(?string $code = null, string $grantType = GrantType::AUTHORIZATION_CODE, array $scopes = []): Result
     {
         if ( ! $clientId = $this->getClientId()) {
             throw new \InvalidArgumentException('The OAuth request requires a client id to be set');
@@ -96,7 +96,7 @@ trait OAuthTrait
      *
      * @see https://dev.twitch.tv/docs/authentication/validate-tokens/
      *
-     * @return \romanzipp\Twitch\Result
+     * @return Result
      */
     public function validateOAuthToken(): Result
     {

@@ -61,7 +61,7 @@ trait ExtensionsTrait
      *
      * @return Result Result instance
      */
-    public function disableUserExtensionById(string $parameter = null): Result
+    public function disableUserExtensionById(?string $parameter = null): Result
     {
         return $this->updateUserExtensions('id', $parameter, false);
     }
@@ -76,7 +76,7 @@ trait ExtensionsTrait
      *
      * @return Result Result instance
      */
-    public function disableUserExtensionByName(string $parameter = null): Result
+    public function disableUserExtensionByName(?string $parameter = null): Result
     {
         return $this->updateUserExtensions('name', $parameter, false);
     }
@@ -94,7 +94,7 @@ trait ExtensionsTrait
      *
      * @return Result Result instance
      */
-    public function updateUserExtensions(string $method = null, string $parameter = null, bool $disabled = false): Result
+    public function updateUserExtensions(?string $method = null, ?string $parameter = null, bool $disabled = false): Result
     {
         $extensionsResult = $this->getAuthedUserActiveExtensions();
 
@@ -236,7 +236,7 @@ trait ExtensionsTrait
      *
      * @return Result
      */
-    public function getExtensionLiveChannels(array $parameters = [], Paginator $paginator = null): Result
+    public function getExtensionLiveChannels(array $parameters = [], ?Paginator $paginator = null): Result
     {
         $this->validateRequired($parameters, ['extension_id']);
 

@@ -19,7 +19,7 @@ trait WebhooksTrait
      *
      * @param array<string, mixed> $parameters
      *
-     * @return \romanzipp\Twitch\Result
+     * @return Result
      */
     public function getWebhookSubscriptions(array $parameters = []): Result
     {
@@ -35,7 +35,7 @@ trait WebhooksTrait
      * @param array<string, mixed> $parameters
      * @param array<string, mixed> $body
      *
-     * @return \romanzipp\Twitch\Result
+     * @return Result
      */
     public function subscribeWebhook(array $parameters = [], array $body = []): Result
     {
@@ -58,7 +58,7 @@ trait WebhooksTrait
      * @param array<string, mixed> $parameters
      * @param array<string, mixed> $body
      *
-     * @return \romanzipp\Twitch\Result
+     * @return Result
      */
     public function unsubscribeWebhook(array $parameters = [], array $body = []): Result
     {

@@ -23,7 +23,7 @@ trait ScheduleTrait
      *
      * @return Result
      */
-    public function getChannelStreamSchedule(array $parameters = [], Paginator $paginator = null): Result
+    public function getChannelStreamSchedule(array $parameters = [], ?Paginator $paginator = null): Result
     {
         $this->validateRequired($parameters, ['broadcaster_id']);
 

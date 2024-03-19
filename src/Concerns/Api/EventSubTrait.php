@@ -57,7 +57,7 @@ trait EventSubTrait
      *
      * @return Result
      */
-    public function getEventSubs(array $parameters = [], Paginator $paginator = null): Result
+    public function getEventSubs(array $parameters = [], ?Paginator $paginator = null): Result
     {
         return $this->get('eventsub/subscriptions', $parameters, $paginator);
     }

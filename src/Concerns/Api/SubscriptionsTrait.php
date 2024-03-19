@@ -18,11 +18,11 @@ trait SubscriptionsTrait
      * @see https://dev.twitch.tv/docs/api/reference/#get-broadcaster-subscriptions
      *
      * @param array<string, mixed> $parameters
-     * @param \romanzipp\Twitch\Objects\Paginator|null $paginator Paginator instance
+     * @param Paginator|null $paginator Paginator instance
      *
-     * @return \romanzipp\Twitch\Result Result instance
+     * @return Result Result instance
      */
-    public function getSubscriptions(array $parameters = [], Paginator $paginator = null): Result
+    public function getSubscriptions(array $parameters = [], ?Paginator $paginator = null): Result
     {
         $this->validateRequired($parameters, ['broadcaster_id']);
 
@@ -36,7 +36,7 @@ trait SubscriptionsTrait
      *
      * @param array<string, mixed> $parameters
      *
-     * @return \romanzipp\Twitch\Result Result instance
+     * @return Result Result instance
      */
     public function getUserSubscription(array $parameters = []): Result
     {

@@ -20,7 +20,7 @@ trait HypeTrainTrait
      *
      * @param array<string, mixed> $parameters
      *
-     * @return \romanzipp\Twitch\Result
+     * @return Result
      */
     public function getHypeTrainEvents(array $parameters = []): Result
     {

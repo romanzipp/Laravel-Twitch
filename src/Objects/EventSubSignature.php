@@ -14,7 +14,7 @@ class EventSubSignature
      * exception if the verification fails for any reason.
      *
      * @param string $payload the payload sent by Twitch
-     * @param \Symfony\Component\HttpFoundation\HeaderBag $headers the contents of the signature header sent by Twitch
+     * @param HeaderBag $headers the contents of the signature header sent by Twitch
      * @param string $secret secret used to generate the signature
      * @param int $tolerance maximum difference allowed between the header's timestamp and the current time
      *

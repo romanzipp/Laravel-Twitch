@@ -72,7 +72,7 @@ trait UsersTrait
      *
      * @return Result
      */
-    public function getUsersFollows(array $parameters = [], Paginator $paginator = null): Result
+    public function getUsersFollows(array $parameters = [], ?Paginator $paginator = null): Result
     {
         $this->validateAnyRequired($parameters, ['from_id', 'to_id']);
 
@@ -153,7 +153,7 @@ trait UsersTrait
      *
      * @return Result
      */
-    public function getUserBlockList(array $parameters = [], Paginator $paginator = null): Result
+    public function getUserBlockList(array $parameters = [], ?Paginator $paginator = null): Result
     {
         $this->validateRequired($parameters, ['broadcaster_id']);
 

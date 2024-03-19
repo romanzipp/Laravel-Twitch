@@ -22,7 +22,7 @@ trait PredictionsTrait
      *
      * @return Result
      */
-    public function getPredictions(array $parameters = [], Paginator $paginator = null): Result
+    public function getPredictions(array $parameters = [], ?Paginator $paginator = null): Result
     {
         $this->validateRequired($parameters, ['broadcaster_id']);
 

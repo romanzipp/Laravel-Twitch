@@ -28,7 +28,7 @@ trait ClipsTrait
      *
      * @param array<string, mixed> $parameters
      *
-     * @return \romanzipp\Twitch\Result Result instance
+     * @return Result Result instance
      */
     public function createClip(array $parameters = []): Result
     {
@@ -48,11 +48,11 @@ trait ClipsTrait
      * @see https://dev.twitch.tv/docs/api/reference#get-clips
      *
      * @param array<string, mixed> $parameters
-     * @param \romanzipp\Twitch\Objects\Paginator|null $paginator
+     * @param Paginator|null $paginator
      *
-     * @return \romanzipp\Twitch\Result Result instance
+     * @return Result Result instance
      */
-    public function getClips(array $parameters = [], Paginator $paginator = null): Result
+    public function getClips(array $parameters = [], ?Paginator $paginator = null): Result
     {
         $this->validateAnyRequired($parameters, ['broadcaster_id', 'game_id', 'id']);
 

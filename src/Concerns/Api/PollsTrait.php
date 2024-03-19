@@ -22,7 +22,7 @@ trait PollsTrait
      *
      * @return Result
      */
-    public function getPolls(array $parameters = [], Paginator $paginator = null): Result
+    public function getPolls(array $parameters = [], ?Paginator $paginator = null): Result
     {
         $this->validateRequired($parameters, ['broadcaster_id']);
 

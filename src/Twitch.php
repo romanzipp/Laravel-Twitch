@@ -52,14 +52,14 @@ class Twitch
     /**
      * Guzzle is used to make http requests.
      *
-     * @var \GuzzleHttp\Client
+     * @var Client
      */
     protected $client;
 
     /**
      * Paginator instance.
      *
-     * @var \romanzipp\Twitch\Objects\Paginator
+     * @var Paginator
      */
     protected $paginator;
 
@@ -189,11 +189,11 @@ class Twitch
     /**
      * @param string $path
      * @param array<string, mixed> $parameters
-     * @param \romanzipp\Twitch\Objects\Paginator|null $paginator
+     * @param Paginator|null $paginator
      *
-     * @return \romanzipp\Twitch\Result
+     * @return Result
      */
-    public function get(string $path = '', array $parameters = [], Paginator $paginator = null): Result
+    public function get(string $path = '', array $parameters = [], ?Paginator $paginator = null): Result
     {
         return $this->query('GET', $path, $parameters, $paginator);
     }
@@ -201,12 +201,12 @@ class Twitch
     /**
      * @param string $path
      * @param array<string, mixed> $parameters
-     * @param \romanzipp\Twitch\Objects\Paginator|null $paginator
+     * @param Paginator|null $paginator
      * @param array<string, mixed>|null $body
      *
-     * @return \romanzipp\Twitch\Result
+     * @return Result
      */
-    public function post(string $path = '', array $parameters = [], Paginator $paginator = null, array $body = null): Result
+    public function post(string $path = '', array $parameters = [], ?Paginator $paginator = null, ?array $body = null): Result
     {
         return $this->query('POST', $path, $parameters, $paginator, $body);
     }
@@ -214,12 +214,12 @@ class Twitch
     /**
      * @param string $path
      * @param array<string, mixed> $parameters
-     * @param \romanzipp\Twitch\Objects\Paginator|null $paginator
+     * @param Paginator|null $paginator
      * @param array<string, mixed>|null $body
      *
-     * @return \romanzipp\Twitch\Result
+     * @return Result
      */
-    public function put(string $path = '', array $parameters = [], Paginator $paginator = null, array $body = null): Result
+    public function put(string $path = '', array $parameters = [], ?Paginator $paginator = null, ?array $body = null): Result
     {
         return $this->query('PUT', $path, $parameters, $paginator, $body);
     }
@@ -227,12 +227,12 @@ class Twitch
     /**
      * @param string $path
      * @param array<string, mixed> $parameters
-     * @param \romanzipp\Twitch\Objects\Paginator|null $paginator
+     * @param Paginator|null $paginator
      * @param array<string, mixed>|null $body
      *
-     * @return \romanzipp\Twitch\Result
+     * @return Result
      */
-    public function patch(string $path = '', array $parameters = [], Paginator $paginator = null, array $body = null): Result
+    public function patch(string $path = '', array $parameters = [], ?Paginator $paginator = null, ?array $body = null): Result
     {
         return $this->query('PATCH', $path, $parameters, $paginator, $body);
     }
@@ -240,12 +240,12 @@ class Twitch
     /**
      * @param string $path
      * @param array<string, mixed> $parameters
-     * @param \romanzipp\Twitch\Objects\Paginator|null $paginator
+     * @param Paginator|null $paginator
      * @param array<string, mixed>|null $body
      *
-     * @return \romanzipp\Twitch\Result
+     * @return Result
      */
-    public function delete(string $path = '', array $parameters = [], Paginator $paginator = null, array $body = null): Result
+    public function delete(string $path = '', array $parameters = [], ?Paginator $paginator = null, ?array $body = null): Result
     {
         return $this->query('DELETE', $path, $parameters, $paginator, $body);
     }
@@ -256,17 +256,17 @@ class Twitch
      * @param string $method HTTP method
      * @param string $path Query path
      * @param array<string, mixed> $parameters Query parameters
-     * @param \romanzipp\Twitch\Objects\Paginator|null $paginator Paginator instance
+     * @param Paginator|null $paginator Paginator instance
      * @param array<string, mixed>|null $body JSON body
      *
-     * @throws \romanzipp\Twitch\Exceptions\RequestRequiresAuthenticationException
-     * @throws \romanzipp\Twitch\Exceptions\OAuthTokenRequestException
-     * @throws \GuzzleHttp\Exception\RequestException
+     * @throws RequestRequiresAuthenticationException
+     * @throws Exceptions\OAuthTokenRequestException
+     * @throws RequestException
      * @throws \GuzzleHttp\Exception\GuzzleException
      *
-     * @return \romanzipp\Twitch\Result Result instance
+     * @return Result Result instance
      */
-    public function query(string $method = 'GET', string $path = '', array $parameters = [], Paginator $paginator = null, array $body = null): Result
+    public function query(string $method = 'GET', string $path = '', array $parameters = [], ?Paginator $paginator = null, ?array $body = null): Result
     {
         if ( ! $this->isAuthenticationUri($path) && null === $this->getToken() && $this->shouldFetchClientCredentials()) {
             $token = $this->getClientCredentials();

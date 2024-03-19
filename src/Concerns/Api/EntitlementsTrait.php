@@ -18,7 +18,7 @@ trait EntitlementsTrait
      *
      * @param array<string, mixed> $parameters
      *
-     * @return \romanzipp\Twitch\Result Result instance
+     * @return Result Result instance
      *
      * @deprecated since 2021‑02‑26 "Removed the “Create Entitlement Grants Upload URL” Twitch API endpoint associated with a previous version of Twitch Drops."
      */
@@ -37,7 +37,7 @@ trait EntitlementsTrait
      *
      * @param array<string, mixed> $parameters
      *
-     * @return \romanzipp\Twitch\Result
+     * @return Result
      */
     public function getEntitlementsCodeStatus(array $parameters = []): Result
     {
@@ -53,7 +53,7 @@ trait EntitlementsTrait
      *
      * @param array<string, mixed> $parameters
      *
-     * @return \romanzipp\Twitch\Result
+     * @return Result
      */
     public function getDropsEntitlements(array $parameters = []): Result
     {
@@ -69,7 +69,7 @@ trait EntitlementsTrait
      *
      * @param array<string, mixed> $parameters
      *
-     * @return \romanzipp\Twitch\Result
+     * @return Result
      */
     public function redeemEntitlementsCode(array $parameters = []): Result
     {
@@ -84,7 +84,7 @@ trait EntitlementsTrait
      * @param array<string, mixed> $parameters
      * @param array<string, mixed> $body
      *
-     * @return \romanzipp\Twitch\Result
+     * @return Result
      */
     public function updateDropsEntitlements(array $parameters = [], array $body = []): Result
     {

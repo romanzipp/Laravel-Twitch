@@ -25,7 +25,7 @@ class Paginator
      *
      * @param \stdClass|null $pagination Twitch response pagination cursor
      */
-    public function __construct(\stdClass $pagination = null)
+    public function __construct(?\stdClass $pagination = null)
     {
         $this->pagination = $pagination;
     }
@@ -33,7 +33,7 @@ class Paginator
     /**
      * Create Paginator from Result instance.
      *
-     * @param \romanzipp\Twitch\Result $result Result instance
+     * @param Result $result Result instance
      *
      * @return self Paginator instance
      */

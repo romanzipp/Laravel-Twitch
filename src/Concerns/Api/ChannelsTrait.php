@@ -72,7 +72,7 @@ trait ChannelsTrait
      *
      * @return Result
      */
-    public function getChannelFollowers(array $parameters = [], Paginator $paginator = null): Result
+    public function getChannelFollowers(array $parameters = [], ?Paginator $paginator = null): Result
     {
         $this->validateRequired($parameters, ['broadcaster_id']);
 
@@ -90,7 +90,7 @@ trait ChannelsTrait
      *
      * @return Result
      */
-    public function getChannelsFollowed(array $parameters = [], Paginator $paginator = null): Result
+    public function getChannelsFollowed(array $parameters = [], ?Paginator $paginator = null): Result
     {
         $this->validateRequired($parameters, ['user_id']);
 

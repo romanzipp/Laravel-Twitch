@@ -20,7 +20,7 @@ trait TagsTrait
      *
      * @param array<string, mixed> $parameters
      *
-     * @return \romanzipp\Twitch\Result
+     * @return Result
      */
     public function getStreamTags(array $parameters = []): Result
     {
@@ -38,11 +38,11 @@ trait TagsTrait
      * @see https://dev.twitch.tv/docs/api/reference/#get-all-stream-tags
      *
      * @param array<string, mixed> $parameters
-     * @param \romanzipp\Twitch\Objects\Paginator|null $paginator
+     * @param Paginator|null $paginator
      *
-     * @return \romanzipp\Twitch\Result
+     * @return Result
      */
-    public function getAllStreamTags(array $parameters = [], Paginator $paginator = null): Result
+    public function getAllStreamTags(array $parameters = [], ?Paginator $paginator = null): Result
     {
         return $this->get('tags/streams', $parameters, $paginator);
     }
@@ -61,7 +61,7 @@ trait TagsTrait
      * @param array<string, mixed> $parameters
      * @param array<string, mixed> $body
      *
-     * @return \romanzipp\Twitch\Result
+     * @return Result
      */
     public function replaceStreamTags(array $parameters = [], array $body = []): Result
     {

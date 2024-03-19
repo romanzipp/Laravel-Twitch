@@ -20,11 +20,11 @@ trait GamesTrait
      * @see https://dev.twitch.tv/docs/api/reference#get-top-games
      *
      * @param array<string, mixed> $parameters
-     * @param \romanzipp\Twitch\Objects\Paginator|null $paginator Paginator instance
+     * @param Paginator|null $paginator Paginator instance
      *
-     * @return \romanzipp\Twitch\Result Result instance
+     * @return Result Result instance
      */
-    public function getTopGames(array $parameters = [], Paginator $paginator = null): Result
+    public function getTopGames(array $parameters = [], ?Paginator $paginator = null): Result
     {
         return $this->get('games/top', $parameters, $paginator);
     }
@@ -37,7 +37,7 @@ trait GamesTrait
      *
      * @param array<string, mixed> $parameters
      *
-     * @return \romanzipp\Twitch\Result Result instance
+     * @return Result Result instance
      */
     public function getGames(array $parameters = []): Result
     {

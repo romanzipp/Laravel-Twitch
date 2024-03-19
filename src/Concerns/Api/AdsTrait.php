@@ -18,7 +18,7 @@ trait AdsTrait
      *
      * @param array<string, mixed> $parameters
      *
-     * @return \romanzipp\Twitch\Result Result instance
+     * @return Result Result instance
      */
     public function startCommercial(array $parameters = []): Result
     {

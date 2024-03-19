@@ -19,7 +19,7 @@ trait BitsTrait
      *
      * @param array<string, mixed> $parameters
      *
-     * @return \romanzipp\Twitch\Result
+     * @return Result
      */
     public function getCheermotes(array $parameters = []): Result
     {
@@ -33,7 +33,7 @@ trait BitsTrait
      *
      * @param array<string, mixed> $parameters
      *
-     * @return \romanzipp\Twitch\Result
+     * @return Result
      */
     public function getBitsLeaderboard(array $parameters = []): Result
     {
@@ -47,7 +47,7 @@ trait BitsTrait
      *
      * @param array<string, mixed> $parameters
      *
-     * @return \romanzipp\Twitch\Result
+     * @return Result
      */
     public function getExtensionTransactions(array $parameters = []): Result
     {

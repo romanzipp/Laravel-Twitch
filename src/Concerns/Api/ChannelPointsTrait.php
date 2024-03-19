@@ -20,7 +20,7 @@ trait ChannelPointsTrait
      * @param array<string, mixed> $parameters
      * @param array<string, mixed> $body
      *
-     * @return \romanzipp\Twitch\Result
+     * @return Result
      */
     public function createCustomRewards(array $parameters = [], array $body = []): Result
     {
@@ -39,7 +39,7 @@ trait ChannelPointsTrait
      *
      * @param array<string, mixed> $parameters
      *
-     * @return \romanzipp\Twitch\Result
+     * @return Result
      */
     public function deleteCustomReward(array $parameters = []): Result
     {
@@ -55,7 +55,7 @@ trait ChannelPointsTrait
      *
      * @param array<string, mixed> $parameters
      *
-     * @return \romanzipp\Twitch\Result
+     * @return Result
      */
     public function getCustomReward(array $parameters = []): Result
     {
@@ -71,11 +71,11 @@ trait ChannelPointsTrait
      * @see https://dev.twitch.tv/docs/api/reference#get-custom-reward-redemption
      *
      * @param array<string, mixed> $parameters
-     * @param \romanzipp\Twitch\Objects\Paginator|null $paginator
+     * @param Paginator|null $paginator
      *
-     * @return \romanzipp\Twitch\Result
+     * @return Result
      */
-    public function getCustomRewardRedemption(array $parameters = [], Paginator $paginator = null): Result
+    public function getCustomRewardRedemption(array $parameters = [], ?Paginator $paginator = null): Result
     {
         $this->validateRequired($parameters, ['broadcaster_id', 'reward_id']);
 
@@ -91,7 +91,7 @@ trait ChannelPointsTrait
      * @param array<string, mixed> $parameters
      * @param array<string, mixed> $body
      *
-     * @return \romanzipp\Twitch\Result
+     * @return Result
      */
     public function updateCustomReward(array $parameters = [], array $body = []): Result
     {
@@ -109,7 +109,7 @@ trait ChannelPointsTrait
      * @param array<string, mixed> $parameters
      * @param array<string, mixed> $body
      *
-     * @return \romanzipp\Twitch\Result
+     * @return Result
      */
     public function updateRedemptionStatus(array $parameters = [], array $body = []): Result
     {

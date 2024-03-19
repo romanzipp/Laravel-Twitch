@@ -18,7 +18,7 @@ trait SearchTrait
      *
      * @param array<string, mixed> $parameters
      *
-     * @return \romanzipp\Twitch\Result
+     * @return Result
      */
     public function searchCategories(array $parameters = []): Result
     {
@@ -36,7 +36,7 @@ trait SearchTrait
      *
      * @param array<string, mixed> $parameters
      *
-     * @return \romanzipp\Twitch\Result
+     * @return Result
      */
     public function searchChannels(array $parameters = []): Result
     {

@@ -18,11 +18,11 @@ trait VideosTrait
      * @see https://dev.twitch.tv/docs/api/reference#get-videos
      *
      * @param array<string, mixed> $parameters
-     * @param \romanzipp\Twitch\Objects\Paginator|null $paginator
+     * @param Paginator|null $paginator
      *
-     * @return \romanzipp\Twitch\Result Result instance
+     * @return Result Result instance
      */
-    public function getVideos(array $parameters = [], Paginator $paginator = null): Result
+    public function getVideos(array $parameters = [], ?Paginator $paginator = null): Result
     {
         $this->validateAnyRequired($parameters, ['id', 'user_id', 'game_id']);
 
@@ -40,7 +40,7 @@ trait VideosTrait
      *
      * @param array<string, mixed> $parameters
      *
-     * @return \romanzipp\Twitch\Result Result instance
+     * @return Result Result instance
      */
     public function deleteVideos(array $parameters = []): Result
     {

@@ -9,7 +9,7 @@ class SignatureVerificationException extends \Exception
      * @param int $code
      * @param \Exception|null $previous
      */
-    public function __construct($message = 'Signature verification failed', $code = 0, \Exception $previous = null)
+    public function __construct($message = 'Signature verification failed', $code = 0, ?\Exception $previous = null)
     {
         parent::__construct($message, $code, $previous);
     }

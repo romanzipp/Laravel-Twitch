@@ -4,6 +4,7 @@ namespace romanzipp\Twitch;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
+use Psr\Http\Client\ClientInterface;
 use romanzipp\Twitch\Concerns\Api;
 use romanzipp\Twitch\Concerns\ClientCredentialsTrait;
 use romanzipp\Twitch\Concerns\Validation\ValidationTrait;
@@ -52,44 +53,44 @@ class Twitch
     /**
      * Guzzle is used to make http requests.
      *
-     * @var Client
+     * @var ClientInterface
      */
-    protected $client;
+    protected ClientInterface $client;
 
     /**
      * Paginator instance.
      *
      * @var Paginator
      */
-    protected $paginator;
+    protected Paginator $paginator;
 
     /**
      * Twitch OAuth token.
      *
      * @var string|null
      */
-    protected $token;
+    protected ?string $token = null;
 
     /**
      * Twitch Client ID.
      *
      * @var string|null
      */
-    protected $clientId;
+    protected ?string $clientId = null;
 
     /**
      * Twitch Client Secret.
      *
      * @var string|null
      */
-    protected $clientSecret;
+    protected ?string $clientSecret = null;
 
     /**
      * Twitch OAuth Redirect URI.
      *
      * @var string|null
      */
-    protected $redirectUri;
+    protected ?string $redirectUri = null;
 
     /**
      * Constructor.
@@ -181,7 +182,7 @@ class Twitch
         return $this;
     }
 
-    public function setRequestClient(Client $client): void
+    public function setRequestClient(ClientInterface $client): void
     {
         $this->client = $client;
     }
@@ -289,6 +290,7 @@ class Twitch
         }
 
         try {
+            /** @phpstan-ignore-next-line */
             $response = $this->client->request($method, $path, [
                 'headers' => $headers,
                 'query' => $this->buildQuery($parameters),

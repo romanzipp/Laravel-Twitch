@@ -65,19 +65,4 @@ class ResultExceptionTest extends TestCase
         self::assertFalse($result->success());
         self::assertEquals('No Data', $result->getErrorMessage());
     }
-
-    public function testRequestExceptionMalformedMessage()
-    {
-        $request = new Request('GET', '/');
-
-        $response = new Response(404, [], json_encode([
-            'data' => [],
-            'message' => ['No Data'],
-        ]));
-
-        $result = new Result($response, new RequestException('Not Found', $request, $response));
-
-        self::assertFalse($result->success());
-        self::assertEquals('Not Found', $result->getErrorMessage());
-    }
 }

@@ -13,56 +13,56 @@ class Result
      *
      * @var RequestExceptionInterface|null
      */
-    private $exception;
+    private ?RequestExceptionInterface $exception = null;
 
     /**
      * Query result data.
      *
      * @var array<string, mixed>|\stdClass
      */
-    private $data = [];
+    private \stdClass|array $data = [];
 
     /**
      * Message field, if present.
      *
      * @var string|null
      */
-    private $message;
+    private ?string $message = null;
 
     /**
      * Total amount of result data.
      *
      * @var int
      */
-    private $total = 0;
+    private int $total = 0;
 
     /**
      * Status Code.
      *
      * @var int
      */
-    private $status;
+    private int $status;
 
     /**
      * Twitch response pagination cursor.
      *
      * @var \stdClass|null
      */
-    private $pagination;
+    private ?\stdClass $pagination = null;
 
     /**
      * Internal paginator.
      *
      * @var Paginator|null
      */
-    private $paginator;
+    private ?Paginator $paginator = null;
 
     /**
      * Original Guzzle HTTP Response.
      *
      * @var ResponseInterface
      */
-    public $response;
+    public ResponseInterface $response;
 
     public function __construct(ResponseInterface $response, ?RequestExceptionInterface $exception = null)
     {

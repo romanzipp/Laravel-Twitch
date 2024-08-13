@@ -21,28 +21,28 @@ $markdown = collect(class_uses(Twitch::class))
 
         $methods = [];
 
-        $reflection = new ReflectionClass($trait);
+        $reflection = new \ReflectionClass($trait);
 
         collect($reflection->getMethods())
-            ->reject(function (ReflectionMethod $method) {
+            ->reject(function (\ReflectionMethod $method) {
                 return $method->isAbstract();
             })
-            ->reject(function (ReflectionMethod $method) {
+            ->reject(function (\ReflectionMethod $method) {
                 return $method->isPrivate() || $method->isProtected();
             })
-            ->reject(function (ReflectionMethod $method) {
+            ->reject(function (\ReflectionMethod $method) {
                 return $method->isConstructor();
             })
-            ->each(function (ReflectionMethod $method) use (&$methods) {
+            ->each(function (\ReflectionMethod $method) use (&$methods) {
                 $declaration = collect($method->getModifiers())->map(function (int $modifier) {
-                    return ReflectionMethod::IS_PUBLIC == $modifier ? 'public ' : '';
+                    return \ReflectionMethod::IS_PUBLIC == $modifier ? 'public ' : '';
                 })->implode(' ');
 
                 $declaration .= 'function ';
                 $declaration .= $method->getName();
                 $declaration .= '(';
 
-                $declaration .= collect($method->getParameters())->map(function (ReflectionParameter $parameter) {
+                $declaration .= collect($method->getParameters())->map(function (\ReflectionParameter $parameter) {
                     $parameterString = '';
 
                     if ($parameter->allowsNull()) {

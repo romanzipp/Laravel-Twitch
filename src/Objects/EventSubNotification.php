@@ -4,6 +4,9 @@ namespace romanzipp\Twitch\Objects;
 
 use Illuminate\Contracts\Support\Arrayable;
 
+/**
+ * @implements Arrayable<string, mixed>
+ */
 class EventSubNotification implements Arrayable
 {
     /**

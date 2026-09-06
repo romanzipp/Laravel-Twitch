@@ -219,4 +219,19 @@ trait ChatTrait
 
         return $this->post('chat/shoutouts', $parameters);
     }
+
+    /**
+     * Sends a message to the specified broadcaster's chat.
+     *
+     * @see https://dev.twitch.tv/docs/api/reference#send-chat-message
+     *
+     * @param  array<string, mixed>  $parameters
+     */
+
+    public function sendMessage(array $parameters = []): Result
+    {
+        $this->validateRequired($parameters, ['broadcaster_id', 'senders_id', 'message']);
+
+        return $this->post('chat/messages', $parameters);
+    }
 }

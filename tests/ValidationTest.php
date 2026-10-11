@@ -2,6 +2,7 @@
 
 namespace romanzipp\Twitch\Tests;
 
+use PHPUnit\Framework\Attributes\DoesNotPerformAssertions;
 use romanzipp\Twitch\Concerns\Validation\ValidationTrait;
 use romanzipp\Twitch\Tests\TestCases\TestCase;
 
@@ -23,13 +24,13 @@ class ValidationTest extends TestCase
         $this->validateRequired(['foo' => 'foo'], ['foo', 'bar']);
     }
 
-    /** @doesNotPerformAssertions */
+    #[DoesNotPerformAssertions]
     public function testAllRequiredAllExisting()
     {
         $this->validateRequired(['foo' => 'foo', 'bar' => 'bar'], ['foo', 'bar']);
     }
 
-    /** @doesNotPerformAssertions */
+    #[DoesNotPerformAssertions]
     public function testAllRequiredMoreExisting()
     {
         $this->validateRequired(['foo' => 'foo', 'bar' => 'bar', 'foobar' => 'foobar'], ['foo', 'bar']);
@@ -49,7 +50,7 @@ class ValidationTest extends TestCase
         $this->validateRequired(['foo' => null], ['foo']);
     }
 
-    /** @doesNotPerformAssertions */
+    #[DoesNotPerformAssertions]
     public function testOneRequired()
     {
         $this->validateRequired(['foo' => 'bar'], ['foo']);
@@ -71,13 +72,13 @@ class ValidationTest extends TestCase
         $this->validateAnyRequired(['foo' => null], ['foo', 'bar']);
     }
 
-    /** @doesNotPerformAssertions */
+    #[DoesNotPerformAssertions]
     public function testAnyRequiredAllExisting()
     {
         $this->validateAnyRequired(['foo' => 'foo', 'bar' => 'bar'], ['foo', 'bar']);
     }
 
-    /** @doesNotPerformAssertions */
+    #[DoesNotPerformAssertions]
     public function testAnyRequiredMoreExisting()
     {
         $this->validateAnyRequired(['foo' => 'foo', 'bar' => 'bar', 'foobar' => 'foobar'], ['foo', 'bar']);

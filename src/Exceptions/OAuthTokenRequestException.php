@@ -2,8 +2,8 @@
 
 namespace romanzipp\Twitch\Exceptions;
 
-use GuzzleHttp\Exception\RequestException;
+use GuzzleHttp\Exception\BadResponseException;
 
-class OAuthTokenRequestException extends RequestException
+class OAuthTokenRequestException extends BadResponseException
 {
 }

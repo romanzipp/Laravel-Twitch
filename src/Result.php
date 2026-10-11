@@ -140,8 +140,7 @@ class Result
      */
     public function getErrorMessage(): string
     {
-        /** @phpstan-ignore-next-line */
-        if (null === $this->exception || null === $this->exception->getResponse()) {
+        if (null === $this->exception || ! method_exists($this->exception, 'getResponse') || null === $this->exception->getResponse()) {
             return 'Twitch API Unavailable';
         }
 

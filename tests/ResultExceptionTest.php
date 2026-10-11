@@ -2,7 +2,7 @@
 
 namespace romanzipp\Twitch\Tests;
 
-use GuzzleHttp\Exception\RequestException;
+use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
 use romanzipp\Twitch\Result;
@@ -10,19 +10,19 @@ use romanzipp\Twitch\Tests\TestCases\TestCase;
 
 class ResultExceptionTest extends TestCase
 {
-    public function testRequestExceptionEmptyBody()
+    public function testClientExceptionEmptyBody()
     {
         $request = new Request('GET', '/');
 
         $response = new Response(404, []);
 
-        $result = new Result($response, new RequestException('Not Found', $request, $response));
+        $result = new Result($response, new ClientException('Not Found', $request, $response));
 
         self::assertFalse($result->success());
         self::assertEquals('Not Found', $result->getErrorMessage());
     }
 
-    public function testRequestExceptionMissingMessage()
+    public function testClientExceptionMissingMessage()
     {
         $request = new Request('GET', '/');
 
@@ -30,13 +30,13 @@ class ResultExceptionTest extends TestCase
             'data' => [],
         ]));
 
-        $result = new Result($response, new RequestException('Not Found', $request, $response));
+        $result = new Result($response, new ClientException('Not Found', $request, $response));
 
         self::assertFalse($result->success());
         self::assertEquals('Not Found', $result->getErrorMessage());
     }
 
-    public function testRequestExceptionNullMessage()
+    public function testClientExceptionNullMessage()
     {
         $request = new Request('GET', '/');
 
@@ -45,13 +45,13 @@ class ResultExceptionTest extends TestCase
             'message' => null,
         ]));
 
-        $result = new Result($response, new RequestException('Not Found', $request, $response));
+        $result = new Result($response, new ClientException('Not Found', $request, $response));
 
         self::assertFalse($result->success());
         self::assertEquals('Not Found', $result->getErrorMessage());
     }
 
-    public function testRequestExceptionWithMessage()
+    public function testClientExceptionWithMessage()
     {
         $request = new Request('GET', '/');
 
@@ -60,7 +60,7 @@ class ResultExceptionTest extends TestCase
             'message' => 'No Data',
         ]));
 
-        $result = new Result($response, new RequestException('Not Found', $request, $response));
+        $result = new Result($response, new ClientException('Not Found', $request, $response));
 
         self::assertFalse($result->success());
         self::assertEquals('No Data', $result->getErrorMessage());

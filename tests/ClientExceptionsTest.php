@@ -17,7 +17,10 @@ class ClientExceptionsTest extends TestCase
     {
         $this->expectException(TransferException::class);
 
-        $this->getMockedService(new TransferException())->get('/');
+        // Constructor signature differs between Guzzle 7 and 8
+        $exception = (new \ReflectionClass(TransferException::class))->newInstanceWithoutConstructor();
+
+        $this->getMockedService($exception)->get('/');
     }
 
     public function testConnectException()

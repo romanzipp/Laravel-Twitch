@@ -57,7 +57,7 @@ trait ClientCredentialsTrait
                 return null;
             }
 
-            throw new OAuthTokenRequestException('Could not fetch the OAuth credentials', $exception->getRequest(), $result->getResponse(), $exception);
+            throw new OAuthTokenRequestException('Could not fetch the OAuth credentials', $exception->getRequest(), $result->response, $exception);
         }
 
         $token = new AccessToken(

@@ -297,7 +297,7 @@ class Twitch
                 'json' => $body,
             ]);
         } catch (RequestException $exception) {
-            $response = $exception->getResponse();
+            $response = method_exists($exception, 'getResponse') ? $exception->getResponse() : null;
 
             if (null === $response) {
                 throw $exception;
@@ -342,9 +342,11 @@ class Twitch
      */
     private function buildHeaders(): array
     {
-        $headers = [
-            'Client-ID' => $this->getClientId(),
-        ];
+        $headers = [];
+
+        if (null !== $this->getClientId()) {
+            $headers['Client-ID'] = $this->getClientId();
+        }
 
         if (null !== $this->getToken()) {
             $headers['Authorization'] = "Bearer {$this->getToken()}";

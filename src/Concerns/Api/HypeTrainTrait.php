@@ -28,4 +28,20 @@ trait HypeTrainTrait
 
         return $this->get('hypetrain/events', $parameters);
     }
+
+    /**
+     * Get the status of a Hype Train for the specified broadcaster.
+     *
+     * @see https://dev.twitch.tv/docs/api/reference#get-hype-train-status
+     *
+     * @param array<string, mixed> $parameters
+     *
+     * @return Result
+     */
+    public function getHypeTrainStatus(array $parameters = []): Result
+    {
+        $this->validateRequired($parameters, ['broadcaster_id']);
+
+        return $this->get('hypetrain/status', $parameters);
+    }
 }

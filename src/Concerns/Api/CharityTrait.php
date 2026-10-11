@@ -4,6 +4,7 @@ namespace romanzipp\Twitch\Concerns\Api;
 
 use romanzipp\Twitch\Concerns\Operations\AbstractOperationsTrait;
 use romanzipp\Twitch\Concerns\Operations\AbstractValidationTrait;
+use romanzipp\Twitch\Objects\Paginator;
 use romanzipp\Twitch\Result;
 
 trait CharityTrait
@@ -27,5 +28,22 @@ trait CharityTrait
         $this->validateRequired($parameters, ['broadcaster_id']);
 
         return $this->get('charity/campaigns');
+    }
+
+    /**
+     * Gets the list of donations that users have made to the broadcaster’s active charity campaign.
+     *
+     * @see https://dev.twitch.tv/docs/api/reference#get-charity-campaign-donations
+     *
+     * @param array<string, mixed> $parameters
+     * @param Paginator|null $paginator
+     *
+     * @return Result
+     */
+    public function getCharityCampaignDonations(array $parameters = [], ?Paginator $paginator = null): Result
+    {
+        $this->validateRequired($parameters, ['broadcaster_id']);
+
+        return $this->get('charity/donations', $parameters, $paginator);
     }
 }

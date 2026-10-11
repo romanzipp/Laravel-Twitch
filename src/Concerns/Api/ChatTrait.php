@@ -219,4 +219,118 @@ trait ChatTrait
 
         return $this->post('chat/shoutouts', $parameters);
     }
+
+    /**
+     * Retrieves emotes available to the user across all channels.
+     *
+     * @see https://dev.twitch.tv/docs/api/reference#get-user-emotes
+     *
+     * @param array<string, mixed> $parameters
+     * @param Paginator|null $paginator
+     *
+     * @return Result
+     */
+    public function getUserEmotes(array $parameters = [], ?Paginator $paginator = null): Result
+    {
+        $this->validateRequired($parameters, ['user_id']);
+
+        return $this->get('chat/emotes/user', $parameters, $paginator);
+    }
+
+    /**
+     * Sends a message to the broadcaster’s chat room.
+     *
+     * @see https://dev.twitch.tv/docs/api/reference#send-chat-message
+     *
+     * @param array<string, mixed> $parameters
+     * @param array<string, mixed> $body
+     *
+     * @return Result
+     */
+    public function sendChatMessage(array $parameters = [], array $body = []): Result
+    {
+        $this->validateRequired($body, ['broadcaster_id', 'sender_id', 'message']);
+
+        return $this->post('chat/messages', $parameters, null, $body);
+    }
+
+    /**
+     * Retrieves the active shared chat session for a channel.
+     *
+     * @see https://dev.twitch.tv/docs/api/reference#get-shared-chat-session
+     *
+     * @param array<string, mixed> $parameters
+     *
+     * @return Result
+     */
+    public function getSharedChatSession(array $parameters = []): Result
+    {
+        $this->validateRequired($parameters, ['broadcaster_id']);
+
+        return $this->get('shared_chat/session', $parameters);
+    }
+
+    /**
+     * Gets the currently pinned message for the specified broadcaster’s chat room, including message fragments. Only one mod-pinned message can be active per channel at a time.
+     *
+     * @see https://dev.twitch.tv/docs/api/reference#get-pinned-chat-message
+     *
+     * @param array<string, mixed> $parameters
+     *
+     * @return Result
+     */
+    public function getPinnedChatMessage(array $parameters = []): Result
+    {
+        $this->validateRequired($parameters, ['broadcaster_id', 'moderator_id']);
+
+        return $this->get('chat/pins', $parameters);
+    }
+
+    /**
+     * Pins a chat message to the top of the specified broadcaster’s chat room. Only one mod-pinned message can be active per channel at a time. If a mod-pinned message already exists, it is automatically replaced.
+     *
+     * @see https://dev.twitch.tv/docs/api/reference#pin-chat-message
+     *
+     * @param array<string, mixed> $parameters
+     *
+     * @return Result
+     */
+    public function pinChatMessage(array $parameters = []): Result
+    {
+        $this->validateRequired($parameters, ['broadcaster_id', 'moderator_id', 'message_id']);
+
+        return $this->put('chat/pins', $parameters);
+    }
+
+    /**
+     * Updates the duration of an existing pinned chat message.
+     *
+     * @see https://dev.twitch.tv/docs/api/reference#update-pinned-chat-message
+     *
+     * @param array<string, mixed> $parameters
+     *
+     * @return Result
+     */
+    public function updatePinnedChatMessage(array $parameters = []): Result
+    {
+        $this->validateRequired($parameters, ['broadcaster_id', 'moderator_id', 'message_id']);
+
+        return $this->patch('chat/pins', $parameters);
+    }
+
+    /**
+     * Unpins a pinned chat message from the specified broadcaster’s chat room.
+     *
+     * @see https://dev.twitch.tv/docs/api/reference#unpin-chat-message
+     *
+     * @param array<string, mixed> $parameters
+     *
+     * @return Result
+     */
+    public function unpinChatMessage(array $parameters = []): Result
+    {
+        $this->validateRequired($parameters, ['broadcaster_id', 'moderator_id', 'message_id']);
+
+        return $this->delete('chat/pins', $parameters);
+    }
 }

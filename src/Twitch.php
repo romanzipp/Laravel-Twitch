@@ -23,11 +23,14 @@ class Twitch
     use Api\CharityTrait;
     use Api\ChatTrait;
     use Api\ClipsTrait;
+    use Api\ConduitsTrait;
+    use Api\ContentClassificationLabelsTrait;
     use Api\EntitlementsTrait;
     use Api\EventSubTrait;
     use Api\ExtensionsTrait;
     use Api\GamesTrait;
     use Api\GoalsTrait;
+    use Api\GuestStarTrait;
     use Api\HypeTrainTrait;
     use Api\ModerationTrait;
     use Api\MusicTrait;

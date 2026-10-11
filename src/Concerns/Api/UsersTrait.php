@@ -191,4 +191,20 @@ trait UsersTrait
 
         return $this->delete('users/blocks', $parameters);
     }
+
+    /**
+     * Gets the authorization scopes that the specified user(s) have granted the application.
+     *
+     * @see https://dev.twitch.tv/docs/api/reference#get-authorization-by-user
+     *
+     * @param array<string, mixed> $parameters
+     *
+     * @return Result
+     */
+    public function getAuthorizationByUser(array $parameters = []): Result
+    {
+        $this->validateRequired($parameters, ['user_id']);
+
+        return $this->get('authorization/users', $parameters);
+    }
 }

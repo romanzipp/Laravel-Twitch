@@ -55,4 +55,20 @@ trait BitsTrait
 
         return $this->get('extensions/transactions', $parameters);
     }
+
+    /**
+     * Gets a list of custom Power-ups that the specified broadcaster created.
+     *
+     * @see https://dev.twitch.tv/docs/api/reference#get-custom-power-up
+     *
+     * @param array<string, mixed> $parameters
+     *
+     * @return Result
+     */
+    public function getCustomPowerUp(array $parameters = []): Result
+    {
+        $this->validateRequired($parameters, ['broadcaster_id']);
+
+        return $this->get('bits/custom_power_ups', $parameters);
+    }
 }

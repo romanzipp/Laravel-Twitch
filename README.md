@@ -394,6 +394,8 @@ return [
 
 ```php
 public function startCommercial(array $parameters = [])
+public function getAdSchedule(array $parameters = [])
+public function snoozeNextAd(array $parameters = [])
 ```
 
 ### Analytics
@@ -409,6 +411,7 @@ public function getGameAnalytics(array $parameters = [])
 public function getCheermotes(array $parameters = [])
 public function getBitsLeaderboard(array $parameters = [])
 public function getExtensionTransactions(array $parameters = [])
+public function getCustomPowerUp(array $parameters = [])
 ```
 
 ### ChannelPoints
@@ -436,6 +439,7 @@ public function getChannelsFollowed(array $parameters = [], ?Paginator $paginato
 
 ```php
 public function getCharityCampaign(array $parameters = [])
+public function getCharityCampaignDonations(array $parameters = [], ?Paginator $paginator = NULL)
 ```
 
 ### Chat
@@ -453,6 +457,13 @@ public function getUserChatColor(array $parameters = [])
 public function updateUserChatColor(array $parameters = [])
 public function getChatters(array $parameters = [], ?Paginator $paginator = NULL)
 public function sendShoutout(array $parameters = [])
+public function getUserEmotes(array $parameters = [], ?Paginator $paginator = NULL)
+public function sendChatMessage(array $parameters = [], array $body = [])
+public function getSharedChatSession(array $parameters = [])
+public function getPinnedChatMessage(array $parameters = [])
+public function pinChatMessage(array $parameters = [])
+public function updatePinnedChatMessage(array $parameters = [])
+public function unpinChatMessage(array $parameters = [])
 ```
 
 ### Clips
@@ -460,6 +471,25 @@ public function sendShoutout(array $parameters = [])
 ```php
 public function createClip(array $parameters = [])
 public function getClips(array $parameters = [], ?Paginator $paginator = NULL)
+public function createClipFromVod(array $parameters = [])
+public function getClipsDownload(array $parameters = [])
+```
+
+### Conduits
+
+```php
+public function getConduits(array $parameters = [])
+public function createConduits(array $parameters = [], array $body = [])
+public function updateConduits(array $parameters = [], array $body = [])
+public function deleteConduit(array $parameters = [])
+public function getConduitShards(array $parameters = [], ?Paginator $paginator = NULL)
+public function updateConduitShards(array $parameters = [], array $body = [])
+```
+
+### ContentClassificationLabels
+
+```php
+public function getContentClassificationLabels(array $parameters = [])
 ```
 
 ### Entitlements
@@ -516,10 +546,28 @@ public function getGames(array $parameters = [])
 public function getCreatorGoals(array $parameters = [])
 ```
 
+### GuestStar
+
+```php
+public function getChannelGuestStarSettings(array $parameters = [])
+public function updateChannelGuestStarSettings(array $parameters = [], array $body = [])
+public function getGuestStarSession(array $parameters = [])
+public function createGuestStarSession(array $parameters = [])
+public function endGuestStarSession(array $parameters = [])
+public function getGuestStarInvites(array $parameters = [])
+public function sendGuestStarInvite(array $parameters = [])
+public function deleteGuestStarInvite(array $parameters = [])
+public function assignGuestStarSlot(array $parameters = [])
+public function updateGuestStarSlot(array $parameters = [])
+public function deleteGuestStarSlot(array $parameters = [])
+public function updateGuestStarSlotSettings(array $parameters = [])
+```
+
 ### HypeTrain
 
 ```php
 public function getHypeTrainEvents(array $parameters = [])
+public function getHypeTrainStatus(array $parameters = [])
 ```
 
 ### Moderation
@@ -546,6 +594,12 @@ public function addChannelVIP(array $parameters = [])
 public function removeChannelVIP(array $parameters = [])
 public function getShieldModeStatus(array $parameters = [])
 public function updateShieldModeStatus(array $parameters = [], array $body = [])
+public function getModeratedChannels(array $parameters = [], ?Paginator $paginator = NULL)
+public function getUnbanRequests(array $parameters = [], ?Paginator $paginator = NULL)
+public function resolveUnbanRequests(array $parameters = [])
+public function warnChatUser(array $parameters = [], array $body = [])
+public function addSuspiciousStatusToChatUser(array $parameters = [], array $body = [])
+public function removeSuspiciousStatusFromChatUser(array $parameters = [])
 ```
 
 ### Music
@@ -651,6 +705,7 @@ public function updateUserExtension(array $parameters = [], array $body = [])
 public function getUserBlockList(array $parameters = [], ?Paginator $paginator = NULL)
 public function blockUser(array $parameters = [])
 public function unblockUser(array $parameters = [])
+public function getAuthorizationByUser(array $parameters = [])
 ```
 
 ### Videos

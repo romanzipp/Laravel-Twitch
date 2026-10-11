@@ -58,4 +58,36 @@ trait ClipsTrait
 
         return $this->get('clips', $parameters, $paginator);
     }
+
+    /**
+     * Creates a clip from a broadcaster’s VOD on behalf of the broadcaster or an editor of the channel. Since a live stream is actively creating a VOD, this endpoint can also be used to create a clip from earlier in the current stream.
+     *
+     * @see https://dev.twitch.tv/docs/api/reference#create-clip-from-vod
+     *
+     * @param array<string, mixed> $parameters
+     *
+     * @return Result
+     */
+    public function createClipFromVod(array $parameters = []): Result
+    {
+        $this->validateRequired($parameters, ['editor_id', 'broadcaster_id', 'vod_id', 'vod_offset', 'title']);
+
+        return $this->post('videos/clips', $parameters);
+    }
+
+    /**
+     * Provides URLs to download the video file(s) for the specified clips. For information about clips, see How to use clips. These links are temporary and should have a long-term expectation to expire.
+     *
+     * @see https://dev.twitch.tv/docs/api/reference#get-clips-download
+     *
+     * @param array<string, mixed> $parameters
+     *
+     * @return Result
+     */
+    public function getClipsDownload(array $parameters = []): Result
+    {
+        $this->validateRequired($parameters, ['editor_id', 'broadcaster_id', 'clip_id']);
+
+        return $this->get('clips/downloads', $parameters);
+    }
 }

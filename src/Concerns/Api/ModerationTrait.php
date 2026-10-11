@@ -385,4 +385,106 @@ trait ModerationTrait
 
         return $this->put('moderation/shield_mode', $parameters, null, $body);
     }
+
+    /**
+     * Gets a list of channels that the specified user has moderator privileges in.
+     *
+     * @see https://dev.twitch.tv/docs/api/reference#get-moderated-channels
+     *
+     * @param array<string, mixed> $parameters
+     * @param Paginator|null $paginator
+     *
+     * @return Result
+     */
+    public function getModeratedChannels(array $parameters = [], ?Paginator $paginator = null): Result
+    {
+        $this->validateRequired($parameters, ['user_id']);
+
+        return $this->get('moderation/channels', $parameters, $paginator);
+    }
+
+    /**
+     * Gets a list of unban requests for a broadcaster’s channel.
+     *
+     * @see https://dev.twitch.tv/docs/api/reference#get-unban-requests
+     *
+     * @param array<string, mixed> $parameters
+     * @param Paginator|null $paginator
+     *
+     * @return Result
+     */
+    public function getUnbanRequests(array $parameters = [], ?Paginator $paginator = null): Result
+    {
+        $this->validateRequired($parameters, ['broadcaster_id', 'moderator_id', 'status']);
+
+        return $this->get('moderation/unban_requests', $parameters, $paginator);
+    }
+
+    /**
+     * Resolves an unban request by approving or denying it.
+     *
+     * @see https://dev.twitch.tv/docs/api/reference#resolve-unban-requests
+     *
+     * @param array<string, mixed> $parameters
+     *
+     * @return Result
+     */
+    public function resolveUnbanRequests(array $parameters = []): Result
+    {
+        $this->validateRequired($parameters, ['broadcaster_id', 'moderator_id', 'unban_request_id', 'status']);
+
+        return $this->patch('moderation/unban_requests', $parameters);
+    }
+
+    /**
+     * Warns a user in the specified broadcaster’s chat room, preventing them from chat interaction until the warning is acknowledged. New warnings can be issued to a user when they already have a warning in the channel (new warning will replace old warning).
+     *
+     * @see https://dev.twitch.tv/docs/api/reference#warn-chat-user
+     *
+     * @param array<string, mixed> $parameters
+     * @param array<string, mixed> $body
+     *
+     * @return Result
+     */
+    public function warnChatUser(array $parameters = [], array $body = []): Result
+    {
+        $this->validateRequired($parameters, ['broadcaster_id', 'moderator_id']);
+        $this->validateRequired($body, ['data']);
+
+        return $this->post('moderation/warnings', $parameters, null, $body);
+    }
+
+    /**
+     * Adds a suspicious user status to a chatter on the broadcaster’s channel.
+     *
+     * @see https://dev.twitch.tv/docs/api/reference#add-suspicious-status-to-chat-user
+     *
+     * @param array<string, mixed> $parameters
+     * @param array<string, mixed> $body
+     *
+     * @return Result
+     */
+    public function addSuspiciousStatusToChatUser(array $parameters = [], array $body = []): Result
+    {
+        $this->validateRequired($parameters, ['broadcaster_id', 'moderator_id']);
+        $this->validateRequired($body, ['user_id', 'status']);
+
+        return $this->post('moderation/suspicious_users', $parameters, null, $body);
+    }
+
+    /**
+     * Remove a suspicious user status from a chatter on broadcaster’s channel.
+     *
+     * @see https://dev.twitch.tv/docs/api/reference#remove-suspicious-status-from-chat-user
+     *
+     * @param array<string, mixed> $parameters
+     *
+     * @return Result
+     */
+    public function removeSuspiciousStatusFromChatUser(array $parameters = []): Result
+    {
+        $this->validateRequired($parameters, ['broadcaster_id', 'moderator_id', 'user_id']);
+
+        return $this->delete('moderation/suspicious_users', $parameters);
+    }
 }

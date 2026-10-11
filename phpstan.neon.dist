@@ -1,5 +1,7 @@
 parameters:
-  phpVersion: 80000
+  phpVersion: 80200
   level: 6
   paths:
     - src
+  ignoreErrors:
+    - identifier: trait.unused

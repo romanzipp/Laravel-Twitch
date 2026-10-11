@@ -2,6 +2,7 @@
 
 namespace romanzipp\Twitch\Tests\Api;
 
+use PHPUnit\Framework\Attributes\Depends;
 use romanzipp\Twitch\Enums\PollStatus;
 use romanzipp\Twitch\Tests\TestCases\ApiTestCase;
 
@@ -45,9 +46,7 @@ class PollsTest extends ApiTestCase
         self::assertTrue($result->success(), $result->getErrorMessage());
     }
 
-    /**
-     * @depends testCreatePolls
-     */
+    #[Depends('testCreatePolls')]
     public function testEndPoll()
     {
         $this->skipIfTokenMissing();

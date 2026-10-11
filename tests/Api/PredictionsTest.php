@@ -2,6 +2,7 @@
 
 namespace romanzipp\Twitch\Tests\Api;
 
+use PHPUnit\Framework\Attributes\Depends;
 use romanzipp\Twitch\Enums\PredictionStatus;
 use romanzipp\Twitch\Tests\TestCases\ApiTestCase;
 
@@ -45,9 +46,7 @@ class PredictionsTest extends ApiTestCase
         self::assertTrue($result->success(), $result->getErrorMessage());
     }
 
-    /**
-     * @depends testCreatePredictions
-     */
+    #[Depends('testCreatePredictions')]
     public function testEndPrediction()
     {
         $this->skipIfTokenMissing();

@@ -24,30 +24,41 @@ class EventSubSignature
      */
     public static function verifyHeader(string $payload, HeaderBag $headers, string $secret, int $tolerance = 600): void
     {
+        $rawTimestamp = $headers->get('twitch-eventsub-message-timestamp');
+
         try {
-            $timestamp = self::getTimestamp(
-                $rawTimestamp = $headers->get('twitch-eventsub-message-timestamp')
-            );
-        } catch (\Exception $exception) {
+            $timestamp = self::getTimestamp($rawTimestamp);
+        } catch (Exception $exception) {
             throw new SignatureVerificationException('Unable to parse timestamp from header', 0, $exception);
         }
 
-        if ( ! is_numeric($timestamp)) {
-            throw new SignatureVerificationException('Unable to extract timestamp and signatures from header');
+        if (! is_numeric($timestamp)) {
+            throw new SignatureVerificationException('Unable to extract timestamp from header');
         }
 
-        if ($tolerance > 0 && (Carbon::now('UTC')->getTimestamp() - $timestamp) > $tolerance) {
+        if ($tolerance > 0 && abs(Carbon::now('UTC')->getTimestamp() - (int) $timestamp) > $tolerance) {
             throw new SignatureVerificationException('Timestamp outside the tolerance zone');
         }
 
         $messageId = $headers->get('twitch-eventsub-message-id');
+        $signature = $headers->get('twitch-eventsub-message-signature');
 
-        [$algo, $givenSignature] = explode('=', $headers->get('twitch-eventsub-message-signature'));
+        if (! $messageId || ! $signature) {
+            throw new SignatureVerificationException('Required Twitch EventSub headers are missing');
+        }
 
-        $expectedSignature = hash_hmac($algo, $messageId . $rawTimestamp . $payload, $secret);
+        $signatureParts = explode('=', $signature, 2);
 
-        if ($givenSignature !== $expectedSignature) {
-            throw new SignatureVerificationException();
+        if (count($signatureParts) !== 2) {
+            throw new SignatureVerificationException('Unable to parse signature from header');
+        }
+
+        [$algo, $givenSignature] = $signatureParts;
+
+        $expectedSignature = hash_hmac($algo, $messageId.$rawTimestamp.$payload, $secret);
+
+        if (! hash_equals($expectedSignature, $givenSignature)) {
+            throw new SignatureVerificationException;
         }
     }
 
